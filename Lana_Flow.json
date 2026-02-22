@@ -1,0 +1,282 @@
+{
+    "name": "Agente IA Lana - Estética & Agendamentos",
+    "nodes": [
+        {
+            "parameters": {},
+            "id": "trigger_1",
+            "name": "Chat Trigger",
+            "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+            "typeVersion": 1.1,
+            "position": [
+                0,
+                0
+            ]
+        },
+        {
+            "parameters": {
+                "options": {
+                    "systemMessage": "Você é a Lana, assistente inteligente da Wolf Art Studio.\n\n# DIRETRIZES E PERSONA\n- Perfil: Especialista em estética, segura e empática.\n- Objetivo: Transformar dúvidas em agendamentos de alto valor (high-ticket), destacando a transformação e os benefícios dos procedimentos realizados.\n- Público: ATENDIMENTO EXCLUSIVO AO PÚBLICO FEMININO.\n- Segurança (LGPD): Informe de forma sutil que os dados coletados respeitam a LGPD e servem estritamente para o agendamento e prestação do serviço.\n- Tone de Voz: Calorosa, com toque humano (use emojis leves, não pareça um robô). Responda com frases curtas e diretas sempre que possível.\n\n# 1. QUALIFICAÇÃO E CADASTRO\nQuando receber o primeiro contato, acione a ferramenta \"buscar_cadastro\" usando o DDD e telefone da pessoa. Caso a resposta seja que este cliente não existe, siga:\n1. Saudação: \"Olá! Seja muito bem-vinda ao nosso estúdio. Sou a Lana, assistente da Wolf Art Studio. Para que eu possa te dar um atendimento personalizado, poderia me informar alguns dados rápidos?\"\n2. Dados solicitados: Nome Completo, Sexo (Masculino/Feminino), Melhor E-mail, Cidade/Bairro de Residência.\n3. FILTRO DE GÊNERO (REGRA DE OURO):\n   - SE O SEXO FOR MASCULINO (ou usar palavras como 'homem', 'rapaz'): Informe IMEDIATAMENTE antes de qualquer cadastro: \"Agradeço seu contato e as informações. No momento, realizamos atendimentos exclusivamente para o público feminino. Posso apenas tirar dúvidas técnicas sobre nossos procedimentos, se desejar.\" \n     -> NÃO o cadastre, NÃO avalie horário e NÃO agende.\n   - SE FOR FEMININO: Confirme tudo e use a ferramenta \"cadastrar_cliente_bd\".\n\n# 2. VENDAS E SERVIÇOS\nDemonstre autoridade técnica. Os serviços prestados são:\n- Design de sobrancelhas: R$ 120 a R$ 300 | 20 Minutos | Foco: Realce imediato do olhar e harmonia facial.\n- Micropigmentação labial: R$ 500 a R$ 1000 | 180 Minutos | Foco: Cor saudável e definição 24h por dia.\n- Micropigmentação de Sobrancelhas: R$ 200 a R$ 300 | 80 Minutos | Foco: Praticidade e preenchimento natural.\n- Tatuagem (Estilo Fine Line): R$ 300 a R$ 1200 | 4 Horas (240 Min) | Foco: Arte personalizada e exclusiva na pele.\n- Extensão de cílios: R$ 50 | 20 Minutos | Foco: Olhar marcante com volume e curvatura.\n\n# 3. PROTOCOLO DE AGENDAMENTO\nSe a cliente quiser marcar uma sessão:\n1. Veja o que temos livre usando a ferramenta \"verificar_disponibilidade_calendario\".\n2. Diante das datas disponíveis, proponha 2 horários distintos. (Ex: \"Tenho segunda às 14h ou terça às 10h. Qual fica melhor?\").\n3. Quando a cliente confirmar, realize os passos nesta EXATA ORDEM:\n   a) \"agendar_google_calendar\": marcando no horário escolhido com o tempo correspondente à Duração do procedimento.\n   b) \"salvar_agendamento_bd\": armazenando Nome, Procedimento, Data e Hora no banco.\n   c) \"notificar_profissional_whatsapp\": Enviando para o telefone (61) 9854-3776 a string: \"Novo agendamento: [Nome] - [Procedimento] em [Data] às [Hora]\".\n4. Finalize essa parte confirmando gentilmente com a cliente todos os detalhes marcados.\n\n# 4. FINALIZAÇÃO DA CONVERSA\nApós o agendamento concluído ou após tirar todas as dúvidas, se a cliente encerrar/der tchau, use a ferramenta \"salvar_log_conversa\" para gravar na base: Nome do Cliente, Procedimento (se agendado), Data e Hora de início do Chat."
+                }
+            },
+            "id": "agent_1",
+            "name": "Agente Lana",
+            "type": "@n8n/n8n-nodes-langchain.agent",
+            "typeVersion": 1.6,
+            "position": [
+                250,
+                0
+            ]
+        },
+        {
+            "parameters": {
+                "modelName": "models/gemini-2.5-flash",
+                "options": {
+                    "temperature": 0.5
+                }
+            },
+            "id": "model_1",
+            "name": "Google Gemini Chat Model",
+            "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+            "typeVersion": 1,
+            "position": [
+                250,
+                250
+            ],
+            "credentials": {
+                "googlePalmApi": {
+                    "id": "",
+                    "name": "AIzaSyAZWDM9hYz0_LYBVlJbKILq4E0idHwIoRg - (Cole no painel de Credenciais do N8N)"
+                }
+            }
+        },
+        {
+            "parameters": {},
+            "id": "memory_1",
+            "name": "Memória (Buffer)",
+            "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+            "typeVersion": 1.2,
+            "position": [
+                400,
+                250
+            ]
+        },
+        {
+            "parameters": {
+                "name": "buscar_cadastro",
+                "description": "Busca na base de dados se o número do contato da cliente já existe, retorna os dados ou 'nao encontrado'. Use no primeiro contato. Propriedades: telefone",
+                "jsCode": "return \"Não encontrado. Proceda com a coleta de dados.\";"
+            },
+            "id": "tool_1",
+            "name": "1. Buscar Cadastro Cliente",
+            "type": "@n8n/n8n-nodes-langchain.tool",
+            "typeVersion": 1.2,
+            "position": [
+                600,
+                -200
+            ]
+        },
+        {
+            "parameters": {
+                "name": "cadastrar_cliente_bd",
+                "description": "Cadastra um cliente no banco de dados. Envie o json contendo nome, sexo, email, residencia, telefone",
+                "jsCode": "return `Cliente cadastrada e filtrada no banco com sucesso nas regras LGPD!`;"
+            },
+            "id": "tool_2",
+            "name": "2. Cadastrar Cliente BD",
+            "type": "@n8n/n8n-nodes-langchain.tool",
+            "typeVersion": 1.2,
+            "position": [
+                600,
+                -50
+            ]
+        },
+        {
+            "parameters": {
+                "name": "verificar_disponibilidade_calendario",
+                "description": "Verifica se há tempo no Google Agenda para o procedimento escolhido nas faixas procuradas. Propriedade: data_alvo, duracao_minutos",
+                "jsCode": "return \"Agenda livre. Pode sugerir horário às 10h e 14h.\";"
+            },
+            "id": "tool_3",
+            "name": "3. Consultar Calendário",
+            "type": "@n8n/n8n-nodes-langchain.tool",
+            "typeVersion": 1.2,
+            "position": [
+                600,
+                100
+            ]
+        },
+        {
+            "parameters": {
+                "name": "agendar_google_calendar",
+                "description": "Bloqueia oficialmente a agenda no horário exato e tempo exato do procedimento. Enviar json: data, hora_inicio, duracao",
+                "jsCode": "return \"O agendamento foi fixado no Google Calendar.\";"
+            },
+            "id": "tool_4",
+            "name": "4. Agendamento Calendar",
+            "type": "@n8n/n8n-nodes-langchain.tool",
+            "typeVersion": 1.2,
+            "position": [
+                600,
+                250
+            ]
+        },
+        {
+            "parameters": {
+                "name": "salvar_agendamento_bd",
+                "description": "Alimenta o banco de dados oficial (Tabela: Agendamentos) com as propriedades: nome, procedimento, data, hora",
+                "jsCode": "return \"Registo de agendamento salvo na Base de Dados com sucesso.\";"
+            },
+            "id": "tool_5",
+            "name": "5. Salvar Agendamento BD",
+            "type": "@n8n/n8n-nodes-langchain.tool",
+            "typeVersion": 1.2,
+            "position": [
+                600,
+                400
+            ]
+        },
+        {
+            "parameters": {
+                "name": "notificar_profissional_whatsapp",
+                "description": "Dispara notificação via API do WhatsApp para o celular (61) 9854-3776 garantindo que a profissional saberá do agendamento. Passe string: 'mensagem'",
+                "jsCode": "return \"A notificação foi disparada com sucesso para a profissional no WhatsApp (61) 9854-3776.\";"
+            },
+            "id": "tool_6",
+            "name": "6. Notificar Profissional",
+            "type": "@n8n/n8n-nodes-langchain.tool",
+            "typeVersion": 1.2,
+            "position": [
+                600,
+                550
+            ]
+        },
+        {
+            "parameters": {
+                "name": "salvar_log_conversa",
+                "description": "Registra o término do atendimento e guarda um resumo dele da base de dados com as props: nome, procedimento_se_agendado, data_agendada, horario_inicio_conversa",
+                "jsCode": "return \"O log de conversa foi encerrado e gravado.\";"
+            },
+            "id": "tool_7",
+            "name": "7. Salvar Resumo de Log",
+            "type": "@n8n/n8n-nodes-langchain.tool",
+            "typeVersion": 1.2,
+            "position": [
+                600,
+                700
+            ]
+        }
+    ],
+    "connections": {
+        "Chat Trigger": {
+            "main": [
+                [
+                    {
+                        "node": "Agente Lana",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Google Gemini Chat Model": {
+            "ai_languageModel": [
+                [
+                    {
+                        "node": "Agente Lana",
+                        "type": "ai_languageModel",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Memória (Buffer)": {
+            "ai_memory": [
+                [
+                    {
+                        "node": "Agente Lana",
+                        "type": "ai_memory",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "1. Buscar Cadastro Cliente": {
+            "ai_tool": [
+                [
+                    {
+                        "node": "Agente Lana",
+                        "type": "ai_tool",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "2. Cadastrar Cliente BD": {
+            "ai_tool": [
+                [
+                    {
+                        "node": "Agente Lana",
+                        "type": "ai_tool",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "3. Consultar Calendário": {
+            "ai_tool": [
+                [
+                    {
+                        "node": "Agente Lana",
+                        "type": "ai_tool",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "4. Agendamento Calendar": {
+            "ai_tool": [
+                [
+                    {
+                        "node": "Agente Lana",
+                        "type": "ai_tool",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "5. Salvar Agendamento BD": {
+            "ai_tool": [
+                [
+                    {
+                        "node": "Agente Lana",
+                        "type": "ai_tool",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "6. Notificar Profissional": {
+            "ai_tool": [
+                [
+                    {
+                        "node": "Agente Lana",
+                        "type": "ai_tool",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "7. Salvar Resumo de Log": {
+            "ai_tool": [
+                [
+                    {
+                        "node": "Agente Lana",
+                        "type": "ai_tool",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    },
+    "settings": {}
+}

@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wolf Art Studio - Agente Lana</title>
+
+    <!-- Meta tags for SEO & Theme -->
+    <meta name="description"
+        content="Atendimento especializado em estética: Design de sobrancelhas, micropigmentação, tatuagem e extensão de cílios exclusivas para o público feminino.">
+    <meta name="theme-color" content="#c98276">
+
+    <!-- Premium Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* Design System & Properties */
+        :root {
+            --primary: #c98276;
+            /* Soft Rose Gold */
+            --primary-dark: #a1645a;
+            --primary-light: #e8aca3;
+            --secondary: #3b2d2a;
+            /* Espresso Coffee */
+            --bg-body: #fdfbfb;
+            --chat-bg: rgba(255, 255, 255, 0.92);
+            --text-main: #4a3d3c;
+            --text-light: #8c7a77;
+            --msg-user: #f0e6e4;
+            --msg-bot: #ffffff;
+            --focus-glow: rgba(201, 130, 118, 0.3);
+            --shadow-soft: 0 10px 40px rgba(59, 45, 42, 0.12);
+            --shadow-hover: 0 15px 50px rgba(201, 130, 118, 0.25);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, var(--bg-body) 0%, #ebedee 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            /* Changed to column to stack sections */
+            justify-content: flex-start;
+            /* Align content to the top */
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* ==========================================================
+           LANDING PAGE - WOLF ART STUDIO (Estilo Lelie)
+           ========================================================== */
+        header {
+            width: 100%;
+            padding: 20px 5%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(253, 251, 251, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(201, 130, 118, 0.15);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--secondary);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--primary);
+            font-style: italic;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 400;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Botão agendar na Nav */
+        .btn-outline {
+            padding: 8px 24px;
+            border: 1px solid var(--primary);
+            border-radius: 30px;
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 100px 5% 50px;
+            text-align: center;
+            position: relative;
+            background: url("https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?q=80&w=2000&auto=format&fit=crop") center/cover no-repeat;
+            width: 100%;
+            /* Ensure hero takes full width */
+        }
+
+        /* Overlay na Her section para melhorar a leitura */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(253, 251, 251, 0.6) 0%, rgba(253, 251, 251, 0.95) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 800px;
+            z-index: 2;
+            animation: fadeUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            color: var(--secondary);
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-main);
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 16px 40px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(201, 130, 118, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(201, 130, 118, 0.4);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 100px 5%;
+            background: var(--bg-body);
+            width: 100%;
+            /* Ensure services takes full width */
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 60px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 24px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 25px;
+            color: white;
+        }
+
+        .service-icon svg {
+            width: 32px;
+            height: 32px;
+            fill: var(--primary-dark);
+        }
+
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Informational Banner / About */
+        .about-banner {
+            background: linear-gradient(135deg, var(--secondary), #1e1513);
+            padding: 80px 5%;
+            text-align: center;
+            color: white;
+            width: 100%;
+            /* Ensure banner takes full width */
+        }
+
+        .about-banner h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-light);
+        }
+
+        .about-banner p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Footer */
+        footer {
+            background: #ffffff;
+            padding: 60px 5% 40px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            width: 100%;
+            /* Ensure footer takes full width */
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .footer-col h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        .footer-col p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            max-width: 300px;
+        }
+
+        .footer-location-wrapper {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-map-container {
+            width: 150px;
+            height: 150px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid rgba(201, 130, 118, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            /* Removida margem superior para alinhar perfeitamente com a caixa ao lado */
+        }
+
+        .footer-map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            color: #b5aba9;
+            font-size: 0.85rem;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Media Queries Globais */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+        }
+
+        /* -----------------------------------
+           LANA CHAT WIDGET STYLES 
+           ----------------------------------- */
+
+        /* Floating Toggle Button */
+        .lana-chat-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: none;
+            box-shadow: 0 10px 25px rgba(201, 130, 118, 0.4);
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 9999;
+        }
+
+        .lana-chat-btn::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            bottom: -5px;
+            left: -5px;
+            border-radius: 50%;
+            background: var(--primary);
+            opacity: 0.3;
+            z-index: -1;
+            animation: pulse 2.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: scale(1.15);
+                opacity: 0.1;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+        }
+
+        .lana-chat-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .lana-chat-btn svg {
+            width: 34px;
+            height: 34px;
+            fill: white;
+            transition: transform 0.4s ease;
+            position: absolute;
+        }
+
+        .lana-chat-btn .icon-open {
+            opacity: 1;
+            transform: rotate(0) scale(1);
+        }
+
+        .lana-chat-btn .icon-close {
+            opacity: 0;
+            transform: rotate(-90deg) scale(0);
+        }
+
+        .lana-chat-btn.active .icon-open {
+            opacity: 0;
+            transform: rotate(90deg) scale(0);
+        }
+
+        .lana-chat-btn.active .icon-close {
+            opacity: 1;
+            transform: rotate(0) scale(1);
+        }
+
+        /* The Chat Window */
+        .lana-chat-window {
+            position: fixed;
+            bottom: 120px;
+            right: 30px;
+            width: 380px;
+            height: 650px;
+            max-height: calc(100vh - 150px);
+            background: var(--chat-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 28px;
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(30px) scale(0.95);
+            transform-origin: bottom right;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: 10000;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .lana-chat-window.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Header */
+        .chat-header {
+            background: linear-gradient(135deg, var(--secondary), #1e1513);
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            position: relative;
+        }
+
+        /* Elegant gold/rose bar below header */
+        .chat-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light), var(--primary));
+        }
+
+        .avatar-container {
+            position: relative;
+        }
+
+        .lana-avatar {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            /* A feminine aesthetic portrait placeholder */
+            background: url('https://images.unsplash.com/photo-1595959183082-7b570b7e08e2?q=80&w=200&auto=format&fit=crop') center/cover;
+            border: 2px solid var(--primary-light);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .status-dot {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 14px;
+            height: 14px;
+            background: #2dd36f;
+            border-radius: 50%;
+            border: 2.5px solid var(--secondary);
+            box-shadow: 0 0 8px rgba(45, 211, 111, 0.5);
+        }
+
+        .header-info h2 {
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            color: white;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+
+        .header-info p {
+            margin: 4px 0 0;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.75);
+            font-weight: 300;
+        }
+
+        /* Chat Body / Messages Area */
+        .chat-body {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            background: rgba(253, 251, 251, 0.4);
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        .chat-body::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-body::-webkit-scrollbar-thumb {
+            background: rgba(201, 130, 118, 0.25);
+            border-radius: 10px;
+        }
+
+        .chat-body::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .message-row {
+            display: flex;
+            width: 100%;
+        }
+
+        .message-row.bot {
+            justify-content: flex-start;
+        }
+
+        .message-row.user {
+            justify-content: flex-end;
+        }
+
+        .message {
+            max-width: 82%;
+            padding: 14px 20px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            animation: messageSlide 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            opacity: 0;
+            transform: translateY(15px);
+            word-wrap: break-word;
+        }
+
+        @keyframes messageSlide {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- Estilo Premium para Tabelas Markdown geradas pela IA --- */
+        .message table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 12px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(201, 130, 118, 0.3);
+            /* Rose Gold Soft */
+            box-shadow: 0 4px 15px rgba(59, 45, 42, 0.05);
+            font-size: 0.85rem;
+        }
+
+        .message th {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 12px 14px;
+            text-align: left;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .message td {
+            padding: 10px 14px;
+            border-bottom: 1px solid rgba(201, 130, 118, 0.15);
+            color: var(--text-main);
+            vertical-align: middle;
+        }
+
+        .message tr:last-child td {
+            border-bottom: none;
+        }
+
+        .message tr:nth-child(even) td {
+            background-color: rgba(253, 251, 251, 0.7);
+        }
+
+        .message tr:nth-child(odd) td {
+            background-color: white;
+        }
+
+        .message.bot {
+            background: var(--msg-bot);
+            border-radius: 20px 20px 20px 4px;
+            color: var(--text-main);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            position: relative;
+        }
+
+        .message.user {
+            background: var(--msg-user);
+            border-radius: 20px 20px 4px 20px;
+            color: var(--secondary);
+            font-weight: 400;
+        }
+
+        /* Typing Indicator inside Chat Body */
+        .typing-indicator-row {
+            display: none;
+            justify-content: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .typing-indicator-row.active {
+            display: flex;
+        }
+
+        .typing-bubbles {
+            background: var(--msg-bot);
+            padding: 12px 18px;
+            border-radius: 20px 20px 20px 4px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            background: var(--text-light);
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+            opacity: 0.6;
+        }
+
+        .dot:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            80%,
+            100% {
+                transform: scale(0.6);
+                opacity: 0.4;
+            }
+
+            40% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+        }
+
+        /* Input Area */
+        .chat-footer {
+            padding: 16px 20px 20px 20px;
+            background: white;
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
+            position: relative;
+        }
+
+        .input-wrapper {
+            display: flex;
+            align-items: center;
+            background: #f8f5f4;
+            border-radius: 30px;
+            padding: 6px 6px 6px 20px;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        .input-wrapper:focus-within {
+            background: white;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--focus-glow);
+        }
+
+        .input-wrapper input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            outline: none;
+        }
+
+        .input-wrapper input::placeholder {
+            color: #b5aba9;
+        }
+
+        .send-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: white;
+        }
+
+        .send-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        .send-btn:active {
+            transform: scale(0.95);
+        }
+
+        .send-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+            margin-left: 2px;
+        }
+
+        .lgpd-notice {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #a69c9a;
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 600px) {
+            .lana-chat-window {
+                width: 100%;
+                height: 100vh;
+                max-height: 100vh;
+                bottom: 0;
+                right: 0;
+                border-radius: 0;
+            }
+
+            .lana-chat-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 60px;
+                height: 60px;
+            }
+
+            .lana-chat-btn svg {
+                width: 28px;
+                height: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <a href="#" class="logo">Wolf <span>Art</span> Studio</a>
+        <nav class="nav-links">
+            <a href="#servicos">Nossos Serviços</a>
+            <a href="#sobre">Quem Somos</a>
+            <a href="#contato">Localização</a>
+            <a href="#" class="btn-outline" onclick="document.getElementById('lanaChatBtn').click(); return false;">Fale
+                Conosco</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Realce Sua Beleza Natural</h1>
+            <p>A experiência Estética Premium dedicada e pensada exclusivamente no design, nos traços e no bem-estar do
+                público feminino.</p>
+            <a href="#" class="btn-primary"
+                onclick="document.getElementById('lanaChatBtn').click(); return false;">Agende sua Experiência</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicos" class="services">
+        <h2 class="section-title">Procedimentos</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
+                    </svg>
+                </div>
+                <h3>Design de Sobrancelhas</h3>
+                <p>Moldura seu olhar para uma expressão facial mais harmoniosa com exclusividade e traços exatos.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 21C7.8 21 3.5 17 2 13.5C3.5 10 7.8 6 12 6s8.5 4 10 7.5c-1.5 3.5-5.8 7.5-10 7.5zm0-13C8.4 8 4.7 11.2 3.2 13.5 4.7 15.8 8.4 19 12 19s7.3-3.2 8.8-5.5C19.3 11.2 15.6 8 12 8zm0 8.5c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3zm0-4.5c-.8 0-1.5.7-1.5 1.5s.7 1.5 1.5 1.5 1.5-.7 1.5-1.5-.7-1.5-1.5-1.5z" />
+                    </svg>
+                </div>
+                <h3>Extensão de Cílios</h3>
+                <p>Acorde todos os dias com o olhar preparado, vibrante, curvilíneo sem a necessidade de rímel.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12.1 19l4.5-4.5h3.4c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v7.5c0 1.1.9 2 2 2h3.4L12 19m-1-11h6v2h-6V8zm0 4h4v2h-4v-2z" />
+                    </svg>
+                </div>
+                <h3>Micro Labial</h3>
+                <p>Cor durável, definição de alto contraste e cor saudável em seus lábios pelo dia inteiro todos os
+                    dias.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+                    </svg>
+                </div>
+                <h3>Tatuagem / Fine Line</h3>
+                <p>Arte delicada, minuciosa e eterna estampada em sua pele e personalizada com seus valores.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Banner -->
+    <section id="sobre" class="about-banner">
+        <h2>Atendimento Exclusivo</h2>
+        <p>A Wolf Art Studio foi idealizada sob o princípio de um ambiente seguro e especializado, atendendo de forma
+            estrita apenas mulheres, fornecendo tratamentos *high-ticket* estéticos desenhados sob medida
+            individualmente.</p>
+    </section>
+
+    <!-- Footer Area -->
+    <footer id="contato">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>Wolf Art Studio</h4>
+                <p>Um novo conceito em beleza facial e corporal feminina em Goiás.</p>
+            </div>
+            <div class="footer-col" style="flex: 1; min-width: 350px;">
+                <div class="footer-location-wrapper">
+                    <div>
+                        <h4>Localização</h4>
+                        <p>Rua 23, quadra 61, lote 3<br>Parque 9<br>Luziânia, Goiás<br>CEP: 72.853-061</p>
+                    </div>
+                    <div class="footer-map-container">
+                        <iframe
+                            src="https://maps.google.com/maps?q=-16.156250,-47.946417&t=&z=18&ie=UTF8&iwloc=&output=embed"
+                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Contato</h4>
+                <p>Nosso agendamento é inteiramente realizado via atendimento inteligente. Clique na Assistente Virtual
+                    (Lana) no canto inferior!</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Wolf Art Studio. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <!-- 1. El Botón Flutuante -->
+    <button class="lana-chat-btn" id="lanaChatBtn" aria-label="Abrir assistente Lana">
+        <svg class="icon-open" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H5.17L4 17.17V4H20V16Z"
+                fill-rule="evenodd" clip-rule="evenodd" />
+            <path d="M7 9H17V11H7V9Z" />
+            <path d="M7 13H14V15H7V13Z" />
+        </svg>
+        <svg class="icon-close" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" />
+        </svg>
+    </button>
+
+    <!-- 2. The Chat Window -->
+    <div class="lana-chat-window" id="lanaChatWindow">
+        <div class="chat-header">
+            <div class="avatar-container">
+                <div class="lana-avatar"></div>
+                <div class="status-dot"></div>
+            </div>
+            <div class="header-info">
+                <h2>Lana</h2>
+                <p>Assistente Especialista ✨</p>
+            </div>
+        </div>
+
+        <div class="chat-body" id="chatBody">
+            <!-- Initial Auto-Greeting Message -->
+            <div class="message-row bot">
+                <div class="message bot">
+                    Olá! Seja muito bem-vinda ao nosso estúdio. Sou a Lana, assistente inteligente da Wolf Art Studio.
+                    Como posso te ajudar a realçar sua beleza hoje? 💖
+                </div>
+            </div>
+
+            <!-- Typing indicator (hidden by default) -->
+            <div class="typing-indicator-row" id="typingIndicator">
+                <div class="typing-bubbles">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-footer">
+            <div class="input-wrapper">
+                <input type="text" id="chatInput" placeholder="Digite sua mensagem de whatsapp..." autocomplete="off">
+                <button class="send-btn" id="sendBtn" aria-label="Enviar">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.01 21L23 12L2.01 3L2 10L17 12L2 14L2.01 21Z" />
+                    </svg>
+                </button>
+            </div>
+            <div class="lgpd-notice">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 6c1.4 0 2.8 1.1 2.8 2.5V11c.6 0 1.2.6 1.2 1.2v3.5c0 .7-.6 1.3-1.2 1.3H9.2c-.6 0-1.2-.6-1.2-1.3v-3.5c0-.7.6-1.3 1.2-1.3V9.5C9.2 8.1 10.6 7 12 7zm0 1c-.8 0-1.5.7-1.5 1.5V11h3V9.5c0-.8-.7-1.5-1.5-1.5z" />
+                </svg>
+                Ambiente seguro e protegido LGPD.
+            </div>
+        </div>
+    </div>
+
+    <!-- Integrator Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const chatBtn = document.getElementById('lanaChatBtn');
+            const chatWindow = document.getElementById('lanaChatWindow');
+            const chatBody = document.getElementById('chatBody');
+            const chatInput = document.getElementById('chatInput');
+            const sendBtn = document.getElementById('sendBtn');
+            const typingIndicator = document.getElementById('typingIndicator');
+
+            // Configuração da API do Gemini
+            const GEMINI_API_KEY = "AIzaSyAZWDM9hYz0_LYBVlJbKILq4E0idHwIoRg";
+            const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+
+            // Histórico de conversa para a API manter o contexto
+            let chatHistory = [];
+
+            // Instruções de Sistema (Persona da Lana)
+            const systemInstruction = `Você é a Lana, assistente inteligente da Wolf Art Studio.
+# DIRETRIZES E PERSONA
+- Perfil: Especialista em estética, segura e empática.
+- Objetivo: Transformar dúvidas em agendamentos de alto valor (high-ticket), destacando a transformação e os benefícios dos procedimentos realizados.
+- Público: ATENDIMENTO EXCLUSIVO AO PÚBLICO FEMININO.
+- Segurança (LGPD): Informe de forma sutil que os dados coletados respeitam a LGPD e servem estritamente para o agendamento e prestação do serviço.
+- Tone de Voz: Calorosa, com toque humano (use emojis leves, não pareça um robô). Responda com frases curtas e diretas sempre que possível.
+
+# REGRAS DO CHAT:
+- Regra de Ouro: Nunca agende ou tire dúvidas longas de homens. Se o usuário informar que é homem, seja polida e informe que o atendimento é exclusivamente feminino e encerre o assunto.
+- Os serviços prestados são: Design de sobrancelhas (R$ 120-300 | 20 Min), Micropigmentação labial (R$ 500-1000 | 180 Min), Micropigmentação de Sobrancelhas (R$ 200-300 | 80 Min), Tatuagem (R$ 300-1200 | 4 Horas), Extensão de cílios (R$ 50 | 20 Min).
+- Guie a conversa educadamente para obter: Nome, Sexo, E-mail e Bairro/Cidade.
+- QUANDO SOLICITADA PARA EXPLICAR/LISTAR OS SERVIÇOS QUE VOCÊ TRABALHA OU SEUS VALORES, você DEVE retornar as informações EXCLUSIVAMENTE em formato de TABELA (utilizando markdown \`| Procedimento | Valor | Destaca-se por... |\`). Nunca retorne em forma de lista com asteriscos.
+- Ao tratar de agendamentos, sugira você mesma 2 opções de horário distintas para a cliente escolher.
+- Importante: Foco na transformação. Ex: Na tabela ou explicação, ao invés de só falar o preço da micropigmentação, fale que ela entrega 'cor saudável e definição 24h por dia'.`;
+
+            // Toggle Open/Close
+            chatBtn.addEventListener('click', () => {
+                const isActive = chatWindow.classList.contains('active');
+
+                if (isActive) {
+                    chatWindow.classList.remove('active');
+                    chatBtn.classList.remove('active');
+                } else {
+                    chatWindow.classList.add('active');
+                    chatBtn.classList.add('active');
+                    setTimeout(() => chatInput.focus(), 300);
+                    scrollToBottom();
+                }
+            });
+
+            // Utils: Scroll to bottom of chat
+            function scrollToBottom() {
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
+
+            // Append a message to the UI
+            function appendMessage(text, senderType) {
+                const row = document.createElement('div');
+                row.className = `message-row ${senderType}`;
+
+                const msg = document.createElement('div');
+                msg.className = `message ${senderType}`;
+
+                // Formatar quebras de linha básicas e negritos (**) do markdown que a IA manda
+                let formattedText = text.replace(/\\n/g, '<br>');
+                formattedText = formattedText.replace(/\\*\\*(.*?)\\*\\*/g, '<strong>$1</strong>');
+
+                // Formatação simples e robusta para Tabelas
+                // IA enviou: | Procedimento | Valor | ... |---|---| | Design...
+                if (formattedText.includes('|') && formattedText.includes('---')) {
+                    // Remove todos os <br> antes de processar os pipes para unificar a string
+                    let cleanPipes = formattedText.replace(/<br>/g, ' ');
+
+                    // Encontra tudo entre o primeiro e o último pipe
+                    const firstPipe = cleanPipes.indexOf('|');
+                    const lastPipe = cleanPipes.lastIndexOf('|');
+
+                    if (firstPipe !== -1 && lastPipe !== -1 && lastPipe > firstPipe) {
+                        const tableString = cleanPipes.substring(firstPipe, lastPipe + 1);
+
+                        // Quebra por pipes. Ignora itens vazios (extremos)
+                        const cells = tableString.split('|').map(s => s.trim());
+
+                        // Remover índices em branco (gerados pelos pipes nas pontas) ou o divisor '---'
+                        const filteredCells = cells.filter(s => s !== '' && !s.includes('---'));
+
+                        // Sabendo que a IA manda sempre 3 colunas (Procedimento | Valor | Destaca-se por...)
+                        // ou no mínimo 2. Vamos checar o cabeçalho para saber o número de colunas:
+                        const originalHeaders = tableString.split('---')[0];
+                        const colCount = originalHeaders.split('|').filter(s => s.trim() !== '').length || 3;
+
+                        let tableHTML = `<div style="display: grid; grid-template-columns: repeat(${colCount}, 1fr); gap: 4px; margin-top: 10px; font-size: 0.85em;">`;
+
+                        for (let i = 0; i < filteredCells.length; i++) {
+                            // Estilo básico de célula
+                            let isHeader = i < colCount;
+                            let style = isHeader
+                                ? 'font-weight: 600; border-bottom: 1px solid #ddd; padding-bottom: 4px;'
+                                : 'padding: 4px 0; border-bottom: 1px dashed #eee;';
+
+                            // Garante que o markdown bold dentro da célula seja processado (caso o regex global falhou)
+                            let cellText = filteredCells[i].replace(/\\*\\*(.*?)\\*\\*/g, '<strong>$1</strong>');
+
+                            tableHTML += `<div style="${style}">${cellText}</div>`;
+                        }
+
+                        tableHTML += `</div>`;
+
+                        // Substitui a 'maçaroca' inteira do markdown pela grid div limpa
+                        const stringToReplace = formattedText.substring(formattedText.indexOf('|'), formattedText.lastIndexOf('|') + 1);
+                        formattedText = formattedText.replace(stringToReplace, tableHTML);
+                    }
+                }
+
+                msg.innerHTML = formattedText;
+
+                row.appendChild(msg);
+
+                // Insert message BEFORE the typing indicator
+                chatBody.insertBefore(row, typingIndicator);
+                scrollToBottom();
+            }
+
+            // Integrado com a API do Gemini
+            async function sendMessage() {
+                const text = chatInput.value.trim();
+                if (!text) return;
+
+                // 1. Mostrar a mensagem do usuário
+                appendMessage(text, 'user');
+                chatInput.value = '';
+
+                // 2. Mostrar 'Lana está digitando...'
+                typingIndicator.classList.add('active');
+                scrollToBottom();
+
+                // 3. Adicionar mensagem do usuário ao histórico do Chat
+                chatHistory.push({
+                    role: "user",
+                    parts: [{ text: text }]
+                });
+
+                // 4. Bater na API do Google Gemini
+                try {
+                    const response = await fetch(GEMINI_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            systemInstruction: {
+                                parts: [{ text: systemInstruction }]
+                            },
+                            contents: chatHistory,
+                            generationConfig: {
+                                temperature: 0.7,
+                                maxOutputTokens: 600,
+                            }
+                        })
+                    });
+
+                    const data = await response.json();
+
+                    if (data.candidates && data.candidates.length > 0) {
+                        const botResponse = data.candidates[0].content.parts[0].text;
+
+                        // Registrar resposta no histórico para lembrar do contexto
+                        chatHistory.push({
+                            role: "model",
+                            parts: [{ text: botResponse }]
+                        });
+
+                        typingIndicator.classList.remove('active');
+                        appendMessage(botResponse, 'bot');
+                    } else {
+                        console.error("Erro da API Gemini:", data);
+                        throw new Error("Resposta inválida da API do Gemini", data);
+                    }
+
+                } catch (error) {
+                    console.error("Erro ao chamar Gemini API:", error);
+                    typingIndicator.classList.remove('active');
+                    appendMessage("Desculpe, estou com uma instabilidade de conexão no momento. Pode tentar mandar a mensagem de novo em alguns segundos? 🥺", 'bot');
+                    // Remove do histórico a msg para que o usuário possa tentar novamente
+                    chatHistory.pop();
+                }
+            }
+
+            // Bind Events Handlers
+            sendBtn.addEventListener('click', sendMessage);
+
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
