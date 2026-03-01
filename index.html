@@ -1021,9 +1021,8 @@
             const sendBtn = document.getElementById('sendBtn');
             const typingIndicator = document.getElementById('typingIndicator');
 
-            // Configuração da API do Gemini
-            const GEMINI_API_KEY = "AIzaSyAZWDM9hYz0_LYBVlJbKILq4E0idHwIoRg";
-            const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+            // Configuração do Backend Local
+            const BACKEND_URL = "http://localhost:3000/api/chat";
 
             // Histórico de conversa para a API manter o contexto
             let chatHistory = [];
@@ -1152,9 +1151,9 @@
                     parts: [{ text: text }]
                 });
 
-                // 4. Bater na API do Google Gemini
+                // 4. Bater no Backend Local
                 try {
-                    const response = await fetch(GEMINI_URL, {
+                    const response = await fetch(BACKEND_URL, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
