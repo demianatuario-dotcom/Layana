@@ -2,9 +2,13 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 
+const path = require('path');
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+// Serve arquivos estáticos (index.html, imagens, etc) da pasta atual
+app.use(express.static(path.join(__dirname)));
 
 const PORT = process.env.PORT || 3000;
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
