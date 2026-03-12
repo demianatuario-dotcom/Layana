@@ -84,6 +84,7 @@ app.post('/api/simulate', upload.fields([{ name: 'image', maxCount: 1 }, { name:
                 prompt: `A beautiful woman after a cosmetic procedure for ${procedure}. ${promptInfo}. Maintain original facial features realistically. Photorealistic, 4k.`,
                 n: 1,
                 size: "512x512",
+                model: "dall-e-2"
             };
 
             if (maskFile) {
