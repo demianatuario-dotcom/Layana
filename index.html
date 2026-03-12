@@ -8,7 +8,7 @@
 
     <!-- Meta tags for SEO & Theme -->
     <meta name="description"
-        content="Atendimento especializado em estética: Design de sobrancelhas, micropigmentação, tatuagem e extensão de cílios exclusivas para o público feminino.">
+        content="Atendimento especializado em estética: Design de sobrancelhas, Micropigmentação labial, Micropigmentação de Sobrancelhas, Tatuagem, Extensão de cílios, Alongamento de unhas, Manicure, Pedicure e Body Piercing exclusivas para o público feminino.">
     <meta name="theme-color" content="#c98276">
 
     <!-- Premium Google Fonts -->
@@ -1101,7 +1101,6 @@
 # REGRAS DO CHAT:
 - Regra de Ouro: Nunca agende ou tire dúvidas longas de homens. Se o usuário informar que é homem, seja polida e informe que o atendimento é exclusivamente feminino e encerre o assunto.
 - Os serviços prestados são: Design de sobrancelhas (R$ 120-300 | 20 Min), Micropigmentação labial (R$ 500-1000 | 180 Min), Micropigmentação de Sobrancelhas (R$ 200-300 | 80 Min), Tatuagem (R$ 300-1200 | 4 Horas), Extensão de cílios (R$ 50 | 20 Min), Alongamento de unhas (Consulte | 120 Min), Manicure (Consulte | 60 Min), Pedicure (Consulte | 60 Min), Body Piercing (Consulte | 30 Min).
-- Guie a conversa educadamente para obter: Nome, Sexo, E-mail e Bairro/Cidade.
 - QUANDO SOLICITADA PARA EXPLICAR/LISTAR OS SERVIÇOS QUE VOCÊ TRABALHA OU SEUS VALORES, você DEVE retornar as informações EXCLUSIVAMENTE em formato de TABELA (utilizando markdown \`| Procedimento | Valor | Destaca-se por... |\`). Nunca retorne em forma de lista com asteriscos.
 - Ao tratar de agendamentos, sugira você mesma 2 opções de horário distintas para a cliente escolher.
 - Importante: Foco na transformação. Ex: Na tabela ou explicação, ao invés de só falar o preço da micropigmentação, fale que ela entrega 'cor saudável e definição 24h por dia'.`;
@@ -1135,8 +1134,8 @@
                 msg.className = `message ${senderType}`;
 
                 // Formatar quebras de linha básicas e negritos (**) do markdown que a IA manda
-                let formattedText = text.replace(/\\n/g, '<br>');
-                formattedText = formattedText.replace(/\\*\\*(.*?)\\*\\*/g, '<strong>$1</strong>');
+                let formattedText = text.replace(/\n/g, '<br>');
+                formattedText = formattedText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
 
                 // Formatação simples e robusta para Tabelas
                 // IA enviou: | Procedimento | Valor | ... |---|---| | Design...
@@ -1172,7 +1171,7 @@
                                 : 'padding: 4px 0; border-bottom: 1px dashed #eee;';
 
                             // Garante que o markdown bold dentro da célula seja processado (caso o regex global falhou)
-                            let cellText = filteredCells[i].replace(/\\*\\*(.*?)\\*\\*/g, '<strong>$1</strong>');
+                            let cellText = filteredCells[i].replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
 
                             tableHTML += `<div style="${style}">${cellText}</div>`;
                         }
@@ -1194,7 +1193,7 @@
                 scrollToBottom();
             }
 
-            // Integrado com a API do Gemini
+            // Integrado com a API da Gemini
             async function sendMessage() {
                 const text = chatInput.value.trim();
                 if (!text) return;
