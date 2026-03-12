@@ -68,7 +68,7 @@
             },
             "id": "tool_1",
             "name": "1. Buscar Cadastro Cliente",
-            "type": "@n8n/n8n-nodes-langchain.tool",
+            "type": "@n8n/n8n-nodes-langchain.toolCode",
             "typeVersion": 1.2,
             "position": [
                 600,
@@ -83,7 +83,7 @@
             },
             "id": "tool_2",
             "name": "2. Cadastrar Cliente BD",
-            "type": "@n8n/n8n-nodes-langchain.tool",
+            "type": "@n8n/n8n-nodes-langchain.toolCode",
             "typeVersion": 1.2,
             "position": [
                 600,
@@ -98,7 +98,7 @@
             },
             "id": "tool_3",
             "name": "3. Consultar Calendário",
-            "type": "@n8n/n8n-nodes-langchain.tool",
+            "type": "@n8n/n8n-nodes-langchain.toolCode",
             "typeVersion": 1.2,
             "position": [
                 600,
@@ -113,7 +113,7 @@
             },
             "id": "tool_4",
             "name": "4. Agendamento Calendar",
-            "type": "@n8n/n8n-nodes-langchain.tool",
+            "type": "@n8n/n8n-nodes-langchain.toolCode",
             "typeVersion": 1.2,
             "position": [
                 600,
@@ -128,7 +128,7 @@
             },
             "id": "tool_5",
             "name": "5. Salvar Agendamento BD",
-            "type": "@n8n/n8n-nodes-langchain.tool",
+            "type": "@n8n/n8n-nodes-langchain.toolCode",
             "typeVersion": 1.2,
             "position": [
                 600,
@@ -143,7 +143,7 @@
             },
             "id": "tool_6",
             "name": "6. Notificar Profissional",
-            "type": "@n8n/n8n-nodes-langchain.tool",
+            "type": "@n8n/n8n-nodes-langchain.toolCode",
             "typeVersion": 1.2,
             "position": [
                 600,
@@ -158,11 +158,38 @@
             },
             "id": "tool_7",
             "name": "7. Salvar Resumo de Log",
-            "type": "@n8n/n8n-nodes-langchain.tool",
+            "type": "@n8n/n8n-nodes-langchain.toolCode",
             "typeVersion": 1.2,
             "position": [
                 600,
                 700
+            ]
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "http://evo-n8ks88g0c0gk4848o8occs44.76.13.234.225.sslip.io/message/sendText/Layana",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "apikey",
+                            "value": "GS2kgv6tDcGnN4i5IfIdrrEDDgKQxr39"
+                        }
+                    ]
+                },
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={\n  \"number\": \"5561981171564\",\n  \"text\": \"{{ $json.output }}\"\n}",
+                "options": {}
+            },
+            "id": "evo_api_1",
+            "name": "Evo API Teste Envio",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                800,
+                0
             ]
         }
     ],
@@ -272,6 +299,17 @@
                     {
                         "node": "Agente Lana",
                         "type": "ai_tool",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Agente Lana": {
+            "main": [
+                [
+                    {
+                        "node": "Evo API Teste Envio",
+                        "type": "main",
                         "index": 0
                     }
                 ]

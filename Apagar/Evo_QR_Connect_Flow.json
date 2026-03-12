@@ -1,0 +1,29 @@
+{
+    "nodes": [
+        {
+            "parameters": {
+                "method": "GET",
+                "url": "http://evo-n8ks88g0c0gk4848o8occs44.76.13.234.225.sslip.io/instance/connect/Layana",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "apikey",
+                            "value": "GS2kgv6tDcGnN4i5IfIdrrEDDgKQxr39"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "id": "evo_connect_instance",
+            "name": "Evo API Reconectar QR Code",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                200,
+                -200
+            ]
+        }
+    ],
+    "connections": {}
+}

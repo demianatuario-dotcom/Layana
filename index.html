@@ -808,6 +808,38 @@
             gap: 4px;
         }
 
+        /* Simulation Modal Styles */
+        .sim-modal-overlay {
+            position: fixed; top:0; left:0; width:100%; height:100%;
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
+            z-index: 20000; display: flex; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+        }
+        .sim-modal-overlay.active { opacity: 1; pointer-events: auto; }
+        .sim-modal {
+            background: white; border-radius: 20px; width: 90%; max-width: 450px;
+            padding: 35px 30px; box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+            transform: translateY(20px); transition: transform 0.3s ease;
+            max-height: 90vh; overflow-y: auto; text-align: center; position: relative;
+        }
+        .sim-modal-overlay.active .sim-modal { transform: translateY(0); }
+        .sim-modal h3 { font-family: 'Playfair Display', serif; color: var(--secondary); font-size: 1.8rem; margin-bottom: 10px; }
+        .sim-modal p.sim-price { font-size: 1.3rem; color: var(--primary); font-weight: 500; margin-bottom: 25px; }
+        .sim-modal textarea, .sim-modal input[type="file"] {
+            width: 100%; padding: 12px; border: 1px solid rgba(201, 130, 118, 0.4); border-radius: 12px; margin-bottom: 20px;
+            font-family: inherit; outline: none; transition: border-color 0.3s;
+        }
+        .sim-modal textarea:focus { border-color: var(--primary); }
+        .sim-step { display: none; }
+        .sim-step.active { display: block; animation: fadeUp 0.4s ease; }
+        .sim-img-result { width: 100%; border-radius: 16px; margin: 15px 0 25px 0; box-shadow: 0 5px 25px rgba(201, 130, 118, 0.2); }
+        .sim-loading { padding: 40px 0; }
+        .sim-loading .dot { width: 12px; height: 12px; margin: 0 4px; display: inline-block; background: var(--primary); border-radius: 50%; animation: bounce 1.4s infinite ease-in-out; }
+        .sim-loading .dot:nth-child(2) { animation-delay: 0.2s; }
+        .sim-loading .dot:nth-child(3) { animation-delay: 0.4s; }
+        .btn-close-modal { position: absolute; top: 15px; right: 20px; background: none; border:none; font-size: 28px; cursor: pointer; color: #b5aba9; transition: color 0.3s; }
+        .btn-close-modal:hover { color: var(--secondary); }
+
         /* Responsive Styles */
         @media (max-width: 600px) {
             .lana-chat-window {
@@ -1073,9 +1105,188 @@
         </div>
     </div>
 
+    <!-- Sim Modal -->
+    <div class="sim-modal-overlay" id="simModalOverlay">
+        <div class="sim-modal">
+            <button class="btn-close-modal" onclick="closeSimModal()">×</button>
+            
+            <!-- Step 1: Info & Prompt -->
+            <div class="sim-step active" id="simStep1">
+                <h3 id="simTitle">Procedimento</h3>
+                <p class="sim-price" id="simPrice">R$ 0,00</p>
+                <p style="margin-bottom: 25px; color: var(--text-light); line-height: 1.6;">Gostaria de visualizar como a sua fisionomia pode ficar ainda mais deslumbrante com este procedimento?</p>
+                <button class="btn-primary" style="width:100%; padding:14px; cursor:pointer; font-size: 1rem;" onclick="nextSimStep()">Simular Meu Resultado</button>
+            </div>
+
+            <!-- Step 2: Upload -->
+            <div class="sim-step" id="simStep2">
+                <h3>Sua Simulação</h3>
+                <p style="font-size: 0.95rem; margin-bottom:12px; color: var(--text-light);">Conte em poucas palavras o que espera desse procedimento:</p>
+                <textarea id="simPrompt" rows="3" placeholder="Ex: Deixar mais arqueado, visual natural..."></textarea>
+                <p style="font-size: 0.95rem; margin-bottom:12px; color: var(--text-light);">Por fim, nos envie uma foto clara de onde o procedimento será realizado:</p>
+                <input type="file" id="simImage" accept="image/png, image/jpeg" />
+                <button class="btn-primary" style="width:100%; padding:14px; cursor:pointer; margin-top: 10px; font-size: 1rem;" onclick="runSimulation()">Gerar Transformação ✨</button>
+                <p style="font-size: 0.75rem; color: #a69c9a; margin-top: 15px;">Desenvolvido com IA Avançada.</p>
+            </div>
+
+            <!-- Step 3: Loading -->
+            <div class="sim-step sim-loading" id="simStep3">
+                <h3 style="margin-bottom: 5px;">Analisando seus traços...</h3>
+                <p style="color: var(--text-light); font-size: 0.9rem;">Aplicando o procedimento com cuidado</p>
+                <div style="margin-top: 25px;">
+                    <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+                </div>
+            </div>
+
+            <!-- Step 4: Result -->
+            <div class="sim-step" id="simStep4">
+                <h3 style="margin-bottom: 5px;">Seu Novo Visual!</h3>
+                <img id="simResultImg" class="sim-img-result" src="" alt="Resultado da Simulação">
+                <div style="background: rgba(201, 130, 118, 0.08); padding: 15px; border-radius: 12px; margin-bottom: 25px; border-left: 3px solid var(--primary);">
+                    <p id="simPraise" style="font-size:0.95rem; line-height:1.6; color:var(--secondary); text-align:left; font-style:italic; margin: 0;"></p>
+                </div>
+                <button class="btn-primary" style="width:100%; padding:14px; cursor:pointer; font-size: 1rem;" onclick="closeSimModalAndChat()">Amei! Quero Agendar 👉</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Integrator Script -->
     <script>
+        // Funções Globais da UI do Simulador (Sim Modal)
+        window.closeSimModal = function() {
+            document.getElementById('simModalOverlay').classList.remove('active');
+            setTimeout(() => { document.getElementById('simStep1').classList.add('active'); }, 300); // re-set steps
+        };
+        window.nextSimStep = function() {
+            document.querySelectorAll('.sim-step').forEach(el => el.classList.remove('active'));
+            document.getElementById('simStep2').classList.add('active');
+        };
+        window.closeSimModalAndChat = function() {
+            window.closeSimModal();
+            document.getElementById('lanaChatBtn').click();
+        };
+
+        // Resize utility before upload to save API limit & ensure png
+        function processImageForOpenAI(file, callback) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = 512;
+                    canvas.height = 512;
+                    const ctx = canvas.getContext('2d');
+                    
+                    // Draw image scaled and cropped to fill 512x512
+                    const scale = Math.max(canvas.width / img.width, canvas.height / img.height);
+                    const x = (canvas.width / 2) - (img.width / 2) * scale;
+                    const y = (canvas.height / 2) - (img.height / 2) * scale;
+                    ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
+
+                    canvas.toBlob(blob => callback(blob), 'image/png');
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        window.runSimulation = function() {
+            const imgInput = document.getElementById('simImage');
+            const promptInput = document.getElementById('simPrompt').value;
+            const title = document.getElementById('simTitle').innerText;
+
+            if(!imgInput.files || imgInput.files.length === 0) {
+                alert("Por favor, selecione uma foto sua limpa e bem iluminada.");
+                return;
+            }
+
+            document.querySelectorAll('.sim-step').forEach(el => el.classList.remove('active'));
+            document.getElementById('simStep3').classList.add('active');
+
+            const file = imgInput.files[0];
+            processImageForOpenAI(file, function(imageBlob) {
+                
+                // Create a totally transparent mask to allow DALL-E 2 edits
+                const maskCanvas = document.createElement('canvas');
+                maskCanvas.width = 512; maskCanvas.height = 512;
+                const maskCtx = maskCanvas.getContext('2d');
+                maskCtx.clearRect(0,0,512,512); // Transparent mask
+                
+                maskCanvas.toBlob(function(maskBlob) {
+                    const formData = new FormData();
+                    formData.append('image', imageBlob, 'image.png');
+                    formData.append('mask', maskBlob, 'mask.png');
+                    formData.append('prompt', promptInput || "Otimizar formato e realce estético focado no procedimento.");
+                    formData.append('procedure', title);
+
+                    fetch('/api/simulate', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(r => r.json())
+                    .then(data => {
+                        document.querySelectorAll('.sim-step').forEach(el => el.classList.remove('active'));
+                        if (data.error) {
+                            alert("Houve um erro na simulação: " + data.error);
+                            window.closeSimModal();
+                        } else {
+                            document.getElementById('simStep4').classList.add('active');
+                            document.getElementById('simResultImg').src = data.imageUrl;
+                            document.getElementById('simPraise').innerText = "« " + data.text + " »";
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        alert("Erro de conexão ao simular.");
+                        window.closeSimModal();
+                    });
+                }, 'image/png');
+            });
+        };
+
+        window.openSimulationModal = function(title, price) {
+            console.log("Abrindo modal para: ", title, price);
+            // Reset to defaults
+            document.querySelectorAll('.sim-step').forEach(el => el.classList.remove('active'));
+            document.getElementById('simStep1').classList.add('active');
+            document.getElementById('simPrompt').value = "";
+            document.getElementById('simImage').value = "";
+            
+            document.getElementById('simTitle').innerText = title;
+            document.getElementById('simPrice').innerText = price;
+            document.getElementById('simModalOverlay').classList.add('active');
+        };
+
         document.addEventListener('DOMContentLoaded', () => {
+            console.log("DOM loaded. Attaching events to service cards...");
+            // --- Attach dynamically UI handlers for services cards --- //
+            const servicePrices = {
+                "Design de Sobrancelhas": "R$ 40",
+                "Micro de Sobrancelhas": "R$ 400",
+                "Extensão de Cílios": "A partir de R$ 150",
+                "Micro Labial": "R$ 400",
+                "Tatuagem / Fine Line": "Preços a Consultar",
+                "Alongamento de Unhas": "A partir de R$ 130",
+                "Manicure Intacta": "R$ 50",
+                "Spa dos Pés / Pedicure": "R$ 50",
+                "Body Piercing": "Preços a Consultar"
+            };
+
+            const cards = document.querySelectorAll('.service-card');
+            console.log("Found " + cards.length + " cards.");
+            
+            cards.forEach(card => {
+                card.style.cursor = 'pointer';
+                const originalBg = card.style.background || "white";
+                card.addEventListener('mouseenter', () => card.style.background = "#fffafa"); // visual feedback
+                card.addEventListener('mouseleave', () => card.style.background = originalBg);
+                card.addEventListener('click', () => {
+                    const title = card.querySelector('h3').innerText;
+                    const price = servicePrices[title] || "Valores Médios na Tabela";
+                    window.openSimulationModal(title, price);
+                });
+            });
+
             const chatBtn = document.getElementById('lanaChatBtn');
             const chatWindow = document.getElementById('lanaChatWindow');
             const chatBody = document.getElementById('chatBody');
@@ -1105,6 +1316,7 @@
   2. Micropigmentação e Sobrancelha: Micro Shadow/Fio a Fio (R$ 400 | Retoque R$ 200), Micro/Revitalização Labial (R$ 400 | Retoque R$ 200), Design com Henna (R$ 55), Design Simples (R$ 40).
   3. Cílios: Fio a Fio/Vol Brasileiro/Vol Híbrido (R$ 150 | Manu R$ 85), Vol Egípcio (R$ 180 | Manu R$ 100), Fox (R$ 190 | Manu R$ 95), Efeito Rímel (R$ 100 | Manu R$ 65), Vol Russo (R$ 200 | Manu R$ 105), Mega Volume (R$ 230 | Manu R$ 130).
   4. Unhas (Apenas com a profissional Amanda - WhatsApp: 61 99966-7225): Fibra de Vidro (R$ 180), Molde F1 (R$ 130), Banho de Gel (R$ 95), Manutenção de Gel (R$ 95 a R$ 130), Pé e Mão Esmaltação Tradicional (R$ 50).
+  5. Tatuagem fine-line: (Preços a Consultar)
 - QUANDO SOLICITADA PARA EXPLICAR/LISTAR OS SERVIÇOS QUE VOCÊ TRABALHA OU SEUS VALORES, você DEVE retornar as informações EXCLUSIVAMENTE em formato de TABELA (utilizando markdown \`| Procedimento | Valor | Destaca-se por... |\`). Nunca retorne em forma de lista com asteriscos.
 - ATENÇÃO SOBRE AGENDAMENTOS: Caso a cliente demonstre interesse em marcar algum procedimento, informe educadamente que ela deverá entrar em contato com a profissional Layana pelo número: (61) 9598-1186
 - Importante: Foco na transformação. Ex: Na tabela ou explicação, ao invés de só falar o preço da micropigmentação, fale que ela entrega 'cor saudável e definição 24h por dia'.`;

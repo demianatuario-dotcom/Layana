@@ -1,0 +1,24 @@
+{
+    "name": "Ouvido da Layana - Webhook Recebedor",
+    "nodes": [
+        {
+            "parameters": {
+                "httpMethod": "POST",
+                "path": "recebe_whatsapp_layana",
+                "responseMode": "lastNode",
+                "options": {}
+            },
+            "id": "webhook_1",
+            "name": "Webhook Layana",
+            "type": "n8n-nodes-base.webhook",
+            "typeVersion": 2,
+            "position": [
+                250,
+                250
+            ],
+            "webhookId": "cb3bc7d7-133a-4a21-98a0-21db33385734"
+        }
+    ],
+    "connections": {},
+    "settings": {}
+}
