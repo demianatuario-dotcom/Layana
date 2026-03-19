@@ -90,9 +90,22 @@ app.post('/api/simulate', upload.fields([{ name: 'image', maxCount: 1 }, { name:
         let imageUrl = "";
         try {
             const { toFile } = require('openai');
+            let visualPrompt = "";
+            const procLower = procedure.toLowerCase();
+            if (procLower.includes("piercing")) {
+                visualPrompt = "A closeup portrait of a person featuring a highly visible, prominent, and shiny metallic piercing jewelry beautifully attached to the skin. The piercing is striking, flawless, and photorealistic, perfectly matching the original lighting and skin texture.";
+            } else if (procLower.includes("sobrancelha") || procLower.includes("cílios")) {
+                visualPrompt = "A closeup portrait of a person featuring perfectly shaped, prominent, dark, and beautifully defined eyebrows, along with thick, striking eyelashes. Flawless cosmetic enhancement, photorealistic 8k.";
+            } else if (procLower.includes("labial")) {
+                visualPrompt = "A closeup portrait of a person featuring vibrantly tinted, healthy, full, and beautifully contoured lips. Flawless cosmetic enhancement, photorealistic 8k.";
+            } else {
+                visualPrompt = `A closeup portrait of a person featuring a beautiful, realistic, and highly visible aesthetic enhancement for ${procedure}. Flawless cosmetic result, photorealistic 8k.`;
+            }
+            visualPrompt += ` Specific client request applied to the image: ${promptInfo}.`;
+
             const openaiArgs = {
                 image: await toFile(fs.createReadStream(imagePathPng), 'image.png', { type: 'image/png' }),
-                prompt: `A highly realistic, professional cosmetic procedure: ${procedure}. Client request: "${promptInfo}". YOU MUST ADD A CLEARLY VISIBLE AND PROMINENT JEWELRY PIECE OR ENHANCEMENT. The modification must be striking, metallic/shiny if applicable, and anatomically correct. Do not distort the surrounding face. Perfect lighting and skin texture match. Photorealistic, 8k.`,
+                prompt: visualPrompt,
                 n: 1,
                 size: "512x512",
                 model: "dall-e-2"
