@@ -1231,14 +1231,14 @@
                 } else if (proc.includes('piercing')) {
                     // Identify specific piercing location from user text
                     if (userText.includes('nariz') || userText.includes('nostril') || userText.includes('septo')) {
-                        // Nose focus - very small radius to prevent lip generation
-                        maskCtx.arc(256, 250, 45, 0, Math.PI * 2);
+                        // Nose focus - small radius to prevent lip generation but large enough for the jewelry
+                        maskCtx.arc(256, 250, 65, 0, Math.PI * 2);
                     } else if (userText.includes('orelha')) {
                         // Ear piercings (wide ellipse covering sides)
                         maskCtx.ellipse(256, 256, 220, 100, 0, 0, Math.PI * 2);
                     } else {
                         // Generic small center target
-                        maskCtx.arc(256, 260, 60, 0, Math.PI * 2);
+                        maskCtx.arc(256, 260, 70, 0, Math.PI * 2);
                     }
                 } else {
                     // Default central circle
