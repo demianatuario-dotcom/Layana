@@ -74,21 +74,32 @@ app.post('/api/simulate', upload.fields([{ name: 'image', maxCount: 1 }, { name:
         const imageFile = req.files['image'][0];
         const maskFile = req.files['mask'] ? req.files['mask'][0] : null;
 
+        // OpenAI exige que o arquivo termine em .png para inferir o mimetype corretamente (multer não adiciona extensão)
+        const imagePathPng = imageFile.path + '.png';
+        fs.renameSync(imageFile.path, imagePathPng);
+        
+        let maskPathPng = null;
+        if (maskFile) {
+            maskPathPng = maskFile.path + '.png';
+            fs.renameSync(maskFile.path, maskPathPng);
+        }
+
         // 1. Chamar OpenAI DALL-E 2 para editar a imagem
         // A API exige que a imagem seja um PNG quadrado.
         // O Frontend deve enviar a imagem e a máscara já no formato correto (512x512 PNG).
         let imageUrl = "";
         try {
+            const { toFile } = require('openai');
             const openaiArgs = {
-                image: fs.createReadStream(imageFile.path),
+                image: await toFile(fs.createReadStream(imagePathPng), 'image.png', { type: 'image/png' }),
                 prompt: `A beautiful woman after a cosmetic procedure for ${procedure}. ${promptInfo}. Maintain original facial features realistically. Photorealistic, 4k.`,
                 n: 1,
                 size: "512x512",
                 model: "dall-e-2"
             };
 
-            if (maskFile) {
-                openaiArgs.mask = fs.createReadStream(maskFile.path);
+            if (maskPathPng) {
+                openaiArgs.mask = await toFile(fs.createReadStream(maskPathPng), 'mask.png', { type: 'image/png' });
             }
 
             const imageParams = await openai.images.edit(openaiArgs);
@@ -98,8 +109,8 @@ app.post('/api/simulate', upload.fields([{ name: 'image', maxCount: 1 }, { name:
             return res.status(500).json({ error: 'Erro ao gerar imagem na OpenAI', details: imgError.message });
         } finally {
             // Limpar arquivos temporários
-            fs.unlinkSync(imageFile.path);
-            if (maskFile) fs.unlinkSync(maskFile.path);
+            if (fs.existsSync(imagePathPng)) fs.unlinkSync(imagePathPng);
+            if (maskPathPng && fs.existsSync(maskPathPng)) fs.unlinkSync(maskPathPng);
         }
 
         // 2. Chamar Gemini para o texto de elogio
