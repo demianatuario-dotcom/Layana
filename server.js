@@ -92,16 +92,21 @@ app.post('/api/simulate', upload.fields([{ name: 'image', maxCount: 1 }, { name:
             const { toFile } = require('openai');
             let visualPrompt = "";
             const procLower = procedure.toLowerCase();
+            const infoLower = promptInfo.toLowerCase();
+            
             if (procLower.includes("piercing")) {
-                visualPrompt = "A closeup portrait of a person featuring a highly visible, prominent, and shiny metallic piercing jewelry beautifully attached to the skin. The piercing is striking, flawless, and photorealistic, perfectly matching the original lighting and skin texture.";
+                if (infoLower.includes("nariz") || infoLower.includes("nostril") || infoLower.includes("septo")) {
+                     visualPrompt = "A beautiful, photorealistic closeup fashion portrait of a person wearing a delicate, elegant silver nose piercing (hoop ring or stud). The jewelry is highly aesthetic, perfectly placed, metallic, and catches the light naturally. Flawless skin texture, 8k resolution, extremely beautiful.";
+                } else {
+                     visualPrompt = "A beautiful, photorealistic closeup fashion portrait of a person wearing a delicate, elegant, and highly aesthetic metallic piercing. The jewelry is perfectly placed and catches the light naturally. Flawless skin texture, 8k resolution, extremely beautiful.";
+                }
             } else if (procLower.includes("sobrancelha") || procLower.includes("cílios")) {
-                visualPrompt = "A closeup portrait of a person featuring perfectly shaped, prominent, dark, and beautifully defined eyebrows, along with thick, striking eyelashes. Flawless cosmetic enhancement, photorealistic 8k.";
+                visualPrompt = "A beautiful, photorealistic closeup fashion portrait of a person featuring perfectly shaped, symmetric, and beautifully defined eyebrows, along with thick, elegant eyelashes. Flawless cosmetic enhancement, 8k resolution, highly aesthetic.";
             } else if (procLower.includes("labial")) {
-                visualPrompt = "A closeup portrait of a person featuring vibrantly tinted, healthy, full, and beautifully contoured lips. Flawless cosmetic enhancement, photorealistic 8k.";
+                visualPrompt = "A beautiful, photorealistic closeup fashion portrait of a person featuring vibrantly tinted, healthy, full, and beautifully contoured aesthetic lips. Flawless cosmetic enhancement, 8k resolution.";
             } else {
-                visualPrompt = `A closeup portrait of a person featuring a beautiful, realistic, and highly visible aesthetic enhancement for ${procedure}. Flawless cosmetic result, photorealistic 8k.`;
+                visualPrompt = `A beautiful, photorealistic closeup fashion portrait of a person featuring an incredibly realistic and highly aesthetic cosmetic enhancement for ${procedure}. Flawless result, 8k resolution.`;
             }
-            visualPrompt += ` Specific client request applied to the image: ${promptInfo}.`;
 
             const openaiArgs = {
                 image: await toFile(fs.createReadStream(imagePathPng), 'image.png', { type: 'image/png' }),
