@@ -95,8 +95,10 @@ app.post('/api/simulate', upload.fields([{ name: 'image', maxCount: 1 }, { name:
             const infoLower = promptInfo.toLowerCase();
             
             if (procLower.includes("piercing")) {
-                if (infoLower.includes("nariz") || infoLower.includes("nostril") || infoLower.includes("septo")) {
-                     visualPrompt = "A beautiful, photorealistic closeup fashion portrait of a person wearing a delicate, elegant silver nose piercing (hoop ring or stud). The jewelry is highly aesthetic, perfectly placed, metallic, and catches the light naturally. Flawless skin texture, 8k resolution, extremely beautiful.";
+                if (infoLower.includes("septo")) {
+                     visualPrompt = "A beautiful, photorealistic fashion closeup portrait of a person wearing a delicate, elegant silver septum piercing. The jewelry is highly aesthetic, perfectly placed in the septum, metallic, and catches the light naturally. Flawless skin texture, 8k resolution.";
+                } else if (infoLower.includes("nariz") || infoLower.includes("nostril")) {
+                     visualPrompt = "A beautiful, photorealistic fashion closeup portrait of a person wearing a delicate, elegant silver nostril stud piercing specifically on the side of the nose. The jewelry is a highly aesthetic tiny metallic stud, perfectly placed, and catches the light naturally. Flawless skin texture, 8k resolution.";
                 } else {
                      visualPrompt = "A beautiful, photorealistic closeup fashion portrait of a person wearing a delicate, elegant, and highly aesthetic metallic piercing. The jewelry is perfectly placed and catches the light naturally. Flawless skin texture, 8k resolution, extremely beautiful.";
                 }

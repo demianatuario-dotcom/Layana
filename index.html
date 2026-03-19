@@ -1230,15 +1230,19 @@
                     maskCtx.ellipse(256, 360, 100, 50, 0, 0, Math.PI * 2);
                 } else if (proc.includes('piercing')) {
                     // Identify specific piercing location from user text
-                    if (userText.includes('nariz') || userText.includes('nostril') || userText.includes('septo')) {
-                        // Nose focus - small radius to prevent lip generation but large enough for the jewelry
-                        maskCtx.arc(256, 250, 65, 0, Math.PI * 2);
+                    if (userText.includes('septo')) {
+                        // Septum - needs to be able to hang down slightly over the lip
+                        maskCtx.arc(256, 260, 50, 0, Math.PI * 2);
+                    } else if (userText.includes('nariz') || userText.includes('nostril')) {
+                        // Nostril - Shift the mask UP (y=240) and smaller (r=50) to physically block the upper lip
+                        // This forces DALL-E to only edit the actual nose cartilege
+                        maskCtx.arc(256, 240, 50, 0, Math.PI * 2);
                     } else if (userText.includes('orelha')) {
                         // Ear piercings (wide ellipse covering sides)
                         maskCtx.ellipse(256, 256, 220, 100, 0, 0, Math.PI * 2);
                     } else {
                         // Generic small center target
-                        maskCtx.arc(256, 260, 70, 0, Math.PI * 2);
+                        maskCtx.arc(256, 256, 60, 0, Math.PI * 2);
                     }
                 } else {
                     // Default central circle
