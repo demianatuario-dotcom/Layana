@@ -1220,18 +1220,29 @@
                 maskCtx.beginPath();
                 
                 const proc = title.toLowerCase();
-                if (proc.includes('sobrancelha') || proc.includes('cílios')) {
+                const userText = promptInput.toLowerCase();
+                
+                if (proc.includes('sobrancelha') || proc.includes('cílios') || userText.includes('olho') || userText.includes('sobrancelha')) {
                     // Upper face (Eyes/Eyebrows)
-                    maskCtx.ellipse(256, 180, 160, 80, 0, 0, Math.PI * 2);
-                } else if (proc.includes('labial')) {
+                    maskCtx.ellipse(256, 180, 150, 60, 0, 0, Math.PI * 2);
+                } else if (proc.includes('labial') || userText.includes('boca') || userText.includes('labio') || userText.includes('lábio')) {
                     // Lower face (Lips)
-                    maskCtx.ellipse(256, 360, 120, 70, 0, 0, Math.PI * 2);
+                    maskCtx.ellipse(256, 360, 100, 50, 0, 0, Math.PI * 2);
                 } else if (proc.includes('piercing')) {
-                    // Center small (Nose/General)
-                    maskCtx.arc(256, 256, 100, 0, Math.PI * 2);
+                    // Identify specific piercing location from user text
+                    if (userText.includes('nariz') || userText.includes('nostril') || userText.includes('septo')) {
+                        // Nose focus - very small radius to prevent lip generation
+                        maskCtx.arc(256, 250, 45, 0, Math.PI * 2);
+                    } else if (userText.includes('orelha')) {
+                        // Ear piercings (wide ellipse covering sides)
+                        maskCtx.ellipse(256, 256, 220, 100, 0, 0, Math.PI * 2);
+                    } else {
+                        // Generic small center target
+                        maskCtx.arc(256, 260, 60, 0, Math.PI * 2);
+                    }
                 } else {
                     // Default central circle
-                    maskCtx.arc(256, 256, 130, 0, Math.PI * 2);
+                    maskCtx.arc(256, 256, 100, 0, Math.PI * 2);
                 }
                 
                 maskCtx.fill();
