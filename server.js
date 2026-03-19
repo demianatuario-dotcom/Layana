@@ -136,15 +136,25 @@ app.post('/api/simulate', upload.fields([{ name: 'image', maxCount: 1 }, { name:
         // 2. Chamar Gemini para o texto de elogio
         let praiseText = "";
         try {
+            const isPiercing = procedure.toLowerCase().includes("piercing");
+            
+            const geminiSystemPrompt = isPiercing
+                ? "Você é Lana, uma assistente de estética e body piercing de alto padrão. Você deve se comunicar de forma 100% NEUTRA quanto a gênero gramatical (NÃO USE palavras como 'querida', 'linda', 'amiga', ou 'deslumbrante' focada ao gênero feminino, pois o cliente pode ser um homem)."
+                : "Você é Lana, uma assistente de estética de alto padrão luxuosa. A cliente acabou de receber uma simulação visual de um procedimento estético.";
+            
+            const geminiUserPrompt = isPiercing
+                ? `O usuário fez uma simulação do procedimento: ${procedure}. Preferência: ${promptInfo}. Faça um elogio vibrante destacando como o procedimento realçou o estilo e a fisionomia, garantindo um visual incrível. Seja calorosa e curta (máximo 3 frases). USE LINGUAGEM ESTRITAMENTE NEUTRA, evitando completamente flexão de gênero feminino. Termine incentivando o agendamento real com a equipe Layana!`
+                : `A cliente fez uma simulação do procedimento: ${procedure}. As preferências dela foram: ${promptInfo}. Faça um elogio vibrante, exalte como esse procedimento destacou a beleza natural dela, deixando-a deslumbrante. Seja humana, calorosa e curta (máximo 3 frases). Traga foco para a autoestima. Termine incentivando o agendamento real com a equipe Layana!`;
+
             const response = await fetch(GEMINI_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     systemInstruction: {
-                        parts: [{ text: "Você é Lana, uma assistente de estética de alto padrão luxuosa. A cliente acabou de receber uma simulação visual de um procedimento estético." }]
+                        parts: [{ text: geminiSystemPrompt }]
                     },
                     contents: [{
-                        parts: [{ text: `A cliente fez uma simulação do procedimento: ${procedure}. As preferências dela foram: ${promptInfo}. Faça um elogio vibrante, exalte como esse procedimento destacou a beleza natural dela, deixando-a deslumbrante. Seja humana, calorosa e curta (máximo 3 frases). Traga foco para a autoestima. Termine incentivando o agendamento real com a equipe Layana!` }]
+                        parts: [{ text: geminiUserPrompt }]
                     }]
                 })
             });
