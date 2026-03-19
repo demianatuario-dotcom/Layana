@@ -92,7 +92,7 @@ app.post('/api/simulate', upload.fields([{ name: 'image', maxCount: 1 }, { name:
             const { toFile } = require('openai');
             const openaiArgs = {
                 image: await toFile(fs.createReadStream(imagePathPng), 'image.png', { type: 'image/png' }),
-                prompt: `A beautiful woman after a cosmetic procedure for ${procedure}. ${promptInfo}. Maintain original facial features realistically. Photorealistic, 4k.`,
+                prompt: `Subtle, highly realistic, and professional cosmetic procedure: ${procedure}. ${promptInfo}. The aesthetic enhancement must be extremely discrete, delicate, and anatomically safe. Preserve the exact original facial structure, lighting, and skin texture without distortions or exaggerations. Flawless, photorealistic, 4k photography.`,
                 n: 1,
                 size: "512x512",
                 model: "dall-e-2"

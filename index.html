@@ -1206,11 +1206,21 @@
             const file = imgInput.files[0];
             processImageForOpenAI(file, function(imageBlob) {
                 
-                // Create a totally transparent mask to allow DALL-E 2 edits
+                // Create a centered mask to allow DALL-E 2 edits only in the middle of the face
                 const maskCanvas = document.createElement('canvas');
                 maskCanvas.width = 512; maskCanvas.height = 512;
                 const maskCtx = maskCanvas.getContext('2d');
-                maskCtx.clearRect(0,0,512,512); // Transparent mask
+                
+                // Fill entirely with opaque black (uneditable area)
+                maskCtx.fillStyle = 'rgba(0, 0, 0, 1)';
+                maskCtx.fillRect(0, 0, 512, 512);
+                
+                // Clear a central circle for the editable area (transparent mask)
+                maskCtx.globalCompositeOperation = 'destination-out';
+                maskCtx.beginPath();
+                maskCtx.arc(256, 256, 170, 0, Math.PI * 2);
+                maskCtx.fill();
+                maskCtx.globalCompositeOperation = 'source-over'; // reset
                 
                 maskCanvas.toBlob(function(maskBlob) {
                     const formData = new FormData();
