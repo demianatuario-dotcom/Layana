@@ -1123,7 +1123,7 @@
                 <h3>Sua Simulação</h3>
                 <p style="font-size: 0.95rem; margin-bottom:12px; color: var(--text-light);">Conte em poucas palavras o que espera desse procedimento:</p>
                 <textarea id="simPrompt" rows="3" placeholder="Ex: Deixar mais arqueado, visual natural..."></textarea>
-                <p style="font-size: 0.95rem; margin-bottom:12px; color: var(--text-light);">Por fim, nos envie uma foto clara de onde o procedimento será realizado:</p>
+                <p style="font-size: 0.95rem; margin-bottom:12px; color: var(--text-light);">Por fim, envie uma foto *bem alinhada e centralizada* no seu rosto:</p>
                 <input type="file" id="simImage" accept="image/png, image/jpeg" />
                 <button class="btn-primary" style="width:100%; padding:14px; cursor:pointer; margin-top: 10px; font-size: 1rem;" onclick="runSimulation()">Gerar Transformação ✨</button>
                 <p style="font-size: 0.75rem; color: #a69c9a; margin-top: 15px;">Desenvolvido com IA Avançada.</p>
@@ -1206,7 +1206,7 @@
             const file = imgInput.files[0];
             processImageForOpenAI(file, function(imageBlob) {
                 
-                // Create a centered mask to allow DALL-E 2 edits only in the middle of the face
+                // Create a dynamic targeted mask based on the procedure
                 const maskCanvas = document.createElement('canvas');
                 maskCanvas.width = 512; maskCanvas.height = 512;
                 const maskCtx = maskCanvas.getContext('2d');
@@ -1215,10 +1215,25 @@
                 maskCtx.fillStyle = 'rgba(0, 0, 0, 1)';
                 maskCtx.fillRect(0, 0, 512, 512);
                 
-                // Clear a central circle for the editable area (transparent mask)
+                // Clear a specific region for the editable area (transparent mask)
                 maskCtx.globalCompositeOperation = 'destination-out';
                 maskCtx.beginPath();
-                maskCtx.arc(256, 256, 170, 0, Math.PI * 2);
+                
+                const proc = title.toLowerCase();
+                if (proc.includes('sobrancelha') || proc.includes('cílios')) {
+                    // Upper face (Eyes/Eyebrows)
+                    maskCtx.ellipse(256, 180, 160, 80, 0, 0, Math.PI * 2);
+                } else if (proc.includes('labial')) {
+                    // Lower face (Lips)
+                    maskCtx.ellipse(256, 360, 120, 70, 0, 0, Math.PI * 2);
+                } else if (proc.includes('piercing')) {
+                    // Center small (Nose/General)
+                    maskCtx.arc(256, 256, 100, 0, Math.PI * 2);
+                } else {
+                    // Default central circle
+                    maskCtx.arc(256, 256, 130, 0, Math.PI * 2);
+                }
+                
                 maskCtx.fill();
                 maskCtx.globalCompositeOperation = 'source-over'; // reset
                 
