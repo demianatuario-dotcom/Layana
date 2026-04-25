@@ -1,0 +1,2394 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lana Wolf Art - Agente Lana</title>
+
+    <!-- Meta tags for SEO & Theme -->
+    <meta
+      name="description"
+      content="Atendimento especializado em estética: Design de sobrancelhas, Micropigmentação labial, Micropigmentação de Sobrancelhas, Tatuagem, Extensão de cílios, Alongamento de unhas, Manicure, Pedicure e Body Piercing exclusivas para o público feminino."
+    />
+    <meta name="theme-color" content="#c98276" />
+
+    <!-- Premium Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* Design System & Properties */
+      :root {
+        --primary: #c98276;
+        /* Soft Rose Gold */
+        --primary-dark: #a1645a;
+        --primary-light: #e8aca3;
+        --secondary: #3b2d2a;
+        /* Espresso Coffee */
+        --bg-body: #fdfbfb;
+        --chat-bg: rgba(255, 255, 255, 0.92);
+        --text-main: #4a3d3c;
+        --text-light: #8c7a77;
+        --msg-user: #f0e6e4;
+        --msg-bot: #ffffff;
+        --focus-glow: rgba(201, 130, 118, 0.3);
+        --shadow-soft: 0 10px 40px rgba(59, 45, 42, 0.12);
+        --shadow-hover: 0 15px 50px rgba(201, 130, 118, 0.25);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Outfit", sans-serif;
+        background: linear-gradient(135deg, var(--bg-body) 0%, #ebedee 100%);
+        color: var(--text-main);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        /* Changed to column to stack sections */
+        justify-content: flex-start;
+        /* Align content to the top */
+        align-items: center;
+        overflow-x: hidden;
+      }
+
+      /* ==========================================================
+           LANDING PAGE - LANA WOLF ART (Estilo Lelie)
+           ========================================================== */
+      header {
+        width: 100%;
+        padding: 20px 5%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(253, 251, 251, 0.85);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        z-index: 1000;
+        border-bottom: 1px solid rgba(201, 130, 118, 0.15);
+      }
+
+      .logo {
+        font-family: "Playfair Display", serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--secondary);
+        text-decoration: none;
+        letter-spacing: 1px;
+      }
+
+      .logo span {
+        color: var(--primary);
+        font-style: italic;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 30px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--text-main);
+        font-weight: 400;
+        font-size: 0.95rem;
+        transition: color 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        color: var(--primary);
+      }
+
+      /* Botão agendar na Nav */
+      .btn-outline {
+        padding: 8px 24px;
+        border: 1px solid var(--primary);
+        border-radius: 30px;
+        color: var(--primary);
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .btn-outline:hover {
+        background: var(--primary);
+        color: white;
+      }
+
+      /* Hero Section */
+      .hero {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 100px 5% 50px;
+        text-align: center;
+        position: relative;
+        background: url("bg-hero.jpg") center 15% / cover no-repeat;
+        width: 100%;
+        /* Ensure hero takes full width */
+      }
+
+      /* Overlay na Her section para melhorar a leitura */
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          180deg,
+          rgba(253, 251, 251, 0.6) 0%,
+          rgba(253, 251, 251, 0.95) 100%
+        );
+      }
+
+      .hero-content {
+        position: relative;
+        max-width: 800px;
+        z-index: 2;
+        animation: fadeUp 1s ease-out;
+      }
+
+      .hero h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 4.5rem;
+        color: var(--secondary);
+        line-height: 1.1;
+        margin-bottom: 20px;
+      }
+
+      .hero p {
+        font-size: 1.25rem;
+        color: var(--text-main);
+        margin-bottom: 40px;
+        font-weight: 300;
+      }
+
+      .btn-primary {
+        display: inline-block;
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-dark)
+        );
+        color: white;
+        padding: 16px 40px;
+        border-radius: 40px;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.1rem;
+        letter-spacing: 1px;
+        box-shadow: 0 10px 30px rgba(201, 130, 118, 0.3);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(201, 130, 118, 0.4);
+      }
+
+      /* Services Section */
+      .services {
+        padding: 100px 5%;
+        background: var(--bg-body);
+        width: 100%;
+        /* Ensure services takes full width */
+      }
+
+      .section-title {
+        text-align: center;
+        font-family: "Playfair Display", serif;
+        font-size: 3rem;
+        color: var(--secondary);
+        margin-bottom: 60px;
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .service-card {
+        background: white;
+        border-radius: 24px;
+        padding: 40px 30px;
+        text-align: center;
+        box-shadow: var(--shadow-soft);
+        transition: transform 0.4s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .service-card:hover {
+        transform: translateY(-10px);
+      }
+
+      .service-icon {
+        width: 70px;
+        height: 70px;
+        background: var(--primary-light);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 25px;
+        color: white;
+      }
+
+      .service-icon svg {
+        width: 32px;
+        height: 32px;
+        fill: var(--primary-dark);
+      }
+
+      .service-card h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.5rem;
+        color: var(--secondary);
+        margin-bottom: 15px;
+      }
+
+      .service-card p {
+        font-size: 0.95rem;
+        color: var(--text-light);
+        line-height: 1.6;
+      }
+
+      /* Informational Banner / About */
+      .about-banner {
+        background: linear-gradient(135deg, var(--secondary), #1e1513);
+        padding: 80px 5%;
+        text-align: center;
+        color: white;
+        width: 100%;
+        /* Ensure banner takes full width */
+      }
+
+      .about-banner h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        color: var(--primary-light);
+      }
+
+      .about-banner p {
+        max-width: 700px;
+        margin: 0 auto;
+        font-size: 1.1rem;
+        line-height: 1.8;
+        font-weight: 300;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      /* Footer */
+      footer {
+        background: #ffffff;
+        padding: 60px 5% 40px;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        width: 100%;
+        /* Ensure footer takes full width */
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 40px;
+      }
+
+      .footer-col h4 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.2rem;
+        color: var(--secondary);
+        margin-bottom: 20px;
+      }
+
+      .footer-col p {
+        color: var(--text-light);
+        font-size: 0.95rem;
+        line-height: 1.7;
+        max-width: 300px;
+      }
+
+      .footer-location-wrapper {
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .footer-map-container {
+        width: 150px;
+        height: 150px;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 2px solid rgba(201, 130, 118, 0.2);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        /* Removida margem superior para alinhar perfeitamente com a caixa ao lado */
+      }
+
+      .footer-map-container iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        display: block;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 40px;
+        margin-top: 40px;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        color: #b5aba9;
+        font-size: 0.85rem;
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Media Queries Globais */
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 3rem;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .footer-content {
+          flex-direction: column;
+        }
+
+        .hero {
+          background: url("bg-hero.jpg") center/cover no-repeat;
+        }
+      }
+
+      /* -----------------------------------
+           LANA CHAT WIDGET STYLES 
+           ----------------------------------- */
+
+      /* Floating Toggle Button */
+      .lana-chat-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-dark)
+        );
+        border: none;
+        box-shadow: 0 10px 25px rgba(201, 130, 118, 0.4);
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        z-index: 9999;
+      }
+
+      .lana-chat-btn::before {
+        content: "";
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        bottom: -5px;
+        left: -5px;
+        border-radius: 50%;
+        background: var(--primary);
+        opacity: 0.3;
+        z-index: -1;
+        animation: pulse 2.5s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          opacity: 0.5;
+        }
+
+        50% {
+          transform: scale(1.15);
+          opacity: 0.1;
+        }
+
+        100% {
+          transform: scale(1);
+          opacity: 0.5;
+        }
+      }
+
+      .lana-chat-btn:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: var(--shadow-hover);
+      }
+
+      .lana-chat-btn svg {
+        width: 34px;
+        height: 34px;
+        fill: white;
+        transition: transform 0.4s ease;
+        position: absolute;
+      }
+
+      .lana-chat-btn .icon-open {
+        opacity: 1;
+        transform: rotate(0) scale(1);
+      }
+
+      .lana-chat-btn .icon-close {
+        opacity: 0;
+        transform: rotate(-90deg) scale(0);
+      }
+
+      .lana-chat-btn.active .icon-open {
+        opacity: 0;
+        transform: rotate(90deg) scale(0);
+      }
+
+      .lana-chat-btn.active .icon-close {
+        opacity: 1;
+        transform: rotate(0) scale(1);
+      }
+
+      /* The Chat Window */
+      .lana-chat-window {
+        position: fixed;
+        bottom: 120px;
+        right: 30px;
+        width: 380px;
+        height: 650px;
+        max-height: calc(100vh - 150px);
+        background: var(--chat-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 28px;
+        box-shadow: var(--shadow-soft);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(30px) scale(0.95);
+        transform-origin: bottom right;
+        transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        z-index: 10000;
+        border: 1px solid rgba(255, 255, 255, 0.6);
+      }
+
+      .lana-chat-window.active {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0) scale(1);
+      }
+
+      /* Header */
+      .chat-header {
+        background: linear-gradient(135deg, var(--secondary), #1e1513);
+        padding: 24px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        position: relative;
+      }
+
+      /* Elegant gold/rose bar below header */
+      .chat-header::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          var(--primary),
+          var(--primary-light),
+          var(--primary)
+        );
+      }
+
+      .avatar-container {
+        position: relative;
+      }
+
+      .lana-avatar {
+        width: 54px;
+        height: 54px;
+        border-radius: 50%;
+        /* A feminine aesthetic portrait placeholder */
+        background: url("https://images.unsplash.com/photo-1595959183082-7b570b7e08e2?q=80&w=200&auto=format&fit=crop")
+          center/cover;
+        border: 2px solid var(--primary-light);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      .status-dot {
+        position: absolute;
+        bottom: 2px;
+        right: 2px;
+        width: 14px;
+        height: 14px;
+        background: #2dd36f;
+        border-radius: 50%;
+        border: 2.5px solid var(--secondary);
+        box-shadow: 0 0 8px rgba(45, 211, 111, 0.5);
+      }
+
+      .header-info h2 {
+        margin: 0;
+        font-family: "Playfair Display", serif;
+        font-size: 1.35rem;
+        color: white;
+        letter-spacing: 0.5px;
+        font-weight: 500;
+      }
+
+      .header-info p {
+        margin: 4px 0 0;
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.75);
+        font-weight: 300;
+      }
+
+      /* Chat Body / Messages Area */
+      .chat-body {
+        flex: 1;
+        padding: 24px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        background: rgba(253, 251, 251, 0.4);
+        scroll-behavior: smooth;
+      }
+
+      /* Custom Scrollbar */
+      .chat-body::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .chat-body::-webkit-scrollbar-thumb {
+        background: rgba(201, 130, 118, 0.25);
+        border-radius: 10px;
+      }
+
+      .chat-body::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      .message-row {
+        display: flex;
+        width: 100%;
+      }
+
+      .message-row.bot {
+        justify-content: flex-start;
+      }
+
+      .message-row.user {
+        justify-content: flex-end;
+      }
+
+      .message {
+        max-width: 82%;
+        padding: 14px 20px;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        animation: messageSlide 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+          forwards;
+        opacity: 0;
+        transform: translateY(15px);
+        word-wrap: break-word;
+      }
+
+      @keyframes messageSlide {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* --- Estilo Premium para Tabelas Markdown geradas pela IA --- */
+      .message table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        margin: 12px 0;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(201, 130, 118, 0.3);
+        /* Rose Gold Soft */
+        box-shadow: 0 4px 15px rgba(59, 45, 42, 0.05);
+        font-size: 0.85rem;
+      }
+
+      .message th {
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-dark)
+        );
+        color: white;
+        padding: 12px 14px;
+        text-align: left;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+      }
+
+      .message td {
+        padding: 10px 14px;
+        border-bottom: 1px solid rgba(201, 130, 118, 0.15);
+        color: var(--text-main);
+        vertical-align: middle;
+      }
+
+      .message tr:last-child td {
+        border-bottom: none;
+      }
+
+      .message tr:nth-child(even) td {
+        background-color: rgba(253, 251, 251, 0.7);
+      }
+
+      .message tr:nth-child(odd) td {
+        background-color: white;
+      }
+
+      .message.bot {
+        background: var(--msg-bot);
+        border-radius: 20px 20px 20px 4px;
+        color: var(--text-main);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+        border: 1px solid rgba(0, 0, 0, 0.03);
+        position: relative;
+      }
+
+      .message.user {
+        background: var(--msg-user);
+        border-radius: 20px 20px 4px 20px;
+        color: var(--secondary);
+        font-weight: 400;
+      }
+
+      /* Typing Indicator inside Chat Body */
+      .typing-indicator-row {
+        display: none;
+        justify-content: flex-start;
+        margin-bottom: 10px;
+      }
+
+      .typing-indicator-row.active {
+        display: flex;
+      }
+
+      .typing-bubbles {
+        background: var(--msg-bot);
+        padding: 12px 18px;
+        border-radius: 20px 20px 20px 4px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+        display: flex;
+        gap: 6px;
+        align-items: center;
+      }
+
+      .dot {
+        width: 6px;
+        height: 6px;
+        background: var(--text-light);
+        border-radius: 50%;
+        animation: bounce 1.4s infinite ease-in-out both;
+        opacity: 0.6;
+      }
+
+      .dot:nth-child(1) {
+        animation-delay: -0.32s;
+      }
+
+      .dot:nth-child(2) {
+        animation-delay: -0.16s;
+      }
+
+      @keyframes bounce {
+        0%,
+        80%,
+        100% {
+          transform: scale(0.6);
+          opacity: 0.4;
+        }
+
+        40% {
+          transform: scale(1.1);
+          opacity: 1;
+        }
+      }
+
+      /* Input Area */
+      .chat-footer {
+        padding: 16px 20px 20px 20px;
+        background: white;
+        border-top: 1px solid rgba(0, 0, 0, 0.04);
+        position: relative;
+      }
+
+      .input-wrapper {
+        display: flex;
+        align-items: center;
+        background: #f8f5f4;
+        border-radius: 30px;
+        padding: 6px 6px 6px 20px;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        transition: all 0.3s ease;
+      }
+
+      .input-wrapper:focus-within {
+        background: white;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 4px var(--focus-glow);
+      }
+
+      .input-wrapper input {
+        flex: 1;
+        border: none;
+        background: transparent;
+        font-family: "Outfit", sans-serif;
+        font-size: 0.95rem;
+        color: var(--text-main);
+        outline: none;
+      }
+
+      .input-wrapper input::placeholder {
+        color: #b5aba9;
+      }
+
+      .send-btn {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: var(--primary);
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.2s;
+        color: white;
+      }
+
+      .send-btn:hover {
+        background: var(--primary-dark);
+        transform: scale(1.05);
+      }
+
+      .send-btn:active {
+        transform: scale(0.95);
+      }
+
+      .send-btn svg {
+        width: 18px;
+        height: 18px;
+        fill: currentColor;
+        margin-left: 2px;
+      }
+
+      .lgpd-notice {
+        text-align: center;
+        font-size: 0.7rem;
+        color: #a69c9a;
+        margin-top: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+      }
+
+      /* Simulation Modal Styles */
+      .sim-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(5px);
+        z-index: 20000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+
+      .sim-modal-overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .sim-modal {
+        background: white;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 450px;
+        padding: 35px 30px;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+        transform: translateY(20px);
+        transition: transform 0.3s ease;
+        max-height: 90vh;
+        overflow-y: auto;
+        text-align: center;
+        position: relative;
+      }
+
+      .sim-modal-overlay.active .sim-modal {
+        transform: translateY(0);
+      }
+
+      .sim-modal h3 {
+        font-family: "Playfair Display", serif;
+        color: var(--secondary);
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+      }
+
+      .sim-modal p.sim-price {
+        font-size: 1.3rem;
+        color: var(--primary);
+        font-weight: 500;
+        margin-bottom: 25px;
+      }
+
+      .sim-modal textarea,
+      .sim-modal input[type="file"] {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid rgba(201, 130, 118, 0.4);
+        border-radius: 12px;
+        margin-bottom: 20px;
+        font-family: inherit;
+        outline: none;
+        transition: border-color 0.3s;
+      }
+
+      .sim-modal textarea:focus {
+        border-color: var(--primary);
+      }
+
+      .sim-choice-box {
+        width: 100%;
+        padding: 12px 16px;
+        margin-bottom: 12px;
+        border: 1px solid rgba(201, 130, 118, 0.4);
+        border-radius: 12px;
+        font-family: inherit;
+        font-size: 0.95rem;
+        color: var(--text-main);
+        background: rgba(253, 251, 251, 0.8);
+        appearance: none;
+        background-image: url('data:image/svg+xml;utf8,<svg fill="%23c98276" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        outline: none;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .sim-choice-box:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 4px var(--focus-glow);
+        background-color: white;
+      }
+
+      .sim-choice-label {
+        display: block;
+        text-align: left;
+        font-size: 0.85rem;
+        color: var(--primary-dark);
+        margin-bottom: 4px;
+        font-weight: 500;
+      }
+
+      .sim-step {
+        display: none;
+      }
+
+      .sim-step.active {
+        display: block;
+        animation: fadeUp 0.4s ease;
+      }
+
+      .sim-img-result {
+        width: 100%;
+        border-radius: 16px;
+        margin: 15px 0 25px 0;
+        box-shadow: 0 5px 25px rgba(201, 130, 118, 0.2);
+      }
+
+      .sim-loading {
+        padding: 40px 0;
+      }
+
+      .sim-loading .dot {
+        width: 12px;
+        height: 12px;
+        margin: 0 4px;
+        display: inline-block;
+        background: var(--primary);
+        border-radius: 50%;
+        animation: bounce 1.4s infinite ease-in-out;
+      }
+
+      .sim-loading .dot:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      .sim-loading .dot:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+
+      .btn-close-modal {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        background: none;
+        border: none;
+        font-size: 28px;
+        cursor: pointer;
+        color: #b5aba9;
+        transition: color 0.3s;
+      }
+
+      .btn-close-modal:hover {
+        color: var(--secondary);
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 600px) {
+        .lana-chat-window {
+          width: 100%;
+          height: 100vh;
+          max-height: 100vh;
+          bottom: 0;
+          right: 0;
+          border-radius: 0;
+        }
+
+        .lana-chat-btn {
+          bottom: 20px;
+          right: 20px;
+          width: 60px;
+          height: 60px;
+        }
+
+        .lana-chat-btn svg {
+          width: 28px;
+          height: 28px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Header Navigation -->
+    <header>
+      <a href="#" class="logo">Lana <span>Wolf</span> Art</a>
+      <nav class="nav-links">
+        <a href="#servicos">Nossos Serviços</a>
+        <a href="#sobre">Quem Somos</a>
+        <a href="#contato">Localização</a>
+        <a
+          href="#"
+          class="btn-outline"
+          onclick="
+            document.getElementById('lanaChatBtn').click();
+            return false;
+          "
+          >Fale Conosco</a
+        >
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Realce Sua Beleza Natural</h1>
+        <p>
+          A experiência Estética Premium dedicada e pensada exclusivamente no
+          design, nos traços e no bem-estar do público feminino.
+        </p>
+        <a
+          href="#"
+          class="btn-primary"
+          onclick="
+            document.getElementById('lanaChatBtn').click();
+            return false;
+          "
+          >Agende sua Experiência</a
+        >
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicos" class="services">
+      <h2 class="section-title">Procedimentos</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"
+              />
+            </svg>
+          </div>
+          <h3>Design de Sobrancelhas</h3>
+          <p>
+            Moldura seu olhar para uma expressão facial mais harmoniosa com
+            exclusividade e traços exatos.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM9.54 9.17l-1.39 1.39A4.982 4.982 0 0012 11c1.55 0 2.94-.71 3.85-1.83l-1.39-1.39C13.82 8.44 12.95 9 12 9c-.95 0-1.82-.56-2.46-1.23zM5.5 13.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5-1.5.67-1.5 1.5zm10 0c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5-1.5.67-1.5 1.5z"
+              />
+            </svg>
+          </div>
+          <h3>Micro de Sobrancelhas</h3>
+          <p>
+            Preenchimento natural e duradouro, cobrindo falhas e garantindo
+            praticidade máxima para o seu dia a dia.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 21C7.8 21 3.5 17 2 13.5C3.5 10 7.8 6 12 6s8.5 4 10 7.5c-1.5 3.5-5.8 7.5-10 7.5zm0-13C8.4 8 4.7 11.2 3.2 13.5 4.7 15.8 8.4 19 12 19s7.3-3.2 8.8-5.5C19.3 11.2 15.6 8 12 8zm0 8.5c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3zm0-4.5c-.8 0-1.5.7-1.5 1.5s.7 1.5 1.5 1.5 1.5-.7 1.5-1.5-.7-1.5-1.5-1.5z"
+              />
+            </svg>
+          </div>
+          <h3>Extensão de Cílios</h3>
+          <p>
+            Acorde todos os dias com o olhar preparado, vibrante, curvilíneo sem
+            a necessidade de rímel.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12.1 19l4.5-4.5h3.4c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v7.5c0 1.1.9 2 2 2h3.4L12 19m-1-11h6v2h-6V8zm0 4h4v2h-4v-2z"
+              />
+            </svg>
+          </div>
+          <h3>Micro Labial</h3>
+          <p>
+            Cor durável, definição de alto contraste e cor saudável em seus
+            lábios pelo dia inteiro todos os dias.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+              />
+            </svg>
+          </div>
+          <h3>Tatuagem / Fine Line</h3>
+          <p>
+            Arte delicada, minuciosa e eterna estampada em sua pele e
+            personalizada com seus valores.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M11 20H13V22H11V20M8 11H16V13H8V11M5 2H19C20.11 2 21 2.9 21 4V16C21 17.11 20.11 18 19 18H5C3.9 18 3 17.11 3 16V4C3 2.9 3.9 2 5 2M5 4V16H19V4H5Z"
+              />
+            </svg>
+          </div>
+          <h3>Alongamento de Unhas</h3>
+          <p>
+            Estruturas perfeitas, resistentes e elegantes, projetadas para
+            destacar a beleza das suas mãos a longo prazo.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 2C13.1 2 14 2.9 14 4V7L13.5 8C14.4 8.9 15 10.4 15 12C15 15.3 12.3 18 9 18C5.7 18 3 15.3 3 12C3 10.4 3.6 8.9 4.5 8L4 7V4C4 2.9 4.9 2 6 2H12M12 4H6V6.8L6.4 7.5C5.5 8.6 5 10.2 5 12C5 14.2 6.8 16 9 16C11.2 16 13 14.2 13 12C13 10.2 12.5 8.6 11.6 7.5L12 6.8V4M20 15C20 17.2 18.2 19 16 19V21C19.3 21 22 18.3 22 15H20Z"
+              />
+            </svg>
+          </div>
+          <h3>Manicure Intacta</h3>
+          <p>
+            Cuidado impecável das cutículas e esmaltação premium para unhas
+            saudáveis e com brilho duradouro.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 2C17.5 2 22 6.5 22 12S17.5 22 12 22 2 17.5 2 12 6.5 2 12 2M12 4C7.58 4 4 7.58 4 12S7.58 20 12 20 20 16.42 20 12 16.42 4 12 4M12 6C15.31 6 18 8.69 18 12S15.31 18 12 18 6 15.31 6 12 8.69 6 12 6M12 8C9.79 8 8 9.79 8 12S9.79 16 12 16 16 14.21 16 12 14.21 8 12 8M12 10C13.1 10 14 10.9 14 12S13.1 14 12 14 10 13.1 10 12 10.9 10 12 10Z"
+              />
+            </svg>
+          </div>
+          <h3>Spa dos Pés / Pedicure</h3>
+          <p>
+            Revitalize seus pés com técnicas relaxantes, cuidado de excelência e
+            acabamento estético perfeito.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 2L15 9H22L16 14L18 21L12 17L6 21L8 14L2 9H9L12 2Z" />
+            </svg>
+          </div>
+          <h3>Body Piercing</h3>
+          <p>
+            Perfurações seguras e assépticas, com joalheria de alta qualidade
+            para evidenciar o seu estilo próprio.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Banner -->
+    <section id="sobre" class="about-banner">
+      <h2>Atendimento Exclusivo</h2>
+      <p>
+        A Lana Wolf Art foi idealizada sob o princípio de um ambiente seguro e
+        especializado, atendendo de forma estrita apenas mulheres, fornecendo
+        tratamentos *high-ticket* estéticos desenhados sob medida
+        individualmente.
+      </p>
+    </section>
+
+    <!-- Footer Area -->
+    <footer id="contato">
+      <div class="footer-content">
+        <div class="footer-col">
+          <h4>Lana Wolf Art</h4>
+          <p>Um novo conceito em beleza facial e corporal feminina em Goiás.</p>
+        </div>
+        <div class="footer-col" style="flex: 1; min-width: 350px">
+          <div class="footer-location-wrapper">
+            <div>
+              <h4>Localização</h4>
+              <p>
+                Rua 23, quadra 61, lote 3<br />Parque 9<br />Luziânia, Goiás<br />CEP:
+                72.853-061
+              </p>
+            </div>
+            <div class="footer-map-container">
+              <iframe
+                src="https://maps.google.com/maps?q=-16.156250,-47.946417&t=&z=18&ie=UTF8&iwloc=&output=embed"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Contato</h4>
+          <p>
+            Nosso agendamento é inteiramente realizado via atendimento
+            inteligente. Clique na Assistente Virtual (Lana) no canto inferior!
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 Lana Wolf Art. Todos os direitos reservados.
+      </div>
+    </footer>
+
+    <!-- 1. El Botón Flutuante -->
+    <button
+      class="lana-chat-btn"
+      id="lanaChatBtn"
+      aria-label="Abrir assistente Lana"
+    >
+      <svg
+        class="icon-open"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H5.17L4 17.17V4H20V16Z"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+        />
+        <path d="M7 9H17V11H7V9Z" />
+        <path d="M7 13H14V15H7V13Z" />
+      </svg>
+      <svg
+        class="icon-close"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z"
+        />
+      </svg>
+    </button>
+
+    <!-- 2. The Chat Window -->
+    <div class="lana-chat-window" id="lanaChatWindow">
+      <div class="chat-header">
+        <div class="avatar-container">
+          <div class="lana-avatar"></div>
+          <div class="status-dot"></div>
+        </div>
+        <div class="header-info">
+          <h2>Lana</h2>
+          <p>Assistente Especialista ✨</p>
+        </div>
+      </div>
+
+      <div class="chat-body" id="chatBody">
+        <!-- Initial Auto-Greeting Message -->
+        <div class="message-row bot">
+          <div class="message bot">
+            Olá! Seja muito bem-vinda ao nosso estúdio. Sou a Lana, assistente
+            inteligente da Lana Wolf Art. Como posso te ajudar a realçar sua
+            beleza hoje? 💖
+          </div>
+        </div>
+
+        <!-- Typing indicator (hidden by default) -->
+        <div class="typing-indicator-row" id="typingIndicator">
+          <div class="typing-bubbles">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-footer">
+        <div class="input-wrapper">
+          <input
+            type="text"
+            id="chatInput"
+            placeholder="Digite sua mensagem de whatsapp..."
+            autocomplete="off"
+          />
+          <button class="send-btn" id="sendBtn" aria-label="Enviar">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2.01 21L23 12L2.01 3L2 10L17 12L2 14L2.01 21Z" />
+            </svg>
+          </button>
+        </div>
+        <div class="lgpd-notice">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 6c1.4 0 2.8 1.1 2.8 2.5V11c.6 0 1.2.6 1.2 1.2v3.5c0 .7-.6 1.3-1.2 1.3H9.2c-.6 0-1.2-.6-1.2-1.3v-3.5c0-.7.6-1.3 1.2-1.3V9.5C9.2 8.1 10.6 7 12 7zm0 1c-.8 0-1.5.7-1.5 1.5V11h3V9.5c0-.8-.7-1.5-1.5-1.5z"
+            />
+          </svg>
+          Ambiente seguro e protegido LGPD.
+        </div>
+      </div>
+    </div>
+
+    <!-- Sim Modal -->
+    <div class="sim-modal-overlay" id="simModalOverlay">
+      <div class="sim-modal">
+        <button class="btn-close-modal" onclick="closeSimModal()">×</button>
+
+        <!-- Step 1: Info & Prompt -->
+        <div class="sim-step active" id="simStep1">
+          <h3 id="simTitle">Procedimento</h3>
+          <p class="sim-price" id="simPrice">R$ 0,00</p>
+          <p
+            style="
+              margin-bottom: 25px;
+              color: var(--text-light);
+              line-height: 1.6;
+            "
+          >
+            Gostaria de visualizar como a sua fisionomia pode ficar ainda mais
+            deslumbrante com este procedimento?
+          </p>
+          <button
+            class="btn-primary"
+            style="width: 100%; padding: 14px; cursor: pointer; font-size: 1rem"
+            onclick="nextSimStep()"
+          >
+            Simular Meu Resultado
+          </button>
+        </div>
+
+        <!-- Step 2: Upload -->
+        <div class="sim-step" id="simStep2">
+          <h3>Sua Simulação</h3>
+          <div id="simDynamicChoices" style="text-align: left"></div>
+          <p
+            style="
+              font-size: 0.95rem;
+              margin-bottom: 12px;
+              color: var(--text-light);
+            "
+          >
+            Por fim, envie uma foto *bem alinhada e centralizada* no seu rosto:
+          </p>
+          <input type="file" id="simImage" accept="image/png, image/jpeg" />
+          <button
+            class="btn-primary"
+            style="
+              width: 100%;
+              padding: 14px;
+              cursor: pointer;
+              margin-top: 10px;
+              font-size: 1rem;
+            "
+            onclick="runSimulation()"
+          >
+            Gerar Transformação ✨
+          </button>
+          <p style="font-size: 0.75rem; color: #a69c9a; margin-top: 15px">
+            Desenvolvido com IA Avançada.
+          </p>
+        </div>
+
+        <!-- Step 3: Loading -->
+        <div class="sim-step sim-loading" id="simStep3">
+          <h3 style="margin-bottom: 5px">Analisando seus traços...</h3>
+          <p style="color: var(--text-light); font-size: 0.9rem">
+            Aplicando o procedimento com cuidado
+          </p>
+          <div style="margin-top: 25px">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+        </div>
+
+        <!-- Step 4: Result -->
+        <div class="sim-step" id="simStep4">
+          <h3 style="margin-bottom: 5px">Seu Novo Visual!</h3>
+          <img
+            id="simResultImg"
+            class="sim-img-result"
+            src=""
+            alt="Resultado da Simulação"
+          />
+          <div
+            style="
+              background: rgba(201, 130, 118, 0.08);
+              padding: 15px;
+              border-radius: 12px;
+              margin-bottom: 25px;
+              border-left: 3px solid var(--primary);
+            "
+          >
+            <p
+              id="simPraise"
+              style="
+                font-size: 0.95rem;
+                line-height: 1.6;
+                color: var(--secondary);
+                text-align: left;
+                font-style: italic;
+                margin: 0;
+              "
+            ></p>
+          </div>
+          <button
+            class="btn-primary"
+            style="width: 100%; padding: 14px; cursor: pointer; font-size: 1rem"
+            onclick="closeSimModalAndChat()"
+          >
+            Amei! Quero Agendar 👉
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MediaPipe Face Detection -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/face_detection/face_detection.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Integrator Script -->
+    <script>
+      async function detectFace(imageElement) {
+        return new Promise((resolve) => {
+          const faceDetection = new FaceDetection({
+            locateFile: (file) =>
+              `https://cdn.jsdelivr.net/npm/@mediapipe/face_detection/${file}`,
+          });
+
+          faceDetection.setOptions({
+            model: "short",
+            minDetectionConfidence: 0.5,
+          });
+
+          faceDetection.onResults((results) => {
+            if (results.detections && results.detections.length > 0)
+              resolve(results.detections[0]);
+            else resolve(null);
+          });
+
+          faceDetection.send({ image: imageElement });
+        });
+      }
+
+      function getFacePoints(detection, width, height) {
+        const box = detection.boundingBox;
+        const x = box.xCenter * width;
+        const y = box.yCenter * height;
+        const w = box.width * width;
+        const h = box.height * height;
+
+        // Extrair landmarks reais do MediaPipe (6 keypoints)
+        // [0]=Right Eye, [1]=Left Eye, [2]=Nose Tip, [3]=Mouth Center, [4]=Right Ear, [5]=Left Ear
+        const landmarks = detection.landmarks || [];
+        const rightEye = landmarks[0] ? { x: landmarks[0].x * width, y: landmarks[0].y * height } : null;
+        const leftEye = landmarks[1] ? { x: landmarks[1].x * width, y: landmarks[1].y * height } : null;
+        const noseTip = landmarks[2] ? { x: landmarks[2].x * width, y: landmarks[2].y * height } : null;
+        const mouthCenter = landmarks[3] ? { x: landmarks[3].x * width, y: landmarks[3].y * height } : null;
+
+        return {
+          centerX: x,
+          centerY: y,
+          width: w,
+          height: h,
+          top: y - h / 2,
+          bottom: y + h / 2,
+          left: x - w / 2,
+          right: x + w / 2,
+          rightEye,
+          leftEye,
+          noseTip,
+          mouthCenter,
+        };
+      }
+      // Funções Globais da UI do Simulador (Sim Modal)
+      window.closeSimModal = function () {
+        document.getElementById("simModalOverlay").classList.remove("active");
+        setTimeout(() => {
+          document.getElementById("simStep1").classList.add("active");
+        }, 300); // re-set steps
+      };
+      window.nextSimStep = function () {
+        document
+          .querySelectorAll(".sim-step")
+          .forEach((el) => el.classList.remove("active"));
+        document.getElementById("simStep2").classList.add("active");
+      };
+      window.closeSimModalAndChat = function () {
+        window.closeSimModal();
+        document.getElementById("lanaChatBtn").click();
+      };
+
+      // Resize utility before upload: letterbox sem cortar (browser já aplica EXIF)
+      function processImageForOpenAI(file, callback) {
+        const imgReader = new FileReader();
+        imgReader.onload = function (ev) {
+          const img = new Image();
+          img.onload = function () {
+            const targetSize = 1024;
+            const canvas = document.createElement("canvas");
+            canvas.width = targetSize;
+            canvas.height = targetSize;
+            const ctx = canvas.getContext("2d");
+            ctx.fillStyle = "#808080";
+            ctx.fillRect(0, 0, targetSize, targetSize);
+
+            const scale = Math.min(
+              targetSize / img.width,
+              targetSize / img.height,
+            );
+            const drawW = img.width * scale;
+            const drawH = img.height * scale;
+            const dx = (targetSize - drawW) / 2;
+            const dy = (targetSize - drawH) / 2;
+            ctx.drawImage(img, dx, dy, drawW, drawH);
+
+            canvas.toBlob((blob) => callback(blob), "image/png");
+          };
+          img.src = ev.target.result;
+        };
+        imgReader.readAsDataURL(file);
+      }
+
+      // Aplica rotação/flip do EXIF gerando um canvas pronto para uso
+      function drawWithOrientation(img, orientation) {
+        let w = img.width,
+          h = img.height;
+        const swap = (o) => [5, 6, 7, 8].includes(o);
+        const canvas = document.createElement("canvas");
+        canvas.width = swap(orientation) ? h : w;
+        canvas.height = swap(orientation) ? w : h;
+        const ctx = canvas.getContext("2d");
+
+        switch (orientation) {
+          case 2: // flip H
+            ctx.translate(w, 0);
+            ctx.scale(-1, 1);
+            break;
+          case 3: // 180
+            ctx.translate(w, h);
+            ctx.rotate(Math.PI);
+            break;
+          case 4: // flip V
+            ctx.translate(0, h);
+            ctx.scale(1, -1);
+            break;
+          case 5: // 90 CW + flip H
+            ctx.rotate(0.5 * Math.PI);
+            ctx.translate(0, -h);
+            ctx.scale(1, -1);
+            break;
+          case 6: // 90 CW
+            ctx.rotate(0.5 * Math.PI);
+            ctx.translate(0, -h);
+            break;
+          case 7: // 90 CCW + flip H
+            ctx.rotate(-0.5 * Math.PI);
+            ctx.translate(-w, 0);
+            ctx.scale(1, -1);
+            break;
+          case 8: // 90 CCW
+            ctx.rotate(-0.5 * Math.PI);
+            ctx.translate(-w, 0);
+            break;
+          default:
+            // 1: sem rotação
+            break;
+        }
+
+        ctx.drawImage(img, 0, 0);
+        return canvas;
+      }
+
+      window.runSimulation = function () {
+        const imgInput = document.getElementById("simImage");
+        const title = document.getElementById("simTitle").innerText;
+
+        let promptInput = "";
+        const selects = document.querySelectorAll(
+          "#simDynamicChoices select.sim-choice-box",
+        );
+        let isSelectsValid = true;
+        if (selects.length > 0) {
+          const parts = [];
+          selects.forEach((s) => {
+            if (!s.value) isSelectsValid = false;
+            parts.push(s.dataset.label + ": " + s.value);
+          });
+          if (!isSelectsValid) {
+            alert(
+              "Por favor, selecione todas as opções da simulação antes de continuar.",
+            );
+            return;
+          }
+          promptInput = parts.join(", ");
+        } else {
+          const fbText = document.getElementById("fallbackPrompt");
+          if (fbText) promptInput = fbText.value;
+        }
+
+        if (!imgInput.files || imgInput.files.length === 0) {
+          alert("Por favor, selecione uma foto sua limpa e bem iluminada.");
+          return;
+        }
+
+        const simBtn = document.querySelector("#simStep2 .btn-primary");
+        if (simBtn) {
+          simBtn.disabled = true;
+          simBtn.innerText = "Processando...";
+        }
+
+        document
+          .querySelectorAll(".sim-step")
+          .forEach((el) => el.classList.remove("active"));
+        document.getElementById("simStep3").classList.add("active");
+
+        const file = imgInput.files[0];
+        processImageForOpenAI(file, async function (imageBlob) {
+          const img = new Image();
+          img.src = URL.createObjectURL(imageBlob);
+
+          img.onload = async function () {
+            const detection = await detectFace(img);
+            if (!detection) {
+              alert(
+                "Não consegui encontrar um rosto na foto. Envie uma foto frontal, bem iluminada e com o rosto inteiro visível.",
+              );
+              if (simBtn) {
+                simBtn.disabled = false;
+                simBtn.innerText = "Gerar Transformação ✨";
+              }
+              document
+                .querySelectorAll(".sim-step")
+                .forEach((el) => el.classList.remove("active"));
+              document.getElementById("simStep2").classList.add("active");
+              return;
+            }
+
+            // Create a dynamic targeted mask based on the procedure
+            const maskCanvas = document.createElement("canvas");
+            maskCanvas.width = 1024;
+            maskCanvas.height = 1024;
+            const maskCtx = maskCanvas.getContext("2d");
+
+            // Para a Stability AI (v2beta inpaint):
+            // BRANCO = EDITAR | PRETO = PRESERVAR (seguindo docs oficiais)
+            maskCtx.fillStyle = "black";
+            maskCtx.fillRect(0, 0, 1024, 1024);
+
+            maskCtx.globalCompositeOperation = "source-over";
+            maskCtx.fillStyle = "white";
+            maskCtx.beginPath();
+
+            const proc = title.toLowerCase();
+            const userText = promptInput.toLowerCase();
+
+            let cx = 512;
+            let cy = 512;
+            let fw = 400; // default width fallback
+            let fh = 500; // default height fallback
+            let rEye = null, lEye = null, nose = null, mouth = null;
+
+            if (detection) {
+              const face = getFacePoints(detection, 1024, 1024);
+              cx = face.centerX;
+              cy = face.centerY;
+              fw = face.width;
+              fh = face.height;
+              rEye = face.rightEye;
+              lEye = face.leftEye;
+              nose = face.noseTip;
+              mouth = face.mouthCenter;
+            }
+
+            // 🎯 REGIÕES INTELIGENTES com Landmarks Reais do MediaPipe
+
+            if (proc.includes("cílios") || proc.includes("cilios")) {
+              // EYELASH STRIP: arco curvo sobre a pálpebra superior (NÃO elipse cheia)
+              const stripWidth = fh * 0.045; // espessura da faixa de cílios
+              maskCtx.lineWidth = stripWidth;
+              maskCtx.strokeStyle = 'white';
+              maskCtx.lineCap = 'round';
+
+              const lashRadius = fw * 0.12;
+              const lashYOffset = fh * 0.015; // ligeiramente acima do keypoint do olho
+
+              if (rEye) {
+                maskCtx.beginPath();
+                maskCtx.arc(rEye.x, rEye.y - lashYOffset, lashRadius, Math.PI, 0);
+                maskCtx.stroke();
+              }
+              if (lEye) {
+                maskCtx.beginPath();
+                maskCtx.arc(lEye.x, lEye.y - lashYOffset, lashRadius, Math.PI, 0);
+                maskCtx.stroke();
+              }
+
+            } else if (proc.includes("sobrancelha")) {
+              // Sobrancelhas: elipses posicionadas acima dos olhos reais
+              const browYOffset = fh * 0.06;
+              const browRX = fw * 0.16;
+              const browRY = fh * 0.05;
+
+              if (rEye) {
+                maskCtx.beginPath();
+                maskCtx.ellipse(rEye.x, rEye.y - browYOffset, browRX, browRY, 0, 0, Math.PI * 2);
+                maskCtx.fill();
+              }
+              if (lEye) {
+                maskCtx.beginPath();
+                maskCtx.ellipse(lEye.x, lEye.y - browYOffset, browRX, browRY, 0, 0, Math.PI * 2);
+                maskCtx.fill();
+              }
+
+            } else if (
+              proc.includes("labial") ||
+              userText.includes("boca") ||
+              userText.includes("labio") ||
+              userText.includes("lábio")
+            ) {
+              // Boca: usar keypoint real
+              const mX = mouth ? mouth.x : cx;
+              const mY = mouth ? mouth.y : cy + fh * 0.22;
+              maskCtx.beginPath();
+              maskCtx.ellipse(mX, mY, fw * 0.18, fh * 0.07, 0, 0, Math.PI * 2);
+              maskCtx.fill();
+
+            } else if (proc.includes("piercing")) {
+              const nX = nose ? nose.x : cx;
+              const nY = nose ? nose.y : cy;
+              if (userText.includes("septo")) {
+                maskCtx.arc(nX, nY + fh * 0.03, fw * 0.05, 0, Math.PI * 2);
+              } else if (userText.includes("nariz") || userText.includes("nostril")) {
+                maskCtx.arc(nX + fw * 0.04, nY, fw * 0.05, 0, Math.PI * 2);
+              } else if (userText.includes("orelha") || userText.includes("tragus") || userText.includes("helix")) {
+                maskCtx.ellipse(cx + fw * 0.55, cy - fh * 0.05, fw * 0.15, fh * 0.25, 0, 0, Math.PI * 2);
+                maskCtx.ellipse(cx - fw * 0.55, cy - fh * 0.05, fw * 0.15, fh * 0.25, 0, 0, Math.PI * 2);
+              } else {
+                maskCtx.arc(nX, nY, fw * 0.06, 0, Math.PI * 2);
+              }
+              maskCtx.fill();
+
+            } else {
+              maskCtx.arc(cx, cy, fw * 0.14, 0, Math.PI * 2);
+              maskCtx.fill();
+            }
+
+            // --- Gaussian Blur para suavizar bordas da máscara (feathering) ---
+            const blurCanvas = document.createElement('canvas');
+            blurCanvas.width = 1024;
+            blurCanvas.height = 1024;
+            const blurCtx = blurCanvas.getContext('2d');
+            blurCtx.filter = 'blur(12px)';
+            blurCtx.drawImage(maskCanvas, 0, 0);
+
+            // DEBUG (descomente para depurar a máscara)
+            // const preview = document.createElement('div');
+            // preview.style.cssText = 'position:fixed; top:10px; left:10px; z-index:99999; background:white; padding:10px; border:2px solid red; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);';
+            // preview.innerHTML = '<h3 style="margin:0 0 5px 0; font-size:14px;">DEBUG: Máscara</h3>';
+            // const mImg = document.createElement('img');
+            // mImg.src = blurCanvas.toDataURL();
+            // mImg.style.width = '200px';
+            // preview.appendChild(mImg);
+            // document.body.appendChild(preview);
+            // setTimeout(() => document.body.removeChild(preview), 7000);
+
+            blurCanvas.toBlob(function (maskBlob) {
+              const formData = new FormData();
+              formData.append("image", imageBlob, "image.png");
+              formData.append("mask", maskBlob, "mask.png");
+              formData.append("prompt", promptInput);
+              formData.append("procedure", title);
+
+              fetch("/api/simulate", {
+                method: "POST",
+                body: formData,
+              })
+                .then((r) => r.json())
+                .then((data) => {
+                  if (simBtn) {
+                    simBtn.disabled = false;
+                    simBtn.innerText = "Gerar Transformação ✨";
+                  }
+                  document
+                    .querySelectorAll(".sim-step")
+                    .forEach((el) => el.classList.remove("active"));
+                  if (data.error) {
+                    alert(
+                      "Houve um erro na simulação: " +
+                        data.error +
+                        "\nDetalhes: " +
+                        (data.details || ""),
+                    );
+                    window.closeSimModal();
+                  } else {
+                    document.getElementById("simStep4").classList.add("active");
+                    document.getElementById("simResultImg").src =
+                      data.imageUrl || "";
+                    console.log(
+                      "Sim result img length",
+                      data.imageUrl ? data.imageUrl.length : 0,
+                      "promptUsed",
+                      data.promptUsed,
+                    );
+                    document.getElementById("simPraise").innerText =
+                      "« " + data.text + " »";
+                  }
+                })
+                .catch((err) => {
+                  console.error(err);
+                  if (simBtn) {
+                    simBtn.disabled = false;
+                    simBtn.innerText = "Gerar Transformação ✨";
+                  }
+                  alert("Erro de conexão ao simular.");
+                  window.closeSimModal();
+                });
+            }, "image/png");
+          };
+        });
+      };
+
+      const procedureOptions = {
+        "Design de Sobrancelhas": [
+          {
+            label: "Estilo",
+            name: "estilo",
+            options: [
+              "Clean up (apenas limpeza)",
+              "High arch (arqueada)",
+              "Straight brow (reta/estilo coreano)",
+              "Thick/Bushy (grossa e natural)",
+            ],
+          },
+          {
+            label: "Acabamento",
+            name: "acabamento",
+            options: [
+              "Soft shading (sombreado leve com sombra)",
+              "Defined concealer outline (contorno marcado com corretivo)",
+              "Natural brow gel look",
+            ],
+          },
+          {
+            label: "Técnica",
+            name: "tecnica",
+            options: ["Tweezers (pinça)", "Threading (linha)", "Waxing (cera)"],
+          },
+        ],
+        "Micro de Sobrancelhas": [
+          {
+            label: "Técnica",
+            name: "tecnica",
+            options: [
+              "Microblading (fio a fio ultra fino)",
+              "Powder Brows/Ombré (efeito pixelado/sombra)",
+              "Nanoblading",
+            ],
+          },
+          {
+            label: "Pigmentação",
+            name: "pigmentacao",
+            options: [
+              "Soft pixel effect (efeito pó)",
+              "Crisp hair strokes (fios bem definidos)",
+            ],
+          },
+          {
+            label: "Cor",
+            name: "cor",
+            options: ["Ash brown (frio)", "Warm brown (quente)", "Taupe"],
+          },
+        ],
+        "Micro Labial": [
+          {
+            label: "Efeito",
+            name: "efeito",
+            options: [
+              "Lip Blush (efeito batom suave)",
+              "Aquarelle Lips (sem contorno marcado)",
+              "Full Lips (cor sólida e intensa)",
+            ],
+          },
+          {
+            label: "Acabamento",
+            name: "acabamento",
+            options: [
+              "Velvet matte (fosco aveludado)",
+              "Glossy/Hydrated look (efeito molhado)",
+              "Sheer tint (translúcido)",
+            ],
+          },
+          {
+            label: "Contorno",
+            name: "contorno",
+            options: [
+              "Soft blurred borders (bordas esfumadas)",
+              "Defined vermilion border (contorno nítido)",
+            ],
+          },
+        ],
+        "Tatuagem / Fine Line": [
+          {
+            label: "Traço",
+            name: "traco",
+            options: [
+              "Ultra fine line (traço agulha 1)",
+              "Bold line (traço grosso)",
+              "Dotwork (pontilhismo)",
+            ],
+          },
+          {
+            label: "Estilo",
+            name: "estilo",
+            options: [
+              "Minimalist",
+              "Micro-realism",
+              "Geometric",
+              "Floral botanical",
+            ],
+          },
+          {
+            label: "Pigmento",
+            name: "pigmento",
+            options: [
+              "Solid black ink",
+              "Grey wash shading (sombreado cinza)",
+              "Fine line color accents",
+            ],
+          },
+        ],
+        "Alongamento de Unhas": [
+          {
+            label: "Formato (Shape)",
+            name: "formato",
+            options: [
+              "Almond (amendoada)",
+              "Coffin/Ballerina",
+              "Square (quadrada)",
+              "Stiletto",
+            ],
+          },
+          {
+            label: "Comprimento",
+            name: "comprimento",
+            options: ["Short natural", "Medium salon length", "Extra long"],
+          },
+          {
+            label: "Acabamento",
+            name: "acabamento",
+            options: [
+              "High gloss top coat",
+              "Matte finish",
+              "Milky white",
+              "French tip ombre",
+            ],
+          },
+        ],
+        "Manicure Intacta": [
+          {
+            label: "Cutícula",
+            name: "cuticula",
+            options: ["E-file manicure", "Russian manicure"],
+          },
+          {
+            label: "Esmaltação",
+            name: "esmaltacao",
+            options: [
+              "Apex structure (curvatura correta da unha)",
+              "Under the cuticle color application (cor que nasce debaixo da pele)",
+            ],
+          },
+          {
+            label: "Cor/Brilho",
+            name: "cor",
+            options: ["Solid gel polish color", "Cat-eye magnetic effect"],
+          },
+        ],
+        "Spa dos Pés / Pedicure": [
+          {
+            label: "Textura da Pele",
+            name: "textura",
+            options: [
+              "Soft smooth skin texture",
+              "Callus-free heels",
+              "Exfoliated glow",
+            ],
+          },
+          {
+            label: "Finalização",
+            name: "finalizacao",
+            options: [
+              "Moisturized skin with essential oils",
+              "Relaxing foot bath with rose petals",
+            ],
+          },
+          {
+            label: "Unhas",
+            name: "unhas",
+            options: ["Square shaped toenails", "Classic white/red gel polish"],
+          },
+        ],
+        "Body Piercing": [
+          {
+            label: "Joia",
+            name: "joia",
+            options: ["Titanium G23", "14k Gold", "Surgical steel"],
+          },
+          {
+            label: "Tipo de Joia",
+            name: "tipo",
+            options: [
+              "Labret stud",
+              "Hoop/Ring (argola)",
+              "Barbell",
+              "Clicker with zircon crystals",
+            ],
+          },
+          {
+            label: "Localização",
+            name: "localizacao",
+            options: ["Tragus", "Septum", "Helix", "Nostril"],
+          },
+        ],
+        "Extensão de Cílios": [
+          {
+            label: "Estilo",
+            name: "estilo",
+            options: [
+              "Fio a Fio",
+              "Volume Brasileiro",
+              "Volume Russo",
+              "Fox Eyes",
+              "Efeito Rímel",
+            ],
+          },
+          {
+            label: "Comprimento",
+            name: "comprimento",
+            options: ["Curto/Natural", "Médio", "Longo/Glamour"],
+          },
+          {
+            label: "Curvatura",
+            name: "curvatura",
+            options: ["Suave (C)", "Acentuada (D)", "Extrema (L)"],
+          },
+        ],
+      };
+
+      window.openSimulationModal = function (title, price) {
+        console.log("Abrindo modal para: ", title, price);
+        // Reset to defaults
+        document
+          .querySelectorAll(".sim-step")
+          .forEach((el) => el.classList.remove("active"));
+        document.getElementById("simStep1").classList.add("active");
+
+        const choicesContainer = document.getElementById("simDynamicChoices");
+        choicesContainer.innerHTML = "";
+        const opts = procedureOptions[title];
+        if (opts) {
+          opts.forEach((config) => {
+            const label = document.createElement("label");
+            label.className = "sim-choice-label";
+            label.innerText = config.label;
+
+            const select = document.createElement("select");
+            select.className = "sim-choice-box";
+            select.name = config.name;
+            select.required = true;
+            select.dataset.label = config.label;
+
+            const defaultOpt = document.createElement("option");
+            defaultOpt.value = "";
+            defaultOpt.innerText = "Selecione...";
+            defaultOpt.disabled = true;
+            defaultOpt.selected = true;
+            select.appendChild(defaultOpt);
+
+            config.options.forEach((o) => {
+              const opt = document.createElement("option");
+              opt.value = o;
+              opt.innerText = o;
+              select.appendChild(opt);
+            });
+
+            choicesContainer.appendChild(label);
+            choicesContainer.appendChild(select);
+          });
+        } else {
+          choicesContainer.innerHTML = `<label class="sim-choice-label">O que espera desse procedimento?</label>
+                          <textarea class="sim-choice-box" id="fallbackPrompt" rows="3" placeholder="Ex: Deixar mais arqueado, visual natural..."></textarea>`;
+        }
+
+        document.getElementById("simImage").value = "";
+
+        document.getElementById("simTitle").innerText = title;
+        document.getElementById("simPrice").innerText = price;
+        document.getElementById("simModalOverlay").classList.add("active");
+      };
+
+      document.addEventListener("DOMContentLoaded", () => {
+        console.log("DOM loaded. Attaching events to service cards...");
+        // --- Attach dynamically UI handlers for services cards --- //
+        const servicePrices = {
+          "Design de Sobrancelhas": "R$ 40",
+          "Micro de Sobrancelhas": "R$ 400",
+          "Extensão de Cílios": "A partir de R$ 150",
+          "Micro Labial": "R$ 400",
+          "Tatuagem / Fine Line": "Preços a Consultar",
+          "Alongamento de Unhas": "A partir de R$ 130",
+          "Manicure Intacta": "R$ 50",
+          "Spa dos Pés / Pedicure": "R$ 50",
+          "Body Piercing": "Preços a Consultar",
+        };
+
+        const cards = document.querySelectorAll(".service-card");
+        console.log("Found " + cards.length + " cards.");
+
+        cards.forEach((card) => {
+          card.style.cursor = "pointer";
+          const originalBg = card.style.background || "white";
+          card.addEventListener(
+            "mouseenter",
+            () => (card.style.background = "#fffafa"),
+          ); // visual feedback
+          card.addEventListener(
+            "mouseleave",
+            () => (card.style.background = originalBg),
+          );
+          card.addEventListener("click", () => {
+            const title = card.querySelector("h3").innerText;
+            const price = servicePrices[title] || "Valores Médios na Tabela";
+            window.openSimulationModal(title, price);
+          });
+        });
+
+        const chatBtn = document.getElementById("lanaChatBtn");
+        const chatWindow = document.getElementById("lanaChatWindow");
+        const chatBody = document.getElementById("chatBody");
+        const chatInput = document.getElementById("chatInput");
+        const sendBtn = document.getElementById("sendBtn");
+        const typingIndicator = document.getElementById("typingIndicator");
+
+        // Configuração do Backend da API
+        const BACKEND_URL = "/api/chat";
+
+        // Histórico de conversa para a API manter o contexto
+        let chatHistory = [];
+
+        // Instruções de Sistema (Persona da Lana)
+        const systemInstruction = `Você é a Lana, assistente inteligente da Lana Wolf Art.
+      # DIRETRIZES E PERSONA
+      - Perfil: Especialista em estética, segura e empática.
+      - Objetivo: Transformar dúvidas em agendamentos de alto valor (high-ticket), destacando a transformação e os benefícios dos procedimentos realizados.
+      - Público: ATENDIMENTO EXCLUSIVO AO PÚBLICO FEMININO.
+      - Segurança (LGPD): Informe de forma sutil que os dados coletados respeitam a LGPD e servem estritamente para o agendamento e prestação do serviço.
+      - Tone de Voz: Calorosa, com toque humano (use emojis leves, não pareça um robô). Responda com frases curtas e diretas sempre que possível.
+
+      # REGRAS DO CHAT:
+      - Regra de Ouro: Nunca agende ou tire dúvidas longas de homens. Se o usuário informar que é homem, seja polida e informe que o atendimento é exclusivamente feminino e encerre o assunto.
+      - Os serviços prestados e seus valores bases são:
+        1. Piercings: Orelha (R$ 60), Nostril (R$ 65), Sobrancelha (R$ 60), Septo (R$ 60), Umbigo (R$ 75), Boca (R$ 60), Íntima (R$ 190), Mamilo (R$ 180), Microdermal (R$ 200), Sulface (R$ 185).
+        2. Micropigmentação e Sobrancelha: Micro Shadow/Fio a Fio (R$ 400 | Retoque R$ 200), Micro/Revitalização Labial (R$ 400 | Retoque R$ 200), Design com Henna (R$ 55), Design Simples (R$ 40).
+        3. Cílios: Fio a Fio/Vol Brasileiro/Vol Híbrido (R$ 150 | Manu R$ 85), Vol Egípcio (R$ 180 | Manu R$ 100), Fox (R$ 190 | Manu R$ 95), Efeito Rímel (R$ 100 | Manu R$ 65), Vol Russo (R$ 200 | Manu R$ 105), Mega Volume (R$ 230 | Manu R$ 130).
+        4. Unhas (Apenas com a profissional Amanda - WhatsApp: 61 99966-7225): Fibra de Vidro (R$ 180), Molde F1 (R$ 130), Banho de Gel (R$ 95), Manutenção de Gel (R$ 95 a R$ 130), Pé e Mão Esmaltação Tradicional (R$ 50).
+        5. Tatuagem fine-line: (Preços a Consultar)
+      - QUANDO SOLICITADA PARA EXPLICAR/LISTAR OS SERVIÇOS QUE VOCÊ TRABALHA OU SEUS VALORES, você DEVE retornar as informações EXCLUSIVAMENTE em formato de TABELA (utilizando markdown \`| Procedimento | Valor | Destaca-se por... |\`). Nunca retorne em forma de lista com asteriscos.
+      - ATENÇÃO SOBRE AGENDAMENTOS: Caso a cliente demonstre interesse em marcar algum procedimento, informe educadamente que ela deverá entrar em contato com a profissional Layana pelo número: (61) 9598-1186
+      - Importante: Foco na transformação. Ex: Na tabela ou explicação, ao invés de só falar o preço da micropigmentação, fale que ela entrega 'cor saudável e definição 24h por dia'.`;
+
+        // Toggle Open/Close
+        chatBtn.addEventListener("click", () => {
+          const isActive = chatWindow.classList.contains("active");
+
+          if (isActive) {
+            chatWindow.classList.remove("active");
+            chatBtn.classList.remove("active");
+          } else {
+            chatWindow.classList.add("active");
+            chatBtn.classList.add("active");
+            setTimeout(() => chatInput.focus(), 300);
+            scrollToBottom();
+          }
+        });
+
+        // Utils: Scroll to bottom of chat
+        function scrollToBottom() {
+          chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        // Append a message to the UI
+        function appendMessage(text, senderType) {
+          const row = document.createElement("div");
+          row.className = `message-row ${senderType}`;
+
+          const msg = document.createElement("div");
+          msg.className = `message ${senderType}`;
+
+          // Formatar quebras de linha básicas e negritos (**) do markdown que a IA manda
+          let formattedText = text.replace(/\n/g, "<br>");
+          formattedText = formattedText.replace(
+            /\*\*(.*?)\*\*/g,
+            "<strong>$1</strong>",
+          );
+
+          // Formatação simples e robusta para Tabelas
+          // IA enviou: | Procedimento | Valor | ... |---|---| | Design...
+          if (formattedText.includes("|") && formattedText.includes("---")) {
+            // Remove todos os <br> antes de processar os pipes para unificar a string
+            let cleanPipes = formattedText.replace(/<br>/g, " ");
+
+            // Encontra tudo entre o primeiro e o último pipe
+            const firstPipe = cleanPipes.indexOf("|");
+            const lastPipe = cleanPipes.lastIndexOf("|");
+
+            if (firstPipe !== -1 && lastPipe !== -1 && lastPipe > firstPipe) {
+              const tableString = cleanPipes.substring(firstPipe, lastPipe + 1);
+
+              // Quebra por pipes. Ignora itens vazios (extremos)
+              const cells = tableString.split("|").map((s) => s.trim());
+
+              // Remover índices em branco (gerados pelos pipes nas pontas) ou o divisor '---'
+              const filteredCells = cells.filter(
+                (s) => s !== "" && !s.includes("---"),
+              );
+
+              // Sabendo que a IA manda sempre 3 colunas (Procedimento | Valor | Destaca-se por...)
+              // ou no mínimo 2. Vamos checar o cabeçalho para saber o número de colunas:
+              const originalHeaders = tableString.split("---")[0];
+              const colCount =
+                originalHeaders.split("|").filter((s) => s.trim() !== "")
+                  .length || 3;
+
+              let tableHTML = `<div style="display: grid; grid-template-columns: repeat(${colCount}, 1fr); gap: 4px; margin-top: 10px; font-size: 0.85em;">`;
+
+              for (let i = 0; i < filteredCells.length; i++) {
+                // Estilo básico de célula
+                let isHeader = i < colCount;
+                let style = isHeader
+                  ? "font-weight: 600; border-bottom: 1px solid #ddd; padding-bottom: 4px;"
+                  : "padding: 4px 0; border-bottom: 1px dashed #eee;";
+
+                // Garante que o markdown bold dentro da célula seja processado (caso o regex global falhou)
+                let cellText = filteredCells[i].replace(
+                  /\*\*(.*?)\*\*/g,
+                  "<strong>$1</strong>",
+                );
+
+                tableHTML += `<div style="${style}">${cellText}</div>`;
+              }
+
+              tableHTML += `</div>`;
+
+              // Substitui a 'maçaroca' inteira do markdown pela grid div limpa
+              const stringToReplace = formattedText.substring(
+                formattedText.indexOf("|"),
+                formattedText.lastIndexOf("|") + 1,
+              );
+              formattedText = formattedText.replace(stringToReplace, tableHTML);
+            }
+          }
+
+          msg.innerHTML = formattedText;
+
+          row.appendChild(msg);
+
+          // Insert message BEFORE the typing indicator
+          chatBody.insertBefore(row, typingIndicator);
+          scrollToBottom();
+        }
+
+        // Integrado com a API da Gemini
+        async function sendMessage() {
+          const text = chatInput.value.trim();
+          if (!text) return;
+
+          // 1. Mostrar a mensagem do usuário
+          appendMessage(text, "user");
+          chatInput.value = "";
+
+          // 2. Mostrar 'Lana está digitando...'
+          typingIndicator.classList.add("active");
+          scrollToBottom();
+
+          // 3. Adicionar mensagem do usuário ao histórico do Chat
+          chatHistory.push({
+            role: "user",
+            parts: [{ text: text }],
+          });
+
+          // 4. Bater no Backend Local
+          try {
+            const response = await fetch(BACKEND_URL, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                systemInstruction: {
+                  parts: [{ text: systemInstruction }],
+                },
+                contents: chatHistory,
+                generationConfig: {
+                  temperature: 0.7,
+                  maxOutputTokens: 600,
+                },
+              }),
+            });
+
+            const data = await response.json();
+
+            if (data.candidates && data.candidates.length > 0) {
+              const botResponse = data.candidates[0].content.parts[0].text;
+
+              // Registrar resposta no histórico para lembrar do contexto
+              chatHistory.push({
+                role: "model",
+                parts: [{ text: botResponse }],
+              });
+
+              typingIndicator.classList.remove("active");
+              appendMessage(botResponse, "bot");
+            } else {
+              console.error("Erro da API Gemini:", data);
+              throw new Error("Resposta inválida da API do Gemini", data);
+            }
+          } catch (error) {
+            console.error("Erro ao chamar Gemini API:", error);
+            typingIndicator.classList.remove("active");
+            appendMessage(
+              "Desculpe, estou com uma instabilidade de conexão no momento. Pode tentar mandar a mensagem de novo em alguns segundos? 🥺",
+              "bot",
+            );
+            // Remove do histórico a msg para que o usuário possa tentar novamente
+            chatHistory.pop();
+          }
+        }
+
+        // Bind Events Handlers
+        sendBtn.addEventListener("click", sendMessage);
+
+        chatInput.addEventListener("keypress", (e) => {
+          if (e.key === "Enter") {
+            sendMessage();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
