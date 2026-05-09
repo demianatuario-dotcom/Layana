@@ -947,6 +947,146 @@
           height: 28px;
         }
       }
+
+      /* Comments Section */
+      .comments-section {
+        background: white;
+        padding: 80px 5%;
+        width: 100%;
+        border-top: 1px solid rgba(0,0,0,0.05);
+      }
+      .comments-container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .comment-card {
+        background: #FDFBFB;
+        border: 1px solid rgba(201, 130, 118, 0.2);
+        border-radius: 16px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      }
+      .comment-card.reply {
+        margin-left: 40px;
+        border-left: 3px solid var(--primary);
+        background: #FDF4F3;
+      }
+      .comment-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .comment-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 12px;
+        object-fit: cover;
+      }
+      .comment-meta {
+        display: flex;
+        flex-direction: column;
+      }
+      .comment-author {
+        font-weight: 600;
+        color: var(--secondary);
+        font-size: 1rem;
+      }
+      .comment-date {
+        font-size: 0.8rem;
+        color: var(--text-light);
+      }
+      .comment-body {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        color: var(--text-main);
+        margin-bottom: 12px;
+        white-space: pre-wrap;
+      }
+      .btn-reply {
+        background: none;
+        border: none;
+        color: var(--primary);
+        font-size: 0.85rem;
+        font-weight: 500;
+        cursor: pointer;
+        padding: 0;
+        text-decoration: underline;
+      }
+      .comment-form {
+        margin-bottom: 40px;
+        background: var(--bg-nude);
+        padding: 25px;
+        border-radius: 16px;
+        border: 1px solid rgba(201, 130, 118, 0.3);
+      }
+      .comment-form textarea {
+        width: 100%;
+        padding: 12px;
+        border-radius: 12px;
+        border: 1px solid rgba(201, 130, 118, 0.4);
+        margin-bottom: 15px;
+        font-family: inherit;
+        resize: vertical;
+        min-height: 80px;
+      }
+      .comment-form textarea:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px var(--focus-glow);
+      }
+      .auth-message {
+        text-align: center;
+        padding: 30px;
+        background: var(--bg-nude);
+        border-radius: 16px;
+        margin-bottom: 40px;
+      }
+      .btn-google {
+        background: white;
+        border: 1px solid #ccc;
+        color: #444;
+        padding: 10px 24px;
+        border-radius: 30px;
+        cursor: pointer;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.2s;
+        text-decoration: none;
+        font-family: 'Outfit', sans-serif;
+        font-size: 1rem;
+      }
+      .btn-google:hover {
+        background: #f1f1f1;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+      .user-logged-in {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 15px;
+      }
+      .user-logged-in span {
+        font-size: 0.9rem;
+        color: var(--secondary);
+        font-weight: 500;
+      }
+      .btn-logout {
+        background: none;
+        border: none;
+        color: #a69c9a;
+        font-size: 0.8rem;
+        cursor: pointer;
+        text-decoration: underline;
+      }
+      @media (max-width: 600px) {
+        .comment-card.reply {
+            margin-left: 15px;
+        }
+      }
     </style>
   </head>
 
@@ -975,13 +1115,6 @@
             href="https://wa.me/556195981186" target="_blank"
             class="btn-primary"
             >Agende sua Experiência</a
-          >
-          <a
-            href="#"
-            class="btn-outline"
-            style="color: var(--secondary); border-color: var(--secondary);"
-            onclick="openSim(); return false;"
-            >Simule seu Procedimento</a
           >
         </div>
       </div>
@@ -1160,6 +1293,41 @@
             </svg>
             Ambiente seguro e protegido LGPD.
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comments Section -->
+    <section id="comentarios" class="comments-section">
+      <h2 class="section-title" style="margin-bottom: 20px;">Experiências e Dúvidas</h2>
+      <p style="text-align: center; margin-bottom: 40px; color: var(--text-main); font-size: 1.1rem; padding: 0 20px;">Veja o que nossas clientes dizem e compartilhe sua experiência.</p>
+      
+      <div class="comments-container">
+        
+        <div id="authContainer" class="auth-message">
+          <p style="margin-bottom: 15px;">Para deixar um comentário ou responder, identifique-se com segurança.</p>
+          <button id="btnGoogleLogin" class="btn-google">
+            <svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg"><g transform="matrix(1, 0, 0, 1, 27.009001, -39.238998)"><path fill="#4285F4" d="M -3.264 51.509 C -3.264 50.719 -3.334 49.969 -3.454 49.239 L -14.754 49.239 L -14.754 53.749 L -8.284 53.749 C -8.574 55.229 -9.424 56.479 -10.684 57.329 L -10.684 60.329 L -6.824 60.329 C -4.564 58.239 -3.264 55.159 -3.264 51.509 Z"/><path fill="#34A853" d="M -14.754 63.239 C -11.514 63.239 -8.804 62.159 -6.824 60.329 L -10.684 57.329 C -11.764 58.049 -13.134 58.489 -14.754 58.489 C -17.884 58.489 -20.534 56.379 -21.484 53.529 L -25.464 53.529 L -25.464 56.619 C -23.494 60.539 -19.444 63.239 -14.754 63.239 Z"/><path fill="#FBBC05" d="M -21.484 53.529 C -21.734 52.809 -21.864 52.039 -21.864 51.239 C -21.864 50.439 -21.724 49.669 -21.484 48.949 L -21.484 45.859 L -25.464 45.859 C -26.284 47.479 -26.754 49.299 -26.754 51.239 C -26.754 53.179 -26.284 54.999 -25.464 56.619 L -21.484 53.529 Z"/><path fill="#EA4335" d="M -14.754 43.989 C -12.984 43.989 -11.404 44.599 -10.154 45.789 L -6.734 42.369 C -8.804 40.429 -11.514 39.239 -14.754 39.239 C -19.444 39.239 -23.494 41.939 -25.464 45.859 L -21.484 48.949 C -20.534 46.099 -17.884 43.989 -14.754 43.989 Z"/></g></svg>
+            Entrar com Google
+          </button>
+        </div>
+
+        <div id="commentFormContainer" class="comment-form" style="display: none;">
+          <div class="user-logged-in">
+            <span id="userNameDisplay">Olá, Usuário</span>
+            <button id="btnLogout" class="btn-logout">Sair</button>
+          </div>
+          <textarea id="commentInput" placeholder="Deixe seu comentário ou dúvida..."></textarea>
+          <input type="hidden" id="replyToId" value="">
+          <div id="replyingToMessage" style="display:none; font-size: 0.8rem; color: var(--primary); margin-bottom: 10px;">
+            Respondendo a um comentário... <button onclick="cancelReply()" style="background:none;border:none;color:#999;cursor:pointer;text-decoration:underline;">Cancelar</button>
+          </div>
+          <button id="btnSubmitComment" class="btn-primary" style="padding: 10px 24px; font-size: 0.95rem;">Enviar Comentário</button>
+        </div>
+
+        <div id="commentsList">
+          <!-- Comments will be loaded here dynamically -->
+          <div style="text-align: center; color: var(--text-light); padding: 20px;">Carregando comentários...</div>
         </div>
       </div>
     </section>
@@ -2262,6 +2430,188 @@
           }
         });
       });
+    </script>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+      import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyA26RT_5vwSTHI2RfZFrfEH2UV9IaZbYqM",
+        authDomain: "lanawolfart-4c922.firebaseapp.com",
+        projectId: "lanawolfart-4c922",
+        storageBucket: "lanawolfart-4c922.firebasestorage.app",
+        messagingSenderId: "964225456214",
+        appId: "1:964225456214:web:9ef9ff15057633703243f7",
+        measurementId: "G-6DH3SGDPPJ"
+      };
+
+      let app;
+      let auth;
+      try {
+        app = initializeApp(firebaseConfig);
+        auth = getAuth(app);
+      } catch(e) {
+        console.warn("Firebase não configurado ou credenciais ausentes. Por favor configure o apiKey.", e);
+      }
+
+      const API_URL = "http://localhost:8080/api"; // Ajuste para produção se necessário
+
+      let currentUser = null;
+
+      // DOM Elements
+      const authContainer = document.getElementById('authContainer');
+      const commentFormContainer = document.getElementById('commentFormContainer');
+      const btnGoogleLogin = document.getElementById('btnGoogleLogin');
+      const btnLogout = document.getElementById('btnLogout');
+      const userNameDisplay = document.getElementById('userNameDisplay');
+      const btnSubmitComment = document.getElementById('btnSubmitComment');
+      const commentInput = document.getElementById('commentInput');
+      const commentsList = document.getElementById('commentsList');
+      const replyToIdInput = document.getElementById('replyToId');
+      const replyingToMessage = document.getElementById('replyingToMessage');
+
+      window.cancelReply = function() {
+        replyToIdInput.value = "";
+        replyingToMessage.style.display = "none";
+        commentInput.placeholder = "Deixe seu comentário ou dúvida...";
+      };
+
+      window.replyTo = function(commentId, authorName) {
+        replyToIdInput.value = commentId;
+        replyingToMessage.style.display = "block";
+        replyingToMessage.innerHTML = `Respondendo a ${authorName}... <button onclick="cancelReply()" style="background:none;border:none;color:#999;cursor:pointer;text-decoration:underline;">Cancelar</button>`;
+        commentInput.focus();
+        // Scroll to form smoothly
+        document.getElementById('comentarios').scrollIntoView({ behavior: 'smooth' });
+      };
+
+      function formatDate(dateString) {
+        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+        return new Date(dateString).toLocaleDateString('pt-BR', options);
+      }
+
+      function renderComment(c, isReply = false) {
+        const div = document.createElement('div');
+        div.className = `comment-card ${isReply ? 'reply' : ''}`;
+        
+        div.innerHTML = `
+          <div class="comment-header">
+            <img src="${c.usuario_avatar || 'https://via.placeholder.com/40/C98276/FFFFFF?text=' + c.usuario_nome.charAt(0)}" alt="Avatar" class="comment-avatar" onerror="this.src='https://via.placeholder.com/40/C98276/FFFFFF?text=U'">
+            <div class="comment-meta">
+              <span class="comment-author">${c.usuario_nome}</span>
+              <span class="comment-date">${formatDate(c.criado_em)}</span>
+            </div>
+          </div>
+          <div class="comment-body">${c.conteudo}</div>
+          ${!isReply && currentUser ? `<button class="btn-reply" onclick="replyTo(${c.id}, '${c.usuario_nome}')">Responder</button>` : ''}
+        `;
+        return div;
+      }
+
+      async function loadComments() {
+        try {
+          const res = await fetch(`${API_URL}/comentarios`);
+          if (!res.ok) throw new Error("Erro ao carregar");
+          const comments = await res.json();
+          
+          commentsList.innerHTML = '';
+          if (comments.length === 0) {
+            commentsList.innerHTML = '<p style="text-align: center; color: var(--text-light);">Seja a primeira a comentar!</p>';
+            return;
+          }
+
+          comments.forEach(c => {
+            commentsList.appendChild(renderComment(c, false));
+            if (c.respostas && c.respostas.length > 0) {
+              c.respostas.forEach(r => {
+                commentsList.appendChild(renderComment(r, true));
+              });
+            }
+          });
+        } catch(e) {
+          commentsList.innerHTML = '<p style="text-align: center; color: #a69c9a;">Ocorreu um erro ao carregar os comentários. Tente novamente mais tarde.</p>';
+        }
+      }
+
+      // Initialize
+      if (auth) {
+        onAuthStateChanged(auth, (user) => {
+          if (user) {
+            currentUser = user;
+            authContainer.style.display = 'none';
+            commentFormContainer.style.display = 'block';
+            userNameDisplay.innerText = `Olá, ${user.displayName || 'Visitante'}`;
+          } else {
+            currentUser = null;
+            authContainer.style.display = 'block';
+            commentFormContainer.style.display = 'none';
+          }
+          // Re-render comments to show/hide reply buttons based on auth state
+          loadComments();
+        });
+
+        btnGoogleLogin.addEventListener('click', () => {
+          const provider = new GoogleAuthProvider();
+          signInWithPopup(auth, provider).catch(error => {
+            console.error("Login Error", error);
+            if(error.code === 'auth/invalid-api-key') {
+              alert("Por favor, configure sua Firebase API Key no index.html para ativar o login.");
+            }
+          });
+        });
+
+        btnLogout.addEventListener('click', () => {
+          signOut(auth);
+        });
+
+        btnSubmitComment.addEventListener('click', async () => {
+          const content = commentInput.value.trim();
+          if (!content) return alert("Escreva um comentário!");
+          
+          const parentId = replyToIdInput.value;
+          const token = await currentUser.getIdToken();
+
+          const payload = {
+            conteudo: content,
+            parent_id: parentId ? parseInt(parentId) : null
+          };
+
+          btnSubmitComment.disabled = true;
+          btnSubmitComment.innerText = "Enviando...";
+
+          try {
+            const res = await fetch(`${API_URL}/comentarios`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+              },
+              body: JSON.stringify(payload)
+            });
+
+            if (!res.ok) {
+              const err = await res.json();
+              throw new Error(err.error || "Erro desconhecido");
+            }
+
+            commentInput.value = "";
+            cancelReply();
+            await loadComments();
+          } catch(e) {
+            alert("Erro ao enviar: " + e.message);
+          } finally {
+            btnSubmitComment.disabled = false;
+            btnSubmitComment.innerText = "Enviar Comentário";
+          }
+        });
+      } else {
+         commentsList.innerHTML = '<p style="text-align: center; color: #a69c9a;">Sistema de comentários indisponível no momento.</p>';
+      }
+
+      // Initial Load
+      loadComments();
     </script>
   </body>
 </html>

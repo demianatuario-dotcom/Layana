@@ -5,6 +5,48 @@ require('dotenv').config();
 const path = require('path');
 const app = express();
 
+const { Pool } = require('pg');
+const admin = require('firebase-admin');
+
+// Initialize Firebase Admin (requires service account key or GOOGLE_APPLICATION_CREDENTIALS)
+try {
+    if (process.env.FIREBASE_SERVICE_ACCOUNT && process.env.FIREBASE_SERVICE_ACCOUNT !== '{}') {
+        const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+        admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
+    } else {
+        admin.initializeApp(); // Fallback to default
+    }
+} catch (error) {
+    console.error("Aviso: Falha ao inicializar Firebase Admin. Verificação de tokens pode não funcionar.", error.message);
+}
+
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: process.env.DATABASE_URL && process.env.DATABASE_URL.includes('localhost') ? false : { rejectUnauthorized: false }
+});
+
+// Inicialização da Tabela de Comentários
+async function initDB() {
+    try {
+        await pool.query(`
+            CREATE TABLE IF NOT EXISTS comentarios (
+                id SERIAL PRIMARY KEY,
+                parent_id INTEGER REFERENCES comentarios(id) ON DELETE CASCADE,
+                usuario_nome VARCHAR(255) NOT NULL,
+                usuario_avatar TEXT,
+                usuario_social_id VARCHAR(255) NOT NULL,
+                conteudo TEXT NOT NULL,
+                criado_em TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+            );
+        `);
+        console.log("Tabela 'comentarios' verificada/criada com sucesso no PostgreSQL.");
+    } catch (err) {
+        console.error("Erro ao inicializar o banco de dados (ignorando para modo estático):", err.message);
+    }
+}
+initDB();
+
+
 const rateLimit = require('express-rate-limit');
 const apiLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
@@ -316,6 +358,102 @@ CRITICAL: Maintain identical facial features, skin texture, bone structure, eye 
     } catch (error) {
         console.error("Erro no Simulador:", error);
         res.status(500).json({ error: 'Erro interno ao processar a simulação.' });
+    }
+});
+
+// --- Rotas de Comentários ---
+
+// GET /api/comentarios - Retorna a lista de comentários formatada
+app.get('/api/comentarios', async (req, res) => {
+    try {
+        const result = await pool.query(`
+            SELECT id, parent_id, usuario_nome, usuario_avatar, conteudo, criado_em 
+            FROM comentarios 
+            ORDER BY criado_em ASC
+        `);
+        
+        // Formatar em árvore (agrupando respostas)
+        const comentariosMap = {};
+        const comentariosList = [];
+
+        // Inicializar mapa e converter para objetos
+        result.rows.forEach(row => {
+            comentariosMap[row.id] = { ...row, respostas: [] };
+        });
+
+        // Construir árvore
+        result.rows.forEach(row => {
+            if (row.parent_id) {
+                if (comentariosMap[row.parent_id]) {
+                    comentariosMap[row.parent_id].respostas.push(comentariosMap[row.id]);
+                }
+            } else {
+                comentariosList.push(comentariosMap[row.id]);
+            }
+        });
+
+        // Ordenar a lista principal do mais recente para o mais antigo
+        comentariosList.sort((a, b) => new Date(b.criado_em) - new Date(a.criado_em));
+
+        res.json(comentariosList);
+    } catch (error) {
+        console.error("Erro ao buscar comentários:", error);
+        res.status(500).json({ error: 'Erro ao buscar comentários' });
+    }
+});
+
+// Middleware para verificar token Firebase (fallback tolerante para dev)
+const verifyAuth = async (req, res, next) => {
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ error: 'Não autorizado. Token ausente.' });
+    }
+
+    const idToken = authHeader.split('Bearer ')[1];
+    
+    try {
+        // Tenta verificar com Firebase Admin. 
+        if (admin.apps.length > 0) {
+            const decodedToken = await admin.auth().verifyIdToken(idToken);
+            req.user = decodedToken;
+        } else {
+            // Decodifica manual (INSEGURO, apenas para fallback dev se não houver Firebase Admin config)
+            const base64Url = idToken.split('.')[1];
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+            req.user = JSON.parse(jsonPayload);
+        }
+        next();
+    } catch (error) {
+        console.error("Erro na verificação do token Firebase:", error);
+        return res.status(401).json({ error: 'Não autorizado. Token inválido.' });
+    }
+};
+
+// POST /api/comentarios - Adiciona um novo comentário
+app.post('/api/comentarios', verifyAuth, async (req, res) => {
+    try {
+        const { conteudo, parent_id } = req.body;
+        const usuario_social_id = req.user.uid || req.user.sub || "unknown_id";
+        const usuario_nome = req.user.name || "Usuário";
+        const usuario_avatar = req.user.picture || req.user.avatar || "";
+
+        if (!conteudo || conteudo.trim() === '') {
+            return res.status(400).json({ error: 'O conteúdo do comentário é obrigatório.' });
+        }
+
+        const result = await pool.query(
+            `INSERT INTO comentarios (parent_id, usuario_nome, usuario_avatar, usuario_social_id, conteudo)
+             VALUES ($1, $2, $3, $4, $5) RETURNING id, parent_id, usuario_nome, usuario_avatar, conteudo, criado_em`,
+            [parent_id || null, usuario_nome, usuario_avatar, usuario_social_id, conteudo]
+        );
+
+        res.status(201).json(result.rows[0]);
+    } catch (error) {
+        console.error("Erro ao inserir comentário:", error);
+        res.status(500).json({ error: 'Erro ao salvar o comentário' });
     }
 });
 
