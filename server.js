@@ -8,17 +8,19 @@ app.set('trust proxy', 1);
 
 const { Pool } = require('pg');
 const admin = require('firebase-admin');
+const crypto = require('crypto');
 
-// Initialize Firebase Admin (requires service account key or GOOGLE_APPLICATION_CREDENTIALS)
+// Initialize Firebase Admin (only if service account key is provided)
 try {
     if (process.env.FIREBASE_SERVICE_ACCOUNT && process.env.FIREBASE_SERVICE_ACCOUNT !== '{}') {
         const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
         admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
+        console.log("Firebase Admin inicializado com conta de serviço.");
     } else {
-        admin.initializeApp(); // Fallback to default
+        console.log("Firebase Admin não inicializado (chave de conta de serviço ausente). Usando verificação JWT nativa.");
     }
 } catch (error) {
-    console.error("Aviso: Falha ao inicializar Firebase Admin. Verificação de tokens pode não funcionar.", error.message);
+    console.error("Aviso: Falha ao inicializar Firebase Admin:", error.message);
 }
 
 // Determinar se precisa de SSL baseado na URL e ambiente
@@ -409,7 +411,105 @@ app.get('/api/comentarios', async (req, res) => {
     }
 });
 
-// Middleware para verificar token Firebase (fallback tolerante para dev)
+// Cache das chaves públicas do Google
+let googlePublicKeysCache = {
+    keys: null,
+    expiresAt: 0
+};
+
+async function getGooglePublicKeys() {
+    const now = Date.now();
+    if (googlePublicKeysCache.keys && googlePublicKeysCache.expiresAt > now) {
+        return googlePublicKeysCache.keys;
+    }
+    
+    try {
+        const response = await fetch('https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com');
+        if (!response.ok) {
+            throw new Error(`Falha ao buscar chaves públicas do Google: ${response.statusText}`);
+        }
+        const keys = await response.json();
+        
+        // Cache por 6 horas
+        googlePublicKeysCache = {
+            keys,
+            expiresAt: now + 6 * 60 * 60 * 1000
+        };
+        return keys;
+    } catch (error) {
+        console.error("Erro ao buscar chaves públicas do Google:", error);
+        if (googlePublicKeysCache.keys) {
+            return googlePublicKeysCache.keys; // Fallback para cache expirado em caso de falha de rede
+        }
+        throw error;
+    }
+}
+
+async function verifyGoogleIdToken(idToken, projectId) {
+    const parts = idToken.split('.');
+    if (parts.length !== 3) {
+        throw new Error('Token JWT malformado (não contém 3 partes).');
+    }
+
+    const [headerB64, payloadB64, signatureB64] = parts;
+    
+    // Decodifica header
+    const header = JSON.parse(Buffer.from(headerB64, 'base64url').toString('utf8'));
+    if (header.alg !== 'RS256') {
+        throw new Error(`Algoritmo não suportado: ${header.alg}. Esperado RS256.`);
+    }
+    
+    const kid = header.kid;
+    if (!kid) {
+        throw new Error('Nenhum campo "kid" encontrado no header do token.');
+    }
+    
+    // Decodifica payload
+    const payload = JSON.parse(Buffer.from(payloadB64, 'base64url').toString('utf8'));
+    
+    // Validações de Claims
+    const now = Math.floor(Date.now() / 1000);
+    
+    // 1. Expiração
+    if (payload.exp <= now) {
+        throw new Error('Token expirado.');
+    }
+    
+    // 2. Issuer (emissor)
+    if (payload.iss !== `https://securetoken.google.com/${projectId}`) {
+        throw new Error(`Emissor (iss) inválido: ${payload.iss}`);
+    }
+    
+    // 3. Audience (audiência)
+    if (payload.aud !== projectId) {
+        throw new Error(`Audiência (aud) inválida: ${payload.aud}`);
+    }
+    
+    // 4. Subject (sub / ID de usuário)
+    if (!payload.sub) {
+        throw new Error('Nenhum campo "sub" (UID do usuário) no token.');
+    }
+    
+    // Busca chaves públicas do Google
+    const publicKeys = await getGooglePublicKeys();
+    const cert = publicKeys[kid];
+    if (!cert) {
+        throw new Error(`Chave pública não encontrada para o kid: ${kid}`);
+    }
+    
+    // Verifica a assinatura criptográfica
+    const data = Buffer.from(`${headerB64}.${payloadB64}`);
+    const signature = Buffer.from(signatureB64, 'base64url');
+    const isValid = crypto.verify('sha256', data, cert, signature);
+    
+    if (!isValid) {
+        throw new Error('Verificação da assinatura criptográfica falhou.');
+    }
+    
+    return payload;
+}
+
+// Middleware para verificar token Firebase (Option B: usando chaves públicas se Admin não estiver ativo)
 const verifyAuth = async (req, res, next) => {
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -419,22 +519,27 @@ const verifyAuth = async (req, res, next) => {
     const idToken = authHeader.split('Bearer ')[1];
     
     try {
-        // Tenta verificar com Firebase Admin. 
         if (admin.apps.length > 0) {
+            // Tenta verificar com Firebase Admin se inicializado
             const decodedToken = await admin.auth().verifyIdToken(idToken);
             req.user = decodedToken;
         } else {
-            // Decodifica manual (INSEGURO, apenas para fallback dev se não houver Firebase Admin config)
-            const base64Url = idToken.split('.')[1];
-            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-            }).join(''));
-            req.user = JSON.parse(jsonPayload);
+            // Validação local e segura usando chaves públicas do Google (Option B)
+            const projectId = process.env.FIREBASE_PROJECT_ID || 'lanawolfart-4c922';
+            const decodedToken = await verifyGoogleIdToken(idToken, projectId);
+            
+            // Normaliza as chaves do payload para compatibilidade com o formato do Firebase Admin
+            req.user = {
+                uid: decodedToken.sub,
+                name: decodedToken.name || decodedToken.display_name,
+                picture: decodedToken.picture,
+                email: decodedToken.email,
+                ...decodedToken
+            };
         }
         next();
     } catch (error) {
-        console.error("Erro na verificação do token Firebase:", error);
+        console.error("Erro na verificação do token Firebase:", error.message);
         return res.status(401).json({ error: 'Não autorizado. Token inválido.' });
     }
 };
