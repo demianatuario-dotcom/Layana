@@ -2731,7 +2731,9 @@
         console.warn("Firebase não configurado ou credenciais ausentes. Por favor configure o apiKey.", e);
       }
 
-      const API_URL = "http://localhost:8080/api"; // Ajuste para produção se necessário
+      const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+        ? `http://${window.location.hostname}:8080/api`
+        : '/api'; // Produção: caminho relativo ao mesmo domínio
 
       let currentUser = null;
 
