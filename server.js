@@ -4,6 +4,7 @@ require('dotenv').config();
 
 const path = require('path');
 const app = express();
+app.set('trust proxy', 1);
 
 const { Pool } = require('pg');
 const admin = require('firebase-admin');
@@ -20,9 +21,15 @@ try {
     console.error("Aviso: Falha ao inicializar Firebase Admin. Verificação de tokens pode não funcionar.", error.message);
 }
 
+// Determinar se precisa de SSL baseado na URL e ambiente
+const useSSL = process.env.DATABASE_URL && 
+               !process.env.DATABASE_URL.includes('localhost') && 
+               !process.env.DATABASE_URL.includes('127.0.0.1') &&
+               !process.env.DATABASE_URL.includes('owkkgow4ww040ks400444c4g'); // Host do banco interno no Coolify
+
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
-    ssl: process.env.DATABASE_URL && process.env.DATABASE_URL.includes('localhost') ? false : { rejectUnauthorized: false }
+    ssl: useSSL ? { rejectUnauthorized: false } : false
 });
 
 // Inicialização da Tabela de Comentários
