@@ -402,6 +402,185 @@
         }
       }
 
+      /* =====================================================
+         DOMINO AUTOMATE — Advertisement Section
+         ===================================================== */
+      .domino-ad {
+        width: 100%;
+        background: linear-gradient(135deg, #0a1628 0%, #0d1f3c 50%, #091424 100%);
+        padding: 80px 5%;
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+      }
+
+      /* Animated particle dots */
+      .domino-ad::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image:
+          radial-gradient(circle, rgba(201,166,77,0.15) 1px, transparent 1px),
+          radial-gradient(circle, rgba(201,166,77,0.08) 1px, transparent 1px);
+        background-size: 40px 40px, 80px 80px;
+        background-position: 0 0, 20px 20px;
+        animation: particleDrift 20s linear infinite;
+        pointer-events: none;
+      }
+
+      @keyframes particleDrift {
+        from { background-position: 0 0, 20px 20px; }
+        to   { background-position: 40px 40px, 60px 60px; }
+      }
+
+      .domino-ad-inner {
+        position: relative;
+        z-index: 2;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .domino-ad-badge {
+        display: inline-block;
+        background: rgba(201,166,77,0.15);
+        border: 1px solid rgba(201,166,77,0.4);
+        color: #c9a64d;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        padding: 6px 18px;
+        border-radius: 30px;
+        margin-bottom: 30px;
+      }
+
+      .domino-ad-logo-wrap {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 28px;
+      }
+
+      .domino-ad-logo {
+        width: 220px;
+        height: auto;
+        filter: drop-shadow(0 0 20px rgba(201,166,77,0.35));
+        transition: filter 0.4s ease, transform 0.4s ease;
+      }
+
+      .domino-ad-logo:hover {
+        filter: drop-shadow(0 0 35px rgba(201,166,77,0.65));
+        transform: scale(1.05);
+      }
+
+      .domino-ad-tagline {
+        font-family: 'Playfair Display', serif;
+        font-size: 2rem;
+        color: #ffffff;
+        line-height: 1.3;
+        margin-bottom: 16px;
+      }
+
+      .domino-ad-tagline span {
+        background: linear-gradient(90deg, #c9a64d, #f0d080, #c9a64d);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        background-size: 200%;
+        animation: shimmer 3s ease-in-out infinite;
+      }
+
+      @keyframes shimmer {
+        0%   { background-position: 0% 50%; }
+        50%  { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      .domino-ad-desc {
+        font-size: 1rem;
+        color: rgba(255,255,255,0.65);
+        max-width: 600px;
+        margin: 0 auto 36px;
+        line-height: 1.8;
+        font-weight: 300;
+      }
+
+      .domino-ad-features {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-bottom: 40px;
+      }
+
+      .domino-ad-feature {
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(201,166,77,0.2);
+        border-radius: 12px;
+        padding: 14px 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: rgba(255,255,255,0.8);
+        font-size: 0.88rem;
+        font-weight: 400;
+        transition: all 0.3s ease;
+      }
+
+      .domino-ad-feature:hover {
+        background: rgba(201,166,77,0.12);
+        border-color: rgba(201,166,77,0.5);
+        transform: translateY(-2px);
+      }
+
+      .domino-ad-feature-icon {
+        font-size: 1.2rem;
+      }
+
+      .domino-ad-cta {
+        display: inline-block;
+        background: linear-gradient(135deg, #c9a64d, #a8813a);
+        color: #0a1628;
+        padding: 16px 42px;
+        border-radius: 40px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.95rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        box-shadow: 0 8px 30px rgba(201,166,77,0.35);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .domino-ad-cta::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.2) 60%, transparent 80%);
+        transform: translateX(-100%);
+        transition: transform 0.5s ease;
+      }
+
+      .domino-ad-cta:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 14px 40px rgba(201,166,77,0.5);
+        color: #0a1628;
+      }
+
+      .domino-ad-cta:hover::after {
+        transform: translateX(100%);
+      }
+
+      .domino-ad-divider {
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, #c9a64d, transparent);
+        margin: 0 auto 28px;
+        border-radius: 2px;
+      }
+
       /* Floating WhatsApp Button */
       .whatsapp-float {
         position: fixed;
@@ -1375,6 +1554,56 @@
           <!-- Comments will be loaded here dynamically -->
           <div style="text-align: center; color: var(--text-light); padding: 20px;">Carregando comentários...</div>
         </div>
+      </div>
+    </section>
+
+    <!-- Domino Automate Advertisement -->
+    <section class="domino-ad" aria-label="Desenvolvido por Domino Automate">
+      <div class="domino-ad-inner">
+        <div class="domino-ad-badge">⚡ Desenvolvido com Inteligência Artificial</div>
+
+        <div class="domino-ad-logo-wrap">
+          <a href="https://domino-automate.com.br/" target="_blank" rel="noopener noreferrer" aria-label="Visitar site da Domino Automate">
+            <img
+              src="./assets/domino-logo.png"
+              alt="Domino Automate – Orquestração & IA para PMEs"
+              class="domino-ad-logo"
+            />
+          </a>
+        </div>
+
+        <div class="domino-ad-divider"></div>
+
+        <h2 class="domino-ad-tagline">
+          Pensado, desenhado e orquestrado por <span>Domino Automate</span>
+        </h2>
+
+        <p class="domino-ad-desc">
+          Este site não é apenas um site — é um ecossistema inteligente. Da arquitetura ao agente de IA, cada detalhe foi estrategicamente orquestrado para transformar visitantes em clientes e dados em resultados.
+        </p>
+
+        <div class="domino-ad-features">
+          <div class="domino-ad-feature">
+            <span class="domino-ad-feature-icon">🤖</span>
+            Agente de IA integrado
+          </div>
+          <div class="domino-ad-feature">
+            <span class="domino-ad-feature-icon">⚙️</span>
+            Automação N8N
+          </div>
+          <div class="domino-ad-feature">
+            <span class="domino-ad-feature-icon">🔒</span>
+            Infraestrutura segura
+          </div>
+          <div class="domino-ad-feature">
+            <span class="domino-ad-feature-icon">📈</span>
+            Alta performance
+          </div>
+        </div>
+
+        <a href="https://domino-automate.com.br/" target="_blank" rel="noopener noreferrer" class="domino-ad-cta">
+          Quero um projeto assim →
+        </a>
       </div>
     </section>
 
