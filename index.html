@@ -7,360 +7,69 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-DY32X5S1FL');
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lana Wolf Art & Lana Supply Pro | Studio de Estética e Insumos Profissionais em Luziânia</title>
+    <title>Lana Wolf Art & Lana Supply Pro | Studio de Estética, Cursos e Insumos em Luziânia</title>
 
     <!-- Meta tags for SEO & Local Search -->
     <meta
       name="description"
-      content="Studio de estética avançada e revenda autorizada dos melhores insumos profissionais em Luziânia e Jardim Ingá. Extensão de cílios, colas Booble, pigmentos RBKollors e Diamond, micropigmentação, unhas, piercings e cursos."
+      content="Portal oficial Lana Wolf Art e Lana Supply Pro em Luziânia: Studio de estética avançada, cursos presenciais de formação e distribuidora autorizada de insumos para lash designers e micropigmentadoras."
     />
-    <meta name="keywords" content="Insumos para extensão de cílios em Luziânia, Pigmentos RBKollors Jardim Ingá, Adesivos Booble Luziânia, Estúdio de beleza Lana Wolf, Studio de sobrancelhas Luziânia, Curso de lash designer Luziânia, Micropigmentação labial, Body Piercing Luziânia" />
+    <meta name="keywords" content="Studio Lana Wolf Luziânia, Extensão de Cílios Luziânia, Insumos Booble Luziânia, Pigmentos RBKollors Jardim Ingá, Curso de lash designer Luziânia, Lana Supply Pro" />
     <meta name="author" content="Lana Wolf Art & Domino Automate" />
     <meta name="geo.region" content="BR-GO" />
     <meta name="geo.placename" content="Luziânia" />
     <meta name="geo.position" content="-16.156250;-47.946417" />
     <meta name="ICBM" content="-16.156250, -47.946417" />
-    <meta property="og:title" content="Lana Wolf Art & Lana Supply Pro | Studio e Insumos em Luziânia" />
-    <meta property="og:description" content="Plataforma híbrida de estética de alto padrão e revenda autorizada Booble, RBKollors e materiais para lash designers em Luziânia e entorno." />
+    <meta property="og:title" content="Lana Wolf Art & Lana Supply Pro | Portal Oficial" />
+    <meta property="og:description" content="Studio de estética feminina de alto padrão, formação profissional e revenda autorizada de insumos em Luziânia." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://lanawolfart.cloud" />
     <meta name="theme-color" content="#c98276" />
 
-    <!-- Premium Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
-      rel="stylesheet"
-    />
-    <!-- Font Awesome Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+    <!-- Google Fonts & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
 
     <style>
-      /* Design System & Properties */
-      :root {
-        --primary: #C98276;
-        --primary-dark: #A1645A;
-        --primary-light: #E8ACA3;
-        --secondary: #3B2D2A;
-        --secondary-dark: #241715;
-        --accent-gold: #C5A059;
-        --accent-gold-light: #F7D070;
-        --bg-body: #FDFBFB;
-        --bg-nude: #FDF4F3;
-        --chat-bg: rgba(255, 255, 255, 0.92);
-        --text-main: #4A3D3C;
-        --text-light: #8C7A77;
-        --msg-user: #F0E6E4;
-        --msg-bot: #FFFFFF;
-        --focus-glow: rgba(201, 130, 118, 0.3);
-        --shadow-soft: 0 10px 40px rgba(59, 45, 42, 0.08);
-        --shadow-hover: 0 15px 45px rgba(201, 130, 118, 0.22);
-      }
-
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        font-family: "Outfit", sans-serif;
-        background: linear-gradient(135deg, var(--bg-body) 0%, #ebedee 100%);
-        color: var(--text-main);
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        overflow-x: hidden;
-      }
-
-      /* ==========================================================
-         LANDING PAGE - LANA WOLF ART & LANA SUPPLY PRO
-         ========================================================== */
-      header {
-        width: 100%;
-        padding: 14px 5%;
-        position: fixed;
-        top: 0;
-        left: 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: rgba(253, 251, 251, 0.94);
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        z-index: 1000;
-        border-bottom: 1px solid rgba(201, 130, 118, 0.18);
-        transition: all 0.3s ease;
-      }
-
-      .logo-wrapper {
-        display: flex;
-        flex-direction: column;
-        text-decoration: none;
-      }
-
-      .logo {
-        font-family: "Playfair Display", serif;
-        font-size: 1.45rem;
-        font-weight: 600;
-        color: var(--secondary);
-        text-decoration: none;
-        letter-spacing: 0.5px;
-        line-height: 1.1;
-      }
-
-      .logo span {
-        color: var(--primary);
-        font-style: italic;
-      }
-
-      .logo-badge {
-        font-family: "Outfit", sans-serif;
-        font-size: 0.68rem;
-        font-weight: 600;
-        color: #A1645A;
-        letter-spacing: 1.2px;
-        text-transform: uppercase;
-        margin-top: 3px;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-      }
-
-      .logo-badge::before {
-        content: "";
-        display: inline-block;
-        width: 6px;
-        height: 6px;
-        background: var(--accent-gold);
-        border-radius: 50%;
-      }
-
-      .nav-links {
-        display: flex;
-        align-items: center;
-        gap: 26px;
-      }
-
-      .nav-links a {
-        text-decoration: none;
-        color: var(--text-main);
-        font-weight: 400;
-        font-size: 0.92rem;
-        transition: color 0.3s ease;
-        display: inline-flex;
-        align-items: center;
-      }
-
-      .nav-links a:hover {
-        color: var(--primary);
-      }
-
-      .pro-nav-pill {
-        display: inline-flex;
-        align-items: center;
-        background: linear-gradient(135deg, #f7ede8, #fdf4f3);
-        border: 1px solid rgba(201, 130, 118, 0.4);
-        padding: 2px 7px;
-        border-radius: 20px;
-        font-size: 0.7rem;
-        font-weight: 700;
-        color: var(--primary-dark);
-        margin-left: 6px;
-        letter-spacing: 0.5px;
-      }
-
-      .header-actions {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
-
-      /* Dual CTA Buttons in Navbar */
-      .btn-nav-pro {
-        display: inline-flex;
-        align-items: center;
-        gap: 7px;
-        padding: 8px 18px;
-        border: 1.5px solid var(--primary);
-        border-radius: 30px;
-        color: var(--primary-dark);
-        background: rgba(255, 255, 255, 0.85);
-        text-decoration: none;
-        font-weight: 500;
-        font-size: 0.85rem;
-        transition: all 0.3s ease;
-      }
-
-      .btn-nav-pro:hover {
-        background: var(--bg-nude);
-        border-color: var(--primary-dark);
-        color: var(--secondary);
-        transform: translateY(-2px);
-      }
-
-      .btn-nav-agendar {
-        display: inline-flex;
-        align-items: center;
-        gap: 7px;
-        padding: 8px 20px;
-        border-radius: 30px;
-        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-        color: white;
-        text-decoration: none;
-        font-weight: 500;
-        font-size: 0.85rem;
-        box-shadow: 0 4px 14px rgba(201, 130, 118, 0.35);
-        transition: all 0.3s ease;
-      }
-
-      .btn-nav-agendar:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 18px rgba(201, 130, 118, 0.45);
-        color: white;
-      }
-
-      .mobile-menu-btn {
-        display: none;
-        background: none;
-        border: none;
-        color: var(--secondary);
-        font-size: 1.4rem;
-        cursor: pointer;
-        padding: 6px;
-      }
-
-      .mobile-drawer {
-        display: none;
-        position: fixed;
-        top: 64px;
-        left: 0;
-        width: 100%;
-        background: rgba(253, 251, 251, 0.98);
-        backdrop-filter: blur(20px);
-        border-bottom: 1px solid rgba(201, 130, 118, 0.2);
-        padding: 24px 6%;
-        box-shadow: 0 15px 35px rgba(59, 45, 42, 0.12);
-        z-index: 999;
-        flex-direction: column;
-        gap: 16px;
-      }
-
-      .mobile-drawer.open {
-        display: flex;
-        animation: fadeUp 0.3s ease;
-      }
-
-      .mobile-drawer a {
-        text-decoration: none;
-        color: var(--secondary);
-        font-size: 1.05rem;
-        font-weight: 500;
-        padding: 8px 0;
-        border-bottom: 1px solid rgba(0,0,0,0.04);
-      }
-
-      .mobile-drawer-actions {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 10px;
-      }
-
-      /* Hero Section */
+      /* Hero Specific Background & Styling */
       .hero {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        padding: 100px 5% 50px;
+        padding: 150px 5% 70px;
         text-align: center;
+        max-width: 1100px;
+        margin: 0 auto;
         position: relative;
-        background: url("bg-hero.jpg") center 15% / cover no-repeat;
-        width: 100%;
-        /* Ensure hero takes full width */
       }
-
-      /* Overlay na Her section para melhorar a leitura */
-      .hero::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          180deg,
-          rgba(253, 251, 251, 0.6) 0%,
-          rgba(253, 251, 251, 0.95) 100%
-        );
-      }
-
-      .hero-content {
-        position: relative;
-        max-width: 800px;
-        z-index: 2;
-        animation: fadeUp 1s ease-out;
-      }
-
-      .hero-audience-tag {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: rgba(255, 255, 255, 0.88);
-        border: 1px solid rgba(201, 130, 118, 0.35);
-        padding: 7px 20px;
-        border-radius: 30px;
-        font-size: 0.84rem;
-        font-weight: 600;
-        color: var(--primary-dark);
-        margin-bottom: 22px;
-        box-shadow: 0 4px 15px rgba(201, 130, 118, 0.12);
-        backdrop-filter: blur(10px);
-      }
-
       .hero h1 {
         font-family: "Playfair Display", serif;
         font-size: 3.4rem;
         color: var(--secondary);
         line-height: 1.15;
-        margin-bottom: 20px;
+        margin-bottom: 22px;
       }
-
+      .hero h1 span {
+        color: var(--primary);
+        font-style: italic;
+      }
       .hero-subtitle {
-        font-size: 1.15rem;
+        font-size: 1.2rem;
         color: var(--text-main);
-        margin-bottom: 35px;
         font-weight: 300;
-        line-height: 1.7;
-        max-width: 740px;
-        margin-left: auto;
-        margin-right: auto;
+        line-height: 1.75;
+        max-width: 780px;
+        margin: 0 auto 35px;
       }
-
       .hero-cta-group {
         display: flex;
         gap: 16px;
         justify-content: center;
         flex-wrap: wrap;
-        margin-bottom: 45px;
+        margin-bottom: 50px;
       }
-
       .btn-hero-primary {
         display: inline-flex;
         align-items: center;
@@ -376,13 +85,11 @@
         box-shadow: 0 10px 30px rgba(201, 130, 118, 0.38);
         transition: all 0.3s ease;
       }
-
       .btn-hero-primary:hover {
         transform: translateY(-3px);
         box-shadow: 0 15px 40px rgba(201, 130, 118, 0.5);
         color: white;
       }
-
       .btn-hero-pro {
         display: inline-flex;
         align-items: center;
@@ -399,7 +106,6 @@
         box-shadow: 0 8px 25px rgba(59, 45, 42, 0.08);
         transition: all 0.3s ease;
       }
-
       .btn-hero-pro:hover {
         background: var(--bg-nude);
         border-color: var(--primary-dark);
@@ -407,8 +113,6 @@
         box-shadow: 0 12px 35px rgba(201, 130, 118, 0.25);
         color: var(--secondary);
       }
-
-      /* Hero Trust Bar */
       .hero-trust-bar {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -417,9 +121,8 @@
         max-width: 980px;
         margin: 0 auto;
       }
-
       .trust-item {
-        background: rgba(255, 255, 255, 0.85);
+        background: rgba(255, 255, 255, 0.88);
         border: 1px solid rgba(201, 130, 118, 0.25);
         border-radius: 14px;
         padding: 14px 18px;
@@ -430,7 +133,6 @@
         backdrop-filter: blur(10px);
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
       }
-
       .trust-icon {
         width: 38px;
         height: 38px;
@@ -443,1740 +145,64 @@
         font-size: 1.05rem;
         flex-shrink: 0;
       }
-
       .trust-text strong {
         display: block;
         font-size: 0.85rem;
         color: var(--secondary);
         line-height: 1.25;
       }
-
       .trust-text span {
         font-size: 0.76rem;
         color: var(--text-light);
       }
-
-      .btn-primary {
-        display: inline-block;
-        background: linear-gradient(
-          135deg,
-          var(--primary),
-          var(--primary-dark)
-        );
-        color: white;
-        padding: 14px 32px;
-        border-radius: 40px;
-        text-decoration: none;
-        font-weight: 500;
-        font-size: 1rem;
-        letter-spacing: 0.5px;
-        box-shadow: 0 10px 30px rgba(201, 130, 118, 0.3);
-        transition:
-          transform 0.3s ease,
-          box-shadow 0.3s ease;
-      }
-
-      .btn-primary:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 15px 40px rgba(201, 130, 118, 0.4);
-      }
-
-      /* Card Actions in Services */
-      .service-card-actions {
-        margin-top: 18px;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-      }
-
-      .btn-service-schedule {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        width: 100%;
-        padding: 11px 18px;
-        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-        color: white;
-        border-radius: 30px;
-        text-decoration: none;
-        font-size: 0.92rem;
-        font-weight: 500;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 12px rgba(201, 130, 118, 0.25);
-      }
-
-      .btn-service-schedule:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 18px rgba(201, 130, 118, 0.38);
-        color: white;
-      }
-
-      .btn-service-sim {
-        background: none;
-        border: 1px dashed rgba(201, 130, 118, 0.6);
-        color: var(--primary-dark);
-        border-radius: 30px;
-        padding: 8px 16px;
-        font-size: 0.82rem;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-      }
-
-      .btn-service-sim:hover {
-        background: var(--bg-nude);
-        border-color: var(--primary);
-      }
-
-      /* ==========================================================
-         LANA SUPPLY PRO - VITRINE B2B DE INSUMOS
-         ========================================================== */
-      .loja-pro-section {
-        padding: 90px 5%;
-        background: linear-gradient(180deg, #FDF4F3 0%, #FFFFFF 100%);
-        width: 100%;
-        position: relative;
-      }
-
-      .loja-pro-header {
-        text-align: center;
-        max-width: 860px;
-        margin: 0 auto 40px;
-      }
-
-      .loja-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: #3B2D2A;
-        color: #F7D070;
-        padding: 7px 18px;
-        border-radius: 30px;
-        font-size: 0.82rem;
-        font-weight: 600;
-        letter-spacing: 0.8px;
-        text-transform: uppercase;
-        margin-bottom: 15px;
-        box-shadow: 0 4px 15px rgba(59, 45, 42, 0.15);
-      }
-
-      .loja-pro-title {
-        font-family: "Playfair Display", serif;
-        font-size: 2.8rem;
-        color: var(--secondary);
-        margin-bottom: 14px;
-      }
-
-      .loja-pro-title span {
-        color: var(--primary);
-        font-style: italic;
-      }
-
-      .loja-pro-desc {
-        color: var(--text-main);
-        font-size: 1.12rem;
-        font-weight: 300;
-        line-height: 1.7;
-        margin-bottom: 25px;
-      }
-
-      .loja-controls {
-        max-width: 1050px;
-        margin: 0 auto 35px;
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
-        align-items: center;
-      }
-
-      .pro-search-box {
-        width: 100%;
-        max-width: 480px;
-        position: relative;
-      }
-
-      .pro-search-box input {
-        width: 100%;
-        padding: 13px 44px 13px 20px;
-        border-radius: 30px;
-        border: 1.5px solid rgba(201, 130, 118, 0.35);
-        background: white;
-        font-family: "Outfit", sans-serif;
-        font-size: 0.95rem;
-        color: var(--text-main);
-        outline: none;
-        transition: all 0.3s;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-      }
-
-      .pro-search-box input:focus {
-        border-color: var(--primary);
-        box-shadow: 0 0 0 4px var(--focus-glow);
-      }
-
-      .pro-search-box i {
-        position: absolute;
-        right: 18px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: var(--primary);
-        font-size: 1rem;
-      }
-
-      /* Filter Tabs */
-      .pro-filter-tabs {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        justify-content: center;
-      }
-
-      .pro-tab-btn {
-        background: white;
-        border: 1.5px solid rgba(201, 130, 118, 0.25);
-        color: var(--text-main);
-        padding: 9px 20px;
-        border-radius: 30px;
-        font-family: "Outfit", sans-serif;
-        font-size: 0.9rem;
-        font-weight: 500;
-        cursor: pointer;
-        transition: all 0.25s ease;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .pro-tab-btn:hover {
-        border-color: var(--primary);
-        background: var(--bg-nude);
-        color: var(--primary-dark);
-      }
-
-      .pro-tab-btn.active {
-        background: var(--secondary);
-        color: white;
-        border-color: var(--secondary);
-        box-shadow: 0 6px 18px rgba(59, 45, 42, 0.2);
-      }
-
-      .pro-tab-btn.active .tab-count {
-        background: var(--primary);
-        color: white;
-      }
-
-      .tab-count {
-        background: rgba(201, 130, 118, 0.15);
-        color: var(--primary-dark);
-        font-size: 0.75rem;
-        padding: 2px 7px;
-        border-radius: 12px;
-        font-weight: 600;
-      }
-
-      /* Products Grid */
-      .pro-products-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 28px;
-        max-width: 1240px;
-        margin: 0 auto;
-      }
-
-      .pro-product-card {
-        background: white;
-        border-radius: 20px;
-        border: 1px solid rgba(201, 130, 118, 0.2);
-        box-shadow: var(--shadow-soft);
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        transition: all 0.35s ease;
-        position: relative;
-      }
-
-      .pro-product-card:hover {
-        transform: translateY(-7px);
-        box-shadow: var(--shadow-hover);
-        border-color: var(--primary);
-      }
-
-      .product-img-wrap {
-        position: relative;
-        width: 100%;
-        height: 250px;
-        overflow: hidden;
-        background: #fdfbfb;
-      }
-
-      .product-img-wrap img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.5s ease;
-      }
-
-      .pro-product-card:hover .product-img-wrap img {
-        transform: scale(1.06);
-      }
-
-      .product-badge {
-        position: absolute;
-        top: 12px;
-        left: 12px;
-        background: rgba(59, 45, 42, 0.88);
-        backdrop-filter: blur(8px);
-        color: #F7D070;
-        font-size: 0.72rem;
-        font-weight: 600;
-        padding: 4px 10px;
-        border-radius: 20px;
-        letter-spacing: 0.3px;
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-      }
-
-      .product-badge.bancada {
-        background: rgba(201, 130, 118, 0.92);
-        color: white;
-      }
-
-      .product-badge.destaque {
-        background: rgba(197, 160, 89, 0.95);
-        color: #2b1f1d;
-      }
-
-      .product-info {
-        padding: 22px;
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
-      }
-
-      .product-cat {
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        color: var(--primary);
-        font-weight: 600;
-        margin-bottom: 6px;
-      }
-
-      .product-title {
-        font-family: "Playfair Display", serif;
-        font-size: 1.25rem;
-        color: var(--secondary);
-        margin-bottom: 8px;
-        line-height: 1.3;
-      }
-
-      .product-spec {
-        font-size: 0.88rem;
-        color: var(--text-light);
-        line-height: 1.5;
-        margin-bottom: 16px;
-        flex-grow: 1;
-      }
-
-      .product-price-row {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        margin-bottom: 16px;
-        padding-top: 12px;
-        border-top: 1px dashed rgba(201, 130, 118, 0.25);
-      }
-
-      .product-price {
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: var(--secondary);
-      }
-
-      .product-price small {
-        font-size: 0.75rem;
-        font-weight: 400;
-        color: #2e7d32;
-        display: block;
-      }
-
-      .btn-whatsapp-buy {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        width: 100%;
-        padding: 12px 18px;
-        background: #25D366;
-        color: white;
-        border-radius: 30px;
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 0.92rem;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-      }
-
-      .btn-whatsapp-buy:hover {
-        background: #1eb956;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
-        color: white;
-      }
-
-      /* Logistics & Delivery Notice Card */
-      .pro-logistics-card {
-        max-width: 1240px;
-        margin: 50px auto 0;
-        background: white;
-        border-radius: 20px;
-        border: 1.5px solid rgba(201, 130, 118, 0.25);
-        padding: 30px 35px;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 25px;
-        box-shadow: var(--shadow-soft);
-      }
-
-      .logistics-item {
-        display: flex;
-        gap: 16px;
-        align-items: flex-start;
-      }
-
-      .logistics-icon {
-        width: 44px;
-        height: 44px;
-        border-radius: 12px;
-        background: var(--bg-nude);
-        color: var(--primary);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.2rem;
-        flex-shrink: 0;
-      }
-
-      .logistics-item h4 {
-        font-family: "Playfair Display", serif;
-        font-size: 1.1rem;
-        color: var(--secondary);
-        margin-bottom: 6px;
-      }
-
-      .logistics-item p {
-        font-size: 0.88rem;
-        color: var(--text-light);
-        line-height: 1.5;
-      }
-
-      /* Cursos Section */
-      .cursos-section {
-        padding: 90px 5%;
-        background: var(--bg-body);
-        width: 100%;
-        border-top: 1px solid rgba(0,0,0,0.04);
-      }
-
-      .cursos-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 30px;
-        max-width: 1200px;
-        margin: 0 auto 40px;
-      }
-
-      .curso-card {
-        background: white;
-        border-radius: 20px;
-        border: 1px solid rgba(201, 130, 118, 0.2);
-        padding: 35px 28px;
-        box-shadow: var(--shadow-soft);
-        display: flex;
-        flex-direction: column;
-        transition: transform 0.3s ease;
-      }
-
-      .curso-card:hover {
-        transform: translateY(-6px);
-        box-shadow: var(--shadow-hover);
-      }
-
-      .curso-tag {
-        align-self: flex-start;
-        background: var(--bg-nude);
-        color: var(--primary-dark);
-        font-size: 0.75rem;
-        font-weight: 600;
-        padding: 4px 12px;
-        border-radius: 20px;
-        margin-bottom: 14px;
-        text-transform: uppercase;
-        letter-spacing: 0.8px;
-      }
-
-      .curso-card h3 {
-        font-family: "Playfair Display", serif;
-        font-size: 1.45rem;
-        color: var(--secondary);
-        margin-bottom: 12px;
-      }
-
-      .curso-card p {
-        font-size: 0.92rem;
-        color: var(--text-light);
-        line-height: 1.6;
-        margin-bottom: 20px;
-        flex-grow: 1;
-      }
-
-      .curso-benefits {
-        list-style: none;
-        padding: 0;
-        margin-bottom: 25px;
-      }
-
-      .curso-benefits li {
-        font-size: 0.88rem;
-        color: var(--text-main);
-        margin-bottom: 8px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .curso-benefits li i {
-        color: var(--primary);
-        font-size: 0.85rem;
-      }
-
-      .btn-curso {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        width: 100%;
-        padding: 12px 20px;
-        border-radius: 30px;
-        background: linear-gradient(135deg, var(--secondary), #241715);
-        color: white;
-        text-decoration: none;
-        font-weight: 500;
-        font-size: 0.92rem;
-        transition: all 0.3s ease;
-      }
-
-      .btn-curso:hover {
-        background: var(--primary-dark);
-        color: white;
-        transform: translateY(-2px);
-      }
-
-      /* Chat Quick Action Chips */
-      .chat-quick-actions {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        padding: 12px 16px;
-        background: rgba(253, 244, 243, 0.7);
-        border-radius: 14px;
-        margin-top: 12px;
-        border: 1px solid rgba(201, 130, 118, 0.2);
-      }
-
-      .quick-actions-title {
-        font-size: 0.78rem;
-        font-weight: 600;
-        color: var(--primary-dark);
-        text-transform: uppercase;
-        letter-spacing: 0.6px;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-      }
-
-      .chat-chips-list {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-      }
-
-      .chat-chip-btn {
-        background: white;
-        border: 1px solid rgba(201, 130, 118, 0.35);
-        border-radius: 20px;
-        padding: 8px 14px;
-        font-family: "Outfit", sans-serif;
-        font-size: 0.86rem;
-        color: var(--secondary);
-        text-align: left;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .chat-chip-btn:hover {
-        background: var(--primary);
-        color: white;
-        border-color: var(--primary);
-        transform: translateX(3px);
-      }
-
-      @media (max-width: 900px) {
-        .nav-links {
-          display: none;
-        }
-        .header-actions .btn-nav-pro {
-          display: none;
-        }
-        .mobile-menu-btn {
-          display: block;
-        }
-        .hero h1 {
-          font-size: 2.5rem;
-        }
-        .hero-subtitle {
-          font-size: 1.05rem;
-        }
-        .loja-pro-title {
-          font-size: 2.2rem;
-        }
-      }
-
-      @media (max-width: 600px) {
-        header {
-          padding: 12px 4%;
-        }
-        .logo {
-          font-size: 1.25rem;
-        }
-        .btn-nav-agendar {
-          padding: 6px 14px;
-          font-size: 0.8rem;
-        }
-        .hero {
-          padding: 120px 4% 60px;
-        }
-        .hero h1 {
-          font-size: 2rem;
-        }
-        .hero-cta-group {
-          flex-direction: column;
-          width: 100%;
-        }
-        .btn-hero-primary, .btn-hero-pro {
-          width: 100%;
-          justify-content: center;
-        }
-        .pro-filter-tabs {
-          overflow-x: auto;
-          justify-content: flex-start;
-          padding-bottom: 8px;
-          width: 100%;
-        }
-        .pro-tab-btn {
-          white-space: nowrap;
-          font-size: 0.82rem;
-          padding: 7px 14px;
-        }
-      }
-
-      /* Services Section */
-      .services {
-        padding: 100px 5%;
-        background: var(--bg-body);
-        width: 100%;
-        /* Ensure services takes full width */
-      }
-
-      .section-title {
-        text-align: center;
-        font-family: "Playfair Display", serif;
-        font-size: 3rem;
-        color: var(--secondary);
-        margin-bottom: 60px;
-      }
-
-      .services-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 40px;
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-
-      .service-card {
-        background: white;
-        border-radius: 20px;
-        padding: 0 0 35px 0;
-        text-align: center;
-        box-shadow: var(--shadow-soft);
-        transition: transform 0.4s ease, box-shadow 0.4s ease;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        overflow: hidden;
-        border: 1px solid rgba(197, 160, 89, 0.1);
-      }
-
-      .service-card:hover {
-        transform: translateY(-8px);
-        box-shadow: var(--shadow-hover);
-      }
-
-      .service-image {
-        width: 100%;
-        height: 220px;
-        object-fit: cover;
-        margin-bottom: 25px;
-        transition: transform 0.5s ease;
-        display: block;
-      }
-      
-      .service-card:hover .service-image {
-        transform: scale(1.05);
-      }
-      
-      .service-card-content {
-        padding: 0 25px;
-      }
-
-      .service-card h3 {
-        font-family: "Playfair Display", serif;
-        font-size: 1.5rem;
-        color: var(--secondary);
-        margin-bottom: 15px;
-      }
-
-      .service-card p {
-        font-size: 0.95rem;
-        color: var(--text-light);
-        line-height: 1.6;
-      }
-
-      /* Informational Banner / About */
       .about-banner {
-        background: linear-gradient(135deg, var(--secondary), #1e1513);
-        padding: 80px 5%;
+        width: 100%;
+        background: linear-gradient(rgba(36, 23, 21, 0.92), rgba(59, 45, 42, 0.95)), url('./bg-hero-resized.jpg') center/cover no-repeat;
+        padding: 85px 5%;
         text-align: center;
         color: white;
-        width: 100%;
-        /* Ensure banner takes full width */
       }
-
       .about-banner h2 {
-        font-family: "Playfair Display", serif;
-        font-size: 2.5rem;
-        margin-bottom: 20px;
-        color: var(--primary-light);
-      }
-
-      .about-banner p {
-        max-width: 700px;
-        margin: 0 auto;
-        font-size: 1.1rem;
-        line-height: 1.8;
-        font-weight: 300;
-        color: rgba(255, 255, 255, 0.8);
-      }
-
-      /* Footer */
-      footer {
-        background: #ffffff;
-        padding: 60px 5% 40px;
-        border-top: 1px solid rgba(0, 0, 0, 0.05);
-        width: 100%;
-        /* Ensure footer takes full width */
-      }
-
-      .footer-content {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 40px;
-      }
-
-      .footer-col h4 {
-        font-family: "Playfair Display", serif;
-        font-size: 1.2rem;
-        color: var(--secondary);
-        margin-bottom: 20px;
-      }
-
-      .footer-col p {
-        color: var(--text-light);
-        font-size: 0.95rem;
-        line-height: 1.7;
-        max-width: 300px;
-      }
-
-      .footer-location-wrapper {
-        display: flex;
-        align-items: flex-start;
-        gap: 20px;
-        flex-wrap: wrap;
-      }
-
-      .footer-map-container {
-        width: 150px;
-        height: 150px;
-        border-radius: 12px;
-        overflow: hidden;
-        border: 2px solid rgba(201, 130, 118, 0.2);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-        /* Removida margem superior para alinhar perfeitamente com a caixa ao lado */
-      }
-
-      .footer-map-container iframe {
-        width: 100%;
-        height: 100%;
-        border: 0;
-        display: block;
-      }
-
-      .footer-bottom {
-        text-align: center;
-        padding-top: 40px;
-        margin-top: 40px;
-        border-top: 1px solid rgba(0, 0, 0, 0.05);
-        color: #b5aba9;
-        font-size: 0.85rem;
-      }
-
-      @keyframes fadeUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      /* Media Queries Globais */
-      @media (max-width: 768px) {
-        .hero h1 {
-          font-size: 3rem;
-        }
-
-        .nav-links {
-          display: none;
-        }
-
-        .footer-content {
-          flex-direction: column;
-        }
-
-        .hero {
-          background: url("bg-hero.jpg") center/cover no-repeat;
-        }
-      }
-
-      /* =====================================================
-         DOMINO AUTOMATE — Advertisement Section
-         ===================================================== */
-      .domino-ad {
-        width: 100%;
-        background: linear-gradient(135deg, #0a1628 0%, #0d1f3c 50%, #091424 100%);
-        padding: 80px 5%;
-        position: relative;
-        overflow: hidden;
-        text-align: center;
-      }
-
-      /* Animated particle dots */
-      .domino-ad::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background-image:
-          radial-gradient(circle, rgba(201,166,77,0.15) 1px, transparent 1px),
-          radial-gradient(circle, rgba(201,166,77,0.08) 1px, transparent 1px);
-        background-size: 40px 40px, 80px 80px;
-        background-position: 0 0, 20px 20px;
-        animation: particleDrift 20s linear infinite;
-        pointer-events: none;
-      }
-
-      @keyframes particleDrift {
-        from { background-position: 0 0, 20px 20px; }
-        to   { background-position: 40px 40px, 60px 60px; }
-      }
-
-      .domino-ad-inner {
-        position: relative;
-        z-index: 2;
-        max-width: 900px;
-        margin: 0 auto;
-      }
-
-      .domino-ad-badge {
-        display: inline-block;
-        background: rgba(201,166,77,0.15);
-        border: 1px solid rgba(201,166,77,0.4);
-        color: #c9a64d;
-        font-size: 0.75rem;
-        font-weight: 600;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        padding: 6px 18px;
-        border-radius: 30px;
-        margin-bottom: 30px;
-      }
-
-      .domino-ad-logo-wrap {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 28px;
-      }
-
-      .domino-ad-logo {
-        width: 220px;
-        height: auto;
-        filter: drop-shadow(0 0 20px rgba(201,166,77,0.35));
-        transition: filter 0.4s ease, transform 0.4s ease;
-      }
-
-      .domino-ad-logo:hover {
-        filter: drop-shadow(0 0 35px rgba(201,166,77,0.65));
-        transform: scale(1.05);
-      }
-
-      .domino-ad-tagline {
         font-family: 'Playfair Display', serif;
-        font-size: 2rem;
-        color: #ffffff;
-        line-height: 1.3;
-        margin-bottom: 16px;
-      }
-
-      .domino-ad-tagline span {
-        background: linear-gradient(90deg, #c9a64d, #f0d080, #c9a64d);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        background-size: 200%;
-        animation: shimmer 3s ease-in-out infinite;
-      }
-
-      @keyframes shimmer {
-        0%   { background-position: 0% 50%; }
-        50%  { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-      }
-
-      .domino-ad-desc {
-        font-size: 1rem;
-        color: rgba(255,255,255,0.65);
-        max-width: 600px;
-        margin: 0 auto 36px;
-        line-height: 1.8;
-        font-weight: 300;
-      }
-
-      .domino-ad-features {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        flex-wrap: wrap;
-        margin-bottom: 40px;
-      }
-
-      .domino-ad-feature {
-        background: rgba(255,255,255,0.05);
-        border: 1px solid rgba(201,166,77,0.2);
-        border-radius: 12px;
-        padding: 14px 20px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        color: rgba(255,255,255,0.8);
-        font-size: 0.88rem;
-        font-weight: 400;
-        transition: all 0.3s ease;
-      }
-
-      .domino-ad-feature:hover {
-        background: rgba(201,166,77,0.12);
-        border-color: rgba(201,166,77,0.5);
-        transform: translateY(-2px);
-      }
-
-      .domino-ad-feature-icon {
-        font-size: 1.2rem;
-      }
-
-      .domino-ad-cta {
-        display: inline-block;
-        background: linear-gradient(135deg, #c9a64d, #a8813a);
-        color: #0a1628;
-        padding: 16px 42px;
-        border-radius: 40px;
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 0.95rem;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        box-shadow: 0 8px 30px rgba(201,166,77,0.35);
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .domino-ad-cta::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.2) 60%, transparent 80%);
-        transform: translateX(-100%);
-        transition: transform 0.5s ease;
-      }
-
-      .domino-ad-cta:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 14px 40px rgba(201,166,77,0.5);
-        color: #0a1628;
-      }
-
-      .domino-ad-cta:hover::after {
-        transform: translateX(100%);
-      }
-
-      .domino-ad-divider {
-        width: 60px;
-        height: 3px;
-        background: linear-gradient(90deg, transparent, #c9a64d, transparent);
-        margin: 0 auto 28px;
-        border-radius: 2px;
-      }
-
-      /* Floating WhatsApp Button */
-      .whatsapp-float {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        width: 65px;
-        height: 65px;
-        background: #25D366;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-        z-index: 1000;
-        cursor: pointer;
-        transition: transform 0.3s ease;
-      }
-      .whatsapp-float:hover {
-        transform: scale(1.1);
-      }
-      .whatsapp-float svg {
-        fill: white;
-        width: 35px;
-        height: 35px;
-      }
-
-      /* AI Section Chat Window */
-      .ai-chat-container {
-        width: 100%;
-        max-width: 600px;
-        margin: 0 auto;
-        height: 550px;
-        background: var(--chat-bg);
-        border-radius: 28px;
-        box-shadow: var(--shadow-soft);
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-        border: 1px solid rgba(201, 130, 118, 0.2);
-        text-align: left;
-      }
-
-      /* Header */
-      .chat-header {
-        background: linear-gradient(135deg, var(--secondary), #1e1513);
-        padding: 24px;
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        position: relative;
-      }
-
-      /* Elegant gold/rose bar below header */
-      .chat-header::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 4px;
-        background: linear-gradient(
-          90deg,
-          var(--primary),
-          var(--primary-light),
-          var(--primary)
-        );
-      }
-
-      .avatar-container {
-        position: relative;
-      }
-
-      .lana-avatar {
-        width: 54px;
-        height: 54px;
-        border-radius: 50%;
-        /* A feminine aesthetic portrait placeholder */
-        background: url("https://images.unsplash.com/photo-1595959183082-7b570b7e08e2?q=80&w=200&auto=format&fit=crop")
-          center/cover;
-        border: 2px solid var(--primary-light);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-      }
-
-      .status-dot {
-        position: absolute;
-        bottom: 2px;
-        right: 2px;
-        width: 14px;
-        height: 14px;
-        background: #2dd36f;
-        border-radius: 50%;
-        border: 2.5px solid var(--secondary);
-        box-shadow: 0 0 8px rgba(45, 211, 111, 0.5);
-      }
-
-      .header-info h2 {
-        margin: 0;
-        font-family: "Playfair Display", serif;
-        font-size: 1.35rem;
-        color: white;
-        letter-spacing: 0.5px;
-        font-weight: 500;
-      }
-
-      .header-info p {
-        margin: 4px 0 0;
-        font-size: 0.85rem;
-        color: rgba(255, 255, 255, 0.75);
-        font-weight: 300;
-      }
-
-      /* Chat Body / Messages Area */
-      .chat-body {
-        flex: 1;
-        padding: 24px;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
-        background: rgba(253, 251, 251, 0.4);
-        scroll-behavior: smooth;
-      }
-
-      /* Custom Scrollbar */
-      .chat-body::-webkit-scrollbar {
-        width: 6px;
-      }
-
-      .chat-body::-webkit-scrollbar-thumb {
-        background: rgba(201, 130, 118, 0.25);
-        border-radius: 10px;
-      }
-
-      .chat-body::-webkit-scrollbar-track {
-        background: transparent;
-      }
-
-      .message-row {
-        display: flex;
-        width: 100%;
-      }
-
-      .message-row.bot {
-        justify-content: flex-start;
-      }
-
-      .message-row.user {
-        justify-content: flex-end;
-      }
-
-      .message {
-        max-width: 82%;
-        padding: 14px 20px;
-        font-size: 0.95rem;
-        line-height: 1.5;
-        animation: messageSlide 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)
-          forwards;
-        opacity: 0;
-        transform: translateY(15px);
-        word-wrap: break-word;
-      }
-
-      @keyframes messageSlide {
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      /* --- Estilo Premium para Tabelas Markdown geradas pela IA --- */
-      .message table {
-        width: 100%;
-        border-collapse: separate;
-        border-spacing: 0;
-        margin: 12px 0;
-        border-radius: 12px;
-        overflow: hidden;
-        border: 1px solid rgba(201, 130, 118, 0.3);
-        /* Rose Gold Soft */
-        box-shadow: 0 4px 15px rgba(59, 45, 42, 0.05);
-        font-size: 0.85rem;
-      }
-
-      .message th {
-        background: linear-gradient(
-          135deg,
-          var(--primary),
-          var(--primary-dark)
-        );
-        color: white;
-        padding: 12px 14px;
-        text-align: left;
-        font-weight: 500;
-        letter-spacing: 0.3px;
-      }
-
-      .message td {
-        padding: 10px 14px;
-        border-bottom: 1px solid rgba(201, 130, 118, 0.15);
-        color: var(--text-main);
-        vertical-align: middle;
-      }
-
-      .message tr:last-child td {
-        border-bottom: none;
-      }
-
-      .message tr:nth-child(even) td {
-        background-color: rgba(253, 251, 251, 0.7);
-      }
-
-      .message tr:nth-child(odd) td {
-        background-color: white;
-      }
-
-      .message.bot {
-        background: var(--msg-bot);
-        border-radius: 20px 20px 20px 4px;
-        color: var(--text-main);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
-        border: 1px solid rgba(0, 0, 0, 0.03);
-        position: relative;
-      }
-
-      .message.user {
-        background: var(--msg-user);
-        border-radius: 20px 20px 4px 20px;
-        color: var(--secondary);
-        font-weight: 400;
-      }
-
-      /* Typing Indicator inside Chat Body */
-      .typing-indicator-row {
-        display: none;
-        justify-content: flex-start;
-        margin-bottom: 10px;
-      }
-
-      .typing-indicator-row.active {
-        display: flex;
-      }
-
-      .typing-bubbles {
-        background: var(--msg-bot);
-        padding: 12px 18px;
-        border-radius: 20px 20px 20px 4px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
-        display: flex;
-        gap: 6px;
-        align-items: center;
-      }
-
-      .dot {
-        width: 6px;
-        height: 6px;
-        background: var(--text-light);
-        border-radius: 50%;
-        animation: bounce 1.4s infinite ease-in-out both;
-        opacity: 0.6;
-      }
-
-      .dot:nth-child(1) {
-        animation-delay: -0.32s;
-      }
-
-      .dot:nth-child(2) {
-        animation-delay: -0.16s;
-      }
-
-      @keyframes bounce {
-        0%,
-        80%,
-        100% {
-          transform: scale(0.6);
-          opacity: 0.4;
-        }
-
-        40% {
-          transform: scale(1.1);
-          opacity: 1;
-        }
-      }
-
-      /* Input Area */
-      .chat-footer {
-        padding: 16px 20px 20px 20px;
-        background: white;
-        border-top: 1px solid rgba(0, 0, 0, 0.04);
-        position: relative;
-      }
-
-      .input-wrapper {
-        display: flex;
-        align-items: center;
-        background: #f8f5f4;
-        border-radius: 30px;
-        padding: 6px 6px 6px 20px;
-        border: 1px solid rgba(0, 0, 0, 0.06);
-        transition: all 0.3s ease;
-      }
-
-      .input-wrapper:focus-within {
-        background: white;
-        border-color: var(--primary);
-        box-shadow: 0 0 0 4px var(--focus-glow);
-      }
-
-      .input-wrapper input {
-        flex: 1;
-        border: none;
-        background: transparent;
-        font-family: "Outfit", sans-serif;
-        font-size: 0.95rem;
-        color: var(--text-main);
-        outline: none;
-      }
-
-      .input-wrapper input::placeholder {
-        color: #b5aba9;
-      }
-
-      .send-btn {
-        width: 42px;
-        height: 42px;
-        border-radius: 50%;
-        background: var(--primary);
-        border: none;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        transition: all 0.2s;
-        color: white;
-      }
-
-      .send-btn:hover {
-        background: var(--primary-dark);
-        transform: scale(1.05);
-      }
-
-      .send-btn:active {
-        transform: scale(0.95);
-      }
-
-      .send-btn svg {
-        width: 18px;
-        height: 18px;
-        fill: currentColor;
-        margin-left: 2px;
-      }
-
-      .lgpd-notice {
-        text-align: center;
-        font-size: 0.7rem;
-        color: #a69c9a;
-        margin-top: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 4px;
-      }
-
-      /* Simulation Modal Styles */
-      .sim-modal-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.6);
-        backdrop-filter: blur(5px);
-        z-index: 20000;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.3s ease;
-      }
-
-      .sim-modal-overlay.active {
-        opacity: 1;
-        pointer-events: auto;
-      }
-
-      .sim-modal {
-        background: white;
-        border-radius: 20px;
-        width: 90%;
-        max-width: 450px;
-        padding: 35px 30px;
-        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
-        transform: translateY(20px);
-        transition: transform 0.3s ease;
-        max-height: 90vh;
-        overflow-y: auto;
-        text-align: center;
-        position: relative;
-      }
-
-      .sim-modal-overlay.active .sim-modal {
-        transform: translateY(0);
-      }
-
-      .sim-modal h3 {
-        font-family: "Playfair Display", serif;
-        color: var(--secondary);
-        font-size: 1.8rem;
-        margin-bottom: 10px;
-      }
-
-      .sim-modal p.sim-price {
-        font-size: 1.3rem;
-        color: var(--primary);
-        font-weight: 500;
+        font-size: 2.8rem;
         margin-bottom: 25px;
+        color: #fdfbfb;
       }
-
-      .sim-modal textarea,
-      .sim-modal input[type="file"] {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid rgba(201, 130, 118, 0.4);
-        border-radius: 12px;
-        margin-bottom: 20px;
-        font-family: inherit;
-        outline: none;
-        transition: border-color 0.3s;
-      }
-
-      .sim-modal textarea:focus {
-        border-color: var(--primary);
-      }
-
-      .sim-choice-box {
-        width: 100%;
-        padding: 12px 16px;
-        margin-bottom: 12px;
-        border: 1px solid rgba(201, 130, 118, 0.4);
-        border-radius: 12px;
-        font-family: inherit;
-        font-size: 0.95rem;
-        color: var(--text-main);
-        background: rgba(253, 251, 251, 0.8);
-        appearance: none;
-        background-image: url('data:image/svg+xml;utf8,<svg fill="%23c98276" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
-        background-repeat: no-repeat;
-        background-position: right 10px center;
-        outline: none;
-        transition: all 0.3s ease;
-        cursor: pointer;
-      }
-
-      .sim-choice-box:focus {
-        border-color: var(--primary);
-        box-shadow: 0 0 0 4px var(--focus-glow);
-        background-color: white;
-      }
-
-      .sim-choice-label {
-        display: block;
-        text-align: left;
-        font-size: 0.85rem;
-        color: var(--primary-dark);
-        margin-bottom: 4px;
-        font-weight: 500;
-      }
-
-      .sim-step {
-        display: none;
-      }
-
-      .sim-step.active {
-        display: block;
-        animation: fadeUp 0.4s ease;
-      }
-
-      .sim-img-result {
-        width: 100%;
-        border-radius: 16px;
-        margin: 15px 0 25px 0;
-        box-shadow: 0 5px 25px rgba(201, 130, 118, 0.2);
-      }
-
-      .sim-loading {
-        padding: 40px 0;
-      }
-
-      .sim-loading .dot {
-        width: 12px;
-        height: 12px;
-        margin: 0 4px;
-        display: inline-block;
-        background: var(--primary);
-        border-radius: 50%;
-        animation: bounce 1.4s infinite ease-in-out;
-      }
-
-      .sim-loading .dot:nth-child(2) {
-        animation-delay: 0.2s;
-      }
-
-      .sim-loading .dot:nth-child(3) {
-        animation-delay: 0.4s;
-      }
-
-      .btn-close-modal {
-        position: absolute;
-        top: 15px;
-        right: 20px;
-        background: none;
-        border: none;
-        font-size: 28px;
-        cursor: pointer;
-        color: #b5aba9;
-        transition: color 0.3s;
-      }
-
-      .btn-close-modal:hover {
-        color: var(--secondary);
-      }
-
-      /* Responsive Styles */
-      @media (max-width: 600px) {
-        .lana-chat-window {
-          width: 100%;
-          height: 100vh;
-          max-height: 100vh;
-          bottom: 0;
-          right: 0;
-          border-radius: 0;
-        }
-
-        .lana-chat-btn {
-          bottom: 20px;
-          right: 20px;
-          width: 60px;
-          height: 60px;
-        }
-
-        .lana-chat-btn svg {
-          width: 28px;
-          height: 28px;
-        }
-      }
-
-      /* Comments Section */
-      .comments-section {
-        background: white;
-        padding: 80px 5%;
-        width: 100%;
-        border-top: 1px solid rgba(0,0,0,0.05);
-      }
-      .comments-container {
-        max-width: 800px;
+      .about-banner p {
+        max-width: 850px;
         margin: 0 auto;
-      }
-      .comment-card {
-        background: #FDFBFB;
-        border: 1px solid rgba(201, 130, 118, 0.2);
-        border-radius: 16px;
-        padding: 20px;
-        margin-bottom: 20px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-      }
-      .comment-card.reply {
-        margin-left: 40px;
-        border-left: 3px solid var(--primary);
-        background: #FDF4F3;
-      }
-      .comment-header {
-        display: flex;
-        align-items: center;
-        margin-bottom: 12px;
-      }
-      .comment-avatar {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        margin-right: 12px;
-        object-fit: cover;
-      }
-      .comment-meta {
-        display: flex;
-        flex-direction: column;
-      }
-      .comment-author {
-        font-weight: 600;
-        color: var(--secondary);
-        font-size: 1rem;
-      }
-      .comment-date {
-        font-size: 0.8rem;
-        color: var(--text-light);
-      }
-      .comment-body {
-        font-size: 0.95rem;
-        line-height: 1.5;
-        color: var(--text-main);
-        margin-bottom: 12px;
-        white-space: pre-wrap;
-      }
-      .btn-reply {
-        background: none;
-        border: none;
-        color: var(--primary);
-        font-size: 0.85rem;
-        font-weight: 500;
-        cursor: pointer;
-        padding: 0;
-        text-decoration: underline;
-      }
-      .comment-form {
-        margin-bottom: 40px;
-        background: var(--bg-nude);
-        padding: 25px;
-        border-radius: 16px;
-        border: 1px solid rgba(201, 130, 118, 0.3);
-      }
-      .comment-form textarea {
-        width: 100%;
-        padding: 12px;
-        border-radius: 12px;
-        border: 1px solid rgba(201, 130, 118, 0.4);
-        margin-bottom: 15px;
-        font-family: inherit;
-        resize: vertical;
-        min-height: 80px;
-      }
-      .comment-form textarea:focus {
-        outline: none;
-        border-color: var(--primary);
-        box-shadow: 0 0 0 3px var(--focus-glow);
-      }
-      .auth-message {
-        text-align: center;
-        padding: 30px;
-        background: var(--bg-nude);
-        border-radius: 16px;
-        margin-bottom: 40px;
-      }
-      .btn-google {
-        background: white;
-        border: 1px solid #ccc;
-        color: #444;
-        padding: 10px 24px;
-        border-radius: 30px;
-        cursor: pointer;
-        font-weight: 500;
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        transition: all 0.2s;
-        text-decoration: none;
-        font-family: 'Outfit', sans-serif;
-        font-size: 1rem;
-      }
-      .btn-google:hover {
-        background: #f1f1f1;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      }
-      .user-logged-in {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 15px;
-      }
-      .user-logged-in span {
-        font-size: 0.9rem;
-        color: var(--secondary);
-        font-weight: 500;
-      }
-      .btn-logout {
-        background: none;
-        border: none;
-        color: #a69c9a;
-        font-size: 0.8rem;
-        cursor: pointer;
-        text-decoration: underline;
-      }
-      @media (max-width: 600px) {
-        .comment-card.reply {
-            margin-left: 15px;
-        }
+        color: rgba(255, 255, 255, 0.88);
+        font-weight: 300;
+        font-size: 1.12rem;
+        line-height: 1.8;
       }
     </style>
   </head>
 
   <body>
-    <!-- Header Navigation (Segmented B2C / B2B) -->
+    <!-- Header Navigation -->
     <header id="mainHeader">
-      <a href="#" class="logo-wrapper">
+      <a href="/" class="logo-wrapper">
         <div class="logo">Lana <span>Wolf</span> Art</div>
-        <div class="logo-badge">Studio & Lana Supply Pro</div>
+        <div class="logo-badge">Studio • Cursos • Lana Supply Pro</div>
       </a>
 
       <!-- Desktop Links -->
       <nav class="nav-links">
-        <a href="#servicos"><i class="fa-solid fa-sparkles" style="margin-right:6px; color:var(--primary); font-size:0.8rem;"></i> Studio & Procedimentos</a>
-        <a href="#sobre">Sobre Nós</a>
-        <a href="#loja" style="font-weight: 500; color: var(--secondary);"><i class="fa-solid fa-bag-shopping" style="margin-right:6px; color:var(--accent-gold); font-size:0.85rem;"></i> Loja Pro <span class="pro-nav-pill">B2B</span></a>
-        <a href="#cursos"><i class="fa-solid fa-graduation-cap" style="margin-right:6px; color:var(--primary); font-size:0.85rem;"></i> Cursos</a>
+        <a href="/procedimentos"><i class="fa-solid fa-sparkles" style="margin-right:6px; color:var(--primary); font-size:0.82rem;"></i> Studio & Procedimentos</a>
+        <a href="/cursos"><i class="fa-solid fa-graduation-cap" style="margin-right:6px; color:var(--primary); font-size:0.85rem;"></i> Cursos</a>
+        <a href="/pro" style="font-weight: 500; color: var(--secondary);"><i class="fa-solid fa-bag-shopping" style="margin-right:6px; color:var(--accent-gold); font-size:0.85rem;"></i> Lana Supply Pro <span class="pro-nav-pill">B2B</span></a>
+        <a href="#sobre">Quem Somos</a>
         <a href="#contato">Localização</a>
       </nav>
 
-      <!-- Dual CTA Buttons (Header) -->
+      <!-- Dual CTA Buttons -->
       <div class="header-actions">
-        <a href="#loja" class="btn-nav-pro">
-          <i class="fa-solid fa-boxes-stacked" style="color:var(--accent-gold);"></i>
-          Área da Profissional (Loja)
+        <a href="/pro" class="btn-nav-pro">
+          <i class="fa-solid fa-boxes-stacked" style="color:var(--accent-gold);"></i> Área da Profissional (Loja)
         </a>
-        <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20procedimento%20no%20Studio%20Lana%20Wolf." target="_blank" class="btn-nav-agendar">
-          <i class="fa-brands fa-whatsapp"></i>
-          Agendar Procedimento
+        <a href="/procedimentos" class="btn-nav-agendar">
+          <i class="fa-brands fa-whatsapp"></i> Agendar Procedimento
         </a>
         <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menu">
           <i class="fa-solid fa-bars"></i>
@@ -2186,730 +212,146 @@
 
     <!-- Mobile Navigation Drawer -->
     <div class="mobile-drawer" id="mobileDrawer">
-      <a href="#servicos" onclick="toggleMobileMenu()"><i class="fa-solid fa-wand-magic-sparkles" style="color:var(--primary); margin-right:8px;"></i> Studio & Procedimentos</a>
-      <a href="#loja" onclick="toggleMobileMenu()"><i class="fa-solid fa-bag-shopping" style="color:var(--accent-gold); margin-right:8px;"></i> Loja Pro (Insumos a Pronta Entrega) <span class="pro-nav-pill">B2B</span></a>
-      <a href="#cursos" onclick="toggleMobileMenu()"><i class="fa-solid fa-graduation-cap" style="color:var(--primary); margin-right:8px;"></i> Cursos & Formação</a>
-      <a href="#sobre" onclick="toggleMobileMenu()"><i class="fa-solid fa-heart" style="color:var(--primary); margin-right:8px;"></i> Sobre Nós</a>
-      <a href="#contato" onclick="toggleMobileMenu()"><i class="fa-solid fa-location-dot" style="color:var(--primary); margin-right:8px;"></i> Localização (Luziânia)</a>
+      <a href="/procedimentos" onclick="toggleMobileMenu()"><i class="fa-solid fa-wand-magic-sparkles" style="color:var(--primary); margin-right:8px;"></i> Studio & Procedimentos (B2C)</a>
+      <a href="/cursos" onclick="toggleMobileMenu()"><i class="fa-solid fa-graduation-cap" style="color:var(--primary); margin-right:8px;"></i> Cursos & Formação Profissional</a>
+      <a href="/pro" onclick="toggleMobileMenu()"><i class="fa-solid fa-bag-shopping" style="color:var(--accent-gold); margin-right:8px;"></i> Lana Supply Pro (Insumos B2B) <span class="pro-nav-pill">B2B</span></a>
+      <a href="#sobre" onclick="toggleMobileMenu()"><i class="fa-solid fa-heart" style="color:var(--primary); margin-right:8px;"></i> Quem Somos</a>
+      <a href="#assistente-virtual" onclick="toggleMobileMenu()"><i class="fa-solid fa-comments" style="color:var(--primary); margin-right:8px;"></i> Assistente Lana (Chat IA)</a>
+      <a href="#contato" onclick="toggleMobileMenu()"><i class="fa-solid fa-location-dot" style="color:var(--primary); margin-right:8px;"></i> Localização no Parque 9</a>
       <div class="mobile-drawer-actions">
-        <a href="#loja" onclick="toggleMobileMenu()" class="btn-nav-pro" style="justify-content: center; width: 100%;">
-          <i class="fa-solid fa-boxes-stacked"></i> Área da Profissional (Comprar Insumos)
+        <a href="/pro" class="btn-nav-pro" style="justify-content: center; width: 100%;">
+          <i class="fa-solid fa-boxes-stacked"></i> Comprar Insumos a Pronta Entrega
         </a>
-        <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20procedimento%20no%20Studio%20Lana%20Wolf." target="_blank" class="btn-nav-agendar" style="justify-content: center; width: 100%;">
-          <i class="fa-brands fa-whatsapp"></i> Agendar Procedimento
+        <a href="/procedimentos" class="btn-nav-agendar" style="justify-content: center; width: 100%;">
+          <i class="fa-brands fa-whatsapp"></i> Agendar Procedimento no Studio
         </a>
       </div>
     </div>
 
-    <!-- Hero Section with Dual Value Proposition -->
+    <!-- Hero Section -->
     <section class="hero" id="home">
-      <div class="hero-content">
-        <div class="hero-audience-tag">
-          <i class="fa-solid fa-gem" style="color: var(--accent-gold);"></i>
-          <span>Studio High-Ticket & Distribuidora Autorizada Lana Supply Pro</span>
-        </div>
-        <h1>Arte, Beleza e Formação Profissional em Luziânia</h1>
-        <p class="hero-subtitle">
-          Studio especializado em realce do olhar e estética avançada, além de revenda autorizada dos melhores insumos profissionais para lash designers e micropigmentadoras.
-        </p>
-
-        <!-- Dual CTA in Banner -->
-        <div class="hero-cta-group">
-          <a href="#servicos" class="btn-hero-primary">
-            <i class="fa-solid fa-calendar-check"></i>
-            Quero Agendar um Horário
-          </a>
-          <a href="#loja" class="btn-hero-pro">
-            <i class="fa-solid fa-bag-shopping" style="color:var(--primary);"></i>
-            Comprar Insumos a Pronta Entrega
-          </a>
-        </div>
-
-        <!-- Trust and Distinction Bar -->
-        <div class="hero-trust-bar">
-          <div class="trust-item">
-            <div class="trust-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
-            <div class="trust-text">
-              <strong>Atendimento Feminino</strong>
-              <span>Ambiente exclusivo e acolhedor</span>
-            </div>
-          </div>
-          <div class="trust-item">
-            <div class="trust-icon"><i class="fa-solid fa-bolt"></i></div>
-            <div class="trust-text">
-              <strong>Pronta Entrega Local</strong>
-              <span>Luziânia & Jardim Ingá</span>
-            </div>
-          </div>
-          <div class="trust-item">
-            <div class="trust-icon"><i class="fa-solid fa-shield-check"></i></div>
-            <div class="trust-text">
-              <strong>100% Originais</strong>
-              <span>Booble, RBKollors & Diamond</span>
-            </div>
-          </div>
-          <div class="trust-item">
-            <div class="trust-icon"><i class="fa-solid fa-motorcycle"></i></div>
-            <div class="trust-text">
-              <strong>Envio Express</strong>
-              <span>Retirada ou Uber Flash / Motoboy</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="servicos" class="services" data-anchor="procedimentos">
-      <h2 class="section-title">Procedimentos do Studio</h2>
-      <p style="text-align: center; margin-top: -40px; margin-bottom: 50px; color: var(--text-light); font-size: 1.1rem; max-width: 700px; margin-left: auto; margin-right: auto;">
-        Protocolos estéticos exclusivos de alto padrão desenvolvidos sob medida para elevar a autoestima e realçar os traços femininos.
+      <h1>Arte, Beleza e Formação <span>Profissional</span> em Luziânia</h1>
+      <p class="hero-subtitle">
+        Studio especializado em realce do olhar e estética avançada, além de formação presencial de novos talentos e revenda autorizada dos melhores insumos para lash designers e micropigmentadoras de Goiás.
       </p>
-      <div class="services-grid">
-        <!-- 1. Design de Sobrancelhas -->
-        <div class="service-card">
-          <img src="./assets/eyebrow_design.png" alt="Design de Sobrancelhas" class="service-image">
-          <div class="service-card-content">
-            <h3>Design de Sobrancelhas</h3>
-            <p>
-              Moldura seu olhar para uma expressão facial mais harmoniosa com exclusividade, visagismo e traços exatos.
-            </p>
-            <div class="service-card-actions">
-              <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20e%20agendar%20o%20Design%20de%20Sobrancelhas%20no%20Studio%20Lana%20Wolf." target="_blank" class="btn-service-schedule" onclick="event.stopPropagation();">
-                <i class="fa-brands fa-whatsapp"></i> Saber mais e Agendar
-              </a>
-              <button class="btn-service-sim" onclick="event.stopPropagation(); window.openSimulationModal('Design de Sobrancelhas', 'R$ 40,00 - R$ 55,00');">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> Simular Resultado com IA
-              </button>
-            </div>
-          </div>
-        </div>
 
-        <!-- 2. Micro de Sobrancelhas -->
-        <div class="service-card">
-          <img src="./assets/eyebrow_micro.png" alt="Micro de Sobrancelhas" class="service-image">
-          <div class="service-card-content">
-            <h3>Micro de Sobrancelhas</h3>
-            <p>
-              Preenchimento natural e duradouro (Shadow / Fio a Fio), cobrindo falhas e garantindo praticidade máxima para o seu dia a dia.
-            </p>
-            <div class="service-card-actions">
-              <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20e%20agendar%20a%20Micro%20de%20Sobrancelhas%20no%20Studio%20Lana%20Wolf." target="_blank" class="btn-service-schedule" onclick="event.stopPropagation();">
-                <i class="fa-brands fa-whatsapp"></i> Saber mais e Agendar
-              </a>
-              <button class="btn-service-sim" onclick="event.stopPropagation(); window.openSimulationModal('Micro de Sobrancelhas', 'R$ 400,00');">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> Simular Resultado com IA
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- 3. Extensão de Cílios -->
-        <div class="service-card">
-          <img src="./assets/eyelash_extension.png" alt="Extensão de Cílios" class="service-image">
-          <div class="service-card-content">
-            <h3>Extensão de Cílios</h3>
-            <p>
-              Acorde todos os dias com o olhar preparado, volumoso e curvilíneo. Trabalhamos com Fio a Fio, Volume Brasileiro, Egípcio e Russo.
-            </p>
-            <div class="service-card-actions">
-              <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20e%20agendar%20a%20Extens%C3%A3o%20de%20C%C3%ADlios%20no%20Studio%20Lana%20Wolf." target="_blank" class="btn-service-schedule" onclick="event.stopPropagation();">
-                <i class="fa-brands fa-whatsapp"></i> Saber mais e Agendar
-              </a>
-              <button class="btn-service-sim" onclick="event.stopPropagation(); window.openSimulationModal('Extensão de Cílios', 'A partir de R$ 150,00');">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> Simular Resultado com IA
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- 4. Micro Labial -->
-        <div class="service-card">
-          <img src="./assets/lip_micro.png" alt="Micro Labial" class="service-image">
-          <div class="service-card-content">
-            <h3>Micro Labial</h3>
-            <p>
-              Revitalização e efeito boca corada, definição impecável do contorno e cor saudável 24h por dia com os melhores pigmentos RBKollors.
-            </p>
-            <div class="service-card-actions">
-              <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20e%20agendar%20a%20Micro%20Labial%20no%20Studio%20Lana%20Wolf." target="_blank" class="btn-service-schedule" onclick="event.stopPropagation();">
-                <i class="fa-brands fa-whatsapp"></i> Saber mais e Agendar
-              </a>
-              <button class="btn-service-sim" onclick="event.stopPropagation(); window.openSimulationModal('Micro Labial', 'R$ 400,00');">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> Simular Resultado com IA
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- 5. Tatuagem / Fine Line -->
-        <div class="service-card">
-          <img src="./assets/fine_line_tattoo.png" alt="Tatuagem / Fine Line" class="service-image">
-          <div class="service-card-content">
-            <h3>Tatuagem / Fine Line</h3>
-            <p>
-              Arte delicada, traços ultrafinos, minuciosa e eterna estampada em sua pele e personalizada com seus valores mais preciosos.
-            </p>
-            <div class="service-card-actions">
-              <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20e%20fazer%20um%20or%C3%A7amento%20de%20Tatuagem%20Fine%20Line%20no%20Studio%20Lana%20Wolf." target="_blank" class="btn-service-schedule" onclick="event.stopPropagation();">
-                <i class="fa-brands fa-whatsapp"></i> Saber mais e Agendar
-              </a>
-              <button class="btn-service-sim" onclick="event.stopPropagation(); window.openSimulationModal('Tatuagem / Fine Line', 'Sob Consulta');">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> Simular Resultado com IA
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- 6. Alongamento de Unhas -->
-        <div class="service-card">
-          <img src="./assets/nail_extension.png" alt="Alongamento de Unhas" class="service-image">
-          <div class="service-card-content">
-            <h3>Alongamento de Unhas</h3>
-            <p>
-              Fibra de Vidro e Molde F1 com estruturas perfeitas, resistentes e elegantes, projetadas para destacar a beleza das suas mãos a longo prazo.
-            </p>
-            <div class="service-card-actions">
-              <a href="https://wa.me/5561999667225?text=Ol%C3%A1%20Amanda!%20Gostaria%20de%20agendar%20Alongamento%20de%20Unhas%20no%20Studio%20Lana%20Wolf." target="_blank" class="btn-service-schedule" onclick="event.stopPropagation();">
-                <i class="fa-brands fa-whatsapp"></i> Saber mais e Agendar (Amanda)
-              </a>
-              <button class="btn-service-sim" onclick="event.stopPropagation(); window.openSimulationModal('Alongamento de Unhas', 'R$ 130,00 - R$ 180,00');">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> Simular com IA
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- 7. Manicure Intacta -->
-        <div class="service-card">
-          <img src="./assets/manicure.png" alt="Manicure Intacta" class="service-image">
-          <div class="service-card-content">
-            <h3>Manicure Intacta</h3>
-            <p>
-              Cuidado impecável das cutículas, banho de gel e esmaltação premium para unhas protegidas, resistentes e com brilho duradouro.
-            </p>
-            <div class="service-card-actions">
-              <a href="https://wa.me/5561999667225?text=Ol%C3%A1%20Amanda!%20Gostaria%20de%20agendar%20Manicure%20no%20Studio%20Lana%20Wolf." target="_blank" class="btn-service-schedule" onclick="event.stopPropagation();">
-                <i class="fa-brands fa-whatsapp"></i> Saber mais e Agendar
-              </a>
-              <button class="btn-service-sim" onclick="event.stopPropagation(); window.openSimulationModal('Manicure Intacta', 'R$ 50,00');">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> Simular com IA
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- 8. Pedicure Premium -->
-        <div class="service-card">
-          <img src="./assets/pedicure.png" alt="Pedicure Premium" class="service-image">
-          <div class="service-card-content">
-            <h3>Pedicure Premium</h3>
-            <p>
-              Cuidado especializado para seus pés com protocolo de revitalização, estética de precisão e acabamento de alto padrão.
-            </p>
-            <div class="service-card-actions">
-              <a href="https://wa.me/5561999667225?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20Pedicure%20Premium%20no%20Studio%20Lana%20Wolf." target="_blank" class="btn-service-schedule" onclick="event.stopPropagation();">
-                <i class="fa-brands fa-whatsapp"></i> Saber mais e Agendar
-              </a>
-              <button class="btn-service-sim" onclick="event.stopPropagation(); window.openSimulationModal('Pedicure Premium', 'R$ 50,00');">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> Simular com IA
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- 9. Body Piercing -->
-        <div class="service-card">
-          <img src="./assets/body_piercing.png" alt="Body Piercing" class="service-image">
-          <div class="service-card-content">
-            <h3>Body Piercing</h3>
-            <p>
-              Perfurações 100% assépticas, materiais biocompatíveis e joalheria em titânio de alta qualidade para evidenciar o seu estilo próprio.
-            </p>
-            <div class="service-card-actions">
-              <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20e%20agendar%20Body%20Piercing%20no%20Studio%20Lana%20Wolf." target="_blank" class="btn-service-schedule" onclick="event.stopPropagation();">
-                <i class="fa-brands fa-whatsapp"></i> Saber mais e Agendar
-              </a>
-              <button class="btn-service-sim" onclick="event.stopPropagation(); window.openSimulationModal('Body Piercing', 'A partir de R$ 60,00');">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> Simular com IA
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- About Banner (Quem Somos) -->
-    <section id="sobre" class="about-banner">
-      <h2 style="font-size: 3rem; margin-bottom: 30px;">Quem Somos</h2>
-      <div style="max-width: 850px; margin: 0 auto; text-align: center; color: rgba(255, 255, 255, 0.85); font-weight: 300; font-size: 1.1rem; line-height: 1.8;">
-        <p style="margin-bottom: 20px;">
-          A <strong>Wolf Art Design</strong> nasceu da profunda experiência adquirida na área da beleza e da imensa satisfação em melhorar a autoestima das mulheres. Acreditamos que cada traço conta uma história e cada detalhe realça a verdadeira beleza feminina, promovendo bem-estar e confiança.
-        </p>
-        <p>
-          Nosso estúdio é formado por mulheres apaixonadas pelo que fazem: a profissional <strong>Laiana Barbosa</strong> (mãe) e suas filhas, <strong>Layla Sofia Barbosa da Silva</strong> e <strong>Kárita Amanda Barbosa de Souza</strong>. A Laiana (mãe) iniciou as atividades no ano de 2012, a Amanda (filha mais velha) em 2013, e a Sofia em 2023. Juntas, unimos gerações de dedicação e expertise para oferecer tratamentos <em>high-ticket</em> estéticos desenhados sob medida, garantindo um ambiente seguro e especializado, focado exclusivamente no público feminino.
-        </p>
-      </div>
-    </section>
-
-    <!-- Cursos & Formação Profissional Section -->
-    <section id="cursos" class="cursos-section">
-      <div style="text-align: center; max-width: 800px; margin: 0 auto 50px;">
-        <span class="curso-tag" style="align-self: center; margin: 0 auto 15px;"><i class="fa-solid fa-graduation-cap"></i> Formação de Especialistas</span>
-        <h2 class="section-title" style="margin-bottom: 15px;">Cursos & Treinamentos Profissionais</h2>
-        <p style="color: var(--text-main); font-size: 1.15rem; font-weight: 300; line-height: 1.7;">
-          Aprenda na prática as técnicas mais lucrativas da estética com quem atua em bancada desde 2012. Mentoria personalizada com <strong>Layana Wolf</strong>.
-        </p>
+      <!-- Dual CTA Banner -->
+      <div class="hero-cta-group">
+        <a href="/procedimentos" class="btn-hero-primary">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> Quero Agendar no Studio
+        </a>
+        <a href="/pro" class="btn-hero-pro">
+          <i class="fa-solid fa-boxes-stacked" style="color:var(--accent-gold);"></i> Comprar Insumos a Pronta Entrega
+        </a>
       </div>
 
-      <div class="cursos-grid">
-        <!-- Curso 1 -->
-        <div class="curso-card">
-          <span class="curso-tag">Mais Procurado</span>
-          <h3>Formação Completa em Extensão de Cílios</h3>
-          <p>
-            Do zero ao avançado. Domine as técnicas de Fio a Fio clássico, Volume Brasileiro (fios Y), Volume Egípcio, Volume Híbrido e Volume Russo com biossegurança e retenção blindada.
-          </p>
-          <ul class="curso-benefits">
-            <li><i class="fa-solid fa-check"></i> Prática intensiva em modelos reais</li>
-            <li><i class="fa-solid fa-check"></i> Kit Aluna Lash incluso para atendimento imediato</li>
-            <li><i class="fa-solid fa-check"></i> Certificado de Formação Profissional</li>
-            <li><i class="fa-solid fa-check"></i> Mentoria contínua pós-curso via WhatsApp</li>
-          </ul>
-          <a href="https://wa.me/556195981186?text=Ol%C3%A1%20Layana!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20a%20Forma%C3%A7%C3%A3o%20Completa%20em%20Extens%C3%A3o%20de%20C%C3%ADlios." target="_blank" class="btn-curso">
-            <i class="fa-brands fa-whatsapp"></i> Consultar Próximas Turmas
-          </a>
+      <!-- Trust Bar -->
+      <div class="hero-trust-bar">
+        <div class="trust-item">
+          <div class="trust-icon"><i class="fa-solid fa-certificate"></i></div>
+          <div class="trust-text">
+            <strong>Insumos Autorizados</strong>
+            <span>Booble, RBKollors & Diamond</span>
+          </div>
         </div>
-
-        <!-- Curso 2 -->
-        <div class="curso-card">
-          <span class="curso-tag">Alto Faturamento</span>
-          <h3>Especialização em Micropigmentação Labial & Shadow</h3>
-          <p>
-            Capacite-se nos procedimentos de maior rentabilidade da estética: Revitalização Labial, Efeito Batom, Neutralização de lábios escuros e Sobrancelhas Shadow com os pigmentos inteligentes RBKollors.
-          </p>
-          <ul class="curso-benefits">
-            <li><i class="fa-solid fa-check"></i> Colorimetria avançada sem risco de alteração de cor</li>
-            <li><i class="fa-solid fa-check"></i> Treino minucioso em pele sintética e modelo</li>
-            <li><i class="fa-solid fa-check"></i> Protocolo de anestésico e biossegurança estrita</li>
-            <li><i class="fa-solid fa-check"></i> Suporte técnico vitalício</li>
-          </ul>
-          <a href="https://wa.me/556195981186?text=Ol%C3%A1%20Layana!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20o%20Curso%20de%20Micropigmenta%C3%A7%C3%A3o%20Labial%20e%20Shadow." target="_blank" class="btn-curso">
-            <i class="fa-brands fa-whatsapp"></i> Consultar Próximas Turmas
-          </a>
+        <div class="trust-item">
+          <div class="trust-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+          <div class="trust-text">
+            <strong>Cursos & Mentoria</strong>
+            <span>Método Layana Wolf desde 2012</span>
+          </div>
         </div>
-
-        <!-- Curso 3 -->
-        <div class="curso-card">
-          <span class="curso-tag">Entrada Rápida</span>
-          <h3>Design de Sobrancelhas & Visagismo</h3>
-          <p>
-            O passo inicial essencial para qualquer carreira na estética do olhar. Aprenda mapeamento facial com paquímetro e linha, aplicação correta de henna e técnicas de epilação com pinça.
-          </p>
-          <ul class="curso-benefits">
-            <li><i class="fa-solid fa-check"></i> Mapeamento personalizado para cada fisionomia</li>
-            <li><i class="fa-solid fa-check"></i> Degradê de henna e durabilidade máxima</li>
-            <li><i class="fa-solid fa-check"></i> Dicas de precificação e atração de clientes</li>
-            <li><i class="fa-solid fa-check"></i> Certificado de conclusão</li>
-          </ul>
-          <a href="https://wa.me/556195981186?text=Ol%C3%A1%20Layana!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20o%20Curso%20de%20Design%20de%20Sobrancelhas." target="_blank" class="btn-curso">
-            <i class="fa-brands fa-whatsapp"></i> Consultar Próximas Turmas
-          </a>
+        <div class="trust-item">
+          <div class="trust-icon"><i class="fa-solid fa-location-dot"></i></div>
+          <div class="trust-text">
+            <strong>Studio Parque 9</strong>
+            <span>Luziânia e Jardim Ingá</span>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon"><i class="fa-solid fa-motorcycle"></i></div>
+          <div class="trust-text">
+            <strong>Envio Express</strong>
+            <span>Retirada ou Uber Flash / Motoboy</span>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ==========================================================
-         LANA SUPPLY PRO - VITRINE B2B DE INSUMOS
+         OS TRÊS PILARES: PORTAL DE NAVEGAÇÃO SEGMENTADO
          ========================================================== -->
-    <section id="loja" class="loja-pro-section" data-anchor="loja-pro">
-      <span id="loja-pro" style="position: absolute; top: -80px;"></span>
-      <span id="pro" style="position: absolute; top: -80px;"></span>
-      
-      <div class="loja-pro-header">
-        <div class="loja-badge">
-          <i class="fa-solid fa-boxes-stacked" style="color:var(--accent-gold-light);"></i>
-          Distribuidora & Revenda Autorizada
-        </div>
-        <h2 class="loja-pro-title">Lana <span>Supply</span> Pro</h2>
-        <p class="loja-pro-desc">
-          Os mesmos insumos de alta performance utilizados diariamente na bancada do estúdio por <strong>Layana Wolf</strong>, disponíveis a <strong>pronta entrega em Luziânia e Jardim Ingá</strong> para lash designers, micropigmentadoras e alunas.
+    <section class="pillars-section">
+      <div style="text-align: center; max-width: 800px; margin: 0 auto 45px;">
+        <span class="page-badge"><i class="fa-solid fa-compass"></i> Escolha Seu Caminho</span>
+        <h2 class="section-title" style="margin-bottom: 12px;">Conheça Nosso Ecossistema</h2>
+        <p style="color: var(--text-light); font-size: 1.1rem; line-height: 1.6;">
+          Reunimos excelência técnica, atendimento feminino humanizado e insumos de padrão internacional em três áreas dedicadas:
         </p>
       </div>
 
-      <!-- Controls: Search & Category Filters -->
-      <div class="loja-controls">
-        <div class="pro-search-box">
-          <input type="text" id="proSearchInput" placeholder="Buscar insumo (ex: Rubi, Y, Nagaraku, RBKollors)..." />
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </div>
-
-        <div class="pro-filter-tabs" id="proFilterTabs">
-          <button class="pro-tab-btn active" data-category="todos">
-            <i class="fa-solid fa-border-all"></i> Todos os Insumos <span class="tab-count" id="countTodos">13</span>
-          </button>
-          <button class="pro-tab-btn" data-category="cilios">
-            <i class="fa-solid fa-eye"></i> Extensão de Cílios (Booble & Fios) <span class="tab-count" id="countCilios">6</span>
-          </button>
-          <button class="pro-tab-btn" data-category="micro">
-            <i class="fa-solid fa-feather-pointed"></i> Micropigmentação (RBKollors & Diamond) <span class="tab-count" id="countMicro">3</span>
-          </button>
-          <button class="pro-tab-btn" data-category="descartaveis">
-            <i class="fa-solid fa-shield-virus"></i> Biossegurança & Descartáveis <span class="tab-count" id="countDescartaveis">2</span>
-          </button>
-          <button class="pro-tab-btn" data-category="kits">
-            <i class="fa-solid fa-gift"></i> Kits Prontos para Alunas <span class="tab-count" id="countKits">2</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Products Grid -->
-      <div class="pro-products-grid" id="proProductsGrid">
-        
-        <!-- Produto 1: Adesivo Booble Rubi 3ml -->
-        <div class="pro-product-card" data-category="cilios" data-name="Adesivo Booble Rubi 3ml Cola Extensao Cilios">
-          <div class="product-img-wrap">
-            <img src="./assets/booble_rubi.jpg" alt="Adesivo Booble Rubi 3ml" loading="lazy">
-            <span class="product-badge"><i class="fa-solid fa-bolt"></i> Pronta Entrega Luziânia</span>
+      <div class="pillars-grid">
+        <!-- Pilar 1: Procedimentos -->
+        <a href="/procedimentos" class="pillar-portal-card">
+          <div class="pillar-img-wrap">
+            <img src="/assets/eyelash_extension.png" alt="Procedimentos do Studio Lana Wolf" loading="lazy" />
+            <span class="pillar-badge"><i class="fa-solid fa-spa"></i> Para Você (B2C)</span>
           </div>
-          <div class="product-info">
-            <span class="product-cat">Extensão de Cílios • Booble</span>
-            <h3 class="product-title">Adesivo Booble Rubi 3ml</h3>
-            <p class="product-spec">
-              Secagem ultra-rápida (0.5s a 1s). Retenção campeã de até 7 a 8 semanas. Baixa emissão de odor e adaptabilidade ideal para o clima de Goiás.
+          <div class="pillar-body">
+            <h3>Studio & Procedimentos</h3>
+            <p>
+              Extensão de cílios (brasileiro, russo, fio a fio), micropigmentação labial e de sobrancelhas, alongamento de unhas em fibra, manicure, piercing e fine line em ambiente acolhedor.
             </p>
-            <div class="product-price-row">
-              <div class="product-price">
-                R$ 95,00
-                <small><i class="fa-solid fa-tag"></i> R$ 89,00 à vista no Pix</small>
-              </div>
-            </div>
-            <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20comprar%20o%20produto%20Adesivo%20Booble%20Rubi%203ml%20a%20pronta%20entrega." target="_blank" class="btn-whatsapp-buy">
-              <i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp
-            </a>
+            <span class="pillar-link-cta">Ver Todos os Procedimentos & Preços →</span>
           </div>
-        </div>
+        </a>
 
-        <!-- Produto 2: Adesivo Booble Black 3ml -->
-        <div class="pro-product-card" data-category="cilios" data-name="Adesivo Booble Black 3ml Cola Cilios Flexivel">
-          <div class="product-img-wrap">
-            <img src="./assets/booble_rubi.jpg" alt="Adesivo Booble Black 3ml" loading="lazy">
-            <span class="product-badge bancada"><i class="fa-solid fa-check"></i> Aprovado por Layana Wolf</span>
+        <!-- Pilar 2: Cursos -->
+        <a href="/cursos" class="pillar-portal-card">
+          <div class="pillar-img-wrap">
+            <img src="/assets/kit_aluna_lash.jpg" alt="Cursos e Treinamentos Lana Wolf" loading="lazy" />
+            <span class="pillar-badge" style="background:#2e7d32; color:white;"><i class="fa-solid fa-graduation-cap"></i> Formação</span>
           </div>
-          <div class="product-info">
-            <span class="product-cat">Extensão de Cílios • Booble</span>
-            <h3 class="product-title">Adesivo Booble Black 3ml</h3>
-            <p class="product-spec">
-              Secagem flexível (1s a 2s). Acabamento preto acetinado profundo com película flexível que acompanha o movimento do fio natural.
+          <div class="pillar-body">
+            <h3>Cursos & Treinamentos</h3>
+            <p>
+              Aprenda as técnicas mais lucrativas da estética com mentoria prática VIP. Prática intensiva em modelos reais, kit aluna incluso para atendimento imediato e suporte vitalício.
             </p>
-            <div class="product-price-row">
-              <div class="product-price">
-                R$ 89,00
-                <small><i class="fa-solid fa-tag"></i> Pronta entrega no estúdio</small>
-              </div>
-            </div>
-            <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20comprar%20o%20produto%20Adesivo%20Booble%20Black%203ml%20a%20pronta%20entrega." target="_blank" class="btn-whatsapp-buy">
-              <i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp
-            </a>
+            <span class="pillar-link-cta">Conhecer Formações & Grade Curricular →</span>
           </div>
-        </div>
+        </a>
 
-        <!-- Produto 3: Caixa Fio Y Nagaraku Mix -->
-        <div class="pro-product-card" data-category="cilios" data-name="Caixa Fios Nagaraku Y Mix 8-15mm Volume Brasileiro">
-          <div class="product-img-wrap">
-            <img src="./assets/nagaraku_y_lashes.jpg" alt="Fios Nagaraku Y Mix" loading="lazy">
-            <span class="product-badge destaque"><i class="fa-solid fa-fire"></i> Mais Vendido</span>
+        <!-- Pilar 3: Lana Supply Pro -->
+        <a href="/pro" class="pillar-portal-card">
+          <div class="pillar-img-wrap">
+            <img src="/assets/booble_rubi.jpg" alt="Lana Supply Pro Insumos" loading="lazy" />
+            <span class="pillar-badge" style="background:#C5A059; color:#241715;"><i class="fa-solid fa-boxes-stacked"></i> Profissionais (B2B)</span>
           </div>
-          <div class="product-info">
-            <span class="product-cat">Fios para Cílios • Nagaraku</span>
-            <h3 class="product-title">Fios Nagaraku Y Mix (8 a 15mm)</h3>
-            <p class="product-spec">
-              Os queridinhos do Volume Brasileiro. Fios macios, pretos matte e bifurcados com acoplagem magnética sem peso sobre o fio natural.
+          <div class="pillar-body">
+            <h3>Lana Supply Pro</h3>
+            <p>
+              Distribuidora e revenda oficial de insumos a pronta entrega em Luziânia. Adesivos Booble (Rubi/Black), fios Nagaraku, pigmentos inteligentes RBKollors e descartáveis sem custo de frete.
             </p>
-            <div class="product-price-row">
-              <div class="product-price">
-                R$ 38,00
-                <small><i class="fa-solid fa-boxes-stacked"></i> Mix 8 ao 15mm Curvatura D e C</small>
-              </div>
-            </div>
-            <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20comprar%20o%20produto%20Caixa%20Fios%20Nagaraku%20Y%20Mix%20a%20pronta%20entrega." target="_blank" class="btn-whatsapp-buy">
-              <i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp
-            </a>
+            <span class="pillar-link-cta">Acessar Catálogo & Comprar Insumos →</span>
           </div>
-        </div>
-
-        <!-- Produto 4: Fios Booble Velvet Volume Russo -->
-        <div class="pro-product-card" data-category="cilios" data-name="Fios Booble Velvet Volume Russo Fans Maciez">
-          <div class="product-img-wrap">
-            <img src="./assets/nagaraku_y_lashes.jpg" alt="Fios Booble Velvet" loading="lazy">
-            <span class="product-badge"><i class="fa-solid fa-bolt"></i> Pronta Entrega Luziânia</span>
-          </div>
-          <div class="product-info">
-            <span class="product-cat">Fios para Cílios • Booble</span>
-            <h3 class="product-title">Fios Booble Velvet Volume Russo</h3>
-            <p class="product-spec">
-              Fios ultrafinos (espessura 0.05 / 0.07) com textura aveludada. Fáceis de abrir fans no chicote sem desmanchar a raiz.
-            </p>
-            <div class="product-price-row">
-              <div class="product-price">
-                R$ 42,00
-                <small><i class="fa-solid fa-star"></i> Padrão profissional internacional</small>
-              </div>
-            </div>
-            <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20comprar%20o%20produto%20Fios%20Booble%20Velvet%20Volume%20Russo%20a%20pronta%20entrega." target="_blank" class="btn-whatsapp-buy">
-              <i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp
-            </a>
-          </div>
-        </div>
-
-        <!-- Produto 5: Primer Booble Higienizador -->
-        <div class="pro-product-card" data-category="cilios" data-name="Primer Booble Higienizador 15ml Retencao Cilios">
-          <div class="product-img-wrap">
-            <img src="./assets/booble_rubi.jpg" alt="Primer Booble Higienizador" loading="lazy">
-            <span class="product-badge bancada"><i class="fa-solid fa-shield-halved"></i> Essencial de Bancada</span>
-          </div>
-          <div class="product-info">
-            <span class="product-cat">Preparação • Booble</span>
-            <h3 class="product-title">Primer Higienizador Booble 15ml</h3>
-            <p class="product-spec">
-              Remove qualquer vestígio de oleosidade e equilibra o pH dos fios naturais antes da acoplagem. Aumenta a durabilidade da retenção em até 40%.
-            </p>
-            <div class="product-price-row">
-              <div class="product-price">
-                R$ 45,00
-                <small><i class="fa-solid fa-check"></i> Rendimento de até 80 procedimentos</small>
-              </div>
-            </div>
-            <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20comprar%20o%20produto%20Primer%20Booble%20Higienizador%20a%20pronta%20entrega." target="_blank" class="btn-whatsapp-buy">
-              <i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp
-            </a>
-          </div>
-        </div>
-
-        <!-- Produto 6: Removedor em Gel Booble -->
-        <div class="pro-product-card" data-category="cilios" data-name="Removedor em Gel Booble 15g Suave Sem Ardor">
-          <div class="product-img-wrap">
-            <img src="./assets/booble_rubi.jpg" alt="Removedor em Gel Booble" loading="lazy">
-            <span class="product-badge"><i class="fa-solid fa-bolt"></i> Pronta Entrega</span>
-          </div>
-          <div class="product-info">
-            <span class="product-cat">Remoção Segura • Booble</span>
-            <h3 class="product-title">Removedor em Gel Booble 15g</h3>
-            <p class="product-spec">
-              Fórmula em gel com aroma suave que não escorre para os olhos. Dissolve a cola com rapidez sem desconforto ou quebra dos fios naturais.
-            </p>
-            <div class="product-price-row">
-              <div class="product-price">
-                R$ 48,00
-                <small><i class="fa-solid fa-heart"></i> Não arde e remove em minutos</small>
-              </div>
-            </div>
-            <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20comprar%20o%20produto%20Removedor%20em%20Gel%20Booble%20a%20pronta%20entrega." target="_blank" class="btn-whatsapp-buy">
-              <i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp
-            </a>
-          </div>
-        </div>
-
-        <!-- Produto 7: Pigmento RBKollors Red Rose 15ml -->
-        <div class="pro-product-card" data-category="micro" data-name="Pigmento RBKollors Red Rose 15ml Smart Pigment Micro Labial">
-          <div class="product-img-wrap">
-            <img src="./assets/rbkollors_lips.jpg" alt="Pigmento RBKollors Red Rose" loading="lazy">
-            <span class="product-badge bancada"><i class="fa-solid fa-check"></i> Aprovado por Layana Wolf</span>
-          </div>
-          <div class="product-info">
-            <span class="product-cat">Micropigmentação • RBKollors</span>
-            <h3 class="product-title">Pigmento RBKollors Red Rose 15ml</h3>
-            <p class="product-spec">
-              Linha Lips Smart Pigment. Alta carga pigmentária, cor translúcida e vibrante que entrega efeito lábios de seda e cicatrização fiel sem manchas.
-            </p>
-            <div class="product-price-row">
-              <div class="product-price">
-                R$ 165,00
-                <small><i class="fa-solid fa-tag"></i> Original com lacre de fábrica</small>
-              </div>
-            </div>
-            <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20comprar%20o%20produto%20Pigmento%20RBKollors%20Red%20Rose%2015ml%20a%20pronta%20entrega." target="_blank" class="btn-whatsapp-buy">
-              <i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp
-            </a>
-          </div>
-        </div>
-
-        <!-- Produto 8: Pigmento RBKollors Jambo / Jamblack -->
-        <div class="pro-product-card" data-category="micro" data-name="Pigmento RBKollors Jambo Jamblack 15ml Sobrancelhas">
-          <div class="product-img-wrap">
-            <img src="./assets/rbkollors_lips.jpg" alt="Pigmento RBKollors Jambo" loading="lazy">
-            <span class="product-badge"><i class="fa-solid fa-bolt"></i> Pronta Entrega Luziânia</span>
-          </div>
-          <div class="product-info">
-            <span class="product-cat">Micropigmentação • RBKollors</span>
-            <h3 class="product-title">Pigmento RBKollors Jambo 15ml</h3>
-            <p class="product-spec">
-              Castanho escuro aquecido indispensável para fototipos brasileiros. Fórmula biocompatível inteligente que impede o acinzentamento ao cicatrizar.
-            </p>
-            <div class="product-price-row">
-              <div class="product-price">
-                R$ 165,00
-                <small><i class="fa-solid fa-check"></i> Disponível também na cor Jamblack</small>
-              </div>
-            </div>
-            <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20comprar%20o%20produto%20Pigmento%20RBKollors%20Jambo%2015ml%20a%20pronta%20entrega." target="_blank" class="btn-whatsapp-buy">
-              <i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp
-            </a>
-          </div>
-        </div>
-
-        <!-- Produto 9: Pigmento Diamond Sobrancelhas 10ml -->
-        <div class="pro-product-card" data-category="micro" data-name="Pigmento Diamond Sobrancelhas 10ml Microblading Shadow">
-          <div class="product-img-wrap">
-            <img src="./assets/diamond_pigment.jpg" alt="Pigmento Diamond Sobrancelhas" loading="lazy">
-            <span class="product-badge destaque"><i class="fa-solid fa-gem"></i> Exclusividade Pro</span>
-          </div>
-          <div class="product-info">
-            <span class="product-cat">Micropigmentação • Diamond</span>
-            <h3 class="product-title">Pigmento Diamond Sobrancelhas 10ml</h3>
-            <p class="product-spec">
-              Linha especial de acabamento nobre para técnicas Shadow e Microblading. Degradês perfeitos com penetração homogênea e excelente retenção na derme.
-            </p>
-            <div class="product-price-row">
-              <div class="product-price">
-                R$ 145,00
-                <small><i class="fa-solid fa-star"></i> Acabamento refinado de alto contraste</small>
-              </div>
-            </div>
-            <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20comprar%20o%20produto%20Pigmento%20Diamond%20Sobrancelhas%20a%20pronta%20entrega." target="_blank" class="btn-whatsapp-buy">
-              <i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp
-            </a>
-          </div>
-        </div>
-
-        <!-- Produto 10: Microbrush Rosa Tubo c/ 100 -->
-        <div class="pro-product-card" data-category="descartaveis" data-name="Microbrush Rosa Tubo com 100 unidades Descartaveis Biosseguranca">
-          <div class="product-img-wrap">
-            <img src="./assets/disposables.jpg" alt="Microbrush Tubo 100 unids" loading="lazy">
-            <span class="product-badge"><i class="fa-solid fa-bolt"></i> Pronta Entrega</span>
-          </div>
-          <div class="product-info">
-            <span class="product-cat">Biossegurança & Descartáveis</span>
-            <h3 class="product-title">Microbrush Rosa - Tubo c/ 100 un</h3>
-            <p class="product-spec">
-              Ponta de microfibra que não solta fiapos nem retém produto em excesso. Essencial para higienização, primer, removedor e alinhamento de cílios.
-            </p>
-            <div class="product-price-row">
-              <div class="product-price">
-                R$ 22,00
-                <small><i class="fa-solid fa-box"></i> Tubo acrílico higiênico</small>
-              </div>
-            </div>
-            <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20comprar%20o%20produto%20Microbrush%20Rosa%20Tubo%20com%20100%20unidades%20a%20pronta%20entrega." target="_blank" class="btn-whatsapp-buy">
-              <i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp
-            </a>
-          </div>
-        </div>
-
-        <!-- Produto 11: Escovinhas com Glitter Rosa (50 unids) -->
-        <div class="pro-product-card" data-category="descartaveis" data-name="Escovinhas Cilios Glitter Rosa Pacote 50 unidades Mimos">
-          <div class="product-img-wrap">
-            <img src="./assets/disposables.jpg" alt="Escovinhas com Glitter" loading="lazy">
-            <span class="product-badge"><i class="fa-solid fa-bolt"></i> Pronta Entrega</span>
-          </div>
-          <div class="product-info">
-            <span class="product-cat">Biossegurança & Mimos</span>
-            <h3 class="product-title">Escovinhas c/ Glitter Rosa (50 un)</h3>
-            <p class="product-spec">
-              Cerdas macias que alinham as extensões sem repuxar. Cabo com glitter rosa de alto apelo visual para uso em bancada e presente para suas clientes.
-            </p>
-            <div class="product-price-row">
-              <div class="product-price">
-                R$ 25,00
-                <small><i class="fa-solid fa-sparkles"></i> Pacote com 50 unidades</small>
-              </div>
-            </div>
-            <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20comprar%20o%20produto%20Escovinhas%20com%20Glitter%20Rosa%20a%20pronta%20entrega." target="_blank" class="btn-whatsapp-buy">
-              <i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp
-            </a>
-          </div>
-        </div>
-
-        <!-- Produto 12: Kit Aluna Lash Designer Iniciante -->
-        <div class="pro-product-card" data-category="kits" data-name="Kit Aluna Lash Designer Iniciante Completo Booble Nagaraku Pincas">
-          <div class="product-img-wrap">
-            <img src="./assets/kit_aluna_lash.jpg" alt="Kit Aluna Lash Designer Iniciante" loading="lazy">
-            <span class="product-badge bancada"><i class="fa-solid fa-star"></i> Kit Completo Aluna</span>
-          </div>
-          <div class="product-info">
-            <span class="product-cat">Kits de Formação • Alunas</span>
-            <h3 class="product-title">Kit Aluna Lash Designer Completo</h3>
-            <p class="product-spec">
-              Adesivo Booble Rubi 3ml + 2 Caixas Nagaraku Y/Mix + Pinça Reta Dourada + Pinça Curva + Primer + Removedor + 50 Escovinhas + 100 Microbrush + Fita Micropore.
-            </p>
-            <div class="product-price-row">
-              <div class="product-price">
-                R$ 289,00
-                <small><i class="fa-solid fa-percent"></i> Economia de 25% comparado ao avulso</small>
-              </div>
-            </div>
-            <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20comprar%20o%20Kit%20Aluna%20Lash%20Designer%20Completo%20a%20pronta%20entrega." target="_blank" class="btn-whatsapp-buy">
-              <i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp
-            </a>
-          </div>
-        </div>
-
-        <!-- Produto 13: Kit Aluna Micropigmentação Lips & Brows -->
-        <div class="pro-product-card" data-category="kits" data-name="Kit Aluna Micropigmentacao Lips Brows RBKollors Pele Sintetica">
-          <div class="product-img-wrap">
-            <img src="./assets/kit_aluna_lash.jpg" alt="Kit Aluna Micropigmentação" loading="lazy">
-            <span class="product-badge destaque"><i class="fa-solid fa-graduation-cap"></i> Aprovado por Layana</span>
-          </div>
-          <div class="product-info">
-            <span class="product-cat">Kits de Formação • Alunas</span>
-            <h3 class="product-title">Kit Aluna Micropigmentação Pro</h3>
-            <p class="product-spec">
-              2 Pigmentos RBKollors (Lips Red Rose + Sobrancelhas Jambo) + 1 Pele Sintética 3D para treino + 20 Anéis de Batoque + Lápis Dermatográfico + Paquímetro de precisão.
-            </p>
-            <div class="product-price-row">
-              <div class="product-price">
-                R$ 389,00
-                <small><i class="fa-solid fa-gift"></i> Treino prático e atendimento imediato</small>
-              </div>
-            </div>
-            <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20comprar%20o%20Kit%20Aluna%20Micropigmenta%C3%A7%C3%A3o%20Pro%20a%20pronta%20entrega." target="_blank" class="btn-whatsapp-buy">
-              <i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp
-            </a>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Local Logistics Notice Card -->
-      <div class="pro-logistics-card">
-        <div class="logistics-item">
-          <div class="logistics-icon"><i class="fa-solid fa-store"></i></div>
-          <div>
-            <h4>Retirada no Studio</h4>
-            <p>Retire seus pedidos diretamente no Studio Lana Wolf no Parque 9 (Luziânia) sem custo de frete com horário agendado.</p>
-          </div>
-        </div>
-        <div class="logistics-item">
-          <div class="logistics-icon"><i class="fa-solid fa-motorcycle"></i></div>
-          <div>
-            <h4>Envio Express (Uber Flash / Motoboy)</h4>
-            <p>Precisa de reposição urgente na bancada? Enviamos no mesmo dia via Uber Flash ou motoboy para Luziânia e Jardim Ingá.</p>
-          </div>
-        </div>
-        <div class="logistics-item">
-          <div class="logistics-icon"><i class="fa-solid fa-credit-card"></i></div>
-          <div>
-            <h4>Pagamento Facilitado</h4>
-            <p>Pague com segurança via Pix com desconto especial ou parcele no cartão de crédito na separação do pedido.</p>
-          </div>
-        </div>
+        </a>
       </div>
     </section>
 
-    <!-- Virtual Assistant Section -->
+    <!-- Quem Somos Banner -->
+    <section id="sobre" class="about-banner">
+      <h2>Quem Somos</h2>
+      <p>
+        Nosso estúdio é formado por mulheres apaixonadas pelo que fazem: a profissional <strong>Layana Barbosa</strong> (mãe) e suas filhas, <strong>Layla Sofia Barbosa da Silva</strong> e <strong>Kárita Amanda Barbosa de Souza</strong>. A Layana iniciou as atividades no ano de 2012, a Amanda em 2013, e a Sofia em 2023. Juntas, unimos gerações de dedicação e expertise para oferecer tratamentos de alto padrão desenhados sob medida, além de formar novas profissionais e abastecer bancadas de beleza com insumos de primeira linha em todo o entorno de Goiás.
+      </p>
+    </section>
+
+    <!-- Virtual Assistant Section (Chatbot) -->
     <section id="assistente-virtual" class="services" style="background: var(--bg-nude); text-align: center; padding-top: 80px;">
-      <h2 class="section-title" style="margin-bottom: 20px;">Especialista de Beleza Virtual</h2>
-      <p style="margin-bottom: 40px; color: var(--text-main); font-size: 1.1rem; padding: 0 20px;">Tire suas dúvidas com nossa assistente inteligente Lana, sobre serviços, estilos ou cuidados.</p>
+      <h2 class="section-title" style="margin-bottom: 15px;">Especialista de Beleza Virtual</h2>
+      <p style="margin-bottom: 35px; color: var(--text-main); font-size: 1.1rem; padding: 0 20px;">
+        Tire dúvidas com nossa assistente inteligente Lana sobre procedimentos, cursos, cuidados pós-procedimento ou insumos a pronta entrega.
+      </p>
       
       <div class="ai-chat-container">
         <div class="chat-header">
@@ -2924,14 +366,14 @@
         </div>
 
         <div class="chat-body" id="chatBody">
-          <!-- Initial Auto-Greeting Message -->
+          <!-- Greeting Message -->
           <div class="message-row bot">
             <div class="message bot">
               Olá! Seja muito bem-vinda ao nosso espaço. Sou a Lana, especialista e assistente inteligente oficial da <strong>Lana Wolf Art</strong> e <strong>Lana Supply Pro</strong>. Como posso te ajudar hoje? 💖
             </div>
           </div>
 
-          <!-- Quick Action Options on First Contact -->
+          <!-- Quick Action Options -->
           <div class="chat-quick-actions" id="chatQuickActions">
             <div class="quick-actions-title"><i class="fa-solid fa-bolt"></i> Opções rápidas para começar:</div>
             <div class="chat-chips-list">
@@ -2947,7 +389,7 @@
             </div>
           </div>
 
-          <!-- Typing indicator (hidden by default) -->
+          <!-- Typing indicator -->
           <div class="typing-indicator-row" id="typingIndicator">
             <div class="typing-bubbles">
               <div class="dot"></div>
@@ -2983,16 +425,17 @@
 
     <!-- Comments Section -->
     <section id="comentarios" class="comments-section">
-      <h2 class="section-title" style="margin-bottom: 20px;">Conte-nos a sua Experiência</h2>
-      <p style="text-align: center; margin-bottom: 40px; color: var(--text-main); font-size: 1.1rem; padding: 0 20px;">Veja o que nossas clientes dizem e compartilhe sua experiência.</p>
-      
       <div class="comments-container">
-        
+        <h2 class="section-title" style="margin-bottom: 20px;">Comentários e Avaliações</h2>
+        <p style="text-align: center; margin-bottom: 40px; color: var(--text-light);">
+          Deixe sua dúvida, sugestão ou elogio para nossa equipe.
+        </p>
+
         <div id="authContainer" class="auth-message">
-          <p style="margin-bottom: 15px;">Para deixar um comentário ou responder, identifique-se com segurança.</p>
+          <p style="margin-bottom: 15px; font-weight: 500;">Para deixar um comentário, identifique-se:</p>
           <button id="btnGoogleLogin" class="btn-google">
-            <svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg"><g transform="matrix(1, 0, 0, 1, 27.009001, -39.238998)"><path fill="#4285F4" d="M -3.264 51.509 C -3.264 50.719 -3.334 49.969 -3.454 49.239 L -14.754 49.239 L -14.754 53.749 L -8.284 53.749 C -8.574 55.229 -9.424 56.479 -10.684 57.329 L -10.684 60.329 L -6.824 60.329 C -4.564 58.239 -3.264 55.159 -3.264 51.509 Z"/><path fill="#34A853" d="M -14.754 63.239 C -11.514 63.239 -8.804 62.159 -6.824 60.329 L -10.684 57.329 C -11.764 58.049 -13.134 58.489 -14.754 58.489 C -17.884 58.489 -20.534 56.379 -21.484 53.529 L -25.464 53.529 L -25.464 56.619 C -23.494 60.539 -19.444 63.239 -14.754 63.239 Z"/><path fill="#FBBC05" d="M -21.484 53.529 C -21.734 52.809 -21.864 52.039 -21.864 51.239 C -21.864 50.439 -21.724 49.669 -21.484 48.949 L -21.484 45.859 L -25.464 45.859 C -26.284 47.479 -26.754 49.299 -26.754 51.239 C -26.754 53.179 -26.284 54.999 -25.464 56.619 L -21.484 53.529 Z"/><path fill="#EA4335" d="M -14.754 43.989 C -12.984 43.989 -11.404 44.599 -10.154 45.789 L -6.734 42.369 C -8.804 40.429 -11.514 39.239 -14.754 39.239 C -19.444 39.239 -23.494 41.939 -25.464 45.859 L -21.484 48.949 C -20.534 46.099 -17.884 43.989 -14.754 43.989 Z"/></g></svg>
-            Entrar com Google
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" style="width:18px;height:18px;margin-right:8px;"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.1 29.2 35 24 35c-6.1 0-11-4.9-11-11s4.9-11 11-11c2.8 0 5.3 1 7.2 2.7l5.7-5.7C33.1 7.1 28.8 5 24 5 12.9 5 4 13.9 4 25s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c2.8 0 5.3 1 7.2 2.7l5.7-5.7C33.1 7.1 28.8 5 24 5 16.3 5 9.7 9.4 6.3 14.7z"/><path fill="#4CAF50" d="M24 45c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.4 36.5 26.8 37.5 24 37.5c-5.2 0-9.6-3.5-11.2-8.3l-6.5 5C9.5 40.8 16.3 45 24 45z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.3 5.8l6.2 5.2C37.1 36.7 44 31.5 44 25c0-1.3-.1-2.6-.4-3.9z"/></svg>
+            Entrar com o Google
           </button>
         </div>
 
@@ -3010,7 +453,6 @@
         </div>
 
         <div id="commentsList">
-          <!-- Comments will be loaded here dynamically -->
           <div style="text-align: center; color: var(--text-light); padding: 20px;">Carregando comentários...</div>
         </div>
       </div>
@@ -3020,1276 +462,189 @@
     <section class="domino-ad" aria-label="Desenvolvido por Domino Automate">
       <div class="domino-ad-inner">
         <div class="domino-ad-badge">⚡ Desenvolvido com Inteligência Artificial</div>
-
         <div class="domino-ad-logo-wrap">
-          <a href="https://domino-automate.com.br/" target="_blank" rel="noopener noreferrer" aria-label="Visitar site da Domino Automate">
-            <img
-              src="./assets/domino-logo.png"
-              alt="Domino Automate – Orquestração & IA para PMEs"
-              class="domino-ad-logo"
-            />
+          <a href="https://domino-automate.com.br/" target="_blank" rel="noopener noreferrer">
+            <img src="/assets/domino-logo.png" alt="Domino Automate" class="domino-ad-logo" />
           </a>
         </div>
-
         <div class="domino-ad-divider"></div>
-
         <h2 class="domino-ad-tagline">
           Pensado, desenhado e orquestrado por <span>Domino Automate</span>
         </h2>
-
         <p class="domino-ad-desc">
           Este site não é apenas um site — é um ecossistema inteligente. Da arquitetura ao agente de IA, cada detalhe foi estrategicamente orquestrado para transformar visitantes em clientes e dados em resultados.
         </p>
-
         <div class="domino-ad-features">
-          <div class="domino-ad-feature">
-            <span class="domino-ad-feature-icon">🤖</span>
-            Agente de IA integrado
-          </div>
-          <div class="domino-ad-feature">
-            <span class="domino-ad-feature-icon">⚙️</span>
-            Automação N8N
-          </div>
-          <div class="domino-ad-feature">
-            <span class="domino-ad-feature-icon">🔒</span>
-            Infraestrutura segura
-          </div>
-          <div class="domino-ad-feature">
-            <span class="domino-ad-feature-icon">📈</span>
-            Alta performance
-          </div>
+          <div class="domino-ad-feature"><span class="domino-ad-feature-icon">🤖</span> Agente de IA integrado</div>
+          <div class="domino-ad-feature"><span class="domino-ad-feature-icon">⚙️</span> Automação N8N</div>
+          <div class="domino-ad-feature"><span class="domino-ad-feature-icon">🔒</span> Infraestrutura segura</div>
+          <div class="domino-ad-feature"><span class="domino-ad-feature-icon">📈</span> Alta performance</div>
         </div>
-
         <a href="https://domino-automate.com.br/" target="_blank" rel="noopener noreferrer" class="domino-ad-cta">
           Quero um projeto assim →
         </a>
       </div>
     </section>
 
-    <!-- Footer Area -->
+    <!-- Footer -->
     <footer id="contato">
       <div class="footer-content">
         <div class="footer-col">
           <h4>Lana Wolf Art</h4>
           <p>Um novo conceito em beleza facial e corporal feminina em Goiás.</p>
         </div>
-        <div class="footer-col" style="flex: 1; min-width: 350px">
+        <div class="footer-col" style="flex: 1; min-width: 320px">
           <div class="footer-location-wrapper">
             <div>
               <h4>Localização</h4>
-              <p>
-                Rua 23, quadra 61, lote 3<br />Parque 9<br />Luziânia, Goiás<br />CEP:
-                72.853-061
-              </p>
+              <p>Rua 23, quadra 61, lote 3<br />Parque 9, Luziânia - GO<br />CEP: 72.853-061</p>
             </div>
             <div class="footer-map-container">
-              <iframe
-                src="https://maps.google.com/maps?q=-16.156250,-47.946417&t=&z=18&ie=UTF8&iwloc=&output=embed"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-              ></iframe>
+              <iframe src="https://maps.google.com/maps?q=-16.156250,-47.946417&t=&z=18&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
           </div>
         </div>
         <div class="footer-col">
-          <h4>Contato</h4>
-          <p>
-            Nosso agendamento é inteiramente realizado via atendimento
-            inteligente. Clique na Assistente Virtual (Lana) no canto inferior!
-          </p>
+          <h4>Contato & Horários</h4>
+          <p>Atendimento inteligente 24h na assistente virtual ou diretamente pelo WhatsApp com a profissional Layana: (61) 9598-1186.</p>
         </div>
       </div>
       <div class="footer-bottom">
-        &copy; 2026 Lana Wolf Art. Todos os direitos reservados.
+        &copy; 2026 Lana Wolf Art & Lana Supply Pro. Todos os direitos reservados.
       </div>
     </footer>
 
     <!-- Floating WhatsApp -->
-    <a href="https://wa.me/556195981186" target="_blank" class="whatsapp-float">
+    <a href="https://wa.me/556195981186" target="_blank" class="whatsapp-float" aria-label="Falar no WhatsApp">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path d="M12.031 21.722l-3.146.85 1.13-3.082a9.71 9.71 0 01-1.396-4.99c0-5.362 4.364-9.725 9.728-9.725 5.362 0 9.725 4.363 9.725 9.725 0 5.363-4.363 9.725-9.725 9.725a9.71 9.71 0 01-5.016-1.38zM18.15 15.69c-.282-.142-1.673-.826-1.932-.92-.258-.094-.447-.142-.636.142-.188.283-.728.92-.893 1.11-.164.188-.33.212-.612.07a7.925 7.925 0 01-2.327-1.436 8.766 8.766 0 01-1.616-2.007c-.164-.283-.017-.436.124-.577.127-.127.283-.33.424-.495.141-.165.188-.283.283-.472.094-.188.047-.354-.024-.495-.07-.142-.636-1.533-.872-2.1-.228-.543-.46-.47-.636-.478-.164-.008-.353-.008-.542-.008a1.037 1.037 0 00-.754.354c-.26.283-.99.967-.99 2.358s1.014 2.735 1.155 2.924c.141.188 1.993 3.042 4.827 4.267.674.292 1.2.466 1.61.597.676.216 1.293.185 1.78.112.545-.082 1.673-.683 1.909-1.344.236-.66.236-1.226.165-1.344-.07-.118-.26-.188-.543-.33z"/>
       </svg>
     </a>
 
-    <!-- Sim Modal -->
-    <div class="sim-modal-overlay" id="simModalOverlay">
-      <div class="sim-modal">
-        <button class="btn-close-modal" onclick="closeSimModal()">×</button>
-
-        <!-- Step 1: Info & Prompt -->
-        <div class="sim-step active" id="simStep1">
-          <h3 id="simTitle">Procedimento</h3>
-          <p class="sim-price" id="simPrice">R$ 0,00</p>
-          <p
-            style="
-              margin-bottom: 25px;
-              color: var(--text-light);
-              line-height: 1.6;
-            "
-          >
-            Gostaria de visualizar como a sua fisionomia pode ficar ainda mais
-            deslumbrante com este procedimento?
-          </p>
-          <button
-            class="btn-primary"
-            style="width: 100%; padding: 14px; cursor: pointer; font-size: 1rem"
-            onclick="nextSimStep()"
-          >
-            Simular Meu Resultado
-          </button>
-        </div>
-
-        <!-- Step 2: Upload -->
-        <div class="sim-step" id="simStep2">
-          <h3>Sua Simulação</h3>
-          <div id="simDynamicChoices" style="text-align: left"></div>
-          <p
-            style="
-              font-size: 0.95rem;
-              margin-bottom: 12px;
-              color: var(--text-light);
-            "
-          >
-            Por fim, envie uma foto *bem alinhada e centralizada* no seu rosto:
-          </p>
-          <input type="file" id="simImage" accept="image/png, image/jpeg" />
-          <button
-            class="btn-primary"
-            style="
-              width: 100%;
-              padding: 14px;
-              cursor: pointer;
-              margin-top: 10px;
-              font-size: 1rem;
-            "
-            onclick="runSimulation()"
-          >
-            Gerar Transformação ✨
-          </button>
-          <p style="font-size: 0.75rem; color: #a69c9a; margin-top: 15px">
-            Desenvolvido com IA Avançada.
-          </p>
-        </div>
-
-        <!-- Step 3: Loading -->
-        <div class="sim-step sim-loading" id="simStep3">
-          <h3 style="margin-bottom: 5px">Analisando seus traços...</h3>
-          <p style="color: var(--text-light); font-size: 0.9rem">
-            Aplicando o procedimento com cuidado
-          </p>
-          <div style="margin-top: 25px">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-          </div>
-        </div>
-
-        <!-- Step 4: Result -->
-        <div class="sim-step" id="simStep4">
-          <h3 style="margin-bottom: 5px">Seu Novo Visual!</h3>
-          <img
-            id="simResultImg"
-            class="sim-img-result"
-            src=""
-            alt="Resultado da Simulação"
-          />
-          <div
-            style="
-              background: rgba(201, 130, 118, 0.08);
-              padding: 15px;
-              border-radius: 12px;
-              margin-bottom: 25px;
-              border-left: 3px solid var(--primary);
-            "
-          >
-            <p
-              id="simPraise"
-              style="
-                font-size: 0.95rem;
-                line-height: 1.6;
-                color: var(--secondary);
-                text-align: left;
-                font-style: italic;
-                margin: 0;
-              "
-            ></p>
-          </div>
-          <button
-            class="btn-primary"
-            style="width: 100%; padding: 14px; cursor: pointer; font-size: 1rem"
-            onclick="closeSimModalAndChat()"
-          >
-            Amei! Quero Agendar 👉
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- MediaPipe Face Detection -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/@mediapipe/face_detection/face_detection.js"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"
-      crossorigin="anonymous"
-    ></script>
-
-    <!-- Integrator Script -->
+    <!-- Main Scripts: Mobile Menu & Lana Virtual Assistant -->
     <script>
-      async function detectFace(imageElement) {
-        return new Promise((resolve) => {
-          const faceDetection = new FaceDetection({
-            locateFile: (file) =>
-              `https://cdn.jsdelivr.net/npm/@mediapipe/face_detection/${file}`,
-          });
+      // Mobile Menu Drawer
+      window.toggleMobileMenu = function () {
+        const drawer = document.getElementById("mobileDrawer");
+        if (drawer) {
+          drawer.classList.toggle("open");
+        }
+      };
 
-          faceDetection.setOptions({
-            model: "short",
-            minDetectionConfidence: 0.5,
-          });
+      const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+      if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener("click", window.toggleMobileMenu);
+      }
 
-          faceDetection.onResults((results) => {
-            if (results.detections && results.detections.length > 0)
-              resolve(results.detections[0]);
-            else resolve(null);
-          });
+      // Chatbot Implementation
+      const chatBody = document.getElementById("chatBody");
+      const chatInput = document.getElementById("chatInput");
+      const sendBtn = document.getElementById("sendBtn");
+      const typingIndicator = document.getElementById("typingIndicator");
 
-          faceDetection.send({ image: imageElement });
+      const BACKEND_URL = "/api/chat";
+      let chatHistory = [];
+
+      const systemInstruction = `Você é a Lana, assistente inteligente oficial da Lana Wolf Art e da Lana Supply Pro em Luziânia.
+      Missão: Atender com excelência e acolhimento direcionando para o canal correto:
+      1. Procedimentos do Studio (B2C): Extensão de Cílios (a partir de R$ 150), Micro de Sobrancelhas (R$ 400), Micro Labial (R$ 400), Alongamento de Unhas (R$ 130-180), Piercings (R$ 60-190). Link de agendamento: https://lanawolfart.cloud/procedimentos
+      2. Cursos & Mentoria: Formação em Cílios, Micropigmentação e Design com Layana Wolf (desde 2012 em bancada). Kit aluna incluso. Link: https://lanawolfart.cloud/cursos
+      3. Lana Supply Pro (B2B): Insumos profissionais (Adesivo Booble Rubi R$ 95/R$ 89 no Pix, Nagaraku Y R$ 38, pigmentos RBKollors R$ 165). Pronta entrega no Parque 9 ou Uber Flash/motoboy. Link: https://lanawolfart.cloud/pro
+      WhatsApp de agendamento e dúvidas: (61) 9598-1186.
+      Seja calorosa, objetiva, use emojis e formate respostas com listas ou tabelas se solicitado.`;
+
+      function scrollToBottom() {
+        chatBody.scrollTop = chatBody.scrollHeight;
+      }
+
+      function appendMessage(text, senderType) {
+        const row = document.createElement("div");
+        row.className = `message-row ${senderType}`;
+
+        const msg = document.createElement("div");
+        msg.className = `message ${senderType}`;
+
+        let formattedText = text.replace(/\n/g, "<br>");
+        formattedText = formattedText.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+
+        // Format links if any
+        formattedText = formattedText.replace(/(https:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" style="color:var(--primary-dark); font-weight:600; text-decoration:underline;">$1</a>');
+
+        msg.innerHTML = formattedText;
+        row.appendChild(msg);
+
+        chatBody.insertBefore(row, typingIndicator);
+        scrollToBottom();
+      }
+
+      async function sendMessage() {
+        const text = chatInput.value.trim();
+        if (!text) return;
+
+        appendMessage(text, "user");
+        chatInput.value = "";
+
+        typingIndicator.classList.add("active");
+        scrollToBottom();
+
+        chatHistory.push({
+          role: "user",
+          parts: [{ text: text }],
         });
-      }
 
-      function getFacePoints(detection, width, height) {
-        const box = detection.boundingBox;
-        const x = box.xCenter * width;
-        const y = box.yCenter * height;
-        const w = box.width * width;
-        const h = box.height * height;
-
-        // Extrair landmarks reais do MediaPipe (6 keypoints)
-        // [0]=Right Eye, [1]=Left Eye, [2]=Nose Tip, [3]=Mouth Center, [4]=Right Ear, [5]=Left Ear
-        const landmarks = detection.landmarks || [];
-        const rightEye = landmarks[0] ? { x: landmarks[0].x * width, y: landmarks[0].y * height } : null;
-        const leftEye = landmarks[1] ? { x: landmarks[1].x * width, y: landmarks[1].y * height } : null;
-        const noseTip = landmarks[2] ? { x: landmarks[2].x * width, y: landmarks[2].y * height } : null;
-        const mouthCenter = landmarks[3] ? { x: landmarks[3].x * width, y: landmarks[3].y * height } : null;
-
-        return {
-          centerX: x,
-          centerY: y,
-          width: w,
-          height: h,
-          top: y - h / 2,
-          bottom: y + h / 2,
-          left: x - w / 2,
-          right: x + w / 2,
-          rightEye,
-          leftEye,
-          noseTip,
-          mouthCenter,
-        };
-      }
-      // Funções Globais da UI do Simulador (Sim Modal)
-      window.closeSimModal = function () {
-        document.getElementById("simModalOverlay").classList.remove("active");
-        setTimeout(() => {
-          document.getElementById("simStep1").classList.add("active");
-        }, 300); // re-set steps
-      };
-      window.nextSimStep = function () {
-        document
-          .querySelectorAll(".sim-step")
-          .forEach((el) => el.classList.remove("active"));
-        document.getElementById("simStep2").classList.add("active");
-      };
-      window.closeSimModalAndChat = function () {
-        window.closeSimModal();
-        const chatSection = document.getElementById("assistente-virtual");
-        if (chatSection) {
-          chatSection.scrollIntoView({ behavior: "smooth" });
-        }
-      };
-
-      // Resize utility before upload: letterbox sem cortar (browser já aplica EXIF)
-      function processImageForOpenAI(file, callback) {
-        const imgReader = new FileReader();
-        imgReader.onload = function (ev) {
-          const img = new Image();
-          img.onload = function () {
-            const targetSize = 1024;
-            const canvas = document.createElement("canvas");
-            canvas.width = targetSize;
-            canvas.height = targetSize;
-            const ctx = canvas.getContext("2d");
-            ctx.fillStyle = "#808080";
-            ctx.fillRect(0, 0, targetSize, targetSize);
-
-            const scale = Math.min(
-              targetSize / img.width,
-              targetSize / img.height,
-            );
-            const drawW = img.width * scale;
-            const drawH = img.height * scale;
-            const dx = (targetSize - drawW) / 2;
-            const dy = (targetSize - drawH) / 2;
-            ctx.drawImage(img, dx, dy, drawW, drawH);
-
-            canvas.toBlob((blob) => callback(blob), "image/png");
-          };
-          img.src = ev.target.result;
-        };
-        imgReader.readAsDataURL(file);
-      }
-
-      // Aplica rotação/flip do EXIF gerando um canvas pronto para uso
-      function drawWithOrientation(img, orientation) {
-        let w = img.width,
-          h = img.height;
-        const swap = (o) => [5, 6, 7, 8].includes(o);
-        const canvas = document.createElement("canvas");
-        canvas.width = swap(orientation) ? h : w;
-        canvas.height = swap(orientation) ? w : h;
-        const ctx = canvas.getContext("2d");
-
-        switch (orientation) {
-          case 2: // flip H
-            ctx.translate(w, 0);
-            ctx.scale(-1, 1);
-            break;
-          case 3: // 180
-            ctx.translate(w, h);
-            ctx.rotate(Math.PI);
-            break;
-          case 4: // flip V
-            ctx.translate(0, h);
-            ctx.scale(1, -1);
-            break;
-          case 5: // 90 CW + flip H
-            ctx.rotate(0.5 * Math.PI);
-            ctx.translate(0, -h);
-            ctx.scale(1, -1);
-            break;
-          case 6: // 90 CW
-            ctx.rotate(0.5 * Math.PI);
-            ctx.translate(0, -h);
-            break;
-          case 7: // 90 CCW + flip H
-            ctx.rotate(-0.5 * Math.PI);
-            ctx.translate(-w, 0);
-            ctx.scale(1, -1);
-            break;
-          case 8: // 90 CCW
-            ctx.rotate(-0.5 * Math.PI);
-            ctx.translate(-w, 0);
-            break;
-          default:
-            // 1: sem rotação
-            break;
-        }
-
-        ctx.drawImage(img, 0, 0);
-        return canvas;
-      }
-
-      window.runSimulation = function () {
-        const imgInput = document.getElementById("simImage");
-        const title = document.getElementById("simTitle").innerText;
-
-        let promptInput = "";
-        const selects = document.querySelectorAll(
-          "#simDynamicChoices select.sim-choice-box",
-        );
-        let isSelectsValid = true;
-        if (selects.length > 0) {
-          const parts = [];
-          selects.forEach((s) => {
-            if (!s.value) isSelectsValid = false;
-            parts.push(s.dataset.label + ": " + s.value);
+        try {
+          const response = await fetch(BACKEND_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              systemInstruction: { parts: [{ text: systemInstruction }] },
+              contents: chatHistory,
+              generationConfig: { temperature: 0.7, maxOutputTokens: 600 },
+            }),
           });
-          if (!isSelectsValid) {
-            alert(
-              "Por favor, selecione todas as opções da simulação antes de continuar.",
-            );
-            return;
-          }
-          promptInput = parts.join(", ");
-        } else {
-          const fbText = document.getElementById("fallbackPrompt");
-          if (fbText) promptInput = fbText.value;
-        }
 
-        if (!imgInput.files || imgInput.files.length === 0) {
-          alert("Por favor, selecione uma foto sua limpa e bem iluminada.");
-          return;
-        }
+          const data = await response.json();
 
-        const simBtn = document.querySelector("#simStep2 .btn-primary");
-        if (simBtn) {
-          simBtn.disabled = true;
-          simBtn.innerText = "Processando...";
-        }
-
-        document
-          .querySelectorAll(".sim-step")
-          .forEach((el) => el.classList.remove("active"));
-        document.getElementById("simStep3").classList.add("active");
-
-        const file = imgInput.files[0];
-        processImageForOpenAI(file, async function (imageBlob) {
-          const img = new Image();
-          img.src = URL.createObjectURL(imageBlob);
-
-          img.onload = async function () {
-            const detection = await detectFace(img);
-            if (!detection) {
-              alert(
-                "Não consegui encontrar um rosto na foto. Envie uma foto frontal, bem iluminada e com o rosto inteiro visível.",
-              );
-              if (simBtn) {
-                simBtn.disabled = false;
-                simBtn.innerText = "Gerar Transformação ✨";
-              }
-              document
-                .querySelectorAll(".sim-step")
-                .forEach((el) => el.classList.remove("active"));
-              document.getElementById("simStep2").classList.add("active");
-              return;
-            }
-
-            // Create a dynamic targeted mask based on the procedure
-            const maskCanvas = document.createElement("canvas");
-            maskCanvas.width = 1024;
-            maskCanvas.height = 1024;
-            const maskCtx = maskCanvas.getContext("2d");
-
-            // Para a Stability AI (v2beta inpaint):
-            // BRANCO = EDITAR | PRETO = PRESERVAR (seguindo docs oficiais)
-            maskCtx.fillStyle = "black";
-            maskCtx.fillRect(0, 0, 1024, 1024);
-
-            maskCtx.globalCompositeOperation = "source-over";
-            maskCtx.fillStyle = "white";
-            maskCtx.beginPath();
-
-            const proc = title.toLowerCase();
-            const userText = promptInput.toLowerCase();
-
-            let cx = 512;
-            let cy = 512;
-            let fw = 400; // default width fallback
-            let fh = 500; // default height fallback
-            let rEye = null, lEye = null, nose = null, mouth = null;
-
-            if (detection) {
-              const face = getFacePoints(detection, 1024, 1024);
-              cx = face.centerX;
-              cy = face.centerY;
-              fw = face.width;
-              fh = face.height;
-              rEye = face.rightEye;
-              lEye = face.leftEye;
-              nose = face.noseTip;
-              mouth = face.mouthCenter;
-            }
-
-            // 🎯 REGIÕES INTELIGENTES com Landmarks Reais do MediaPipe
-
-            if (proc.includes("cílios") || proc.includes("cilios")) {
-              // EYELASH STRIP: arco curvo sobre a pálpebra superior (NÃO elipse cheia)
-              const stripWidth = fh * 0.045; // espessura da faixa de cílios
-              maskCtx.lineWidth = stripWidth;
-              maskCtx.strokeStyle = 'white';
-              maskCtx.lineCap = 'round';
-
-              const lashRadius = fw * 0.12;
-              const lashYOffset = fh * 0.015; // ligeiramente acima do keypoint do olho
-
-              if (rEye) {
-                maskCtx.beginPath();
-                maskCtx.arc(rEye.x, rEye.y - lashYOffset, lashRadius, Math.PI, 0);
-                maskCtx.stroke();
-              }
-              if (lEye) {
-                maskCtx.beginPath();
-                maskCtx.arc(lEye.x, lEye.y - lashYOffset, lashRadius, Math.PI, 0);
-                maskCtx.stroke();
-              }
-
-            } else if (proc.includes("sobrancelha")) {
-              // Sobrancelhas: elipses posicionadas acima dos olhos reais
-              const browYOffset = fh * 0.06;
-              const browRX = fw * 0.16;
-              const browRY = fh * 0.05;
-
-              if (rEye) {
-                maskCtx.beginPath();
-                maskCtx.ellipse(rEye.x, rEye.y - browYOffset, browRX, browRY, 0, 0, Math.PI * 2);
-                maskCtx.fill();
-              }
-              if (lEye) {
-                maskCtx.beginPath();
-                maskCtx.ellipse(lEye.x, lEye.y - browYOffset, browRX, browRY, 0, 0, Math.PI * 2);
-                maskCtx.fill();
-              }
-
-            } else if (
-              proc.includes("labial") ||
-              userText.includes("boca") ||
-              userText.includes("labio") ||
-              userText.includes("lábio")
-            ) {
-              // Boca: usar keypoint real
-              const mX = mouth ? mouth.x : cx;
-              const mY = mouth ? mouth.y : cy + fh * 0.22;
-              maskCtx.beginPath();
-              maskCtx.ellipse(mX, mY, fw * 0.18, fh * 0.07, 0, 0, Math.PI * 2);
-              maskCtx.fill();
-
-            } else if (proc.includes("piercing")) {
-              const nX = nose ? nose.x : cx;
-              const nY = nose ? nose.y : cy;
-              if (userText.includes("septo")) {
-                maskCtx.arc(nX, nY + fh * 0.03, fw * 0.05, 0, Math.PI * 2);
-              } else if (userText.includes("nariz") || userText.includes("nostril")) {
-                maskCtx.arc(nX + fw * 0.04, nY, fw * 0.05, 0, Math.PI * 2);
-              } else if (userText.includes("orelha") || userText.includes("tragus") || userText.includes("helix")) {
-                maskCtx.ellipse(cx + fw * 0.55, cy - fh * 0.05, fw * 0.15, fh * 0.25, 0, 0, Math.PI * 2);
-                maskCtx.ellipse(cx - fw * 0.55, cy - fh * 0.05, fw * 0.15, fh * 0.25, 0, 0, Math.PI * 2);
-              } else {
-                maskCtx.arc(nX, nY, fw * 0.06, 0, Math.PI * 2);
-              }
-              maskCtx.fill();
-
-            } else {
-              maskCtx.arc(cx, cy, fw * 0.14, 0, Math.PI * 2);
-              maskCtx.fill();
-            }
-
-            // --- Gaussian Blur para suavizar bordas da máscara (feathering) ---
-            const blurCanvas = document.createElement('canvas');
-            blurCanvas.width = 1024;
-            blurCanvas.height = 1024;
-            const blurCtx = blurCanvas.getContext('2d');
-            blurCtx.filter = 'blur(12px)';
-            blurCtx.drawImage(maskCanvas, 0, 0);
-
-            // DEBUG (descomente para depurar a máscara)
-            // const preview = document.createElement('div');
-            // preview.style.cssText = 'position:fixed; top:10px; left:10px; z-index:99999; background:white; padding:10px; border:2px solid red; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);';
-            // preview.innerHTML = '<h3 style="margin:0 0 5px 0; font-size:14px;">DEBUG: Máscara</h3>';
-            // const mImg = document.createElement('img');
-            // mImg.src = blurCanvas.toDataURL();
-            // mImg.style.width = '200px';
-            // preview.appendChild(mImg);
-            // document.body.appendChild(preview);
-            // setTimeout(() => document.body.removeChild(preview), 7000);
-
-            blurCanvas.toBlob(function (maskBlob) {
-              const formData = new FormData();
-              formData.append("image", imageBlob, "image.png");
-              formData.append("mask", maskBlob, "mask.png");
-              formData.append("prompt", promptInput);
-              formData.append("procedure", title);
-
-              fetch("/api/simulate", {
-                method: "POST",
-                body: formData,
-              })
-                .then((r) => r.json())
-                .then((data) => {
-                  if (simBtn) {
-                    simBtn.disabled = false;
-                    simBtn.innerText = "Gerar Transformação ✨";
-                  }
-                  document
-                    .querySelectorAll(".sim-step")
-                    .forEach((el) => el.classList.remove("active"));
-                  if (data.error) {
-                    alert(
-                      "Houve um erro na simulação: " +
-                        data.error +
-                        "\nDetalhes: " +
-                        (data.details || ""),
-                    );
-                    window.closeSimModal();
-                  } else {
-                    document.getElementById("simStep4").classList.add("active");
-                    document.getElementById("simResultImg").src =
-                      data.imageUrl || "";
-                    console.log(
-                      "Sim result img length",
-                      data.imageUrl ? data.imageUrl.length : 0,
-                      "promptUsed",
-                      data.promptUsed,
-                    );
-                    document.getElementById("simPraise").innerText =
-                      "« " + data.text + " »";
-                  }
-                })
-                .catch((err) => {
-                  console.error(err);
-                  if (simBtn) {
-                    simBtn.disabled = false;
-                    simBtn.innerText = "Gerar Transformação ✨";
-                  }
-                  alert("Erro de conexão ao simular.");
-                  window.closeSimModal();
-                });
-            }, "image/png");
-          };
-        });
-      };
-
-      const procedureOptions = {
-        "Design de Sobrancelhas": [
-          {
-            label: "Estilo",
-            name: "estilo",
-            options: [
-              "Clean up (apenas limpeza)",
-              "High arch (arqueada)",
-              "Straight brow (reta/estilo coreano)",
-              "Thick/Bushy (grossa e natural)",
-            ],
-          },
-          {
-            label: "Acabamento",
-            name: "acabamento",
-            options: [
-              "Soft shading (sombreado leve com sombra)",
-              "Defined concealer outline (contorno marcado com corretivo)",
-              "Natural brow gel look",
-            ],
-          },
-          {
-            label: "Técnica",
-            name: "tecnica",
-            options: ["Tweezers (pinça)", "Threading (linha)", "Waxing (cera)"],
-          },
-        ],
-        "Micro de Sobrancelhas": [
-          {
-            label: "Técnica",
-            name: "tecnica",
-            options: [
-              "Microblading (fio a fio ultra fino)",
-              "Powder Brows/Ombré (efeito pixelado/sombra)",
-              "Nanoblading",
-            ],
-          },
-          {
-            label: "Pigmentação",
-            name: "pigmentacao",
-            options: [
-              "Soft pixel effect (efeito pó)",
-              "Crisp hair strokes (fios bem definidos)",
-            ],
-          },
-          {
-            label: "Cor",
-            name: "cor",
-            options: ["Ash brown (frio)", "Warm brown (quente)", "Taupe"],
-          },
-        ],
-        "Micro Labial": [
-          {
-            label: "Efeito",
-            name: "efeito",
-            options: [
-              "Lip Blush (efeito batom suave)",
-              "Aquarelle Lips (sem contorno marcado)",
-              "Full Lips (cor sólida e intensa)",
-            ],
-          },
-          {
-            label: "Acabamento",
-            name: "acabamento",
-            options: [
-              "Velvet matte (fosco aveludado)",
-              "Glossy/Hydrated look (efeito molhado)",
-              "Sheer tint (translúcido)",
-            ],
-          },
-          {
-            label: "Contorno",
-            name: "contorno",
-            options: [
-              "Soft blurred borders (bordas esfumadas)",
-              "Defined vermilion border (contorno nítido)",
-            ],
-          },
-        ],
-        "Tatuagem / Fine Line": [
-          {
-            label: "Traço",
-            name: "traco",
-            options: [
-              "Ultra fine line (traço agulha 1)",
-              "Bold line (traço grosso)",
-              "Dotwork (pontilhismo)",
-            ],
-          },
-          {
-            label: "Estilo",
-            name: "estilo",
-            options: [
-              "Minimalist",
-              "Micro-realism",
-              "Geometric",
-              "Floral botanical",
-            ],
-          },
-          {
-            label: "Pigmento",
-            name: "pigmento",
-            options: [
-              "Solid black ink",
-              "Grey wash shading (sombreado cinza)",
-              "Fine line color accents",
-            ],
-          },
-        ],
-        "Alongamento de Unhas": [
-          {
-            label: "Formato (Shape)",
-            name: "formato",
-            options: [
-              "Almond (amendoada)",
-              "Coffin/Ballerina",
-              "Square (quadrada)",
-              "Stiletto",
-            ],
-          },
-          {
-            label: "Comprimento",
-            name: "comprimento",
-            options: ["Short natural", "Medium salon length", "Extra long"],
-          },
-          {
-            label: "Acabamento",
-            name: "acabamento",
-            options: [
-              "High gloss top coat",
-              "Matte finish",
-              "Milky white",
-              "French tip ombre",
-            ],
-          },
-        ],
-        "Manicure Intacta": [
-          {
-            label: "Cutícula",
-            name: "cuticula",
-            options: ["E-file manicure", "Russian manicure"],
-          },
-          {
-            label: "Esmaltação",
-            name: "esmaltacao",
-            options: [
-              "Apex structure (curvatura correta da unha)",
-              "Under the cuticle color application (cor que nasce debaixo da pele)",
-            ],
-          },
-          {
-            label: "Cor/Brilho",
-            name: "cor",
-            options: ["Solid gel polish color", "Cat-eye magnetic effect"],
-          },
-        ],
-        "Spa dos Pés / Pedicure": [
-          {
-            label: "Textura da Pele",
-            name: "textura",
-            options: [
-              "Soft smooth skin texture",
-              "Callus-free heels",
-              "Exfoliated glow",
-            ],
-          },
-          {
-            label: "Finalização",
-            name: "finalizacao",
-            options: [
-              "Moisturized skin with essential oils",
-              "Relaxing foot bath with rose petals",
-            ],
-          },
-          {
-            label: "Unhas",
-            name: "unhas",
-            options: ["Square shaped toenails", "Classic white/red gel polish"],
-          },
-        ],
-        "Body Piercing": [
-          {
-            label: "Joia",
-            name: "joia",
-            options: ["Titanium G23", "14k Gold", "Surgical steel"],
-          },
-          {
-            label: "Tipo de Joia",
-            name: "tipo",
-            options: [
-              "Labret stud",
-              "Hoop/Ring (argola)",
-              "Barbell",
-              "Clicker with zircon crystals",
-            ],
-          },
-          {
-            label: "Localização",
-            name: "localizacao",
-            options: ["Tragus", "Septum", "Helix", "Nostril"],
-          },
-        ],
-        "Extensão de Cílios": [
-          {
-            label: "Estilo",
-            name: "estilo",
-            options: [
-              "Fio a Fio",
-              "Volume Brasileiro",
-              "Volume Russo",
-              "Fox Eyes",
-              "Efeito Rímel",
-            ],
-          },
-          {
-            label: "Comprimento",
-            name: "comprimento",
-            options: ["Curto/Natural", "Médio", "Longo/Glamour"],
-          },
-          {
-            label: "Curvatura",
-            name: "curvatura",
-            options: ["Suave (C)", "Acentuada (D)", "Extrema (L)"],
-          },
-        ],
-      };
-
-      window.openSimulationModal = function (title, price) {
-        console.log("Abrindo modal para: ", title, price);
-        // Reset to defaults
-        document
-          .querySelectorAll(".sim-step")
-          .forEach((el) => el.classList.remove("active"));
-        document.getElementById("simStep1").classList.add("active");
-
-        const choicesContainer = document.getElementById("simDynamicChoices");
-        choicesContainer.innerHTML = "";
-        const opts = procedureOptions[title];
-        if (opts) {
-          opts.forEach((config) => {
-            const label = document.createElement("label");
-            label.className = "sim-choice-label";
-            label.innerText = config.label;
-
-            const select = document.createElement("select");
-            select.className = "sim-choice-box";
-            select.name = config.name;
-            select.required = true;
-            select.dataset.label = config.label;
-
-            const defaultOpt = document.createElement("option");
-            defaultOpt.value = "";
-            defaultOpt.innerText = "Selecione...";
-            defaultOpt.disabled = true;
-            defaultOpt.selected = true;
-            select.appendChild(defaultOpt);
-
-            config.options.forEach((o) => {
-              const opt = document.createElement("option");
-              opt.value = o;
-              opt.innerText = o;
-              select.appendChild(opt);
+          if (data.candidates && data.candidates.length > 0) {
+            const botResponse = data.candidates[0].content.parts[0].text;
+            chatHistory.push({
+              role: "model",
+              parts: [{ text: botResponse }],
             });
 
-            choicesContainer.appendChild(label);
-            choicesContainer.appendChild(select);
-          });
-        } else {
-          choicesContainer.innerHTML = `<label class="sim-choice-label">O que espera desse procedimento?</label>
-                          <textarea class="sim-choice-box" id="fallbackPrompt" rows="3" placeholder="Ex: Deixar mais arqueado, visual natural..."></textarea>`;
-        }
-
-        document.getElementById("simImage").value = "";
-
-        document.getElementById("simTitle").innerText = title;
-        document.getElementById("simPrice").innerText = price;
-        document.getElementById("simModalOverlay").classList.add("active");
-      };
-
-      document.addEventListener("DOMContentLoaded", () => {
-        console.log("DOM loaded. Attaching events to service cards...");
-        // --- Attach dynamically UI handlers for services cards --- //
-        const servicePrices = {
-          "Design de Sobrancelhas": "R$ 40",
-          "Micro de Sobrancelhas": "R$ 400",
-          "Extensão de Cílios": "A partir de R$ 150",
-          "Micro Labial": "R$ 400",
-          "Tatuagem / Fine Line": "Preços a Consultar",
-          "Alongamento de Unhas": "A partir de R$ 130",
-          "Manicure Intacta": "R$ 50",
-          "Spa dos Pés / Pedicure": "R$ 50",
-          "Body Piercing": "Preços a Consultar",
-        };
-
-        const cards = document.querySelectorAll(".service-card");
-        console.log("Found " + cards.length + " cards.");
-
-        cards.forEach((card) => {
-          card.style.cursor = "pointer";
-          const originalBg = card.style.background || "white";
-          card.addEventListener(
-            "mouseenter",
-            () => (card.style.background = "#fffafa"),
-          ); // visual feedback
-          card.addEventListener(
-            "mouseleave",
-            () => (card.style.background = originalBg),
-          );
-          card.addEventListener("click", () => {
-            const title = card.querySelector("h3").innerText;
-            const price = servicePrices[title] || "Valores Médios na Tabela";
-            window.openSimulationModal(title, price);
-          });
-        });
-
-        const chatBtn = document.getElementById("lanaChatBtn");
-        const chatWindow = document.getElementById("lanaChatWindow");
-        const chatBody = document.getElementById("chatBody");
-        const chatInput = document.getElementById("chatInput");
-        const sendBtn = document.getElementById("sendBtn");
-        const typingIndicator = document.getElementById("typingIndicator");
-
-        // Configuração do Backend da API
-        const BACKEND_URL = "/api/chat";
-
-        // Histórico de conversa para a API manter o contexto
-        let chatHistory = [];
-
-        // Instruções de Sistema (Persona da Lana - Híbrida Studio + Lana Supply Pro)
-        const systemInstruction = `Você é a Lana, assistente inteligente oficial da Lana Wolf Art e da Lana Supply Pro.
-      # DIRETRIZES E PERSONA
-      - Perfil: Especialista em estética avançada e consultora de insumos profissionais de beleza, segura, empática e atenciosa.
-      - Missão: Atender com excelência a dois públicos:
-        1. Clientes do Studio (B2C): Mulheres que buscam procedimentos estéticos de alto padrão e transformação da autoestima.
-        2. Profissionais e Alunas (B2B): Lash designers e micropigmentadoras que buscam insumos de bancada (Booble, RBKollors, Diamond, descartáveis e kits) com pronta entrega em Luziânia e Jardim Ingá.
-        3. Alunas interessadas em Cursos: Informações sobre turmas de extensão de cílios, micropigmentação e design com a Layana Wolf.
-      - Atendimento de Procedimentos: Exclusivo ao público feminino (única exceção é Body Piercing, onde atendemos homens e mulheres).
-      - Tom de Voz: Calorosa, elegante, com emojis leves e respostas claras e diretas.
-
-      # CATÁLOGO 1: PROCEDIMENTOS DO STUDIO (CLIENTE FINAL)
-      - Piercings: Orelha (R$ 60), Nostril (R$ 65), Sobrancelha (R$ 60), Septo (R$ 60), Umbigo (R$ 75), Boca (R$ 60), Íntima (R$ 190), Mamilo (R$ 180), Microdermal (R$ 200), Sulface (R$ 185).
-      - Micropigmentação e Sobrancelhas: Micro Shadow/Fio a Fio (R$ 400 | Retoque R$ 200), Micro/Revitalização Labial (R$ 400 | Retoque R$ 200), Design com Henna (R$ 55), Design Simples (R$ 40).
-      - Cílios (Extensão): Fio a Fio/Vol Híbrido (R$ 150 | Manu R$ 85), Vol Brasileiro (R$ 170 | Manu R$ 95), Vol Egípcio (R$ 185 | Manu R$ 100), Fox (R$ 195 | Manu R$ 100), Efeito Rímel (R$ 100 | Manu R$ 65), Vol Russo (R$ 205 | Manu R$ 110), Mega Volume (R$ 240 | Manu R$ 135).
-      - Unhas: Fibra de Vidro (R$ 180), Molde F1 (R$ 130), Banho de Gel (R$ 95), Manutenção de Gel (R$ 95 a R$ 130), Pé e Mão Esmaltação Tradicional (R$ 50). Atendidas pela profissional Amanda (WhatsApp: 61 99966-7225).
-      - Tatuagem Fine-Line: Sob consulta.
-      - Agendamentos: Informar que a profissional Layana finalizará o horário pelo WhatsApp: (61) 9598-1186.
-
-      # CATÁLOGO 2: LANA SUPPLY PRO (INSUMOS PROFISSIONAIS A PRONTA ENTREGA)
-      - Adesivos Booble: Rubi 3ml (R$ 95 | R$ 89 no Pix - secagem 0.5-1s, retenção 7-8 semanas), Black 3ml (R$ 89 - acabamento preto flexível).
-      - Fios para Extensão: Caixas Nagaraku Y Mix 8-15mm (R$ 38 - Volume Brasileiro), Fios Booble Velvet Volume Russo (R$ 42 - ultrafinos e aveludados).
-      - Preparação e Cuidados: Primer Booble Higienizador 15ml (R$ 45), Removedor em Gel Booble 15g (R$ 48 - sem ardor).
-      - Micropigmentação: Pigmentos RBKollors Smart Pigment 15ml (Red Rose para lábios R$ 165, Jambo/Jamblack para sobrancelhas R$ 165), Pigmento Diamond Sobrancelhas 10ml (R$ 145).
-      - Biossegurança e Descartáveis: Microbrush Rosa tubo c/ 100 (R$ 22), Escovinhas c/ Glitter pacote c/ 50 (R$ 25).
-      - Kits Prontos para Alunas: Kit Aluna Lash Iniciante Completo (R$ 289), Kit Aluna Micropigmentação Lips & Brows (R$ 389).
-      - Condições de Entrega/Retirada: Pronta entrega para retirada imediata no Studio no Parque 9 (Luziânia) ou envio no mesmo dia via Uber Flash / motoboy para Luziânia, Jardim Ingá e entorno. Pagamento via Pix com desconto ou Cartão.
-      
-      # FORMATO DAS RESPOSTAS
-      - Quando solicitada a listar procedimentos ou produtos com valores, retorne em formato de TABELA markdown para facilitar a leitura.`;
-
-        // Toggle Open/Close (Only if elements exist)
-        if (chatBtn && chatWindow) {
-          chatBtn.addEventListener("click", () => {
-            const isActive = chatWindow.classList.contains("active");
-
-            if (isActive) {
-              chatWindow.classList.remove("active");
-              chatBtn.classList.remove("active");
-            } else {
-              chatWindow.classList.add("active");
-              chatBtn.classList.add("active");
-              setTimeout(() => chatInput.focus(), 300);
-              scrollToBottom();
-            }
-          });
-        }
-
-        // Utils: Scroll to bottom of chat
-        function scrollToBottom() {
-          chatBody.scrollTop = chatBody.scrollHeight;
-        }
-
-        // Append a message to the UI
-        function appendMessage(text, senderType) {
-          const row = document.createElement("div");
-          row.className = `message-row ${senderType}`;
-
-          const msg = document.createElement("div");
-          msg.className = `message ${senderType}`;
-
-          // Formatar quebras de linha básicas e negritos (**) do markdown que a IA manda
-          let formattedText = text.replace(/\n/g, "<br>");
-          formattedText = formattedText.replace(
-            /\*\*(.*?)\*\*/g,
-            "<strong>$1</strong>",
-          );
-
-          // Formatação simples e robusta para Tabelas
-          // IA enviou: | Procedimento | Valor | ... |---|---| | Design...
-          if (formattedText.includes("|") && formattedText.includes("---")) {
-            // Remove todos os <br> antes de processar os pipes para unificar a string
-            let cleanPipes = formattedText.replace(/<br>/g, " ");
-
-            // Encontra tudo entre o primeiro e o último pipe
-            const firstPipe = cleanPipes.indexOf("|");
-            const lastPipe = cleanPipes.lastIndexOf("|");
-
-            if (firstPipe !== -1 && lastPipe !== -1 && lastPipe > firstPipe) {
-              const tableString = cleanPipes.substring(firstPipe, lastPipe + 1);
-
-              // Quebra por pipes. Ignora itens vazios (extremos)
-              const cells = tableString.split("|").map((s) => s.trim());
-
-              // Remover índices em branco (gerados pelos pipes nas pontas) ou o divisor '---'
-              const filteredCells = cells.filter(
-                (s) => s !== "" && !s.includes("---"),
-              );
-
-              // Sabendo que a IA manda sempre 3 colunas (Procedimento | Valor | Destaca-se por...)
-              // ou no mínimo 2. Vamos checar o cabeçalho para saber o número de colunas:
-              const originalHeaders = tableString.split("---")[0];
-              const colCount =
-                originalHeaders.split("|").filter((s) => s.trim() !== "")
-                  .length || 3;
-
-              let tableHTML = `<div style="display: grid; grid-template-columns: repeat(${colCount}, 1fr); gap: 4px; margin-top: 10px; font-size: 0.85em;">`;
-
-              for (let i = 0; i < filteredCells.length; i++) {
-                // Estilo básico de célula
-                let isHeader = i < colCount;
-                let style = isHeader
-                  ? "font-weight: 600; border-bottom: 1px solid #ddd; padding-bottom: 4px;"
-                  : "padding: 4px 0; border-bottom: 1px dashed #eee;";
-
-                // Garante que o markdown bold dentro da célula seja processado (caso o regex global falhou)
-                let cellText = filteredCells[i].replace(
-                  /\*\*(.*?)\*\*/g,
-                  "<strong>$1</strong>",
-                );
-
-                tableHTML += `<div style="${style}">${cellText}</div>`;
-              }
-
-              tableHTML += `</div>`;
-
-              // Substitui a 'maçaroca' inteira do markdown pela grid div limpa
-              const stringToReplace = formattedText.substring(
-                formattedText.indexOf("|"),
-                formattedText.lastIndexOf("|") + 1,
-              );
-              formattedText = formattedText.replace(stringToReplace, tableHTML);
-            }
-          }
-
-          msg.innerHTML = formattedText;
-
-          row.appendChild(msg);
-
-          // Insert message BEFORE the typing indicator
-          chatBody.insertBefore(row, typingIndicator);
-          scrollToBottom();
-        }
-
-        // Integrado com a API da Gemini
-        async function sendMessage() {
-          const text = chatInput.value.trim();
-          if (!text) return;
-
-          // 1. Mostrar a mensagem do usuário
-          appendMessage(text, "user");
-          chatInput.value = "";
-
-          // 2. Mostrar 'Lana está digitando...'
-          typingIndicator.classList.add("active");
-          scrollToBottom();
-
-          // 3. Adicionar mensagem do usuário ao histórico do Chat
-          chatHistory.push({
-            role: "user",
-            parts: [{ text: text }],
-          });
-
-          // 4. Bater no Backend Local
-          try {
-            const response = await fetch(BACKEND_URL, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                systemInstruction: {
-                  parts: [{ text: systemInstruction }],
-                },
-                contents: chatHistory,
-                generationConfig: {
-                  temperature: 0.7,
-                  maxOutputTokens: 600,
-                },
-              }),
-            });
-
-            const data = await response.json();
-
-            if (data.candidates && data.candidates.length > 0) {
-              const botResponse = data.candidates[0].content.parts[0].text;
-
-              // Registrar resposta no histórico para lembrar do contexto
-              chatHistory.push({
-                role: "model",
-                parts: [{ text: botResponse }],
-              });
-
-              typingIndicator.classList.remove("active");
-              appendMessage(botResponse, "bot");
-            } else {
-              console.error("Erro da API Gemini:", data);
-              throw new Error("Resposta inválida da API do Gemini", data);
-            }
-          } catch (error) {
-            console.error("Erro ao chamar Gemini API:", error);
             typingIndicator.classList.remove("active");
-            appendMessage(
-              "Desculpe, estou com uma instabilidade de conexão no momento. Pode tentar mandar a mensagem de novo em alguns segundos? 🥺",
-              "bot",
-            );
-            // Remove do histórico a msg para que o usuário possa tentar novamente
-            chatHistory.pop();
+            appendMessage(botResponse, "bot");
+          } else {
+            throw new Error("Resposta inválida da API");
           }
+        } catch (error) {
+          console.error("Erro no chat:", error);
+          typingIndicator.classList.remove("active");
+          appendMessage("Desculpe, tive uma instabilidade momentânea. Pode tentar reenviar ou me chamar direto no WhatsApp pelo botão flutuante? 💖", "bot");
+          chatHistory.pop();
         }
+      }
 
-        // Bind Events Handlers
-        sendBtn.addEventListener("click", sendMessage);
-
+      if (sendBtn) sendBtn.addEventListener("click", sendMessage);
+      if (chatInput) {
         chatInput.addEventListener("keypress", (e) => {
-          if (e.key === "Enter") {
+          if (e.key === "Enter") sendMessage();
+        });
+      }
+
+      const chatChips = document.querySelectorAll(".chat-chip-btn");
+      chatChips.forEach((chip) => {
+        chip.addEventListener("click", () => {
+          const msg = chip.getAttribute("data-msg");
+          if (msg) {
+            chatInput.value = msg;
             sendMessage();
           }
         });
-
-        // Chips de Opções Rápidas no Chat
-        const chatChips = document.querySelectorAll(".chat-chip-btn");
-        chatChips.forEach((chip) => {
-          chip.addEventListener("click", () => {
-            const msg = chip.getAttribute("data-msg");
-            if (msg) {
-              chatInput.value = msg;
-              sendMessage();
-            }
-          });
-        });
-
-        // Lana Supply Pro: Filtro por Categoria e Busca em Tempo Real
-        const proFilterTabs = document.querySelectorAll(".pro-tab-btn");
-        const proProducts = document.querySelectorAll(".pro-product-card");
-        const proSearchInput = document.getElementById("proSearchInput");
-
-        let currentCategory = "todos";
-        let currentSearch = "";
-
-        function filterProProducts() {
-          proProducts.forEach((card) => {
-            const category = card.getAttribute("data-category");
-            const name = (card.getAttribute("data-name") || "").toLowerCase();
-            const textContent = card.innerText.toLowerCase();
-
-            const matchesCategory =
-              currentCategory === "todos" || category === currentCategory;
-            const matchesSearch =
-              !currentSearch ||
-              name.includes(currentSearch) ||
-              textContent.includes(currentSearch);
-
-            if (matchesCategory && matchesSearch) {
-              card.style.display = "flex";
-            } else {
-              card.style.display = "none";
-            }
-          });
-        }
-
-        if (proFilterTabs.length > 0) {
-          proFilterTabs.forEach((btn) => {
-            btn.addEventListener("click", () => {
-              proFilterTabs.forEach((b) => b.classList.remove("active"));
-              btn.classList.add("active");
-              currentCategory = btn.getAttribute("data-category");
-              filterProProducts();
-            });
-          });
-        }
-
-        if (proSearchInput) {
-          proSearchInput.addEventListener("input", (e) => {
-            currentSearch = e.target.value.trim().toLowerCase();
-            filterProProducts();
-          });
-        }
-
-        // Mobile Menu Drawer Toggle
-        window.toggleMobileMenu = function () {
-          const drawer = document.getElementById("mobileDrawer");
-          if (drawer) {
-            drawer.classList.toggle("open");
-          }
-        };
-
-        const mobileMenuBtn = document.getElementById("mobileMenuBtn");
-        if (mobileMenuBtn) {
-          mobileMenuBtn.addEventListener("click", window.toggleMobileMenu);
-        }
-
-        // Roteamento amigável e âncoras suaves (/loja, /pro, /studio, /cursos)
-        function handleRouteNavigation() {
-          const path = window.location.pathname.toLowerCase();
-          const hash = window.location.hash.toLowerCase();
-
-          if (
-            path === "/loja" ||
-            path === "/pro" ||
-            hash === "#loja" ||
-            hash === "#loja-pro" ||
-            hash === "#pro"
-          ) {
-            setTimeout(() => {
-              const el = document.getElementById("loja");
-              if (el) el.scrollIntoView({ behavior: "smooth" });
-            }, 300);
-          } else if (
-            path === "/studio" ||
-            hash === "#servicos" ||
-            hash === "#procedimentos"
-          ) {
-            setTimeout(() => {
-              const el = document.getElementById("servicos");
-              if (el) el.scrollIntoView({ behavior: "smooth" });
-            }, 300);
-          } else if (path === "/cursos" || hash === "#cursos") {
-            setTimeout(() => {
-              const el = document.getElementById("cursos");
-              if (el) el.scrollIntoView({ behavior: "smooth" });
-            }, 300);
-          }
-        }
-
-        handleRouteNavigation();
-        window.addEventListener("hashchange", handleRouteNavigation);
       });
     </script>
 
-    <!-- Firebase SDKs -->
+    <!-- Firebase SDKs for Comments -->
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
       import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
@@ -4304,22 +659,20 @@
         measurementId: "G-6DH3SGDPPJ"
       };
 
-      let app;
-      let auth;
+      let app, auth;
       try {
         app = initializeApp(firebaseConfig);
         auth = getAuth(app);
       } catch(e) {
-        console.warn("Firebase não configurado ou credenciais ausentes.", e);
+        console.warn("Firebase credentials:", e);
       }
 
       const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
         ? `http://${window.location.hostname}:8080/api`
-        : '/api'; // Produção: caminho relativo ao mesmo domínio
+        : '/api';
 
       let currentUser = null;
 
-      // DOM Elements
       const authContainer = document.getElementById('authContainer');
       const commentFormContainer = document.getElementById('commentFormContainer');
       const btnGoogleLogin = document.getElementById('btnGoogleLogin');
@@ -4342,7 +695,6 @@
         replyingToMessage.style.display = "block";
         replyingToMessage.innerHTML = `Respondendo a ${authorName}... <button onclick="cancelReply()" style="background:none;border:none;color:#999;cursor:pointer;text-decoration:underline;">Cancelar</button>`;
         commentInput.focus();
-        // Scroll to form smoothly
         document.getElementById('comentarios').scrollIntoView({ behavior: 'smooth' });
       };
 
@@ -4354,7 +706,6 @@
       function renderComment(c, isReply = false) {
         const div = document.createElement('div');
         div.className = `comment-card ${isReply ? 'reply' : ''}`;
-        
         div.innerHTML = `
           <div class="comment-header">
             <img src="${c.usuario_avatar || 'https://via.placeholder.com/40/C98276/FFFFFF?text=' + c.usuario_nome.charAt(0)}" alt="Avatar" class="comment-avatar" onerror="this.src='https://via.placeholder.com/40/C98276/FFFFFF?text=U'">
@@ -4374,19 +725,15 @@
           const res = await fetch(`${API_URL}/comentarios`);
           if (!res.ok) throw new Error("Erro ao carregar");
           const comments = await res.json();
-          
           commentsList.innerHTML = '';
           if (comments.length === 0) {
             commentsList.innerHTML = '<p style="text-align: center; color: var(--text-light);">Seja a primeira a comentar!</p>';
             return;
           }
-
           comments.forEach(c => {
             commentsList.appendChild(renderComment(c, false));
             if (c.respostas && c.respostas.length > 0) {
-              c.respostas.forEach(r => {
-                commentsList.appendChild(renderComment(r, true));
-              });
+              c.respostas.forEach(r => commentsList.appendChild(renderComment(r, true)));
             }
           });
         } catch(e) {
@@ -4394,7 +741,6 @@
         }
       }
 
-      // Initialize
       if (auth) {
         onAuthStateChanged(auth, (user) => {
           if (user) {
@@ -4407,7 +753,6 @@
             authContainer.style.display = 'block';
             commentFormContainer.style.display = 'none';
           }
-          // Re-render comments to show/hide reply buttons based on auth state
           loadComments();
         });
 
@@ -4417,40 +762,25 @@
           btnGoogleLogin.disabled = true;
           btnGoogleLogin.innerText = 'Autenticando...';
           signInWithPopup(auth, provider)
-            .then((result) => {
-              console.log("Login via popup bem-sucedido:", result.user.displayName);
+            .then(() => {
               btnGoogleLogin.disabled = false;
-              btnGoogleLogin.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" style="width:18px;height:18px;margin-right:8px;"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.1 29.2 35 24 35c-6.1 0-11-4.9-11-11s4.9-11 11-11c2.8 0 5.3 1 7.2 2.7l5.7-5.7C33.1 7.1 28.8 5 24 5 12.9 5 4 13.9 4 25s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c2.8 0 5.3 1 7.2 2.7l5.7-5.7C33.1 7.1 28.8 5 24 5 16.3 5 9.7 9.4 6.3 14.7z"/><path fill="#4CAF50" d="M24 45c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.4 36.5 26.8 37.5 24 37.5c-5.2 0-9.6-3.5-11.2-8.3l-6.5 5C9.5 40.8 16.3 45 24 45z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.3 5.8l6.2 5.2C37.1 36.7 44 31.5 44 25c0-1.3-.1-2.6-.4-3.9z"/></svg>Entrar com o Google';
             })
             .catch(error => {
-              console.error("Login Error:", error.code, error.message);
+              console.error("Login Error:", error);
               btnGoogleLogin.disabled = false;
-              btnGoogleLogin.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" style="width:18px;height:18px;margin-right:8px;"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.1 29.2 35 24 35c-6.1 0-11-4.9-11-11s4.9-11 11-11c2.8 0 5.3 1 7.2 2.7l5.7-5.7C33.1 7.1 28.8 5 24 5 12.9 5 4 13.9 4 25s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c2.8 0 5.3 1 7.2 2.7l5.7-5.7C33.1 7.1 28.8 5 24 5 16.3 5 9.7 9.4 6.3 14.7z"/><path fill="#4CAF50" d="M24 45c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.4 36.5 26.8 37.5 24 37.5c-5.2 0-9.6-3.5-11.2-8.3l-6.5 5C9.5 40.8 16.3 45 24 45z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.3 5.8l6.2 5.2C37.1 36.7 44 31.5 44 25c0-1.3-.1-2.6-.4-3.9z"/></svg>Entrar com o Google';
-              if (error.code !== 'auth/popup-closed-by-user') {
-                alert(`Erro ao fazer login: ${error.message}`);
-              }
             });
         });
 
-        btnLogout.addEventListener('click', () => {
-          signOut(auth);
-        });
+        btnLogout.addEventListener('click', () => signOut(auth));
 
         btnSubmitComment.addEventListener('click', async () => {
           const content = commentInput.value.trim();
           if (!content) return alert("Escreva um comentário!");
-          
           const parentId = replyToIdInput.value;
           const token = await currentUser.getIdToken();
-
-          const payload = {
-            conteudo: content,
-            parent_id: parentId ? parseInt(parentId) : null
-          };
-
+          const payload = { conteudo: content, parent_id: parentId ? parseInt(parentId) : null };
           btnSubmitComment.disabled = true;
           btnSubmitComment.innerText = "Enviando...";
-
           try {
             const res = await fetch(`${API_URL}/comentarios`, {
               method: 'POST',
@@ -4460,12 +790,7 @@
               },
               body: JSON.stringify(payload)
             });
-
-            if (!res.ok) {
-              const err = await res.json();
-              throw new Error(err.error || "Erro desconhecido");
-            }
-
+            if (!res.ok) throw new Error("Falha ao enviar");
             commentInput.value = "";
             cancelReply();
             await loadComments();
@@ -4477,10 +802,9 @@
           }
         });
       } else {
-         commentsList.innerHTML = '<p style="text-align: center; color: #a69c9a;">Sistema de comentários indisponível no momento.</p>';
+        commentsList.innerHTML = '<p style="text-align: center; color: #a69c9a;">Sistema de comentários indisponível no momento.</p>';
       }
 
-      // Initial Load
       loadComments();
     </script>
   </body>

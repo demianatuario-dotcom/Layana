@@ -76,9 +76,22 @@ app.use('/api/', apiLimiter);
 // Serve arquivos estáticos (index.html, imagens, etc) da pasta atual
 app.use(express.static(path.join(__dirname)));
 
-// Rotas amigáveis da plataforma híbrida (B2C & B2B)
-app.get(['/loja', '/pro', '/studio', '/cursos'], (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+// Servir arquivos estáticos das subpastas dedicadas
+app.use('/procedimentos', express.static(path.join(__dirname, 'procedimentos')));
+app.use('/cursos', express.static(path.join(__dirname, 'cursos')));
+app.use('/pro', express.static(path.join(__dirname, 'pro')));
+
+// Rotas explícitas da plataforma modular (B2C & B2B)
+app.get(['/procedimentos', '/procedimentos/', '/studio', '/studio/'], (req, res) => {
+    res.sendFile(path.join(__dirname, 'procedimentos', 'index.html'));
+});
+
+app.get(['/cursos', '/cursos/'], (req, res) => {
+    res.sendFile(path.join(__dirname, 'cursos', 'index.html'));
+});
+
+app.get(['/pro', '/pro/', '/loja', '/loja/'], (req, res) => {
+    res.sendFile(path.join(__dirname, 'pro', 'index.html'));
 });
 
 const PORT = process.env.PORT || 8080;

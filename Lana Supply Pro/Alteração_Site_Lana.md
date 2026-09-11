@@ -50,7 +50,7 @@ Mantenha a base no mesmo domínio, estruturando a navegação da seguinte forma:
   - Badge de destaque: "Pronta Entrega Luziânia/Entorno" ou "Aprovado por Layana Wolf".
   - Valor / Preço de revenda.
   - Botão de Compra Expressa via WhatsApp:
-    `Link: https://wa.me/55619XXXXXXXX?text=Olá!%20Gostaria%20de%20comprar%20o%20produto%20[NomeDoProduto]%20a%20pronta%20entrega.`
+    `Link: https://wa.me/556195981186?text=Olá!%20Gostaria%20de%20comprar%20o%20produto%20[NomeDoProduto]%20a%20pronta%20entrega.`
 
 #### D. Seção do Chatbot / Especialista de Beleza Virtual
 - Manter o widget da Lana, ajustando a interface para oferecer opções rápidas no primeiro clique:

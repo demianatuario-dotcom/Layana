@@ -1,4 +1,4 @@
-Você é um arquiteto sênior de automações em n8n e especialista em engenharia de prompt para agentes LLM (LangChain).
+Você é um arquiteto sênior de automações em n8n e especialista em engenharia de prompt para agentes LLM (LangChain). Crie uma nova versão (V12) baseada na versão (V11), conforme especificações a seguir:
 
 ### CONTEXTO DO PROJETO
 O fluxo atual do n8n ("Lana Multi-Agent - Otimizado Final V11") atende exclusivamente clientes do Studio de beleza "Lana Wolf Art" via WhatsApp (Evolution API).
