@@ -76,6 +76,11 @@ app.use('/api/', apiLimiter);
 // Serve arquivos estáticos (index.html, imagens, etc) da pasta atual
 app.use(express.static(path.join(__dirname)));
 
+// Rotas amigáveis da plataforma híbrida (B2C & B2B)
+app.get(['/loja', '/pro', '/studio', '/cursos'], (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 const PORT = process.env.PORT || 8080;
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
