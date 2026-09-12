@@ -767,6 +767,9 @@ app.post('/api/comentarios', verifyAuth, async (req, res) => {
     } catch (error) {
         console.error("Erro ao inserir comentário:", error);
         res.status(500).json({ error: 'Erro ao salvar o comentário' });
+    }
+});
+
 // ==========================================
 // APIS - LANA SUPPLY PRO & CONTROLE DE ESTOQUE
 // ==========================================
