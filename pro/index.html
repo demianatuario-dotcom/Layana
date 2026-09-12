@@ -29,6 +29,439 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/assets/css/style.css" />
+
+    <style>
+      /* Card Quantity & Add to Cart Controls */
+      .product-actions-bar {
+        margin-top: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+      }
+      .qty-selector {
+        display: inline-flex;
+        align-items: center;
+        border: 1.5px solid rgba(201, 130, 118, 0.4);
+        border-radius: 30px;
+        background: #faf6f5;
+        padding: 2px 4px;
+      }
+      .qty-btn {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: none;
+        background: transparent;
+        color: var(--secondary);
+        font-weight: 700;
+        font-size: 1rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+      }
+      .qty-btn:hover:not(:disabled) {
+        background: var(--primary);
+        color: white;
+      }
+      .qty-btn:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+      .qty-display {
+        width: 30px;
+        text-align: center;
+        font-weight: 700;
+        font-size: 0.95rem;
+        color: var(--secondary);
+      }
+      .btn-add-cart {
+        flex: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 12px 16px;
+        border-radius: 30px;
+        font-weight: 600;
+        font-size: 0.92rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 14px rgba(201, 130, 118, 0.3);
+      }
+      .btn-add-cart:hover:not(:disabled) {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(201, 130, 118, 0.4);
+      }
+      .btn-add-cart:disabled {
+        background: #d4c8c6;
+        cursor: not-allowed;
+        box-shadow: none;
+      }
+      .stock-tag {
+        font-size: 0.76rem;
+        font-weight: 600;
+        padding: 3px 8px;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        margin-top: 6px;
+      }
+      .stock-tag.in-stock {
+        background: rgba(39, 174, 96, 0.12);
+        color: #27ae60;
+      }
+      .stock-tag.low-stock {
+        background: rgba(230, 126, 34, 0.12);
+        color: #e67e22;
+      }
+      .stock-tag.out-stock {
+        background: rgba(231, 76, 60, 0.12);
+        color: #e74c3c;
+      }
+
+      /* Floating Cart Button */
+      .floating-cart-btn {
+        position: fixed;
+        bottom: 25px;
+        right: 90px;
+        background: #2b2321;
+        color: #fff;
+        border: 2px solid var(--accent-gold);
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+        cursor: pointer;
+        z-index: 9998;
+        transition: all 0.3s ease;
+      }
+      .floating-cart-btn:hover {
+        transform: scale(1.08);
+        background: var(--primary);
+      }
+      .cart-badge-counter {
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        background: #e74c3c;
+        color: white;
+        font-size: 0.75rem;
+        font-weight: 700;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #fff;
+      }
+
+      /* Cart & Checkout Drawer */
+      .cart-drawer-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.55);
+        backdrop-filter: blur(4px);
+        z-index: 10000;
+        display: none;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      .cart-drawer-overlay.active {
+        display: block;
+        opacity: 1;
+      }
+      .cart-drawer {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        max-width: 480px;
+        height: 100vh;
+        background: #fff;
+        box-shadow: -8px 0 30px rgba(0, 0, 0, 0.2);
+        z-index: 10001;
+        display: flex;
+        flex-direction: column;
+        transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .cart-drawer.open {
+        right: 0;
+      }
+      .cart-header {
+        padding: 20px 24px;
+        background: #2b2321;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid var(--accent-gold);
+      }
+      .cart-header h3 {
+        margin: 0;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.35rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .btn-close-cart {
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 1.4rem;
+        cursor: pointer;
+        padding: 4px;
+        line-height: 1;
+      }
+      .cart-body {
+        padding: 20px 24px;
+        flex: 1;
+        overflow-y: auto;
+      }
+      .cart-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      }
+      .cart-item-img {
+        width: 55px;
+        height: 55px;
+        border-radius: 10px;
+        object-fit: cover;
+        background: #f5eeeb;
+      }
+      .cart-item-details {
+        flex: 1;
+      }
+      .cart-item-title {
+        font-size: 0.92rem;
+        font-weight: 600;
+        color: var(--secondary);
+        margin: 0 0 3px 0;
+      }
+      .cart-item-price {
+        font-size: 0.88rem;
+        color: var(--primary-dark);
+        font-weight: 700;
+      }
+      .cart-item-remove {
+        background: transparent;
+        border: none;
+        color: #b0a4a2;
+        cursor: pointer;
+        font-size: 0.95rem;
+        padding: 6px;
+        transition: color 0.2s;
+      }
+      .cart-item-remove:hover {
+        color: #e74c3c;
+      }
+
+      /* Checkout Options Section */
+      .checkout-section {
+        background: #faf6f5;
+        border-radius: 14px;
+        padding: 16px;
+        margin-top: 18px;
+        border: 1px solid rgba(201, 130, 118, 0.2);
+      }
+      .checkout-section h4 {
+        margin: 0 0 12px 0;
+        font-size: 0.95rem;
+        color: var(--secondary);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .delivery-radio-label, .payment-radio-label {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 10px 12px;
+        background: white;
+        border-radius: 10px;
+        margin-bottom: 8px;
+        cursor: pointer;
+        border: 1.5px solid transparent;
+        transition: all 0.2s;
+      }
+      .delivery-radio-label.selected, .payment-radio-label.selected {
+        border-color: var(--primary);
+        background: #fff8f7;
+      }
+      .delivery-radio-label input, .payment-radio-label input {
+        margin-top: 3px;
+      }
+      .radio-title {
+        font-weight: 600;
+        font-size: 0.88rem;
+        color: var(--secondary);
+        display: block;
+      }
+      .radio-desc {
+        font-size: 0.78rem;
+        color: var(--text-light);
+        display: block;
+        margin-top: 2px;
+      }
+      .frete-calc-box {
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px dashed rgba(201, 130, 118, 0.3);
+      }
+      .frete-input-wrap {
+        display: flex;
+        gap: 8px;
+        margin-top: 6px;
+      }
+      .frete-input-wrap input {
+        flex: 1;
+        padding: 8px 12px;
+        font-size: 0.85rem;
+        border: 1.5px solid #ccc;
+        border-radius: 8px;
+        outline: none;
+      }
+      .frete-input-wrap button {
+        background: var(--secondary);
+        color: white;
+        border: none;
+        padding: 8px 14px;
+        border-radius: 8px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .frete-result-pill {
+        margin-top: 8px;
+        background: rgba(39, 174, 96, 0.1);
+        color: #27ae60;
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+      }
+      .frete-rules-info {
+        font-size: 0.74rem;
+        color: #887d7b;
+        margin-top: 6px;
+        line-height: 1.4;
+      }
+
+      /* Cart Footer */
+      .cart-footer {
+        padding: 20px 24px;
+        background: #faf6f5;
+        border-top: 1px solid rgba(201, 130, 118, 0.2);
+      }
+      .summary-line {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.9rem;
+        margin-bottom: 6px;
+        color: #665c5a;
+      }
+      .summary-total {
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--secondary);
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1.5px solid rgba(0, 0, 0, 0.1);
+      }
+      .pix-discount-highlight {
+        color: #27ae60;
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-align: right;
+        margin-top: -4px;
+        margin-bottom: 8px;
+      }
+      .btn-checkout-whatsapp {
+        width: 100%;
+        background: #25D366;
+        color: white;
+        border: none;
+        padding: 14px;
+        border-radius: 30px;
+        font-size: 1.05rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 14px;
+        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+        transition: all 0.3s ease;
+      }
+      .btn-checkout-whatsapp:hover {
+        background: #1eb956;
+        transform: translateY(-2px);
+      }
+      .cart-empty-state {
+        text-align: center;
+        padding: 50px 20px;
+        color: #999;
+      }
+      .cart-empty-state i {
+        font-size: 3.5rem;
+        color: #d6cbc8;
+        margin-bottom: 14px;
+      }
+      .installments-select {
+        width: 100%;
+        padding: 8px 10px;
+        border-radius: 8px;
+        border: 1.5px solid #ccc;
+        margin-top: 6px;
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.85rem;
+      }
+      .payment-options-note {
+        font-size: 0.74rem;
+        color: #777;
+        margin-top: 6px;
+        line-height: 1.4;
+      }
+      .customer-field {
+        margin-bottom: 8px;
+      }
+      .customer-field label {
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: #555;
+        display: block;
+        margin-bottom: 3px;
+      }
+      .customer-field input {
+        width: 100%;
+        padding: 8px 12px;
+        font-size: 0.88rem;
+        border: 1.5px solid #ccc;
+        border-radius: 8px;
+        box-sizing: border-box;
+      }
+    </style>
   </head>
 
   <body>
@@ -45,14 +478,15 @@
         <a href="/procedimentos"><i class="fa-solid fa-sparkles" style="margin-right:6px; color:var(--primary);"></i> Studio & Procedimentos</a>
         <a href="/cursos"><i class="fa-solid fa-graduation-cap" style="margin-right:6px; color:var(--primary);"></i> Cursos</a>
         <a href="#catalogo" class="active"><i class="fa-solid fa-bag-shopping" style="margin-right:6px; color:var(--accent-gold);"></i> Catálogo Pro <span class="pro-nav-pill">B2B</span></a>
-        <a href="#contato">Retirada & Local</a>
+        <a href="/ControleEstoque"><i class="fa-solid fa-boxes-stacked" style="margin-right:6px; color:var(--primary);"></i> Estoque</a>
       </nav>
 
-      <!-- Dual CTA Buttons -->
+      <!-- Header Cart & CTA -->
       <div class="header-actions">
-        <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20um%20pedido%20de%20insumos%20na%20Lana%20Supply%20Pro." target="_blank" class="btn-nav-agendar" style="background: #25D366; box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);">
-          <i class="fa-brands fa-whatsapp"></i> Pedido Rápido via WhatsApp
-        </a>
+        <button class="btn-nav-agendar" onclick="openCartDrawer()" style="background: #2b2321; border: 1.5px solid var(--accent-gold); color: white; box-shadow: 0 4px 14px rgba(43, 35, 33, 0.25);">
+          <i class="fa-solid fa-cart-shopping" style="color:var(--accent-gold-light);"></i>
+          <span>Carrinho (<strong class="cart-total-count">0</strong>)</span>
+        </button>
         <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menu">
           <i class="fa-solid fa-bars"></i>
         </button>
@@ -65,11 +499,11 @@
       <a href="/procedimentos"><i class="fa-solid fa-sparkles" style="color:var(--primary); margin-right:8px;"></i> Studio de Estética</a>
       <a href="/cursos"><i class="fa-solid fa-graduation-cap" style="color:var(--primary); margin-right:8px;"></i> Cursos Profissionais</a>
       <a href="#catalogo"><i class="fa-solid fa-bag-shopping" style="color:var(--accent-gold); margin-right:8px;"></i> Catálogo de Insumos B2B</a>
-      <a href="#contato"><i class="fa-solid fa-location-dot" style="color:var(--primary); margin-right:8px;"></i> Retirada no Parque 9</a>
+      <a href="/ControleEstoque"><i class="fa-solid fa-boxes-stacked" style="color:var(--primary); margin-right:8px;"></i> Painel de Estoque</a>
       <div class="mobile-drawer-actions">
-        <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20um%20pedido%20de%20insumos%20na%20Lana%20Supply%20Pro." target="_blank" class="btn-whatsapp-buy" style="justify-content: center;">
-          <i class="fa-brands fa-whatsapp"></i> Fazer Pedido no WhatsApp
-        </a>
+        <button onclick="openCartDrawer()" class="btn-whatsapp-buy" style="background:#2b2321; border:1.5px solid var(--accent-gold); justify-content: center;">
+          <i class="fa-solid fa-cart-shopping" style="color:var(--accent-gold);"></i> Abrir Carrinho (<span class="cart-total-count">0</span>)
+        </button>
       </div>
     </div>
 
@@ -88,7 +522,7 @@
       <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap; margin-bottom:20px;">
         <span class="product-badge" style="position:static; font-size:0.85rem; padding:6px 14px;"><i class="fa-solid fa-bolt"></i> Pronta Entrega Local</span>
         <span class="product-badge bancada" style="position:static; font-size:0.85rem; padding:6px 14px;"><i class="fa-solid fa-store"></i> Retirada Sem Frete no Parque 9</span>
-        <span class="product-badge destaque" style="position:static; font-size:0.85rem; padding:6px 14px;"><i class="fa-solid fa-motorcycle"></i> Envio Uber Flash / Motoboy</span>
+        <span class="product-badge destaque" style="position:static; font-size:0.85rem; padding:6px 14px;"><i class="fa-solid fa-motorcycle"></i> Envio Express (Uber Flash / Motoboy)</span>
       </div>
     </section>
 
@@ -106,335 +540,26 @@
             <i class="fa-solid fa-border-all"></i> Todos os Insumos <span class="tab-count" id="countTodos">13</span>
           </button>
           <button class="pro-tab-btn" data-category="cilios">
-            <i class="fa-solid fa-eye"></i> Extensão de Cílios (Booble & Fios) <span class="tab-count" id="countCilios">6</span>
+            <i class="fa-solid fa-eye"></i> Extensão de Cílios <span class="tab-count" id="countCilios">6</span>
           </button>
           <button class="pro-tab-btn" data-category="micro">
-            <i class="fa-solid fa-feather-pointed"></i> Micropigmentação (RBKollors & Diamond) <span class="tab-count" id="countMicro">3</span>
+            <i class="fa-solid fa-feather-pointed"></i> Micropigmentação <span class="tab-count" id="countMicro">3</span>
           </button>
           <button class="pro-tab-btn" data-category="descartaveis">
-            <i class="fa-solid fa-shield-virus"></i> Biossegurança & Descartáveis <span class="tab-count" id="countDescartaveis">2</span>
+            <i class="fa-solid fa-shield-virus"></i> Descartáveis & Biossegurança <span class="tab-count" id="countDescartaveis">2</span>
           </button>
           <button class="pro-tab-btn" data-category="kits">
-            <i class="fa-solid fa-gift"></i> Kits Prontos para Alunas <span class="tab-count" id="countKits">2</span>
+            <i class="fa-solid fa-gift"></i> Kits para Alunas <span class="tab-count" id="countKits">2</span>
           </button>
         </div>
       </div>
 
       <!-- Products Grid -->
       <div class="pro-products-grid" id="proProductsGrid">
-        
-        <!-- Produto 1: Adesivo Booble Rubi 3ml -->
-        <div class="pro-product-card" data-category="cilios" data-name="Adesivo Booble Rubi 3ml Cola Extensao Cilios">
-          <div class="product-img-wrap">
-            <img src="/assets/booble_rubi.jpg" alt="Adesivo Booble Rubi 3ml" loading="lazy">
-            <span class="product-badge"><i class="fa-solid fa-bolt"></i> Pronta Entrega Luziânia</span>
-          </div>
-          <div class="product-info">
-            <span class="product-cat">Extensão de Cílios • Booble</span>
-            <h3 class="product-title">Adesivo Booble Rubi 3ml</h3>
-            <p class="product-spec">
-              Secagem ultra-rápida (0.5s a 1s). Retenção campeã de até 7 a 8 semanas. Baixa emissão de odor e adaptabilidade ideal para o clima de Goiás.
-            </p>
-            <div class="product-price-row">
-              <div class="product-price">
-                R$ 95,00
-                <small><i class="fa-solid fa-tag"></i> R$ 89,00 à vista no Pix</small>
-              </div>
-            </div>
-            <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20comprar%20o%20produto%20Adesivo%20Booble%20Rubi%203ml%20a%20pronta%20entrega." target="_blank" class="btn-whatsapp-buy">
-              <i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp
-            </a>
-          </div>
+        <!-- Renderizado dinamicamente via JavaScript com dados de /api/produtos do PostgreSQL -->
+        <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #888;">
+          <i class="fa-solid fa-spinner fa-spin" style="margin-right: 8px;"></i> Carregando catálogo oficial da bancada...
         </div>
-
-        <!-- Produto 2: Adesivo Booble Black 3ml -->
-        <div class="pro-product-card" data-category="cilios" data-name="Adesivo Booble Black 3ml Cola Cilios Flexivel">
-          <div class="product-img-wrap">
-            <img src="/assets/booble_rubi.jpg" alt="Adesivo Booble Black 3ml" loading="lazy">
-            <span class="product-badge bancada"><i class="fa-solid fa-check"></i> Aprovado por Layana Wolf</span>
-          </div>
-          <div class="product-info">
-            <span class="product-cat">Extensão de Cílios • Booble</span>
-            <h3 class="product-title">Adesivo Booble Black 3ml</h3>
-            <p class="product-spec">
-              Secagem flexível (1s a 2s). Acabamento preto acetinado profundo com película flexível que acompanha o movimento do fio natural.
-            </p>
-            <div class="product-price-row">
-              <div class="product-price">
-                R$ 89,00
-                <small><i class="fa-solid fa-tag"></i> Pronta entrega no estúdio</small>
-              </div>
-            </div>
-            <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20comprar%20o%20produto%20Adesivo%20Booble%20Black%203ml%20a%20pronta%20entrega." target="_blank" class="btn-whatsapp-buy">
-              <i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp
-            </a>
-          </div>
-        </div>
-
-        <!-- Produto 3: Caixa Fio Y Nagaraku Mix -->
-        <div class="pro-product-card" data-category="cilios" data-name="Caixa Fios Nagaraku Y Mix 8-15mm Volume Brasileiro">
-          <div class="product-img-wrap">
-            <img src="/assets/nagaraku_y_lashes.jpg" alt="Fios Nagaraku Y Mix" loading="lazy">
-            <span class="product-badge destaque"><i class="fa-solid fa-fire"></i> Mais Vendido</span>
-          </div>
-          <div class="product-info">
-            <span class="product-cat">Fios para Cílios • Nagaraku</span>
-            <h3 class="product-title">Fios Nagaraku Y Mix (8 a 15mm)</h3>
-            <p class="product-spec">
-              Os queridinhos do Volume Brasileiro. Fios macios, pretos matte e bifurcados com acoplagem magnética sem peso sobre o fio natural.
-            </p>
-            <div class="product-price-row">
-              <div class="product-price">
-                R$ 38,00
-                <small><i class="fa-solid fa-boxes-stacked"></i> Mix 8 ao 15mm Curvatura D e C</small>
-              </div>
-            </div>
-            <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20comprar%20o%20produto%20Caixa%20Fios%20Nagaraku%20Y%20Mix%20a%20pronta%20entrega." target="_blank" class="btn-whatsapp-buy">
-              <i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp
-            </a>
-          </div>
-        </div>
-
-        <!-- Produto 4: Fios Booble Velvet Volume Russo -->
-        <div class="pro-product-card" data-category="cilios" data-name="Fios Booble Velvet Volume Russo Fans Maciez">
-          <div class="product-img-wrap">
-            <img src="/assets/nagaraku_y_lashes.jpg" alt="Fios Booble Velvet" loading="lazy">
-            <span class="product-badge"><i class="fa-solid fa-bolt"></i> Pronta Entrega Luziânia</span>
-          </div>
-          <div class="product-info">
-            <span class="product-cat">Fios para Cílios • Booble</span>
-            <h3 class="product-title">Fios Booble Velvet Volume Russo</h3>
-            <p class="product-spec">
-              Fios ultrafinos (espessura 0.05 / 0.07) com textura aveludada. Fáceis de abrir fans no chicote sem desmanchar a raiz.
-            </p>
-            <div class="product-price-row">
-              <div class="product-price">
-                R$ 42,00
-                <small><i class="fa-solid fa-star"></i> Padrão profissional internacional</small>
-              </div>
-            </div>
-            <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20comprar%20o%20produto%20Fios%20Booble%20Velvet%20Volume%20Russo%20a%20pronta%20entrega." target="_blank" class="btn-whatsapp-buy">
-              <i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp
-            </a>
-          </div>
-        </div>
-
-        <!-- Produto 5: Primer Booble Higienizador -->
-        <div class="pro-product-card" data-category="cilios" data-name="Primer Booble Higienizador 15ml Retencao Cilios">
-          <div class="product-img-wrap">
-            <img src="/assets/booble_rubi.jpg" alt="Primer Booble Higienizador" loading="lazy">
-            <span class="product-badge bancada"><i class="fa-solid fa-shield-halved"></i> Essencial de Bancada</span>
-          </div>
-          <div class="product-info">
-            <span class="product-cat">Preparação • Booble</span>
-            <h3 class="product-title">Primer Higienizador Booble 15ml</h3>
-            <p class="product-spec">
-              Remove qualquer vestígio de oleosidade e equilibra o pH dos fios naturais antes da acoplagem. Aumenta a durabilidade da retenção em até 40%.
-            </p>
-            <div class="product-price-row">
-              <div class="product-price">
-                R$ 45,00
-                <small><i class="fa-solid fa-check"></i> Rendimento de até 80 procedimentos</small>
-              </div>
-            </div>
-            <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20comprar%20o%20produto%20Primer%20Booble%20Higienizador%20a%20pronta%20entrega." target="_blank" class="btn-whatsapp-buy">
-              <i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp
-            </a>
-          </div>
-        </div>
-
-        <!-- Produto 6: Removedor em Gel Booble -->
-        <div class="pro-product-card" data-category="cilios" data-name="Removedor em Gel Booble 15g Suave Sem Ardor">
-          <div class="product-img-wrap">
-            <img src="/assets/booble_rubi.jpg" alt="Removedor em Gel Booble" loading="lazy">
-            <span class="product-badge"><i class="fa-solid fa-bolt"></i> Pronta Entrega</span>
-          </div>
-          <div class="product-info">
-            <span class="product-cat">Remoção Segura • Booble</span>
-            <h3 class="product-title">Removedor em Gel Booble 15g</h3>
-            <p class="product-spec">
-              Fórmula em gel com aroma suave que não escorre para os olhos. Dissolve a cola com rapidez sem desconforto ou quebra dos fios naturais.
-            </p>
-            <div class="product-price-row">
-              <div class="product-price">
-                R$ 48,00
-                <small><i class="fa-solid fa-heart"></i> Não arde e remove em minutos</small>
-              </div>
-            </div>
-            <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20comprar%20o%20produto%20Removedor%20em%20Gel%20Booble%20a%20pronta%20entrega." target="_blank" class="btn-whatsapp-buy">
-              <i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp
-            </a>
-          </div>
-        </div>
-
-        <!-- Produto 7: Pigmento RBKollors Red Rose 15ml -->
-        <div class="pro-product-card" data-category="micro" data-name="Pigmento RBKollors Red Rose 15ml Smart Pigment Micro Labial">
-          <div class="product-img-wrap">
-            <img src="/assets/rbkollors_lips.jpg" alt="Pigmento RBKollors Red Rose" loading="lazy">
-            <span class="product-badge bancada"><i class="fa-solid fa-check"></i> Aprovado por Layana Wolf</span>
-          </div>
-          <div class="product-info">
-            <span class="product-cat">Micropigmentação • RBKollors</span>
-            <h3 class="product-title">Pigmento RBKollors Red Rose 15ml</h3>
-            <p class="product-spec">
-              Linha Lips Smart Pigment. Alta carga pigmentária, cor translúcida e vibrante que entrega efeito lábios de seda e cicatrização fiel sem manchas.
-            </p>
-            <div class="product-price-row">
-              <div class="product-price">
-                R$ 165,00
-                <small><i class="fa-solid fa-tag"></i> Original com lacre de fábrica</small>
-              </div>
-            </div>
-            <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20comprar%20o%20produto%20Pigmento%20RBKollors%20Red%20Rose%2015ml%20a%20pronta%20entrega." target="_blank" class="btn-whatsapp-buy">
-              <i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp
-            </a>
-          </div>
-        </div>
-
-        <!-- Produto 8: Pigmento RBKollors Jambo / Jamblack -->
-        <div class="pro-product-card" data-category="micro" data-name="Pigmento RBKollors Jambo Jamblack 15ml Sobrancelhas">
-          <div class="product-img-wrap">
-            <img src="/assets/rbkollors_lips.jpg" alt="Pigmento RBKollors Jambo" loading="lazy">
-            <span class="product-badge"><i class="fa-solid fa-bolt"></i> Pronta Entrega Luziânia</span>
-          </div>
-          <div class="product-info">
-            <span class="product-cat">Micropigmentação • RBKollors</span>
-            <h3 class="product-title">Pigmento RBKollors Jambo 15ml</h3>
-            <p class="product-spec">
-              Castanho escuro aquecido indispensável para fototipos brasileiros. Fórmula biocompatível inteligente que impede o acinzentamento ao cicatrizar.
-            </p>
-            <div class="product-price-row">
-              <div class="product-price">
-                R$ 165,00
-                <small><i class="fa-solid fa-check"></i> Disponível também na cor Jamblack</small>
-              </div>
-            </div>
-            <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20comprar%20o%20produto%20Pigmento%20RBKollors%20Jambo%2015ml%20a%20pronta%20entrega." target="_blank" class="btn-whatsapp-buy">
-              <i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp
-            </a>
-          </div>
-        </div>
-
-        <!-- Produto 9: Pigmento Diamond Sobrancelhas 10ml -->
-        <div class="pro-product-card" data-category="micro" data-name="Pigmento Diamond Sobrancelhas 10ml Microblading Shadow">
-          <div class="product-img-wrap">
-            <img src="/assets/diamond_pigment.jpg" alt="Pigmento Diamond Sobrancelhas" loading="lazy">
-            <span class="product-badge destaque"><i class="fa-solid fa-gem"></i> Exclusividade Pro</span>
-          </div>
-          <div class="product-info">
-            <span class="product-cat">Micropigmentação • Diamond</span>
-            <h3 class="product-title">Pigmento Diamond Sobrancelhas 10ml</h3>
-            <p class="product-spec">
-              Linha especial de acabamento nobre para técnicas Shadow e Microblading. Degradês perfeitos com penetração homogênea e excelente retenção na derme.
-            </p>
-            <div class="product-price-row">
-              <div class="product-price">
-                R$ 145,00
-                <small><i class="fa-solid fa-star"></i> Acabamento refinado de alto contraste</small>
-              </div>
-            </div>
-            <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20comprar%20o%20produto%20Pigmento%20Diamond%20Sobrancelhas%20a%20pronta%20entrega." target="_blank" class="btn-whatsapp-buy">
-              <i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp
-            </a>
-          </div>
-        </div>
-
-        <!-- Produto 10: Microbrush Rosa Tubo c/ 100 -->
-        <div class="pro-product-card" data-category="descartaveis" data-name="Microbrush Rosa Tubo com 100 unidades Descartaveis Biosseguranca">
-          <div class="product-img-wrap">
-            <img src="/assets/disposables.jpg" alt="Microbrush Tubo 100 unids" loading="lazy">
-            <span class="product-badge"><i class="fa-solid fa-bolt"></i> Pronta Entrega</span>
-          </div>
-          <div class="product-info">
-            <span class="product-cat">Biossegurança & Descartáveis</span>
-            <h3 class="product-title">Microbrush Rosa - Tubo c/ 100 un</h3>
-            <p class="product-spec">
-              Ponta de microfibra que não solta fiapos nem retém produto em excesso. Essencial para higienização, primer, removedor e alinhamento de cílios.
-            </p>
-            <div class="product-price-row">
-              <div class="product-price">
-                R$ 22,00
-                <small><i class="fa-solid fa-box"></i> Tubo acrílico higiênico</small>
-              </div>
-            </div>
-            <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20comprar%20o%20produto%20Microbrush%20Rosa%20Tubo%20com%20100%20unidades%20a%20pronta%20entrega." target="_blank" class="btn-whatsapp-buy">
-              <i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp
-            </a>
-          </div>
-        </div>
-
-        <!-- Produto 11: Escovinhas com Glitter Rosa (50 unids) -->
-        <div class="pro-product-card" data-category="descartaveis" data-name="Escovinhas Cilios Glitter Rosa Pacote 50 unidades Mimos">
-          <div class="product-img-wrap">
-            <img src="/assets/disposables.jpg" alt="Escovinhas com Glitter" loading="lazy">
-            <span class="product-badge"><i class="fa-solid fa-bolt"></i> Pronta Entrega</span>
-          </div>
-          <div class="product-info">
-            <span class="product-cat">Biossegurança & Mimos</span>
-            <h3 class="product-title">Escovinhas c/ Glitter Rosa (50 un)</h3>
-            <p class="product-spec">
-              Cerdas macias que alinham as extensões sem repuxar. Cabo com glitter rosa de alto apelo visual para uso em bancada e presente para suas clientes.
-            </p>
-            <div class="product-price-row">
-              <div class="product-price">
-                R$ 25,00
-                <small><i class="fa-solid fa-sparkles"></i> Pacote com 50 unidades</small>
-              </div>
-            </div>
-            <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20comprar%20o%20produto%20Escovinhas%20com%20Glitter%20Rosa%20a%20pronta%20entrega." target="_blank" class="btn-whatsapp-buy">
-              <i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp
-            </a>
-          </div>
-        </div>
-
-        <!-- Produto 12: Kit Aluna Lash Designer Iniciante -->
-        <div class="pro-product-card" data-category="kits" data-name="Kit Aluna Lash Designer Iniciante Completo Booble Nagaraku Pincas">
-          <div class="product-img-wrap">
-            <img src="/assets/kit_aluna_lash.jpg" alt="Kit Aluna Lash Designer Iniciante" loading="lazy">
-            <span class="product-badge bancada"><i class="fa-solid fa-star"></i> Kit Completo Aluna</span>
-          </div>
-          <div class="product-info">
-            <span class="product-cat">Kits de Formação • Alunas</span>
-            <h3 class="product-title">Kit Aluna Lash Designer Completo</h3>
-            <p class="product-spec">
-              Adesivo Booble Rubi 3ml + 2 Caixas Nagaraku Y/Mix + Pinça Reta Dourada + Pinça Curva + Primer + Removedor + 50 Escovinhas + 100 Microbrush + Fita Micropore.
-            </p>
-            <div class="product-price-row">
-              <div class="product-price">
-                R$ 289,00
-                <small><i class="fa-solid fa-percent"></i> Economia de 25% comparado ao avulso</small>
-              </div>
-            </div>
-            <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20comprar%20o%20Kit%20Aluna%20Lash%20Designer%20Completo%20a%20pronta%20entrega." target="_blank" class="btn-whatsapp-buy">
-              <i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp
-            </a>
-          </div>
-        </div>
-
-        <!-- Produto 13: Kit Aluna Micropigmentação Lips & Brows -->
-        <div class="pro-product-card" data-category="kits" data-name="Kit Aluna Micropigmentacao Lips Brows RBKollors Pele Sintetica">
-          <div class="product-img-wrap">
-            <img src="/assets/kit_aluna_lash.jpg" alt="Kit Aluna Micropigmentação" loading="lazy">
-            <span class="product-badge destaque"><i class="fa-solid fa-graduation-cap"></i> Aprovado por Layana</span>
-          </div>
-          <div class="product-info">
-            <span class="product-cat">Kits de Formação • Alunas</span>
-            <h3 class="product-title">Kit Aluna Micropigmentação Pro</h3>
-            <p class="product-spec">
-              2 Pigmentos RBKollors (Lips Red Rose + Sobrancelhas Jambo) + 1 Pele Sintética 3D para treino + 20 Anéis de Batoque + Lápis Dermatográfico + Paquímetro de precisão.
-            </p>
-            <div class="product-price-row">
-              <div class="product-price">
-                R$ 389,00
-                <small><i class="fa-solid fa-gift"></i> Treino prático e atendimento imediato</small>
-              </div>
-            </div>
-            <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20comprar%20o%20Kit%20Aluna%20Micropigmenta%C3%A7%C3%A3o%20Pro%20a%20pronta%20entrega." target="_blank" class="btn-whatsapp-buy">
-              <i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp
-            </a>
-          </div>
-        </div>
-
       </div>
 
       <!-- Local Logistics Notice Card -->
@@ -450,18 +575,156 @@
           <div class="logistics-icon"><i class="fa-solid fa-motorcycle"></i></div>
           <div>
             <h4>Envio Express (Uber Flash / Motoboy)</h4>
-            <p>Acabou a cola no meio do atendimento? Enviamos no mesmo dia via Uber Flash ou motoboy para Luziânia e Jardim Ingá.</p>
+            <p>Acabou a cola no meio do atendimento? Entregamos no mesmo dia calculando o frete por quilometragem justa.</p>
           </div>
         </div>
         <div class="logistics-item">
           <div class="logistics-icon"><i class="fa-solid fa-credit-card"></i></div>
           <div>
-            <h4>Pagamento Facilitado</h4>
-            <p>Pague com segurança via Pix com desconto especial à vista ou parcele no cartão de crédito.</p>
+            <h4>PIX com 5% OFF ou Cartão Parcelado</h4>
+            <p>Aproveite 5% de desconto no Pix ou parcele compras a partir de R$ 100 com parcela mínima de R$ 50.</p>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- Floating Cart Button -->
+    <button class="floating-cart-btn" id="floatingCartBtn" onclick="openCartDrawer()" aria-label="Abrir carrinho de compras">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span class="cart-badge-counter cart-total-count">0</span>
+    </button>
+
+    <!-- Cart Drawer & Overlay -->
+    <div class="cart-drawer-overlay" id="cartOverlay" onclick="closeCartDrawer()"></div>
+    <div class="cart-drawer" id="cartDrawer">
+      <div class="cart-header">
+        <h3><i class="fa-solid fa-bag-shopping" style="color:var(--accent-gold);"></i> Seu Pedido Lana Pro</h3>
+        <button class="btn-close-cart" onclick="closeCartDrawer()">&times;</button>
+      </div>
+
+      <div class="cart-body" id="cartBody">
+        <!-- Itens do Carrinho -->
+        <div id="cartItemsContainer"></div>
+
+        <!-- Seção de Entrega -->
+        <div class="checkout-section" id="sectionDelivery" style="display:none;">
+          <h4><i class="fa-solid fa-truck-fast" style="color:var(--primary);"></i> Como deseja receber?</h4>
+          
+          <label class="delivery-radio-label selected" id="labelRetirada" onclick="selectDelivery('retirada')">
+            <input type="radio" name="deliveryType" value="retirada" checked />
+            <div>
+              <span class="radio-title">Retirada no Studio (Sem Frete)</span>
+              <span class="radio-desc">Rua 23, Qd 61, Lt 3, Parque 9, Luziânia - GO • Custo R$ 0,00</span>
+            </div>
+          </label>
+
+          <label class="delivery-radio-label" id="labelExpress" onclick="selectDelivery('express')">
+            <input type="radio" name="deliveryType" value="express" />
+            <div>
+              <span class="radio-title">Envio Express (Uber Flash / Motoboy)</span>
+              <span class="radio-desc">Entrega direta no seu estúdio em Luziânia e região</span>
+            </div>
+          </label>
+
+          <!-- Input de Endereço e Cálculo de Frete -->
+          <div class="frete-calc-box" id="freteCalcBox" style="display:none;">
+            <label style="font-size:0.78rem; font-weight:600; color:#555; display:block;">Endereço de Entrega Completo (Rua, Número, Bairro):</label>
+            <div class="frete-input-wrap">
+              <input type="text" id="inputAddress" placeholder="Ex: Av. Alfredo Nasser, Parque Estrela Dalva, Luziânia" />
+              <button type="button" id="btnCalcFrete" onclick="calculateShipping()">Calcular</button>
+            </div>
+            
+            <div class="frete-result-pill" id="freteResultPill" style="display:none;">
+              <span id="freteDistText">Distância: 0 km</span>
+              <span id="freteValText">Frete: R$ 0,00</span>
+            </div>
+
+            <div class="frete-rules-info">
+              <strong>Tabela de Frete Oficial:</strong> Até 5km: R$ 10 | 5 a 10km: R$ 20 | 10 a 15km: R$ 30 (e sucessivamente a cada 5km).
+            </div>
+          </div>
+        </div>
+
+        <!-- Seção de Pagamento -->
+        <div class="checkout-section" id="sectionPayment" style="display:none;">
+          <h4><i class="fa-solid fa-credit-card" style="color:var(--primary);"></i> Forma de Pagamento</h4>
+
+          <label class="payment-radio-label selected" id="labelPix" onclick="selectPayment('pix')">
+            <input type="radio" name="paymentType" value="pix" checked />
+            <div>
+              <span class="radio-title" style="color:#27ae60;">
+                <i class="fa-brands fa-pix"></i> PIX (5% de Desconto Especial)
+              </span>
+              <span class="radio-desc">Economia automática calculada no valor total do pedido.</span>
+            </div>
+          </label>
+
+          <label class="payment-radio-label" id="labelCartao" onclick="selectPayment('cartao')">
+            <input type="radio" name="paymentType" value="cartao" />
+            <div>
+              <span class="radio-title">
+                <i class="fa-regular fa-credit-card"></i> Cartão de Crédito Parcelado
+              </span>
+              <span class="radio-desc">Permitido a partir de R$ 100 com parcela mínima de R$ 50.</span>
+            </div>
+          </label>
+
+          <!-- Parcelas do Cartão -->
+          <div id="cartaoOptionsBox" style="display:none; margin-top:8px;">
+            <div id="cartaoWarningMin" style="display:none; font-size:0.8rem; color:#e74c3c; padding:6px; background:#fdeeed; border-radius:6px;">
+              <i class="fa-solid fa-circle-exclamation"></i> O parcelamento está disponível para pedidos a partir de R$ 100,00.
+            </div>
+            <div id="cartaoSelectWrap">
+              <label style="font-size:0.78rem; font-weight:600; color:#555;">Selecione o Parcelamento Desejado:</label>
+              <select id="selectInstallments" class="installments-select" onchange="updateInstallmentChoice()"></select>
+              <div class="payment-options-note">
+                <i class="fa-solid fa-shield-check"></i> <strong>Como o pagamento pode ser efetuado:</strong><br />
+                • <strong>Link de Pagamento Seguro:</strong> enviado imediatamente no WhatsApp para confirmação online.<br />
+                • <strong>Maquininha de Cartão:</strong> levada pelo motoboy na entrega ou no balcão da retirada.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seção de Dados do Cliente -->
+        <div class="checkout-section" id="sectionCustomer" style="display:none;">
+          <h4><i class="fa-solid fa-user-check" style="color:var(--primary);"></i> Seus Dados para o Pedido</h4>
+          <div class="customer-field">
+            <label>Seu Nome ou Espaço:</label>
+            <input type="text" id="custName" placeholder="Ex: Layana Studio / Jéssica Lash" />
+          </div>
+          <div class="customer-field">
+            <label>Seu WhatsApp de Contato:</label>
+            <input type="tel" id="custPhone" placeholder="(61) 90000-0000" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Rodapé do Carrinho com Totais e Botão Comprar -->
+      <div class="cart-footer" id="cartFooter" style="display:none;">
+        <div class="summary-line">
+          <span>Subtotal dos Produtos:</span>
+          <strong id="sumSubtotal">R$ 0,00</strong>
+        </div>
+        <div class="summary-line">
+          <span>Valor do Frete:</span>
+          <strong id="sumFrete" style="color:#27ae60;">Grátis (Retirada)</strong>
+        </div>
+        <div class="summary-line" id="sumPixDiscountRow" style="color:#27ae60;">
+          <span>Desconto PIX (5%):</span>
+          <strong id="sumPixDiscount">- R$ 0,00</strong>
+        </div>
+        <div class="summary-total">
+          <span>Total Final:</span>
+          <span id="sumTotal" style="color:var(--primary-dark);">R$ 0,00</span>
+        </div>
+        <div class="pix-discount-highlight" id="pixSavedPill">Você economiza 5% no PIX!</div>
+
+        <button class="btn-checkout-whatsapp" id="btnFinalizarCompra" onclick="checkoutOrder()">
+          <i class="fa-brands fa-whatsapp"></i> Finalizar Compra via WhatsApp
+        </button>
+      </div>
+    </div>
 
     <!-- Domino Ad -->
     <section class="domino-ad" aria-label="Desenvolvido por Domino Automate">
@@ -511,58 +774,536 @@
       </div>
     </footer>
 
-    <!-- Floating WhatsApp -->
-    <a href="https://wa.me/556195981186" target="_blank" class="whatsapp-float" aria-label="Comprar no WhatsApp">
+    <!-- Floating WhatsApp Direct Contact -->
+    <a href="https://wa.me/556195981186" target="_blank" class="whatsapp-float" aria-label="Falar no WhatsApp">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path d="M12.031 21.722l-3.146.85 1.13-3.082a9.71 9.71 0 01-1.396-4.99c0-5.362 4.364-9.725 9.728-9.725 5.362 0 9.725 4.363 9.725 9.725 0 5.363-4.363 9.725-9.725 9.725a9.71 9.71 0 01-5.016-1.38zM18.15 15.69c-.282-.142-1.673-.826-1.932-.92-.258-.094-.447-.142-.636.142-.188.283-.728.92-.893 1.11-.164.188-.33.212-.612.07a7.925 7.925 0 01-2.327-1.436 8.766 8.766 0 01-1.616-2.007c-.164-.283-.017-.436.124-.577.127-.127.283-.33.424-.495.141-.165.188-.283.283-.472.094-.188.047-.354-.024-.495-.07-.142-.636-1.533-.872-2.1-.228-.543-.46-.47-.636-.478-.164-.008-.353-.008-.542-.008a1.037 1.037 0 00-.754.354c-.26.283-.99.967-.99 2.358s1.014 2.735 1.155 2.924c.141.188 1.993 3.042 4.827 4.267.674.292 1.2.466 1.61.597.676.216 1.293.185 1.78.112.545-.082 1.673-.683 1.909-1.344.236-.66.236-1.226.165-1.344-.07-.118-.26-.188-.543-.33z"/>
       </svg>
     </a>
 
+    <!-- Scripts: E-Commerce Logic & Database Integration -->
     <script>
-      // Filtering & Search
-      const proFilterTabs = document.querySelectorAll(".pro-tab-btn");
-      const proProducts = document.querySelectorAll(".pro-product-card");
-      const proSearchInput = document.getElementById("proSearchInput");
-
+      let catalogProducts = [];
+      let cart = {}; // { [productId]: quantity }
       let currentCategory = "todos";
       let currentSearch = "";
+      let deliveryType = "retirada"; // 'retirada' | 'express'
+      let shippingCost = 0;
+      let calculatedDistanceKm = 0;
+      let paymentMethod = "pix"; // 'pix' | 'cartao'
+      let selectedInstallment = 1;
 
-      function filterProProducts() {
-        proProducts.forEach((card) => {
-          const category = card.getAttribute("data-category");
-          const name = (card.getAttribute("data-name") || "").toLowerCase();
-          const textContent = card.innerText.toLowerCase();
+      // Card quantity counters in the catalogue
+      let productQtyHolders = {};
 
-          const matchesCategory = currentCategory === "todos" || category === currentCategory;
-          const matchesSearch = !currentSearch || name.includes(currentSearch) || textContent.includes(currentSearch);
+      // 1. Fetch products from PostgreSQL API (/api/produtos)
+      async function loadCatalog() {
+        try {
+          const res = await fetch('/api/produtos');
+          if (!res.ok) throw new Error("Erro na requisição da API");
+          catalogProducts = await res.json();
+        } catch (err) {
+          console.warn("Fallback: carregando lista padrão...", err);
+          catalogProducts = [
+            { id: 1, tipo: 'Extensão de Cílios • Booble', nome: 'Adesivo Booble Rubi 3ml', descricao: 'Secagem ultra-rápida (0.5s a 1s). Retenção campeã de até 7 a 8 semanas. Baixa emissão de odor e adaptabilidade ideal para o clima de Goiás.', preco: 95.00, estoque: 20, categoria_filtro: 'cilios', imagem_url: '/assets/booble_rubi.jpg', badge: 'Pronta Entrega Luziânia' },
+            { id: 2, tipo: 'Extensão de Cílios • Booble', nome: 'Adesivo Booble Black 3ml', descricao: 'Secagem flexível (1s a 2s). Acabamento preto acetinado profundo com película flexível que acompanha o movimento do fio natural.', preco: 89.00, estoque: 15, categoria_filtro: 'cilios', imagem_url: '/assets/booble_rubi.jpg', badge: 'Aprovado por Layana Wolf' },
+            { id: 3, tipo: 'Fios para Cílios • Nagaraku', nome: 'Fios Nagaraku Y Mix (8 a 15mm)', descricao: 'Os queridinhos do Volume Brasileiro. Fios macios, pretos matte e bifurcados com acoplagem magnética sem peso sobre o fio natural.', preco: 38.00, estoque: 30, categoria_filtro: 'cilios', imagem_url: '/assets/nagaraku_y_lashes.jpg', badge: 'Mais Vendido' },
+            { id: 4, tipo: 'Fios para Cílios • Booble', nome: 'Fios Booble Velvet Volume Russo', descricao: 'Fios ultrafinos (espessura 0.05 / 0.07) com textura aveludada. Fáceis de abrir fans no chicote sem desmanchar a raiz.', preco: 42.00, estoque: 25, categoria_filtro: 'cilios', imagem_url: '/assets/nagaraku_y_lashes.jpg', badge: 'Pronta Entrega Luziânia' },
+            { id: 5, tipo: 'Preparação • Booble', nome: 'Primer Higienizador Booble 15ml', descricao: 'Remove qualquer vestígio de oleosidade e equilibra o pH dos fios naturais antes da acoplagem. Aumenta a durabilidade da retenção em até 40%.', preco: 45.00, estoque: 18, categoria_filtro: 'cilios', imagem_url: '/assets/booble_rubi.jpg', badge: 'Essencial de Bancada' },
+            { id: 6, tipo: 'Remoção Segura • Booble', nome: 'Removedor em Gel Booble 15g', descricao: 'Fórmula em gel com aroma suave que não escorre para os olhos. Dissolve a cola com rapidez sem desconforto ou quebra dos fios naturais.', preco: 48.00, estoque: 16, categoria_filtro: 'cilios', imagem_url: '/assets/booble_rubi.jpg', badge: 'Pronta Entrega' },
+            { id: 7, tipo: 'Micropigmentação • RBKollors', nome: 'Pigmento RBKollors Red Rose 15ml', descricao: 'Linha Lips Smart Pigment. Alta carga pigmentária, cor translúcida e vibrante que entrega efeito lábios de seda e cicatrização fiel sem manchas.', preco: 165.00, estoque: 12, categoria_filtro: 'micro', imagem_url: '/assets/rbkollors_lips.jpg', badge: 'Aprovado por Layana Wolf' },
+            { id: 8, tipo: 'Micropigmentação • RBKollors', nome: 'Pigmento RBKollors Jambo 15ml', descricao: 'Castanho escuro aquecido indispensável para fototipos brasileiros. Fórmula biocompatível inteligente que impede o acinzentamento ao cicatrizar.', preco: 165.00, estoque: 14, categoria_filtro: 'micro', imagem_url: '/assets/rbkollors_lips.jpg', badge: 'Pronta Entrega Luziânia' },
+            { id: 9, tipo: 'Micropigmentação • Diamond', nome: 'Pigmento Diamond Sobrancelhas 10ml', descricao: 'Linha especial de acabamento nobre para técnicas Shadow e Microblading. Degradês perfeitos com penetração homogênea e excelente retenção na derme.', preco: 145.00, estoque: 10, categoria_filtro: 'micro', imagem_url: '/assets/diamond_pigment.jpg', badge: 'Exclusividade Pro' },
+            { id: 10, tipo: 'Biossegurança & Descartáveis', nome: 'Microbrush Rosa - Tubo c/ 100 un', descricao: 'Ponta de microfibra que não solta fiapos nem retém produto em excesso. Essencial para higienização, primer, removedor e alinhamento de cílios.', preco: 22.00, estoque: 40, categoria_filtro: 'descartaveis', imagem_url: '/assets/disposables.jpg', badge: 'Pronta Entrega' },
+            { id: 11, tipo: 'Biossegurança & Mimos', nome: 'Escovinhas c/ Glitter Rosa (50 un)', descricao: 'Cerdas macias que alinham as extensões sem repuxar. Cabo com glitter rosa de alto apelo visual para uso em bancada e presente para suas clientes.', preco: 25.00, estoque: 50, categoria_filtro: 'descartaveis', imagem_url: '/assets/disposables.jpg', badge: 'Pronta Entrega' },
+            { id: 12, tipo: 'Kits de Formação • Alunas', nome: 'Kit Aluna Lash Designer Completo', descricao: 'Adesivo Booble Rubi 3ml + 2 Caixas Nagaraku Y/Mix + Pinça Reta Dourada + Pinça Curva + Primer + Removedor + 50 Escovinhas + 100 Microbrush + Fita Micropore.', preco: 289.00, estoque: 8, categoria_filtro: 'kits', imagem_url: '/assets/kit_aluna_lash.jpg', badge: 'Kit Completo Aluna' },
+            { id: 13, tipo: 'Kits de Formação • Alunas', nome: 'Kit Aluna Micropigmentação Pro', descricao: '2 Pigmentos RBKollors (Lips Red Rose + Sobrancelhas Jambo) + 1 Pele Sintética 3D para treino + 20 Anéis de Batoque + Lápis Dermatográfico + Paquímetro de precisão.', preco: 389.00, estoque: 6, categoria_filtro: 'kits', imagem_url: '/assets/kit_aluna_lash.jpg', badge: 'Aprovado por Layana' }
+          ];
+        }
 
-          if (matchesCategory && matchesSearch) {
-            card.style.display = "flex";
+        renderCatalog();
+        updateCategoryCounts();
+      }
+
+      // 2. Render Products Grid
+      function renderCatalog() {
+        const grid = document.getElementById("proProductsGrid");
+        const q = currentSearch.toLowerCase();
+
+        const filtered = catalogProducts.filter(p => {
+          const matchCat = currentCategory === "todos" || p.categoria_filtro === currentCategory;
+          const matchQ = !q || p.nome.toLowerCase().includes(q) || p.tipo.toLowerCase().includes(q) || p.descricao.toLowerCase().includes(q);
+          return matchCat && matchQ;
+        });
+
+        if (filtered.length === 0) {
+          grid.innerHTML = `
+            <div style="grid-column: 1/-1; text-align: center; padding: 50px 20px; color: #888;">
+              <i class="fa-solid fa-magnifying-glass" style="font-size:2rem; margin-bottom:12px; color:#c98276;"></i>
+              <p>Nenhum insumo encontrado para a busca realizada.</p>
+            </div>
+          `;
+          return;
+        }
+
+        grid.innerHTML = filtered.map(p => {
+          const preco = parseFloat(p.preco);
+          const precoFmt = preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+          const pixPrice = (preco * 0.95).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+          const stock = parseInt(p.estoque, 10) || 0;
+
+          let stockBadgeHtml = '';
+          if (stock === 0) {
+            stockBadgeHtml = `<span class="stock-tag out-stock"><i class="fa-solid fa-circle-xmark"></i> Esgotado</span>`;
+          } else if (stock <= 5) {
+            stockBadgeHtml = `<span class="stock-tag low-stock"><i class="fa-solid fa-triangle-exclamation"></i> Apenas ${stock} un disponíveis</span>`;
           } else {
-            card.style.display = "none";
+            stockBadgeHtml = `<span class="stock-tag in-stock"><i class="fa-solid fa-check"></i> Em estoque (${stock} un)</span>`;
           }
-        });
+
+          if (!productQtyHolders[p.id]) productQtyHolders[p.id] = 1;
+
+          return `
+            <div class="pro-product-card" data-category="${p.categoria_filtro}" data-name="${p.nome}">
+              <div class="product-img-wrap">
+                <img src="${p.imagem_url}" alt="${p.nome}" loading="lazy">
+                ${p.badge ? `<span class="product-badge"><i class="fa-solid fa-bolt"></i> ${p.badge}</span>` : ''}
+              </div>
+              <div class="product-info">
+                <span class="product-cat">${p.tipo}</span>
+                <h3 class="product-title">${p.nome}</h3>
+                <p class="product-spec">${p.descricao}</p>
+                ${stockBadgeHtml}
+
+                <div class="product-price-row" style="margin-top:10px;">
+                  <div class="product-price">
+                    ${precoFmt}
+                    <small><i class="fa-brands fa-pix" style="color:#27ae60;"></i> ${pixPrice} no Pix (5% OFF)</small>
+                  </div>
+                </div>
+
+                <!-- Seletor de Quantidade e Adicionar ao Carrinho -->
+                <div class="product-actions-bar">
+                  <div class="qty-selector">
+                    <button class="qty-btn" onclick="changeCardQty(${p.id}, -1)" ${stock === 0 ? 'disabled' : ''}>-</button>
+                    <span class="qty-display" id="card-qty-${p.id}">${productQtyHolders[p.id]}</span>
+                    <button class="qty-btn" onclick="changeCardQty(${p.id}, 1)" ${stock === 0 ? 'disabled' : ''}>+</button>
+                  </div>
+
+                  <button class="btn-add-cart" id="btn-add-${p.id}" onclick="addToCart(${p.id})" ${stock === 0 ? 'disabled' : ''}>
+                    <i class="fa-solid fa-cart-plus"></i> ${stock === 0 ? 'Indisponível' : 'Adicionar'}
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
       }
 
-      if (proFilterTabs.length > 0) {
-        proFilterTabs.forEach((btn) => {
-          btn.addEventListener("click", () => {
-            proFilterTabs.forEach((b) => b.classList.remove("active"));
-            btn.classList.add("active");
-            currentCategory = btn.getAttribute("data-category");
-            filterProProducts();
+      function updateCategoryCounts() {
+        document.getElementById('countTodos').innerText = catalogProducts.length;
+        document.getElementById('countCilios').innerText = catalogProducts.filter(p => p.categoria_filtro === 'cilios').length;
+        document.getElementById('countMicro').innerText = catalogProducts.filter(p => p.categoria_filtro === 'micro').length;
+        document.getElementById('countDescartaveis').innerText = catalogProducts.filter(p => p.categoria_filtro === 'descartaveis').length;
+        document.getElementById('countKits').innerText = catalogProducts.filter(p => p.categoria_filtro === 'kits').length;
+      }
+
+      function changeCardQty(productId, delta) {
+        const prod = catalogProducts.find(p => p.id === productId);
+        if (!prod) return;
+        const maxStock = prod.estoque;
+        let cur = productQtyHolders[productId] || 1;
+        cur += delta;
+        if (cur < 1) cur = 1;
+        if (cur > maxStock) cur = maxStock;
+        productQtyHolders[productId] = cur;
+        const el = document.getElementById(`card-qty-${productId}`);
+        if (el) el.innerText = cur;
+      }
+
+      // 3. Cart Management
+      function addToCart(productId) {
+        const prod = catalogProducts.find(p => p.id === productId);
+        if (!prod || prod.estoque <= 0) return;
+
+        const qtyToAdd = productQtyHolders[productId] || 1;
+        const curInCart = cart[productId] || 0;
+        const newTotal = curInCart + qtyToAdd;
+
+        if (newTotal > prod.estoque) {
+          alert(`Desculpe, temos apenas ${prod.estoque} unidades deste item em estoque.`);
+          cart[productId] = prod.estoque;
+        } else {
+          cart[productId] = newTotal;
+        }
+
+        // Animação visual no botão do card
+        const btn = document.getElementById(`btn-add-${productId}`);
+        if (btn) {
+          const originalContent = btn.innerHTML;
+          btn.innerHTML = `<i class="fa-solid fa-check"></i> Adicionado!`;
+          btn.style.background = '#27ae60';
+          setTimeout(() => {
+            btn.innerHTML = originalContent;
+            btn.style.background = '';
+          }, 1200);
+        }
+
+        updateCartUI();
+        openCartDrawer();
+      }
+
+      function updateCartItemQty(productId, delta) {
+        const prod = catalogProducts.find(p => p.id === productId);
+        if (!prod) return;
+        let cur = cart[productId] || 0;
+        cur += delta;
+        if (cur <= 0) {
+          delete cart[productId];
+        } else if (cur > prod.estoque) {
+          alert(`Estoque máximo atingido (${prod.estoque} unidades).`);
+          cart[productId] = prod.estoque;
+        } else {
+          cart[productId] = cur;
+        }
+        updateCartUI();
+      }
+
+      function removeCartItem(productId) {
+        delete cart[productId];
+        updateCartUI();
+      }
+
+      function openCartDrawer() {
+        document.getElementById('cartOverlay').classList.add('active');
+        document.getElementById('cartDrawer').classList.add('open');
+      }
+
+      function closeCartDrawer() {
+        document.getElementById('cartOverlay').classList.remove('active');
+        document.getElementById('cartDrawer').classList.remove('open');
+      }
+
+      function updateCartUI() {
+        const itemIds = Object.keys(cart);
+        const totalItemsCount = itemIds.reduce((acc, id) => acc + cart[id], 0);
+
+        // Atualizar badges
+        document.querySelectorAll('.cart-total-count').forEach(el => el.innerText = totalItemsCount);
+
+        const container = document.getElementById('cartItemsContainer');
+        const secDelivery = document.getElementById('sectionDelivery');
+        const secPayment = document.getElementById('sectionPayment');
+        const secCustomer = document.getElementById('sectionCustomer');
+        const footer = document.getElementById('cartFooter');
+
+        if (itemIds.length === 0) {
+          container.innerHTML = `
+            <div class="cart-empty-state">
+              <i class="fa-solid fa-basket-shopping"></i>
+              <h4>Seu carrinho está vazio</h4>
+              <p style="font-size:0.88rem;">Escolha os insumos na bancada acima e selecione as quantidades desejadas.</p>
+            </div>
+          `;
+          secDelivery.style.display = 'none';
+          secPayment.style.display = 'none';
+          secCustomer.style.display = 'none';
+          footer.style.display = 'none';
+          return;
+        }
+
+        // Renderizar Itens
+        let subtotal = 0;
+        container.innerHTML = itemIds.map(id => {
+          const prod = catalogProducts.find(p => p.id === parseInt(id, 10));
+          if (!prod) return '';
+          const qty = cart[id];
+          const itemTotal = prod.preco * qty;
+          subtotal += itemTotal;
+
+          return `
+            <div class="cart-item">
+              <img src="${prod.imagem_url}" class="cart-item-img" alt="${prod.nome}" />
+              <div class="cart-item-details">
+                <h5 class="cart-item-title">${prod.nome}</h5>
+                <div class="cart-item-price">R$ ${parseFloat(prod.preco).toFixed(2)} cada</div>
+                
+                <div style="display:flex; align-items:center; gap:8px; margin-top:6px;">
+                  <div class="qty-selector" style="transform:scale(0.88); transform-origin:left center;">
+                    <button class="qty-btn" onclick="updateCartItemQty(${prod.id}, -1)">-</button>
+                    <span class="qty-display">${qty}</span>
+                    <button class="qty-btn" onclick="updateCartItemQty(${prod.id}, 1)">+</button>
+                  </div>
+                  <strong style="font-size:0.9rem; color:var(--secondary);">R$ ${itemTotal.toFixed(2)}</strong>
+                </div>
+              </div>
+              <button class="cart-item-remove" onclick="removeCartItem(${prod.id})" title="Remover item">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </div>
+          `;
+        }).join('');
+
+        secDelivery.style.display = 'block';
+        secPayment.style.display = 'block';
+        secCustomer.style.display = 'block';
+        footer.style.display = 'block';
+
+        // Atualizar Totais e Regras
+        updateTotals(subtotal);
+      }
+
+      function selectDelivery(type) {
+        deliveryType = type;
+        document.getElementById('labelRetirada').classList.toggle('selected', type === 'retirada');
+        document.getElementById('labelExpress').classList.toggle('selected', type === 'express');
+        document.getElementById('freteCalcBox').style.display = type === 'express' ? 'block' : 'none';
+
+        if (type === 'retirada') {
+          shippingCost = 0;
+          calculatedDistanceKm = 0;
+          document.getElementById('sumFrete').innerText = "Grátis (Retirada)";
+          document.getElementById('sumFrete').style.color = "#27ae60";
+        } else {
+          if (shippingCost === 0) {
+            document.getElementById('sumFrete').innerText = "A calcular";
+            document.getElementById('sumFrete').style.color = "#e67e22";
+          }
+        }
+        recalculateCart();
+      }
+
+      async function calculateShipping() {
+        const address = document.getElementById('inputAddress').value.trim();
+        if (!address) {
+          alert("Por favor, informe seu endereço completo (rua, número e bairro).");
+          return;
+        }
+
+        const btn = document.getElementById('btnCalcFrete');
+        btn.disabled = true;
+        btn.innerText = "Calculando...";
+
+        try {
+          const res = await fetch('/api/frete/calcular-distancia', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ endereco: address })
           });
-        });
+
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || "Erro ao calcular distância");
+
+          shippingCost = parseFloat(data.valor_frete);
+          calculatedDistanceKm = parseFloat(data.distancia_km);
+
+          const resultPill = document.getElementById('freteResultPill');
+          resultPill.style.display = 'flex';
+          document.getElementById('freteDistText').innerText = `Distância: ${calculatedDistanceKm} km`;
+          document.getElementById('freteValText').innerText = `Frete: R$ ${shippingCost.toFixed(2)}`;
+
+          document.getElementById('sumFrete').innerText = `R$ ${shippingCost.toFixed(2)}`;
+          document.getElementById('sumFrete').style.color = "var(--secondary)";
+          recalculateCart();
+        } catch (err) {
+          alert("Aviso no cálculo de frete: " + err.message + "\nConsiderando estimativa padrão para Luziânia.");
+          shippingCost = 20.00;
+          calculatedDistanceKm = 6.5;
+          document.getElementById('sumFrete').innerText = `R$ 20,00`;
+          recalculateCart();
+        } finally {
+          btn.disabled = false;
+          btn.innerText = "Calcular";
+        }
       }
 
-      if (proSearchInput) {
-        proSearchInput.addEventListener("input", (e) => {
-          currentSearch = e.target.value.trim().toLowerCase();
-          filterProProducts();
-        });
+      function selectPayment(method) {
+        paymentMethod = method;
+        document.getElementById('labelPix').classList.toggle('selected', method === 'pix');
+        document.getElementById('labelCartao').classList.toggle('selected', method === 'cartao');
+        document.getElementById('cartaoOptionsBox').style.display = method === 'cartao' ? 'block' : 'none';
+        recalculateCart();
       }
 
-      // Mobile Drawer
+      function updateTotals(subtotal) {
+        const sumBruto = subtotal + shippingCost;
+
+        document.getElementById('sumSubtotal').innerText = subtotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+        if (paymentMethod === 'pix') {
+          const pixDiscount = sumBruto * 0.05;
+          const totalComDesconto = sumBruto - pixDiscount;
+
+          document.getElementById('sumPixDiscountRow').style.display = 'flex';
+          document.getElementById('sumPixDiscount').innerText = `- R$ ${pixDiscount.toFixed(2)}`;
+          document.getElementById('sumTotal').innerText = totalComDesconto.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+          document.getElementById('pixSavedPill').style.display = 'block';
+          document.getElementById('pixSavedPill').innerText = `✨ Você economiza R$ ${pixDiscount.toFixed(2)} pagando no PIX!`;
+        } else {
+          document.getElementById('sumPixDiscountRow').style.display = 'none';
+          document.getElementById('pixSavedPill').style.display = 'none';
+          document.getElementById('sumTotal').innerText = sumBruto.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+
+        // Atualizar Parcelamento no Cartão
+        renderInstallments(sumBruto);
+      }
+
+      function recalculateCart() {
+        const itemIds = Object.keys(cart);
+        let subtotal = 0;
+        itemIds.forEach(id => {
+          const prod = catalogProducts.find(p => p.id === parseInt(id, 10));
+          if (prod) subtotal += prod.preco * cart[id];
+        });
+        updateTotals(subtotal);
+      }
+
+      function renderInstallments(totalBruto) {
+        const select = document.getElementById('selectInstallments');
+        const warnMin = document.getElementById('cartaoWarningMin');
+        const wrap = document.getElementById('cartaoSelectWrap');
+
+        if (totalBruto < 100) {
+          warnMin.style.display = 'block';
+          wrap.style.display = 'none';
+          return;
+        }
+
+        warnMin.style.display = 'none';
+        wrap.style.display = 'block';
+
+        // Regra: Parcela mínima de R$ 50,00
+        const maxInstallments = Math.min(10, Math.floor(totalBruto / 50));
+        let optionsHtml = '';
+        for (let i = 1; i <= maxInstallments; i++) {
+          const valParcela = (totalBruto / i).toFixed(2);
+          optionsHtml += `<option value="${i}" ${i === selectedInstallment ? 'selected' : ''}>${i}x de R$ ${valParcela} sem juros</option>`;
+        }
+        select.innerHTML = optionsHtml;
+      }
+
+      function updateInstallmentChoice() {
+        selectedInstallment = parseInt(document.getElementById('selectInstallments').value, 10) || 1;
+      }
+
+      // 4. Checkout Order & WhatsApp Integration
+      async function checkoutOrder() {
+        const itemIds = Object.keys(cart);
+        if (itemIds.length === 0) {
+          alert("Seu carrinho está vazio.");
+          return;
+        }
+
+        const name = document.getElementById('custName').value.trim() || 'Cliente Lana Supply Pro';
+        const phone = document.getElementById('custPhone').value.trim();
+
+        if (deliveryType === 'express' && shippingCost === 0) {
+          alert("Por favor, clique em 'Calcular' para verificar o valor do frete antes de finalizar.");
+          return;
+        }
+
+        const address = deliveryType === 'express' ? document.getElementById('inputAddress').value.trim() : 'Retirada no Studio Lana Wolf (Parque 9, Luziânia)';
+
+        let subtotal = 0;
+        const itemsList = itemIds.map(id => {
+          const p = catalogProducts.find(prod => prod.id === parseInt(id, 10));
+          const qty = cart[id];
+          const totalItem = p.preco * qty;
+          subtotal += totalItem;
+          return {
+            id: p.id,
+            nome: p.nome,
+            quantidade: qty,
+            preco_unit: p.preco,
+            total: totalItem
+          };
+        });
+
+        const totalBruto = subtotal + shippingCost;
+        const totalFinal = paymentMethod === 'pix' ? (totalBruto * 0.95) : totalBruto;
+
+        // Salvar pedido no banco PostgreSQL
+        try {
+          await fetch('/api/pedidos', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              cliente_nome: name,
+              cliente_whatsapp: phone,
+              tipo_entrega: deliveryType,
+              endereco: address,
+              distancia_km: calculatedDistanceKm,
+              frete: shippingCost,
+              subtotal: subtotal,
+              total: totalFinal,
+              forma_pagamento: paymentMethod,
+              parcelas: paymentMethod === 'cartao' ? selectedInstallment : 1,
+              itens: itemsList
+            })
+          });
+        } catch (e) {
+          console.warn("Aviso ao registrar pedido no banco:", e);
+        }
+
+        // Montar mensagem para o WhatsApp oficial da Lana Supply Pro (556195981186)
+        let msg = `🛍️ *NOVO PEDIDO - LANA SUPPLY PRO*\n\n`;
+        msg += `👤 *Cliente:* ${name}\n`;
+        if (phone) msg += `📱 *WhatsApp:* ${phone}\n\n`;
+
+        msg += `📦 *ITENS DO PEDIDO:*\n`;
+        itemsList.forEach(item => {
+          msg += `• ${item.quantidade}x ${item.nome} - R$ ${item.total.toFixed(2)}\n`;
+        });
+
+        msg += `\n💰 *Subtotal Produtos:* R$ ${subtotal.toFixed(2)}\n`;
+        if (deliveryType === 'retirada') {
+          msg += `📍 *Entrega:* Retirada no Studio Lana Wolf (Sem Frete)\n`;
+        } else {
+          msg += `🛵 *Entrega:* Envio Express (${calculatedDistanceKm} km)\n`;
+          msg += `🏠 *Endereço:* ${address}\n`;
+          msg += `🚚 *Valor Frete:* R$ ${shippingCost.toFixed(2)}\n`;
+        }
+
+        if (paymentMethod === 'pix') {
+          msg += `\n🏷️ *Pagamento:* PIX com 5% de Desconto à Vista\n`;
+          msg += `💵 *TOTAL A PAGAR:* R$ ${totalFinal.toFixed(2)} (Economia de R$ ${(totalBruto * 0.05).toFixed(2)})\n`;
+          msg += `🔑 *Chave Pix:* (61) 95981-186\n`;
+        } else {
+          msg += `\n💳 *Pagamento:* Cartão de Crédito Parcelado em ${selectedInstallment}x de R$ ${(totalFinal / selectedInstallment).toFixed(2)}\n`;
+          msg += `💵 *TOTAL A PAGAR:* R$ ${totalFinal.toFixed(2)}\n`;
+          msg += `💳 *Recebimento:* Por favor me envie o Link de Pagamento ou traga a Maquininha na entrega.\n`;
+        }
+
+        msg += `\n_Pedido gerado automaticamente pelo portal lanawolfart.cloud/pro_`;
+
+        // Abrir WhatsApp com mensagem
+        const whatsappUrl = `https://wa.me/556195981186?text=${encodeURIComponent(msg)}`;
+        window.open(whatsappUrl, '_blank');
+
+        // Limpar carrinho após confirmação
+        cart = {};
+        updateCartUI();
+        closeCartDrawer();
+        alert("🎉 Pedido finalizado com sucesso! Estamos redirecionando para o WhatsApp do estúdio para confirmação imediata.");
+      }
+
+      // 5. Filtros e Pesquisa no Catálogo
+      document.getElementById("proSearchInput").addEventListener("input", (e) => {
+        currentSearch = e.target.value.trim();
+        renderCatalog();
+      });
+
+      document.querySelectorAll(".pro-tab-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".pro-tab-btn").forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentCategory = btn.getAttribute("data-category");
+          renderCatalog();
+        });
+      });
+
+      // Mobile Menu Toggle
       const mobileMenuBtn = document.getElementById("mobileMenuBtn");
       const mobileDrawer = document.getElementById("mobileDrawer");
       if (mobileMenuBtn && mobileDrawer) {
@@ -570,6 +1311,9 @@
           mobileDrawer.classList.toggle("open");
         });
       }
+
+      // Inicialização do catálogo
+      loadCatalog();
     </script>
   </body>
 </html>

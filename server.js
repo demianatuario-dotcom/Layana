@@ -34,7 +34,7 @@ const pool = new Pool({
     ssl: useSSL ? { rejectUnauthorized: false } : false
 });
 
-// Inicialização da Tabela de Comentários
+// Inicialização do Banco de Dados PostgreSQL (db_Layana)
 async function initDB() {
     try {
         await pool.query(`
@@ -47,14 +47,191 @@ async function initDB() {
                 conteudo TEXT NOT NULL,
                 criado_em TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
             );
+
+            CREATE TABLE IF NOT EXISTS produtos_pro (
+                id SERIAL PRIMARY KEY,
+                tipo VARCHAR(120) NOT NULL,
+                nome VARCHAR(255) NOT NULL,
+                descricao TEXT NOT NULL,
+                preco NUMERIC(10, 2) NOT NULL,
+                estoque INTEGER NOT NULL DEFAULT 10,
+                categoria_filtro VARCHAR(50) NOT NULL,
+                imagem_url VARCHAR(255) NOT NULL,
+                badge VARCHAR(80),
+                ativo BOOLEAN DEFAULT TRUE,
+                criado_em TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+                atualizado_em TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+            );
+
+            CREATE TABLE IF NOT EXISTS pedidos_pro (
+                id SERIAL PRIMARY KEY,
+                cliente_nome VARCHAR(255),
+                cliente_whatsapp VARCHAR(50),
+                tipo_entrega VARCHAR(50) NOT NULL,
+                endereco TEXT,
+                distancia_km NUMERIC(6, 2) DEFAULT 0,
+                frete NUMERIC(10, 2) DEFAULT 0,
+                subtotal NUMERIC(10, 2) NOT NULL,
+                total NUMERIC(10, 2) NOT NULL,
+                forma_pagamento VARCHAR(50) NOT NULL,
+                parcelas INTEGER DEFAULT 1,
+                itens JSONB NOT NULL,
+                status VARCHAR(50) DEFAULT 'pendente',
+                criado_em TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+            );
         `);
-        console.log("Tabela 'comentarios' verificada/criada com sucesso no PostgreSQL.");
+        console.log("Tabelas 'comentarios', 'produtos_pro' e 'pedidos_pro' verificadas/criadas com sucesso no PostgreSQL.");
+
+        // Carga inicial dos 13 produtos se a tabela estiver vazia
+        const countRes = await pool.query('SELECT COUNT(*) FROM produtos_pro');
+        if (parseInt(countRes.rows[0].count, 10) === 0) {
+            console.log("Populando tabela 'produtos_pro' com os insumos da Lana Supply Pro...");
+            const defaultProducts = [
+                {
+                    tipo: 'Extensão de Cílios • Booble',
+                    nome: 'Adesivo Booble Rubi 3ml',
+                    descricao: 'Secagem ultra-rápida (0.5s a 1s). Retenção campeã de até 7 a 8 semanas. Baixa emissão de odor e adaptabilidade ideal para o clima de Goiás.',
+                    preco: 95.00,
+                    estoque: 20,
+                    categoria_filtro: 'cilios',
+                    imagem_url: '/assets/booble_rubi.jpg',
+                    badge: 'Pronta Entrega Luziânia'
+                },
+                {
+                    tipo: 'Extensão de Cílios • Booble',
+                    nome: 'Adesivo Booble Black 3ml',
+                    descricao: 'Secagem flexível (1s a 2s). Acabamento preto acetinado profundo com película flexível que acompanha o movimento do fio natural.',
+                    preco: 89.00,
+                    estoque: 15,
+                    categoria_filtro: 'cilios',
+                    imagem_url: '/assets/booble_rubi.jpg',
+                    badge: 'Aprovado por Layana Wolf'
+                },
+                {
+                    tipo: 'Fios para Cílios • Nagaraku',
+                    nome: 'Fios Nagaraku Y Mix (8 a 15mm)',
+                    descricao: 'Os queridinhos do Volume Brasileiro. Fios macios, pretos matte e bifurcados com acoplagem magnética sem peso sobre o fio natural.',
+                    preco: 38.00,
+                    estoque: 30,
+                    categoria_filtro: 'cilios',
+                    imagem_url: '/assets/nagaraku_y_lashes.jpg',
+                    badge: 'Mais Vendido'
+                },
+                {
+                    tipo: 'Fios para Cílios • Booble',
+                    nome: 'Fios Booble Velvet Volume Russo',
+                    descricao: 'Fios ultrafinos (espessura 0.05 / 0.07) com textura aveludada. Fáceis de abrir fans no chicote sem desmanchar a raiz.',
+                    preco: 42.00,
+                    estoque: 25,
+                    categoria_filtro: 'cilios',
+                    imagem_url: '/assets/nagaraku_y_lashes.jpg',
+                    badge: 'Pronta Entrega Luziânia'
+                },
+                {
+                    tipo: 'Preparação • Booble',
+                    nome: 'Primer Higienizador Booble 15ml',
+                    descricao: 'Remove qualquer vestígio de oleosidade e equilibra o pH dos fios naturais antes da acoplagem. Aumenta a durabilidade da retenção em até 40%.',
+                    preco: 45.00,
+                    estoque: 18,
+                    categoria_filtro: 'cilios',
+                    imagem_url: '/assets/booble_rubi.jpg',
+                    badge: 'Essencial de Bancada'
+                },
+                {
+                    tipo: 'Remoção Segura • Booble',
+                    nome: 'Removedor em Gel Booble 15g',
+                    descricao: 'Fórmula em gel com aroma suave que não escorre para os olhos. Dissolve a cola com rapidez sem desconforto ou quebra dos fios naturais.',
+                    preco: 48.00,
+                    estoque: 16,
+                    categoria_filtro: 'cilios',
+                    imagem_url: '/assets/booble_rubi.jpg',
+                    badge: 'Pronta Entrega'
+                },
+                {
+                    tipo: 'Micropigmentação • RBKollors',
+                    nome: 'Pigmento RBKollors Red Rose 15ml',
+                    descricao: 'Linha Lips Smart Pigment. Alta carga pigmentária, cor translúcida e vibrante que entrega efeito lábios de seda e cicatrização fiel sem manchas.',
+                    preco: 165.00,
+                    estoque: 12,
+                    categoria_filtro: 'micro',
+                    imagem_url: '/assets/rbkollors_lips.jpg',
+                    badge: 'Aprovado por Layana Wolf'
+                },
+                {
+                    tipo: 'Micropigmentação • RBKollors',
+                    nome: 'Pigmento RBKollors Jambo 15ml',
+                    descricao: 'Castanho escuro aquecido indispensável para fototipos brasileiros. Fórmula biocompatível inteligente que impede o acinzentamento ao cicatrizar.',
+                    preco: 165.00,
+                    estoque: 14,
+                    categoria_filtro: 'micro',
+                    imagem_url: '/assets/rbkollors_lips.jpg',
+                    badge: 'Pronta Entrega Luziânia'
+                },
+                {
+                    tipo: 'Micropigmentação • Diamond',
+                    nome: 'Pigmento Diamond Sobrancelhas 10ml',
+                    descricao: 'Linha especial de acabamento nobre para técnicas Shadow e Microblading. Degradês perfeitos com penetração homogênea e excelente retenção na derme.',
+                    preco: 145.00,
+                    estoque: 10,
+                    categoria_filtro: 'micro',
+                    imagem_url: '/assets/diamond_pigment.jpg',
+                    badge: 'Exclusividade Pro'
+                },
+                {
+                    tipo: 'Biossegurança & Descartáveis',
+                    nome: 'Microbrush Rosa - Tubo c/ 100 un',
+                    descricao: 'Ponta de microfibra que não solta fiapos nem retém produto em excesso. Essencial para higienização, primer, removedor e alinhamento de cílios.',
+                    preco: 22.00,
+                    estoque: 40,
+                    categoria_filtro: 'descartaveis',
+                    imagem_url: '/assets/disposables.jpg',
+                    badge: 'Pronta Entrega'
+                },
+                {
+                    tipo: 'Biossegurança & Mimos',
+                    nome: 'Escovinhas c/ Glitter Rosa (50 un)',
+                    descricao: 'Cerdas macias que alinham as extensões sem repuxar. Cabo com glitter rosa de alto apelo visual para uso em bancada e presente para suas clientes.',
+                    preco: 25.00,
+                    estoque: 50,
+                    categoria_filtro: 'descartaveis',
+                    imagem_url: '/assets/disposables.jpg',
+                    badge: 'Pronta Entrega'
+                },
+                {
+                    tipo: 'Kits de Formação • Alunas',
+                    nome: 'Kit Aluna Lash Designer Completo',
+                    descricao: 'Adesivo Booble Rubi 3ml + 2 Caixas Nagaraku Y/Mix + Pinça Reta Dourada + Pinça Curva + Primer + Removedor + 50 Escovinhas + 100 Microbrush + Fita Micropore.',
+                    preco: 289.00,
+                    estoque: 8,
+                    categoria_filtro: 'kits',
+                    imagem_url: '/assets/kit_aluna_lash.jpg',
+                    badge: 'Kit Completo Aluna'
+                },
+                {
+                    tipo: 'Kits de Formação • Alunas',
+                    nome: 'Kit Aluna Micropigmentação Pro',
+                    descricao: '2 Pigmentos RBKollors (Lips Red Rose + Sobrancelhas Jambo) + 1 Pele Sintética 3D para treino + 20 Anéis de Batoque + Lápis Dermatográfico + Paquímetro de precisão.',
+                    preco: 389.00,
+                    estoque: 6,
+                    categoria_filtro: 'kits',
+                    imagem_url: '/assets/kit_aluna_lash.jpg',
+                    badge: 'Aprovado por Layana'
+                }
+            ];
+
+            for (const p of defaultProducts) {
+                await pool.query(`
+                    INSERT INTO produtos_pro (tipo, nome, descricao, preco, estoque, categoria_filtro, imagem_url, badge)
+                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+                `, [p.tipo, p.nome, p.descricao, p.preco, p.estoque, p.categoria_filtro, p.imagem_url, p.badge]);
+            }
+            console.log("13 produtos iniciais inseridos com sucesso na tabela produtos_pro.");
+        }
     } catch (err) {
-        console.error("Erro ao inicializar o banco de dados (ignorando para modo estático):", err.message);
+        console.error("Erro ao inicializar o banco de dados (produtos_pro/pedidos_pro):", err.message);
     }
 }
 initDB();
-
 
 const rateLimit = require('express-rate-limit');
 const apiLimiter = rateLimit({
@@ -80,6 +257,8 @@ app.use(express.static(path.join(__dirname)));
 app.use('/procedimentos', express.static(path.join(__dirname, 'procedimentos')));
 app.use('/cursos', express.static(path.join(__dirname, 'cursos')));
 app.use('/pro', express.static(path.join(__dirname, 'pro')));
+app.use('/ControleEstoque', express.static(path.join(__dirname, 'ControleEstoque')));
+app.use('/controleestoque', express.static(path.join(__dirname, 'ControleEstoque')));
 
 // Rotas explícitas da plataforma modular (B2C & B2B)
 app.get(['/procedimentos', '/procedimentos/', '/studio', '/studio/'], (req, res) => {
@@ -92,6 +271,10 @@ app.get(['/cursos', '/cursos/'], (req, res) => {
 
 app.get(['/pro', '/pro/', '/loja', '/loja/'], (req, res) => {
     res.sendFile(path.join(__dirname, 'pro', 'index.html'));
+});
+
+app.get(['/ControleEstoque', '/ControleEstoque/', '/controleestoque', '/controleestoque/'], (req, res) => {
+    res.sendFile(path.join(__dirname, 'ControleEstoque', 'index.html'));
 });
 
 const PORT = process.env.PORT || 8080;
@@ -584,6 +767,183 @@ app.post('/api/comentarios', verifyAuth, async (req, res) => {
     } catch (error) {
         console.error("Erro ao inserir comentário:", error);
         res.status(500).json({ error: 'Erro ao salvar o comentário' });
+// ==========================================
+// APIS - LANA SUPPLY PRO & CONTROLE DE ESTOQUE
+// ==========================================
+
+// GET /api/produtos - Lista todos os produtos ativos do catálogo
+app.get('/api/produtos', async (req, res) => {
+    try {
+        const result = await pool.query(`
+            SELECT id, tipo, nome, descricao, preco, estoque, categoria_filtro, imagem_url, badge, ativo, criado_em, atualizado_em
+            FROM produtos_pro
+            WHERE ativo = true
+            ORDER BY id ASC
+        `);
+        res.json(result.rows);
+    } catch (error) {
+        console.error("Erro ao buscar produtos_pro:", error);
+        res.status(500).json({ error: 'Erro ao buscar catálogo de produtos' });
+    }
+});
+
+// PATCH /api/produtos/:id/estoque - Atualiza a quantidade em estoque de um produto
+app.patch('/api/produtos/:id/estoque', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { estoque, pin } = req.body;
+
+        const ADMIN_PIN = process.env.ADMIN_PIN || 'LanaPro2026';
+        if (pin && pin !== ADMIN_PIN) {
+            return res.status(401).json({ error: 'PIN de segurança incorreto.' });
+        }
+
+        const parsedEstoque = parseInt(estoque, 10);
+        if (isNaN(parsedEstoque) || parsedEstoque < 0) {
+            return res.status(400).json({ error: 'Quantidade de estoque inválida.' });
+        }
+
+        const result = await pool.query(
+            `UPDATE produtos_pro
+             SET estoque = $1, atualizado_em = CURRENT_TIMESTAMP
+             WHERE id = $2
+             RETURNING id, tipo, nome, estoque, atualizado_em`,
+            [parsedEstoque, id]
+        );
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({ error: 'Produto não encontrado.' });
+        }
+
+        res.json({ success: true, produto: result.rows[0] });
+    } catch (error) {
+        console.error("Erro ao atualizar estoque:", error);
+        res.status(500).json({ error: 'Erro ao atualizar estoque no banco de dados' });
+    }
+});
+
+// Coordenadas do Studio Lana Wolf: Rua 23, quadra 61, lote 3, Parque 9, Luziânia - GO
+const STUDIO_COORDS = { lat: -16.156250, lng: -47.946417 };
+
+function calculateHaversineKm(lat1, lon1, lat2, lon2) {
+    const R = 6371; // Raio da Terra em km
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = 
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    // Fator de rota urbana estimada em Luziânia (~1.25x)
+    return (R * c) * 1.25;
+}
+
+function calculateFreteByDistance(distKm) {
+    if (distKm <= 0) return 0;
+    // Até 5km: R$ 10; 5 a 10km: R$ 20; 10 a 15km: R$ 30; sucessivamente:
+    const faixas = Math.ceil(distKm / 5);
+    return Math.max(10, faixas * 10);
+}
+
+// POST /api/frete/calcular-distancia - Calcula distância e valor do frete
+app.post('/api/frete/calcular-distancia', async (req, res) => {
+    try {
+        const { endereco, lat, lng } = req.body;
+
+        let destLat = lat ? parseFloat(lat) : null;
+        let destLng = lng ? parseFloat(lng) : null;
+
+        if ((destLat === null || destLng === null) && endereco) {
+            try {
+                const query = encodeURIComponent(`${endereco}, Luziânia, Goiás, Brasil`);
+                const geoRes = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}&limit=1`, {
+                    headers: { 'User-Agent': 'LanaSupplyPro/1.0 (contato@lanawolfart.cloud)' }
+                });
+                if (geoRes.ok) {
+                    const geoData = await geoRes.json();
+                    if (geoData && geoData.length > 0) {
+                        destLat = parseFloat(geoData[0].lat);
+                        destLng = parseFloat(geoData[0].lon);
+                    }
+                }
+            } catch (geoErr) {
+                console.warn("Aviso na geocodificação Nominatim:", geoErr.message);
+            }
+        }
+
+        if (destLat === null || destLng === null) {
+            // Fallback: estimativa média para Luziânia caso Nominatim não ache o número exato
+            return res.json({
+                distancia_km: 6.5,
+                valor_frete: 20.00,
+                origem: "Studio Lana Wolf (Parque 9, Luziânia)",
+                faixa_frete: "Estimativa Luziânia (5 a 10km): R$ 20,00",
+                observacao: "Endereço registrado. Distância aproximada de referência."
+            });
+        }
+
+        const distKm = parseFloat(calculateHaversineKm(STUDIO_COORDS.lat, STUDIO_COORDS.lng, destLat, destLng).toFixed(1));
+        const valorFrete = calculateFreteByDistance(distKm);
+
+        res.json({
+            distancia_km: distKm,
+            valor_frete: valorFrete,
+            origem: "Studio Lana Wolf (Parque 9, Luziânia)",
+            faixa_frete: `Até ${Math.ceil(distKm / 5) * 5}km: R$ ${valorFrete.toFixed(2)}`
+        });
+    } catch (error) {
+        console.error("Erro ao calcular frete:", error);
+        res.status(500).json({ error: 'Erro ao calcular frete' });
+    }
+});
+
+// POST /api/pedidos - Registra o pedido no banco e atualiza o estoque
+app.post('/api/pedidos', async (req, res) => {
+    try {
+        const { cliente_nome, cliente_whatsapp, tipo_entrega, endereco, distancia_km, frete, subtotal, total, forma_pagamento, parcelas, itens } = req.body;
+
+        if (!itens || !Array.isArray(itens) || itens.length === 0) {
+            return res.status(400).json({ error: 'O carrinho está vazio.' });
+        }
+
+        // Criar registro na tabela pedidos_pro
+        const result = await pool.query(`
+            INSERT INTO pedidos_pro (cliente_nome, cliente_whatsapp, tipo_entrega, endereco, distancia_km, frete, subtotal, total, forma_pagamento, parcelas, itens)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+            RETURNING id, criado_em
+        `, [
+            cliente_nome || 'Cliente Lana Supply Pro',
+            cliente_whatsapp || '',
+            tipo_entrega || 'retirada',
+            endereco || '',
+            distancia_km || 0,
+            frete || 0,
+            subtotal || 0,
+            total || 0,
+            forma_pagamento || 'pix',
+            parcelas || 1,
+            JSON.stringify(itens)
+        ]);
+
+        // Decrementar estoque de cada item comprado
+        for (const item of itens) {
+            if (item.id && item.quantidade) {
+                await pool.query(`
+                    UPDATE produtos_pro
+                    SET estoque = GREATEST(0, estoque - $1), atualizado_em = CURRENT_TIMESTAMP
+                    WHERE id = $2
+                `, [item.quantidade, item.id]);
+            }
+        }
+
+        res.status(201).json({
+            success: true,
+            pedido_id: result.rows[0].id,
+            criado_em: result.rows[0].criado_em
+        });
+    } catch (error) {
+        console.error("Erro ao salvar pedido:", error);
+        res.status(500).json({ error: 'Erro ao registrar pedido' });
     }
 });
 
