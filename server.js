@@ -950,6 +950,80 @@ app.post('/api/pedidos', async (req, res) => {
     }
 });
 
+// POST /api/duvidas-produto - Atendimento com IA (Gemini) sobre produtos do catálogo
+app.post('/api/duvidas-produto', async (req, res) => {
+    try {
+        const { produto, pergunta, historico } = req.body;
+        if (!pergunta || typeof pergunta !== 'string' || !pergunta.trim()) {
+            return res.status(400).json({ error: 'Pergunta não informada.' });
+        }
+
+        const nomeProd = produto?.nome || 'Insumo Profissional';
+        const tipoProd = produto?.tipo || 'Estética & Beleza';
+        const descProd = produto?.descricao || '';
+        const precoProd = produto?.preco ? `R$ ${parseFloat(produto.preco).toFixed(2)}` : '';
+        const estoqueProd = produto?.estoque !== undefined ? `${produto.estoque} unidades` : '';
+
+        const systemInstruction = `Você é Lana IA, a consultora técnica oficial de insumos de beleza do Studio Layana Wolf (Lana Supply Pro).
+Você atende lash designers, micropigmentadoras, esteticistas e clientes tirando dúvidas com altíssima precisão técnica, acolhimento e profissionalismo.
+Informações do produto em consulta:
+- Nome: ${nomeProd}
+- Categoria/Tipo: ${tipoProd}
+- Descrição/Especificações: ${descProd}
+- Preço: ${precoProd}
+- Situação de estoque: ${estoqueProd}
+
+Diretrizes de atendimento:
+1. Responda em Português do Brasil com linguagem elegante, profissional e empática.
+2. Foque na dúvida exata da cliente (modo de uso, tempo de secagem/retenção, técnicas recomendadas, espessura, curvatura, higienização, cuidados e biossegurança).
+3. Seja concisa e prática (máximo de 2 a 4 parágrafos curtos ou tópicos objetivos), facilitando a leitura no celular.
+4. Se perguntarem sobre disponibilidade ou entrega, informe que temos pronta entrega em Luziânia e Jardim Ingá, retirada sem custo no Parque 9 ou envio rápido no mesmo dia (Uber Flash / Motoboy).
+5. Finalize de forma cordial e natural, convidando para adicionar ao carrinho ou entrar em contato no WhatsApp caso prefira suporte humano direto.`;
+
+        let contents = [];
+        if (Array.isArray(historico) && historico.length > 0) {
+            contents = historico
+                .filter(h => h && h.text)
+                .map(h => ({
+                    role: h.role === 'model' ? 'model' : 'user',
+                    parts: [{ text: String(h.text) }]
+                }));
+        }
+        contents.push({
+            role: 'user',
+            parts: [{ text: pergunta.trim() }]
+        });
+
+        const response = await fetch(GEMINI_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                systemInstruction: { parts: [{ text: systemInstruction }] },
+                contents,
+                generationConfig: {
+                    temperature: 0.65,
+                    maxOutputTokens: 900
+                }
+            })
+        });
+
+        if (!response.ok) {
+            const errText = await response.text();
+            console.error("Erro Gemini na rota de dúvidas de produtos:", response.status, errText);
+            return res.status(response.status).json({ error: 'Erro ao consultar IA', details: errText });
+        }
+
+        const data = await response.json();
+        const respostaTexto = data?.candidates?.[0]?.content?.parts?.[0]?.text 
+            || "Desculpe, não consegui processar a resposta neste instante. Por favor, fale diretamente com nossa equipe pelo WhatsApp!";
+
+        res.json({ resposta: respostaTexto });
+    } catch (error) {
+        console.error("Erro interno ao processar dúvida de produto:", error);
+        res.status(500).json({ error: 'Erro interno ao consultar IA.' });
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`Servidor backend rodando na porta ${PORT}`);
     console.log(`Você agora pode acessar a página abrindo o index.html no navegador.`);

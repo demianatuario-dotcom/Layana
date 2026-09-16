@@ -127,6 +127,340 @@
         color: #e74c3c;
       }
 
+      /* Botão 'Tire suas dúvidas' no Card de Produto */
+      .btn-ask-ai {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        width: 100%;
+        margin-top: 10px;
+        padding: 7px 12px;
+        border-radius: 20px;
+        background: rgba(201, 130, 118, 0.08);
+        border: 1px solid rgba(201, 130, 118, 0.32);
+        color: #8c4c41;
+        font-size: 0.78rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        text-decoration: none;
+      }
+      .btn-ask-ai:hover {
+        background: rgba(201, 130, 118, 0.18);
+        border-color: rgba(201, 130, 118, 0.55);
+        color: #6a342b;
+        transform: translateY(-1px);
+        box-shadow: 0 3px 10px rgba(201, 130, 118, 0.15);
+      }
+      .btn-ask-ai i {
+        color: var(--accent-gold);
+        font-size: 0.82rem;
+        animation: aiSparkle 2.5s infinite ease-in-out;
+      }
+      @keyframes aiSparkle {
+        0%, 100% { transform: scale(1); opacity: 0.9; }
+        50% { transform: scale(1.2) rotate(8deg); opacity: 1; }
+      }
+
+      /* Modal de Dúvidas com IA do Produto */
+      .ai-modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(20, 15, 14, 0.68);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        z-index: 10005;
+        display: none;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        padding: 16px;
+        align-items: center;
+        justify-content: center;
+      }
+      .ai-modal-overlay.active {
+        display: flex;
+        opacity: 1;
+      }
+      .ai-modal-card {
+        background: #ffffff;
+        width: 100%;
+        max-width: 520px;
+        max-height: 90vh;
+        border-radius: 20px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        border: 1.5px solid rgba(201, 130, 118, 0.35);
+        animation: aiModalSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      @keyframes aiModalSlideUp {
+        from { transform: translateY(20px) scale(0.97); opacity: 0; }
+        to { transform: translateY(0) scale(1); opacity: 1; }
+      }
+      .ai-modal-header {
+        background: linear-gradient(135deg, #2b2321 0%, #3d2f2c 100%);
+        color: white;
+        padding: 16px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 2px solid var(--accent-gold);
+        gap: 12px;
+      }
+      .ai-modal-header-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+      }
+      .ai-modal-product-img {
+        width: 46px;
+        height: 46px;
+        border-radius: 10px;
+        object-fit: cover;
+        border: 1.5px solid var(--accent-gold);
+        background: #fff;
+        flex-shrink: 0;
+      }
+      .ai-modal-header-titles {
+        min-width: 0;
+      }
+      .ai-modal-badge {
+        font-size: 0.68rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--accent-gold-light);
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .ai-modal-title {
+        margin: 2px 0 0 0;
+        font-size: 0.96rem;
+        font-weight: 600;
+        color: #fff;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .btn-close-ai-modal {
+        background: rgba(255, 255, 255, 0.12);
+        border: none;
+        color: #fff;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        transition: background 0.2s;
+        flex-shrink: 0;
+        line-height: 1;
+      }
+      .btn-close-ai-modal:hover {
+        background: rgba(255, 255, 255, 0.25);
+      }
+      .ai-modal-body {
+        padding: 18px 20px;
+        overflow-y: auto;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        background: #fdfaf9;
+      }
+      .ai-chat-messages {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .ai-msg {
+        display: flex;
+        gap: 10px;
+        max-width: 92%;
+        font-size: 0.88rem;
+        line-height: 1.48;
+      }
+      .ai-msg.bot {
+        align-self: flex-start;
+      }
+      .ai-msg.user {
+        align-self: flex-end;
+        flex-direction: row-reverse;
+      }
+      .ai-msg-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 0.82rem;
+      }
+      .ai-msg.bot .ai-msg-avatar {
+        background: #2b2321;
+        color: var(--accent-gold-light);
+        border: 1px solid var(--accent-gold);
+      }
+      .ai-msg.user .ai-msg-avatar {
+        background: var(--primary);
+        color: white;
+      }
+      .ai-msg-bubble {
+        padding: 10px 14px;
+        border-radius: 14px;
+        word-break: break-word;
+      }
+      .ai-msg.bot .ai-msg-bubble {
+        background: #ffffff;
+        color: #332826;
+        border: 1px solid rgba(201, 130, 118, 0.22);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        border-top-left-radius: 4px;
+      }
+      .ai-msg.user .ai-msg-bubble {
+        background: var(--primary);
+        color: white;
+        border-top-right-radius: 4px;
+      }
+      .ai-msg.bot .ai-msg-bubble strong {
+        color: #7d3f36;
+      }
+      .ai-chips-wrapper {
+        margin-top: 4px;
+      }
+      .ai-chips-title {
+        font-size: 0.74rem;
+        font-weight: 600;
+        color: #8c7f7d;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .ai-chips-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .ai-chip-btn {
+        background: #fff;
+        border: 1px solid rgba(201, 130, 118, 0.35);
+        color: #6a342b;
+        font-size: 0.76rem;
+        font-weight: 500;
+        padding: 5px 11px;
+        border-radius: 16px;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-align: left;
+      }
+      .ai-chip-btn:hover {
+        background: rgba(201, 130, 118, 0.12);
+        border-color: var(--primary);
+        color: var(--primary-dark);
+      }
+      .ai-typing-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 8px 12px;
+        background: #fff;
+        border-radius: 12px;
+        border: 1px solid rgba(201, 130, 118, 0.2);
+        width: fit-content;
+      }
+      .ai-typing-dot {
+        width: 6px;
+        height: 6px;
+        background: var(--primary);
+        border-radius: 50%;
+        animation: aiBounce 1.4s infinite ease-in-out both;
+      }
+      .ai-typing-dot:nth-child(1) { animation-delay: -0.32s; }
+      .ai-typing-dot:nth-child(2) { animation-delay: -0.16s; }
+      @keyframes aiBounce {
+        0%, 80%, 100% { transform: scale(0); opacity: 0.4; }
+        40% { transform: scale(1); opacity: 1; }
+      }
+      .ai-modal-footer {
+        padding: 12px 18px;
+        background: #fff;
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+      }
+      .ai-input-form {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .ai-input-field {
+        flex: 1;
+        padding: 10px 14px;
+        border-radius: 25px;
+        border: 1.5px solid rgba(201, 130, 118, 0.35);
+        background: #faf6f5;
+        font-size: 0.88rem;
+        outline: none;
+        transition: border-color 0.2s, background 0.2s;
+        color: var(--secondary);
+      }
+      .ai-input-field:focus {
+        border-color: var(--primary);
+        background: #fff;
+      }
+      .btn-send-ai {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--primary);
+        color: white;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.95rem;
+        transition: background 0.2s, transform 0.2s;
+        flex-shrink: 0;
+      }
+      .btn-send-ai:hover:not(:disabled) {
+        background: var(--primary-dark);
+        transform: scale(1.05);
+      }
+      .btn-send-ai:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      .ai-modal-subactions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 8px;
+        font-size: 0.75rem;
+        color: #8c7f7d;
+      }
+      .ai-modal-wa-link {
+        color: #27ae60;
+        text-decoration: none;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        transition: color 0.2s;
+      }
+      .ai-modal-wa-link:hover {
+        color: #1e8449;
+        text-decoration: underline;
+      }
+
       /* Floating Cart Button */
       .floating-cart-btn {
         position: fixed;
@@ -739,6 +1073,61 @@
       </div>
     </footer>
 
+    <!-- Modal de Dúvidas sobre o Produto com IA (Gemini) -->
+    <div class="ai-modal-overlay" id="productAiModal" onclick="handleAiModalBackdrop(event)">
+      <div class="ai-modal-card" role="dialog" aria-modal="true" aria-labelledby="aiModalTitle">
+        <!-- Header -->
+        <div class="ai-modal-header">
+          <div class="ai-modal-header-info">
+            <img id="aiModalImg" src="/assets/booble_rubi.jpg" alt="Produto" class="ai-modal-product-img">
+            <div class="ai-modal-header-titles">
+              <span class="ai-modal-badge"><i class="fa-solid fa-sparkles"></i> Especialista Lana IA</span>
+              <h3 class="ai-modal-title" id="aiModalTitle">Dúvidas do Produto</h3>
+            </div>
+          </div>
+          <button class="btn-close-ai-modal" onclick="closeProductAiModal()" aria-label="Fechar modal">&times;</button>
+        </div>
+
+        <!-- Body / Chat Messages -->
+        <div class="ai-modal-body" id="aiModalBody">
+          <div class="ai-chat-messages" id="aiChatMessages">
+            <!-- As mensagens serão inseridas aqui dinamicamente -->
+          </div>
+
+          <!-- Sugestões Rápidas (Chips) -->
+          <div class="ai-chips-wrapper" id="aiChipsWrapper">
+            <span class="ai-chips-title"><i class="fa-regular fa-lightbulb"></i> Perguntas Frequentes:</span>
+            <div class="ai-chips-list" id="aiChipsList">
+              <!-- Chips injetados dinamicamente com base no produto -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer / Input Form -->
+        <div class="ai-modal-footer">
+          <form class="ai-input-form" id="aiInputForm" onsubmit="handleAiFormSubmit(event)">
+            <input 
+              type="text" 
+              id="aiQuestionInput" 
+              class="ai-input-field" 
+              placeholder="Digite sua dúvida sobre este insumo..." 
+              autocomplete="off"
+              maxlength="400"
+            />
+            <button type="submit" class="btn-send-ai" id="btnSendAi" aria-label="Enviar pergunta">
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </form>
+          <div class="ai-modal-subactions">
+            <span>Respostas instantâneas pelo Gemini com base técnica.</span>
+            <a id="aiWaLink" href="https://wa.me/556195981186" target="_blank" class="ai-modal-wa-link">
+              <i class="fa-brands fa-whatsapp"></i> Falar com Layana
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Floating WhatsApp Direct Contact -->
     <a href="https://wa.me/556195981186" target="_blank" class="whatsapp-float" aria-label="Falar no WhatsApp">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -841,6 +1230,12 @@
                     <small><i class="fa-brands fa-pix" style="color:#27ae60;"></i> ${pixPrice} no Pix (5% OFF)</small>
                   </div>
                 </div>
+
+                <!-- Botão discreto Tire suas dúvidas com IA -->
+                <button type="button" class="btn-ask-ai" onclick="openProductAiModal(${p.id})" title="Tire suas dúvidas técnicas sobre este produto com a IA">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i>
+                  <span>Tire suas dúvidas</span>
+                </button>
 
                 <!-- Seletor de Quantidade e Adicionar ao Carrinho -->
                 <div class="product-actions-bar">
@@ -1227,6 +1622,276 @@
           mobileDrawer.classList.toggle("open");
         });
       }
+
+      // -------------------------------------------------------------
+      // Atendimento Inteligente de Produtos com IA (Lana IA - Gemini)
+      // -------------------------------------------------------------
+      let activeAiProduct = null;
+      let aiConversationHistory = [];
+
+      function openProductAiModal(productId) {
+        const prod = catalogProducts.find(p => p.id === productId);
+        if (!prod) return;
+
+        activeAiProduct = prod;
+        aiConversationHistory = [];
+
+        // Atualizar informações no cabeçalho do modal
+        const titleEl = document.getElementById('aiModalTitle');
+        if (titleEl) titleEl.innerText = prod.nome;
+
+        const imgEl = document.getElementById('aiModalImg');
+        if (imgEl) {
+          imgEl.src = prod.imagem_url || '/assets/booble_rubi.jpg';
+          imgEl.alt = prod.nome;
+        }
+
+        // Configurar link do WhatsApp para escalonamento
+        const waLink = document.getElementById('aiWaLink');
+        if (waLink) {
+          const waMsg = encodeURIComponent(`Olá Layana! Tenho uma dúvida sobre o produto "${prod.nome}" da Lana Supply Pro.`);
+          waLink.href = `https://wa.me/556195981186?text=${waMsg}`;
+        }
+
+        // Limpar mensagens e renderizar mensagem inicial
+        const chatContainer = document.getElementById('aiChatMessages');
+        if (chatContainer) {
+          chatContainer.innerHTML = '';
+        }
+
+        const initialGreeting = `Olá! Sou a **Lana IA**, especialista técnica da *Lana Supply Pro*.\n\nComo posso te ajudar com o **${prod.nome}**? Posso tirar dúvidas sobre tempo de secagem, técnicas de acoplagem, retenção, dicas de bancada ou envio para a sua região!`;
+        appendAiChatMessage('bot', initialGreeting);
+
+        // Renderizar chips de perguntas frequentes do produto
+        renderAiChips(prod);
+
+        // Abrir modal
+        const modal = document.getElementById('productAiModal');
+        if (modal) {
+          modal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+
+        setTimeout(() => {
+          const input = document.getElementById('aiQuestionInput');
+          if (input) input.focus();
+        }, 150);
+      }
+
+      function closeProductAiModal() {
+        const modal = document.getElementById('productAiModal');
+        if (modal) {
+          modal.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      }
+
+      function handleAiModalBackdrop(e) {
+        if (e.target && e.target.id === 'productAiModal') {
+          closeProductAiModal();
+        }
+      }
+
+      function renderAiChips(prod) {
+        const chipsList = document.getElementById('aiChipsList');
+        if (!chipsList) return;
+
+        const cat = (prod.categoria_filtro || '').toLowerCase();
+        const nome = (prod.nome || '').toLowerCase();
+
+        let questions = [
+          "Como usar este produto?",
+          "Para quem é indicado?",
+          "Tem pronta entrega hoje?"
+        ];
+
+        if (cat === 'cilios' || nome.includes('adesivo') || nome.includes('cola')) {
+          questions = [
+            "Qual o tempo de secagem e retenção?",
+            "Qual a umidade e temperatura ideais?",
+            "Como armazenar após aberto?",
+            "Tem envio express hoje em Luziânia?"
+          ];
+        } else if (cat === 'micro' || nome.includes('pigmento')) {
+          questions = [
+            "Para qual técnica e fototipo é indicado?",
+            "Como fica a tonalidade após cicatrizar?",
+            "Qual o rendimento e validade?",
+            "Pode misturar com outros pigmentos?"
+          ];
+        } else if (cat === 'kits') {
+          questions = [
+            "Quais itens vêm completos no kit?",
+            "É indicado para alunas iniciantes?",
+            "Como funciona o parcelamento no cartão?",
+            "Posso retirar no Studio sem frete?"
+          ];
+        } else if (cat === 'descartaveis') {
+          questions = [
+            "Qual a quantidade no pacote?",
+            "Qual a recomendação de biossegurança?",
+            "Tem desconto comprando mais unidades?"
+          ];
+        }
+
+        chipsList.innerHTML = questions.map(q => {
+          const safeQ = q.replace(/"/g, '&quot;');
+          return `<button type="button" class="ai-chip-btn" onclick="askAiChip('${safeQ}')">${q}</button>`;
+        }).join('');
+      }
+
+      function askAiChip(text) {
+        const input = document.getElementById('aiQuestionInput');
+        if (input) {
+          input.value = text;
+          submitAiQuestion();
+        }
+      }
+
+      function handleAiFormSubmit(e) {
+        if (e) e.preventDefault();
+        submitAiQuestion();
+      }
+
+      async function submitAiQuestion() {
+        const input = document.getElementById('aiQuestionInput');
+        const sendBtn = document.getElementById('btnSendAi');
+        if (!input || !activeAiProduct) return;
+
+        const text = input.value.trim();
+        if (!text) return;
+
+        // Adiciona pergunta do usuário na UI
+        appendAiChatMessage('user', text);
+        input.value = '';
+        input.disabled = true;
+        if (sendBtn) sendBtn.disabled = true;
+
+        showAiTypingIndicator();
+
+        try {
+          const res = await fetch('/api/duvidas-produto', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              produto: {
+                id: activeAiProduct.id,
+                nome: activeAiProduct.nome,
+                tipo: activeAiProduct.tipo,
+                descricao: activeAiProduct.descricao,
+                preco: activeAiProduct.preco,
+                estoque: activeAiProduct.estoque
+              },
+              pergunta: text,
+              historico: aiConversationHistory
+            })
+          });
+
+          removeAiTypingIndicator();
+
+          if (!res.ok) {
+            throw new Error(`Status ${res.status}`);
+          }
+
+          const data = await res.json();
+          const resposta = data.resposta || "Desculpe, não consegui obter a resposta no momento. Por favor, consulte nossa equipe no WhatsApp!";
+
+          // Armazenar histórico
+          aiConversationHistory.push({ role: 'user', text: text });
+          aiConversationHistory.push({ role: 'model', text: resposta });
+
+          appendAiChatMessage('bot', resposta);
+
+        } catch (err) {
+          console.error("Erro ao consultar Lana IA:", err);
+          removeAiTypingIndicator();
+          appendAiChatMessage('bot', "Tive uma breve oscilação ao consultar a IA. Se preferir, você pode falar direto com a Layana pelo WhatsApp no link abaixo!");
+        } finally {
+          input.disabled = false;
+          if (sendBtn) sendBtn.disabled = false;
+          input.focus();
+        }
+      }
+
+      function formatMarkdown(text) {
+        if (!text) return '';
+        let html = text
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;');
+
+        // Bold
+        html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        // Italic
+        html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+        // Quebras de linha
+        html = html.replace(/\n\n/g, '<br><br>');
+        html = html.replace(/\n/g, '<br>');
+
+        return html;
+      }
+
+      function appendAiChatMessage(role, text) {
+        const chatContainer = document.getElementById('aiChatMessages');
+        if (!chatContainer) return;
+
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `ai-msg ${role}`;
+
+        const avatarIcon = role === 'bot' 
+          ? '<i class="fa-solid fa-sparkles"></i>' 
+          : '<i class="fa-solid fa-user"></i>';
+
+        msgDiv.innerHTML = `
+          <div class="ai-msg-avatar">${avatarIcon}</div>
+          <div class="ai-msg-bubble">${formatMarkdown(text)}</div>
+        `;
+
+        chatContainer.appendChild(msgDiv);
+        scrollAiChatToBottom();
+      }
+
+      function showAiTypingIndicator() {
+        removeAiTypingIndicator();
+        const chatContainer = document.getElementById('aiChatMessages');
+        if (!chatContainer) return;
+
+        const indicator = document.createElement('div');
+        indicator.id = 'aiTypingIndicator';
+        indicator.className = 'ai-msg bot';
+        indicator.innerHTML = `
+          <div class="ai-msg-avatar"><i class="fa-solid fa-sparkles"></i></div>
+          <div class="ai-typing-indicator">
+            <span class="ai-typing-dot"></span>
+            <span class="ai-typing-dot"></span>
+            <span class="ai-typing-dot"></span>
+          </div>
+        `;
+        chatContainer.appendChild(indicator);
+        scrollAiChatToBottom();
+      }
+
+      function removeAiTypingIndicator() {
+        const el = document.getElementById('aiTypingIndicator');
+        if (el) el.remove();
+      }
+
+      function scrollAiChatToBottom() {
+        const modalBody = document.getElementById('aiModalBody');
+        if (modalBody) {
+          modalBody.scrollTop = modalBody.scrollHeight;
+        }
+      }
+
+      // Atalho tecla ESC para fechar modal
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          const modal = document.getElementById('productAiModal');
+          if (modal && modal.classList.contains('active')) {
+            closeProductAiModal();
+          }
+        }
+      });
 
       // Inicialização do catálogo
       loadCatalog();
