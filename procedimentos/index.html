@@ -58,39 +58,55 @@
         border-color: var(--primary);
         box-shadow: 0 4px 15px rgba(201, 130, 118, 0.3);
       }
-      .trust-strip {
+      .service-price-compact {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background: var(--bg-nude);
+        color: var(--primary-dark);
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-bottom: 14px;
+        border: 1px solid rgba(201, 130, 118, 0.2);
+      }
+      .trust-inline {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 24px;
+        padding: 35px 5%;
         background: white;
-        padding: 50px 5%;
         border-top: 1px solid rgba(201, 130, 118, 0.15);
         border-bottom: 1px solid rgba(201, 130, 118, 0.15);
         width: 100%;
       }
-      .trust-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 25px;
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-      .trust-box {
-        text-align: center;
-        padding: 20px 15px;
-      }
-      .trust-box i {
-        font-size: 2.2rem;
-        color: var(--primary);
-        margin-bottom: 14px;
-      }
-      .trust-box h4 {
-        font-family: "Playfair Display", serif;
-        font-size: 1.2rem;
-        color: var(--secondary);
-        margin-bottom: 8px;
-      }
-      .trust-box p {
+      .trust-inline-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
         font-size: 0.88rem;
-        color: var(--text-light);
-        line-height: 1.5;
+        color: var(--text-main);
+        font-weight: 500;
+      }
+      .trust-inline-item i {
+        color: var(--primary);
+        font-size: 1rem;
+      }
+      .footer-dev-credit {
+        margin-top: 8px;
+        font-size: 0.78rem;
+        color: #8a807e;
+      }
+      .footer-dev-credit a {
+        color: var(--accent-gold-light);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s;
+      }
+      .footer-dev-credit a:hover {
+        color: #f7d070;
       }
     </style>
   </head>
@@ -170,22 +186,13 @@
             <p style="margin-bottom: 12px;">
               Acorde todos os dias com o olhar impecável, volumoso e curvilíneo. Retenção blindada Booble com fios macios e leves.
             </p>
-            <div style="background: rgba(201, 130, 118, 0.08); padding: 12px 14px; border-radius: 12px; font-size: 0.82rem; margin-bottom: 14px; line-height: 1.6; color: var(--secondary); text-align: left;">
-              <div><strong>• Fio a Fio / Vol Híbrido:</strong> R$ 150 <span style="color:var(--text-light);">(Manutenção R$ 85)</span></div>
-              <div><strong>• Vol Brasileiro:</strong> R$ 170 <span style="color:var(--text-light);">(Manutenção R$ 95)</span></div>
-              <div><strong>• Vol Egípcio:</strong> R$ 185 <span style="color:var(--text-light);">(Manutenção R$ 100)</span></div>
-              <div><strong>• Fox:</strong> R$ 195 <span style="color:var(--text-light);">(Manutenção R$ 100)</span></div>
-              <div><strong>• Efeito Rímel:</strong> R$ 100 <span style="color:var(--text-light);">(Manutenção R$ 65)</span></div>
-              <div><strong>• Vol Russo:</strong> R$ 205 <span style="color:var(--text-light);">(Manutenção R$ 110)</span></div>
-              <div><strong>• Mega Volume:</strong> R$ 240 <span style="color:var(--text-light);">(Manutenção R$ 135)</span></div>
+            <div class="service-price-compact">
+              <i class="fa-solid fa-tag"></i> A partir de R$ 100
             </div>
             <div class="service-card-actions">
               <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20Extens%C3%A3o%20de%20C%C3%ADlios%20no%20Studio%20Lana%20Wolf." target="_blank" class="btn-service-schedule" onclick="event.stopPropagation();">
                 <i class="fa-brands fa-whatsapp"></i> Saber mais e Agendar
               </a>
-              <button class="btn-service-sim" onclick="event.stopPropagation(); window.openSimulationModal('Extensão de Cílios', 'Consulte a tabela abaixo');">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> Simular Resultado com IA
-              </button>
             </div>
           </div>
         </div>
@@ -198,17 +205,13 @@
             <p style="margin-bottom: 12px;">
               Preenchimento hiper-realista e duradouro. Cobre falhas com naturalidade incomparável usando pigmentos inteligentes biocompatíveis RBKollors.
             </p>
-            <div style="background: rgba(201, 130, 118, 0.08); padding: 12px 14px; border-radius: 12px; font-size: 0.85rem; margin-bottom: 14px; line-height: 1.6; color: var(--secondary); text-align: left;">
-              <div><strong>• Micro Shadow / Fio a Fio:</strong> R$ 400,00</div>
-              <div><strong>• Retoque:</strong> R$ 200,00</div>
+            <div class="service-price-compact">
+              <i class="fa-solid fa-tag"></i> A partir de R$ 400
             </div>
             <div class="service-card-actions">
               <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20Micro%20de%20Sobrancelhas%20no%20Studio%20Lana%20Wolf." target="_blank" class="btn-service-schedule" onclick="event.stopPropagation();">
                 <i class="fa-brands fa-whatsapp"></i> Saber mais e Agendar
               </a>
-              <button class="btn-service-sim" onclick="event.stopPropagation(); window.openSimulationModal('Micro de Sobrancelhas', 'R$ 400,00 | Retoque R$ 200,00');">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> Simular Resultado com IA
-              </button>
             </div>
           </div>
         </div>
@@ -221,17 +224,13 @@
             <p style="margin-bottom: 12px;">
               Revitalização e efeito boca corada (Lip Blush, efeito batom ou degradê suave). Definição perfeita do contorno e cor saudável 24h por dia.
             </p>
-            <div style="background: rgba(201, 130, 118, 0.08); padding: 12px 14px; border-radius: 12px; font-size: 0.85rem; margin-bottom: 14px; line-height: 1.6; color: var(--secondary); text-align: left;">
-              <div><strong>• Micro / Revitalização Labial:</strong> R$ 400,00</div>
-              <div><strong>• Retoque:</strong> R$ 200,00</div>
+            <div class="service-price-compact">
+              <i class="fa-solid fa-tag"></i> A partir de R$ 400
             </div>
             <div class="service-card-actions">
               <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20Micro%20Labial%20no%20Studio%20Lana%20Wolf." target="_blank" class="btn-service-schedule" onclick="event.stopPropagation();">
                 <i class="fa-brands fa-whatsapp"></i> Saber mais e Agendar
               </a>
-              <button class="btn-service-sim" onclick="event.stopPropagation(); window.openSimulationModal('Micro Labial', 'R$ 400,00 | Retoque R$ 200,00');">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> Simular Resultado com IA
-              </button>
             </div>
           </div>
         </div>
@@ -244,17 +243,13 @@
             <p style="margin-bottom: 12px;">
               Moldura sob medida para a sua harmonia facial com visagismo, medição anatômica com paquímetro e aplicação opcional de henna personalizada.
             </p>
-            <div style="background: rgba(201, 130, 118, 0.08); padding: 12px 14px; border-radius: 12px; font-size: 0.85rem; margin-bottom: 14px; line-height: 1.6; color: var(--secondary); text-align: left;">
-              <div><strong>• Design com Henna:</strong> R$ 55,00</div>
-              <div><strong>• Design Simples:</strong> R$ 40,00</div>
+            <div class="service-price-compact">
+              <i class="fa-solid fa-tag"></i> A partir de R$ 40
             </div>
             <div class="service-card-actions">
               <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20Design%20de%20Sobrancelhas%20no%20Studio%20Lana%20Wolf." target="_blank" class="btn-service-schedule" onclick="event.stopPropagation();">
                 <i class="fa-brands fa-whatsapp"></i> Saber mais e Agendar
               </a>
-              <button class="btn-service-sim" onclick="event.stopPropagation(); window.openSimulationModal('Design de Sobrancelhas', 'R$ 40,00 - R$ 55,00');">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> Simular Resultado com IA
-              </button>
             </div>
           </div>
         </div>
@@ -267,18 +262,13 @@
             <p style="margin-bottom: 12px;">
               Alongamento estruturado com curvatura natural, espessura fina e resistência para manter suas mãos impecáveis por semanas.
             </p>
-            <div style="background: rgba(201, 130, 118, 0.08); padding: 12px 14px; border-radius: 12px; font-size: 0.85rem; margin-bottom: 14px; line-height: 1.6; color: var(--secondary); text-align: left;">
-              <div><strong>• Fibra de Vidro:</strong> R$ 180,00</div>
-              <div><strong>• Molde F1:</strong> R$ 130,00</div>
-              <div><strong>• Manutenção de Gel:</strong> R$ 95,00 a R$ 130,00</div>
+            <div class="service-price-compact">
+              <i class="fa-solid fa-tag"></i> A partir de R$ 130
             </div>
             <div class="service-card-actions">
               <a href="https://wa.me/5561999667225?text=Ol%C3%A1%20Amanda!%20Gostaria%20de%20agendar%20Alongamento%20de%20Unhas%20no%20Studio%20Lana%20Wolf." target="_blank" class="btn-service-schedule" onclick="event.stopPropagation();">
                 <i class="fa-brands fa-whatsapp"></i> Agendar com Amanda (Unhas)
               </a>
-              <button class="btn-service-sim" onclick="event.stopPropagation(); window.openSimulationModal('Alongamento de Unhas', 'R$ 130,00 - R$ 180,00');">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> Simular com IA
-              </button>
             </div>
           </div>
         </div>
@@ -291,18 +281,13 @@
             <p style="margin-bottom: 12px;">
               Cutilagem delicada, banho de gel protetor para unhas que quebram facilmente e esmaltação tradicional com brilho prolongado.
             </p>
-            <div style="background: rgba(201, 130, 118, 0.08); padding: 12px 14px; border-radius: 12px; font-size: 0.85rem; margin-bottom: 14px; line-height: 1.6; color: var(--secondary); text-align: left;">
-              <div><strong>• Banho de Gel:</strong> R$ 95,00</div>
-              <div><strong>• Esmaltação Tradicional (Mão):</strong> R$ 50,00</div>
-              <div><strong>• Manutenção de Gel:</strong> R$ 95,00 a R$ 130,00</div>
+            <div class="service-price-compact">
+              <i class="fa-solid fa-tag"></i> A partir de R$ 50
             </div>
             <div class="service-card-actions">
               <a href="https://wa.me/5561999667225?text=Ol%C3%A1%20Amanda!%20Gostaria%20de%20agendar%20Manicure%20/%20Banho%20de%20Gel%20no%20Studio%20Lana%20Wolf." target="_blank" class="btn-service-schedule" onclick="event.stopPropagation();">
                 <i class="fa-brands fa-whatsapp"></i> Agendar com Amanda (Unhas)
               </a>
-              <button class="btn-service-sim" onclick="event.stopPropagation(); window.openSimulationModal('Manicure & Banho de Gel', 'R$ 50,00 - R$ 95,00');">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> Simular com IA
-              </button>
             </div>
           </div>
         </div>
@@ -315,17 +300,13 @@
             <p style="margin-bottom: 12px;">
               Revitalização completa dos pés com cutilagem detalhada, esfoliação suave, hidratação profunda e finalização perfeita.
             </p>
-            <div style="background: rgba(201, 130, 118, 0.08); padding: 12px 14px; border-radius: 12px; font-size: 0.85rem; margin-bottom: 14px; line-height: 1.6; color: var(--secondary); text-align: left;">
-              <div><strong>• Pé e Mão Esmaltação Tradicional:</strong> R$ 50,00</div>
-              <div><strong>• Spa dos Pés & Hidratação:</strong> Sob Consulta</div>
+            <div class="service-price-compact">
+              <i class="fa-solid fa-tag"></i> A partir de R$ 50
             </div>
             <div class="service-card-actions">
               <a href="https://wa.me/5561999667225?text=Ol%C3%A1%20Amanda!%20Gostaria%20de%20agendar%20P%C3%A9%20e%20M%C3%A3o%20no%20Studio%20Lana%20Wolf." target="_blank" class="btn-service-schedule" onclick="event.stopPropagation();">
                 <i class="fa-brands fa-whatsapp"></i> Agendar com Amanda (Unhas)
               </a>
-              <button class="btn-service-sim" onclick="event.stopPropagation(); window.openSimulationModal('Pedicure Premium', 'R$ 50,00');">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> Simular com IA
-              </button>
             </div>
           </div>
         </div>
@@ -338,27 +319,13 @@
             <p style="margin-bottom: 12px;">
               Perfurações 100% assépticas realizadas com joalheria nobre em titânio e aço cirúrgico biocompatível, garantindo cicatrização rápida e segura.
             </p>
-            <div style="background: rgba(201, 130, 118, 0.08); padding: 12px 14px; border-radius: 12px; font-size: 0.82rem; margin-bottom: 14px; line-height: 1.6; color: var(--secondary); text-align: left;">
-              <div style="display:grid; grid-template-columns: 1fr 1fr; gap:3px 8px;">
-                <div><strong>• Orelha:</strong> R$ 60</div>
-                <div><strong>• Nostril:</strong> R$ 65</div>
-                <div><strong>• Sobrancelha:</strong> R$ 60</div>
-                <div><strong>• Septo:</strong> R$ 60</div>
-                <div><strong>• Boca:</strong> R$ 60</div>
-                <div><strong>• Umbigo:</strong> R$ 75</div>
-                <div><strong>• Mamilo:</strong> R$ 180</div>
-                <div><strong>• Sulface:</strong> R$ 185</div>
-                <div><strong>• Íntima:</strong> R$ 190</div>
-                <div><strong>• Microdermal:</strong> R$ 200</div>
-              </div>
+            <div class="service-price-compact">
+              <i class="fa-solid fa-tag"></i> A partir de R$ 60
             </div>
             <div class="service-card-actions">
               <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20Body%20Piercing%20no%20Studio%20Lana%20Wolf." target="_blank" class="btn-service-schedule" onclick="event.stopPropagation();">
                 <i class="fa-brands fa-whatsapp"></i> Saber mais e Agendar
               </a>
-              <button class="btn-service-sim" onclick="event.stopPropagation(); window.openSimulationModal('Body Piercing', 'Consulte a tabela abaixo');">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> Simular com IA
-              </button>
             </div>
           </div>
         </div>
@@ -371,16 +338,13 @@
             <p style="margin-bottom: 12px;">
               Traços ultrafinos, delicados e minuciosos. A eternização de símbolos, homenagens e sentimentos com técnica suave na pele.
             </p>
-            <div style="background: rgba(201, 130, 118, 0.08); padding: 12px 14px; border-radius: 12px; font-size: 0.85rem; margin-bottom: 14px; line-height: 1.6; color: var(--secondary); text-align: left;">
-              <div><strong>• Orçamento sob medida</strong> conforme tamanho e arte</div>
+            <div class="service-price-compact">
+              <i class="fa-solid fa-tag"></i> Sob Consulta
             </div>
             <div class="service-card-actions">
               <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20um%20or%C3%A7amento%20de%20Tatuagem%20Fine%20Line%20no%20Studio%20Lana%20Wolf." target="_blank" class="btn-service-schedule" onclick="event.stopPropagation();">
                 <i class="fa-brands fa-whatsapp"></i> Solicitar Orçamento
               </a>
-              <button class="btn-service-sim" onclick="event.stopPropagation(); window.openSimulationModal('Tatuagem / Fine Line', 'Sob Consulta');">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> Simular Resultado com IA
-              </button>
             </div>
           </div>
         </div>
@@ -388,75 +352,23 @@
       </div>
     </section>
 
-    <!-- Trust & Quality Strip -->
-    <section class="trust-strip">
-      <div class="trust-grid">
-        <div class="trust-box">
-          <i class="fa-solid fa-shield-heart"></i>
-          <h4>Biossegurança Rigorosa</h4>
-          <p>Materiais descartáveis, esterilização hospitalar e higienização completa a cada atendimento.</p>
-        </div>
-        <div class="trust-box">
-          <i class="fa-solid fa-award"></i>
-          <h4>Experiência Desde 2012</h4>
-          <p>Mais de uma década de dedicação constante e milhares de olhares transformados em Goiás.</p>
-        </div>
-        <div class="trust-box">
-          <i class="fa-solid fa-gem"></i>
-          <h4>Insumos Autorizados</h4>
-          <p>Utilizamos apenas pigmentos RBKollors certificados pela Anvisa e adesivos Booble de alta retenção.</p>
-        </div>
-        <div class="trust-box">
-          <i class="fa-solid fa-clock"></i>
-          <h4>Horários Flexíveis</h4>
-          <p>Atendimento com hora marcada para você desfrutar de um momento único de relaxamento e cuidado.</p>
-        </div>
+    <!-- Trust Inline Badges -->
+    <div class="trust-inline">
+      <div class="trust-inline-item">
+        <i class="fa-solid fa-shield-heart"></i> Biossegurança Rigorosa
       </div>
-    </section>
+      <div class="trust-inline-item">
+        <i class="fa-solid fa-award"></i> Desde 2012
+      </div>
+      <div class="trust-inline-item">
+        <i class="fa-solid fa-gem"></i> Insumos Autorizados
+      </div>
+      <div class="trust-inline-item">
+        <i class="fa-solid fa-clock"></i> Horários Flexíveis
+      </div>
+    </div>
 
-    <!-- ==========================================================
-         PRODUTOS UTILIZADOS EM NOSSOS PROCEDIMENTOS (LANA SUPPLY PRO)
-         ========================================================== -->
-    <section id="produtos-utilizados" class="loja-pro-section">
-      <div class="loja-pro-header" style="margin-bottom: 0;">
-        <div class="loja-badge">
-          <i class="fa-solid fa-boxes-stacked" style="color:var(--accent-gold-light);"></i>
-          TRANSPARÊNCIA & QUALIDADE DE BANCADA
-        </div>
-        <h2 class="loja-pro-title">Produtos Utilizados em <span>Nossos Procedimentos</span></h2>
-        <p class="loja-pro-desc">
-          Utilizamos exclusivamente marcas consagradas pela alta segurança e biocompatibilidade: adesivos <strong>Booble</strong> com retenção blindada, pigmentos inteligentes <strong>RBKollors</strong> e fios <strong>Nagaraku</strong>. Além de aplicados em nossos atendimentos, estão disponíveis a pronta entrega em Luziânia através da <strong>Lana Supply Pro</strong>.
-        </p>
-        <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap; margin-top:25px;">
-          <a href="/pro" class="btn-nav-pro" style="padding:12px 28px; font-size:0.95rem; border-radius:30px; background:white; font-weight:500;">
-            <i class="fa-solid fa-arrow-up-right-from-square" style="color:var(--accent-gold); margin-right:4px;"></i> Acessar Catálogo Completo B2B
-          </a>
-          <a href="https://wa.me/556195981186?text=Ol%C3%A1!%20Gostaria%20de%20tirar%20d%C3%BAvidas%20sobre%20os%20produtos%20utilizados%20nos%20procedimentos." target="_blank" class="btn-nav-agendar" style="background:#25D366; padding:12px 28px; font-size:0.95rem; border-radius:30px; font-weight:500; box-shadow:0 4px 14px rgba(37,211,102,0.35);">
-            <i class="fa-brands fa-whatsapp" style="margin-right:4px;"></i> Falar com Especialista
-          </a>
-        </div>
-      </div>
-    </section>
 
-    <!-- Domino Ad -->
-    <section class="domino-ad" aria-label="Desenvolvido por Domino Automate">
-      <div class="domino-ad-inner">
-        <div class="domino-ad-badge">⚡ Desenvolvido com Inteligência Artificial</div>
-        <div class="domino-ad-logo-wrap">
-          <a href="https://domino-automate.com.br/" target="_blank" rel="noopener noreferrer">
-            <img src="/assets/domino-logo.png" alt="Domino Automate" class="domino-ad-logo" />
-          </a>
-        </div>
-        <div class="domino-ad-divider"></div>
-        <h2 class="domino-ad-tagline">Pensado, desenhado e orquestrado por <span>Domino Automate</span></h2>
-        <p class="domino-ad-desc">
-          Um ecossistema digital de alta performance focado em converter visitas em agendamentos qualificados no seu WhatsApp.
-        </p>
-        <a href="https://domino-automate.com.br/" target="_blank" rel="noopener noreferrer" class="domino-ad-cta">
-          Quero um projeto assim →
-        </a>
-      </div>
-    </section>
 
     <!-- Footer -->
     <footer id="contato">
@@ -483,6 +395,9 @@
       </div>
       <div class="footer-bottom">
         &copy; 2026 Lana Wolf Art. Todos os direitos reservados.
+        <div class="footer-dev-credit">
+          Desenvolvido com IA por <a href="https://domino-automate.com.br/" target="_blank" rel="noopener noreferrer">Domino Automate</a>
+        </div>
       </div>
     </footer>
 

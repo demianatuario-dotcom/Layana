@@ -68,7 +68,6 @@
         gap: 16px;
         justify-content: center;
         flex-wrap: wrap;
-        margin-bottom: 50px;
       }
       .btn-hero-primary {
         display: inline-flex;
@@ -113,48 +112,6 @@
         box-shadow: 0 12px 35px rgba(201, 130, 118, 0.25);
         color: var(--secondary);
       }
-      .hero-trust-bar {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-        gap: 16px;
-        width: 100%;
-        max-width: 980px;
-        margin: 0 auto;
-      }
-      .trust-item {
-        background: rgba(255, 255, 255, 0.88);
-        border: 1px solid rgba(201, 130, 118, 0.25);
-        border-radius: 14px;
-        padding: 14px 18px;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        text-align: left;
-        backdrop-filter: blur(10px);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-      }
-      .trust-icon {
-        width: 38px;
-        height: 38px;
-        border-radius: 50%;
-        background: rgba(201, 130, 118, 0.15);
-        color: var(--primary-dark);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.05rem;
-        flex-shrink: 0;
-      }
-      .trust-text strong {
-        display: block;
-        font-size: 0.85rem;
-        color: var(--secondary);
-        line-height: 1.25;
-      }
-      .trust-text span {
-        font-size: 0.76rem;
-        color: var(--text-light);
-      }
       .about-banner {
         width: 100%;
         background: linear-gradient(rgba(36, 23, 21, 0.92), rgba(59, 45, 42, 0.95)), url('./bg-hero-resized.jpg') center/cover no-repeat;
@@ -176,6 +133,20 @@
         font-size: 1.12rem;
         line-height: 1.8;
       }
+      .footer-dev-credit {
+        margin-top: 8px;
+        font-size: 0.78rem;
+        color: #8a807e;
+      }
+      .footer-dev-credit a {
+        color: var(--accent-gold-light);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s;
+      }
+      .footer-dev-credit a:hover {
+        color: #f7d070;
+      }
     </style>
   </head>
 
@@ -196,11 +167,8 @@
         <a href="#contato">Localização</a>
       </nav>
 
-      <!-- Dual CTA Buttons -->
+      <!-- CTA Button -->
       <div class="header-actions">
-        <a href="/pro" class="btn-nav-pro">
-          <i class="fa-solid fa-boxes-stacked" style="color:var(--accent-gold);"></i> Área da Profissional (Loja)
-        </a>
         <a href="/procedimentos" class="btn-nav-agendar">
           <i class="fa-brands fa-whatsapp"></i> Agendar Procedimento
         </a>
@@ -245,37 +213,7 @@
         </a>
       </div>
 
-      <!-- Trust Bar -->
-      <div class="hero-trust-bar">
-        <div class="trust-item">
-          <div class="trust-icon"><i class="fa-solid fa-certificate"></i></div>
-          <div class="trust-text">
-            <strong>Insumos Autorizados</strong>
-            <span>Booble, RBKollors & Diamond</span>
-          </div>
-        </div>
-        <div class="trust-item">
-          <div class="trust-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-          <div class="trust-text">
-            <strong>Cursos & Mentoria</strong>
-            <span>Método Layana Wolf desde 2012</span>
-          </div>
-        </div>
-        <div class="trust-item">
-          <div class="trust-icon"><i class="fa-solid fa-location-dot"></i></div>
-          <div class="trust-text">
-            <strong>Studio Parque 9</strong>
-            <span>Luziânia e Jardim Ingá</span>
-          </div>
-        </div>
-        <div class="trust-item">
-          <div class="trust-icon"><i class="fa-solid fa-motorcycle"></i></div>
-          <div class="trust-text">
-            <strong>Envio Express</strong>
-            <span>Retirada ou Uber Flash / Motoboy</span>
-          </div>
-        </div>
-      </div>
+
     </section>
 
     <!-- ==========================================================
@@ -423,8 +361,8 @@
       </div>
     </section>
 
-    <!-- Comments Section -->
-    <section id="comentarios" class="comments-section">
+    <!-- Comments Section (hidden until content exists) -->
+    <section id="comentarios" class="comments-section" style="display: none;">
       <div class="comments-container">
         <h2 class="section-title" style="margin-bottom: 20px;">Comentários e Avaliações</h2>
         <p style="text-align: center; margin-bottom: 40px; color: var(--text-light);">
@@ -458,33 +396,7 @@
       </div>
     </section>
 
-    <!-- Domino Automate Advertisement -->
-    <section class="domino-ad" aria-label="Desenvolvido por Domino Automate">
-      <div class="domino-ad-inner">
-        <div class="domino-ad-badge">⚡ Desenvolvido com Inteligência Artificial</div>
-        <div class="domino-ad-logo-wrap">
-          <a href="https://domino-automate.com.br/" target="_blank" rel="noopener noreferrer">
-            <img src="/assets/domino-logo.png" alt="Domino Automate" class="domino-ad-logo" />
-          </a>
-        </div>
-        <div class="domino-ad-divider"></div>
-        <h2 class="domino-ad-tagline">
-          Pensado, desenhado e orquestrado por <span>Domino Automate</span>
-        </h2>
-        <p class="domino-ad-desc">
-          Este site não é apenas um site — é um ecossistema inteligente. Da arquitetura ao agente de IA, cada detalhe foi estrategicamente orquestrado para transformar visitantes em clientes e dados em resultados.
-        </p>
-        <div class="domino-ad-features">
-          <div class="domino-ad-feature"><span class="domino-ad-feature-icon">🤖</span> Agente de IA integrado</div>
-          <div class="domino-ad-feature"><span class="domino-ad-feature-icon">⚙️</span> Automação N8N</div>
-          <div class="domino-ad-feature"><span class="domino-ad-feature-icon">🔒</span> Infraestrutura segura</div>
-          <div class="domino-ad-feature"><span class="domino-ad-feature-icon">📈</span> Alta performance</div>
-        </div>
-        <a href="https://domino-automate.com.br/" target="_blank" rel="noopener noreferrer" class="domino-ad-cta">
-          Quero um projeto assim →
-        </a>
-      </div>
-    </section>
+
 
     <!-- Footer -->
     <footer id="contato">
@@ -511,6 +423,9 @@
       </div>
       <div class="footer-bottom">
         &copy; 2026 Lana Wolf Art & Lana Supply Pro. Todos os direitos reservados.
+        <div class="footer-dev-credit">
+          Desenvolvido com IA por <a href="https://domino-automate.com.br/" target="_blank" rel="noopener noreferrer">Domino Automate</a>
+        </div>
       </div>
     </footer>
 
