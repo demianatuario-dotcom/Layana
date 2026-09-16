@@ -767,27 +767,22 @@
           const res = await fetch('/api/produtos');
           if (!res.ok) throw new Error("Erro na requisição da API");
           catalogProducts = await res.json();
+          renderCatalog();
+          updateCategoryCounts();
         } catch (err) {
-          console.warn("Fallback: carregando lista padrão...", err);
-          catalogProducts = [
-            { id: 1, tipo: 'Extensão de Cílios • Booble', nome: 'Adesivo Booble Rubi 3ml', descricao: 'Secagem ultra-rápida (0.5s a 1s). Retenção campeã de até 7 a 8 semanas. Baixa emissão de odor e adaptabilidade ideal para o clima de Goiás.', preco: 95.00, estoque: 20, categoria_filtro: 'cilios', imagem_url: '/assets/booble_rubi.jpg', badge: 'Pronta Entrega Luziânia' },
-            { id: 2, tipo: 'Extensão de Cílios • Booble', nome: 'Adesivo Booble Black 3ml', descricao: 'Secagem flexível (1s a 2s). Acabamento preto acetinado profundo com película flexível que acompanha o movimento do fio natural.', preco: 89.00, estoque: 15, categoria_filtro: 'cilios', imagem_url: '/assets/booble_rubi.jpg', badge: 'Aprovado por Layana Wolf' },
-            { id: 3, tipo: 'Fios para Cílios • Nagaraku', nome: 'Fios Nagaraku Y Mix (8 a 15mm)', descricao: 'Os queridinhos do Volume Brasileiro. Fios macios, pretos matte e bifurcados com acoplagem magnética sem peso sobre o fio natural.', preco: 38.00, estoque: 30, categoria_filtro: 'cilios', imagem_url: '/assets/nagaraku_y_lashes.jpg', badge: 'Mais Vendido' },
-            { id: 4, tipo: 'Fios para Cílios • Booble', nome: 'Fios Booble Velvet Volume Russo', descricao: 'Fios ultrafinos (espessura 0.05 / 0.07) com textura aveludada. Fáceis de abrir fans no chicote sem desmanchar a raiz.', preco: 42.00, estoque: 25, categoria_filtro: 'cilios', imagem_url: '/assets/nagaraku_y_lashes.jpg', badge: 'Pronta Entrega Luziânia' },
-            { id: 5, tipo: 'Preparação • Booble', nome: 'Primer Higienizador Booble 15ml', descricao: 'Remove qualquer vestígio de oleosidade e equilibra o pH dos fios naturais antes da acoplagem. Aumenta a durabilidade da retenção em até 40%.', preco: 45.00, estoque: 18, categoria_filtro: 'cilios', imagem_url: '/assets/booble_rubi.jpg', badge: 'Essencial de Bancada' },
-            { id: 6, tipo: 'Remoção Segura • Booble', nome: 'Removedor em Gel Booble 15g', descricao: 'Fórmula em gel com aroma suave que não escorre para os olhos. Dissolve a cola com rapidez sem desconforto ou quebra dos fios naturais.', preco: 48.00, estoque: 16, categoria_filtro: 'cilios', imagem_url: '/assets/booble_rubi.jpg', badge: 'Pronta Entrega' },
-            { id: 7, tipo: 'Micropigmentação • RBKollors', nome: 'Pigmento RBKollors Red Rose 15ml', descricao: 'Linha Lips Smart Pigment. Alta carga pigmentária, cor translúcida e vibrante que entrega efeito lábios de seda e cicatrização fiel sem manchas.', preco: 165.00, estoque: 12, categoria_filtro: 'micro', imagem_url: '/assets/rbkollors_lips.jpg', badge: 'Aprovado por Layana Wolf' },
-            { id: 8, tipo: 'Micropigmentação • RBKollors', nome: 'Pigmento RBKollors Jambo 15ml', descricao: 'Castanho escuro aquecido indispensável para fototipos brasileiros. Fórmula biocompatível inteligente que impede o acinzentamento ao cicatrizar.', preco: 165.00, estoque: 14, categoria_filtro: 'micro', imagem_url: '/assets/rbkollors_lips.jpg', badge: 'Pronta Entrega Luziânia' },
-            { id: 9, tipo: 'Micropigmentação • Diamond', nome: 'Pigmento Diamond Sobrancelhas 10ml', descricao: 'Linha especial de acabamento nobre para técnicas Shadow e Microblading. Degradês perfeitos com penetração homogênea e excelente retenção na derme.', preco: 145.00, estoque: 10, categoria_filtro: 'micro', imagem_url: '/assets/diamond_pigment.jpg', badge: 'Exclusividade Pro' },
-            { id: 10, tipo: 'Biossegurança & Descartáveis', nome: 'Microbrush Rosa - Tubo c/ 100 un', descricao: 'Ponta de microfibra que não solta fiapos nem retém produto em excesso. Essencial para higienização, primer, removedor e alinhamento de cílios.', preco: 22.00, estoque: 40, categoria_filtro: 'descartaveis', imagem_url: '/assets/disposables.jpg', badge: 'Pronta Entrega' },
-            { id: 11, tipo: 'Biossegurança & Mimos', nome: 'Escovinhas c/ Glitter Rosa (50 un)', descricao: 'Cerdas macias que alinham as extensões sem repuxar. Cabo com glitter rosa de alto apelo visual para uso em bancada e presente para suas clientes.', preco: 25.00, estoque: 50, categoria_filtro: 'descartaveis', imagem_url: '/assets/disposables.jpg', badge: 'Pronta Entrega' },
-            { id: 12, tipo: 'Kits de Formação • Alunas', nome: 'Kit Aluna Lash Designer Completo', descricao: 'Adesivo Booble Rubi 3ml + 2 Caixas Nagaraku Y/Mix + Pinça Reta Dourada + Pinça Curva + Primer + Removedor + 50 Escovinhas + 100 Microbrush + Fita Micropore.', preco: 289.00, estoque: 8, categoria_filtro: 'kits', imagem_url: '/assets/kit_aluna_lash.jpg', badge: 'Kit Completo Aluna' },
-            { id: 13, tipo: 'Kits de Formação • Alunas', nome: 'Kit Aluna Micropigmentação Pro', descricao: '2 Pigmentos RBKollors (Lips Red Rose + Sobrancelhas Jambo) + 1 Pele Sintética 3D para treino + 20 Anéis de Batoque + Lápis Dermatográfico + Paquímetro de precisão.', preco: 389.00, estoque: 6, categoria_filtro: 'kits', imagem_url: '/assets/kit_aluna_lash.jpg', badge: 'Aprovado por Layana' }
-          ];
+          console.error("Erro ao carregar catálogo do banco de dados:", err);
+          catalogProducts = [];
+          const grid = document.getElementById("proProductsGrid");
+          if (grid) {
+            grid.innerHTML = `
+              <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #888;">
+                <i class="fa-solid fa-circle-exclamation" style="font-size: 2rem; color: #e74c3c; margin-bottom: 12px; display: block;"></i>
+                Não foi possível carregar o catálogo no momento.<br>
+                <a href="https://wa.me/556195981186" target="_blank" style="color: var(--primary); font-weight: 600; text-decoration: underline; margin-top: 8px; display: inline-block;">Consulte nossos produtos diretamente no WhatsApp</a>.
+              </div>
+            `;
+          }
         }
-
-        renderCatalog();
-        updateCategoryCounts();
       }
 
       // 2. Render Products Grid
