@@ -359,10 +359,24 @@
         justify-content: space-between;
       }
       .frete-rules-info {
-        font-size: 0.74rem;
+        font-size: 0.78rem;
         color: #887d7b;
         margin-top: 6px;
         line-height: 1.4;
+      }
+      .footer-dev-credit {
+        margin-top: 8px;
+        font-size: 0.78rem;
+        color: #8a807e;
+      }
+      .footer-dev-credit a {
+        color: var(--accent-gold-light);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s;
+      }
+      .footer-dev-credit a:hover {
+        color: #f7d070;
       }
 
       /* Cart Footer */
@@ -478,7 +492,6 @@
         <a href="/procedimentos"><i class="fa-solid fa-sparkles" style="margin-right:6px; color:var(--primary);"></i> Studio & Procedimentos</a>
         <a href="/cursos"><i class="fa-solid fa-graduation-cap" style="margin-right:6px; color:var(--primary);"></i> Cursos</a>
         <a href="#catalogo" class="active"><i class="fa-solid fa-bag-shopping" style="margin-right:6px; color:var(--accent-gold);"></i> Catálogo Pro <span class="pro-nav-pill">B2B</span></a>
-        <a href="/ControleEstoque"><i class="fa-solid fa-boxes-stacked" style="margin-right:6px; color:var(--primary);"></i> Estoque</a>
       </nav>
 
       <!-- Header Cart & CTA -->
@@ -499,7 +512,6 @@
       <a href="/procedimentos"><i class="fa-solid fa-sparkles" style="color:var(--primary); margin-right:8px;"></i> Studio de Estética</a>
       <a href="/cursos"><i class="fa-solid fa-graduation-cap" style="color:var(--primary); margin-right:8px;"></i> Cursos Profissionais</a>
       <a href="#catalogo"><i class="fa-solid fa-bag-shopping" style="color:var(--accent-gold); margin-right:8px;"></i> Catálogo de Insumos B2B</a>
-      <a href="/ControleEstoque"><i class="fa-solid fa-boxes-stacked" style="color:var(--primary); margin-right:8px;"></i> Painel de Estoque</a>
       <div class="mobile-drawer-actions">
         <button onclick="openCartDrawer()" class="btn-whatsapp-buy" style="background:#2b2321; border:1.5px solid var(--accent-gold); justify-content: center;">
           <i class="fa-solid fa-cart-shopping" style="color:var(--accent-gold);"></i> Abrir Carrinho (<span class="cart-total-count">0</span>)
@@ -575,7 +587,7 @@
           <div class="logistics-icon"><i class="fa-solid fa-motorcycle"></i></div>
           <div>
             <h4>Envio Express (Uber Flash / Motoboy)</h4>
-            <p>Acabou a cola no meio do atendimento? Entregamos no mesmo dia calculando o frete por quilometragem justa.</p>
+            <p>Acabou a cola no meio do atendimento? Entregamos no mesmo dia via Uber Flash (Valor do Uber + Taxa de R$ 2,00).</p>
           </div>
         </div>
         <div class="logistics-item">
@@ -626,21 +638,14 @@
             </div>
           </label>
 
-          <!-- Input de Endereço e Cálculo de Frete -->
+          <!-- Endereço de Entrega e Informação de Frete -->
           <div class="frete-calc-box" id="freteCalcBox" style="display:none;">
-            <label style="font-size:0.78rem; font-weight:600; color:#555; display:block;">Endereço de Entrega Completo (Rua, Número, Bairro):</label>
-            <div class="frete-input-wrap">
-              <input type="text" id="inputAddress" placeholder="Ex: Av. Alfredo Nasser, Parque Estrela Dalva, Luziânia" />
-              <button type="button" id="btnCalcFrete" onclick="calculateShipping()">Calcular</button>
-            </div>
-            
-            <div class="frete-result-pill" id="freteResultPill" style="display:none;">
-              <span id="freteDistText">Distância: 0 km</span>
-              <span id="freteValText">Frete: R$ 0,00</span>
-            </div>
+            <label style="font-size:0.78rem; font-weight:600; color:#555; display:block; margin-bottom:6px;">Endereço de Entrega Completo (Rua, Número, Bairro):</label>
+            <input type="text" id="inputAddress" placeholder="Ex: Av. Alfredo Nasser, Parque Estrela Dalva, Luziânia" style="width:100%; padding:10px 14px; border:1.5px solid #e0d0cc; border-radius:8px; font-size:0.85rem; font-family:inherit; margin-bottom:8px; box-sizing:border-box;" />
 
-            <div class="frete-rules-info">
-              <strong>Tabela de Frete Oficial:</strong> Até 5km: R$ 10 | 5 a 10km: R$ 20 | 10 a 15km: R$ 30 (e sucessivamente a cada 5km).
+            <div class="frete-rules-info" style="background:#fdf5f2; border:1px solid #f2d8d0; border-radius:8px; padding:10px 12px; font-size:0.8rem; color:#5a4542; line-height:1.5;">
+              <i class="fa-solid fa-circle-info" style="color:var(--primary); margin-right:4px;"></i>
+              <strong>Valor do Frete:</strong> O envio é realizado via <strong>Uber Flash / Motoboy</strong>. O valor do frete será o <strong>Valor do Uber + Taxa de R$ 2,00</strong>, cotado no momento da saída e acertado diretamente pelo WhatsApp.
             </div>
           </div>
         </div>
@@ -726,51 +731,11 @@
       </div>
     </div>
 
-    <!-- Domino Ad -->
-    <section class="domino-ad" aria-label="Desenvolvido por Domino Automate">
-      <div class="domino-ad-inner">
-        <div class="domino-ad-badge">⚡ Desenvolvido com Inteligência Artificial</div>
-        <div class="domino-ad-logo-wrap">
-          <a href="https://domino-automate.com.br/" target="_blank" rel="noopener noreferrer">
-            <img src="/assets/domino-logo.png" alt="Domino Automate" class="domino-ad-logo" />
-          </a>
-        </div>
-        <div class="domino-ad-divider"></div>
-        <h2 class="domino-ad-tagline">Pensado, desenhado e orquestrado por <span>Domino Automate</span></h2>
-        <p class="domino-ad-desc">
-          E-commerce e catálogos B2B inteligentes integrados diretamente ao seu WhatsApp para fechamento rápido de vendas.
-        </p>
-        <a href="https://domino-automate.com.br/" target="_blank" rel="noopener noreferrer" class="domino-ad-cta">
-          Quero um projeto assim →
-        </a>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contato">
-      <div class="footer-content">
-        <div class="footer-col">
-          <h4>Lana Supply Pro</h4>
-          <p>Distribuidora oficial de insumos de estética, extensão de cílios e micropigmentação em Luziânia - GO.</p>
-        </div>
-        <div class="footer-col" style="flex: 1; min-width: 320px">
-          <div class="footer-location-wrapper">
-            <div>
-              <h4>Ponto de Retirada</h4>
-              <p>Rua 23, quadra 61, lote 3<br />Parque 9, Luziânia - GO<br />CEP: 72.853-061</p>
-            </div>
-            <div class="footer-map-container">
-              <iframe src="https://maps.google.com/maps?q=-16.156250,-47.946417&t=&z=18&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-          </div>
-        </div>
-        <div class="footer-col">
-          <h4>Pedidos e Dúvidas</h4>
-          <p>Atendimento comercial e separação de pedidos via WhatsApp: (61) 9598-1186.</p>
-        </div>
-      </div>
       <div class="footer-bottom">
         &copy; 2026 Lana Supply Pro • Lana Wolf Art. Todos os direitos reservados.
+        <div class="footer-dev-credit">
+          Desenvolvido com IA por <a href="https://domino-automate.com.br/" target="_blank" rel="noopener noreferrer">Domino Automate</a>
+        </div>
       </div>
     </footer>
 
@@ -1059,62 +1024,17 @@
         document.getElementById('labelExpress').classList.toggle('selected', type === 'express');
         document.getElementById('freteCalcBox').style.display = type === 'express' ? 'block' : 'none';
 
+        shippingCost = 0;
+        calculatedDistanceKm = 0;
+
         if (type === 'retirada') {
-          shippingCost = 0;
-          calculatedDistanceKm = 0;
           document.getElementById('sumFrete').innerText = "Grátis (Retirada)";
           document.getElementById('sumFrete').style.color = "#27ae60";
         } else {
-          if (shippingCost === 0) {
-            document.getElementById('sumFrete').innerText = "A calcular";
-            document.getElementById('sumFrete').style.color = "#e67e22";
-          }
+          document.getElementById('sumFrete').innerText = "Uber + Taxa R$ 2,00";
+          document.getElementById('sumFrete').style.color = "#d35400";
         }
         recalculateCart();
-      }
-
-      async function calculateShipping() {
-        const address = document.getElementById('inputAddress').value.trim();
-        if (!address) {
-          alert("Por favor, informe seu endereço completo (rua, número e bairro).");
-          return;
-        }
-
-        const btn = document.getElementById('btnCalcFrete');
-        btn.disabled = true;
-        btn.innerText = "Calculando...";
-
-        try {
-          const res = await fetch('/api/frete/calcular-distancia', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ endereco: address })
-          });
-
-          const data = await res.json();
-          if (!res.ok) throw new Error(data.error || "Erro ao calcular distância");
-
-          shippingCost = parseFloat(data.valor_frete);
-          calculatedDistanceKm = parseFloat(data.distancia_km);
-
-          const resultPill = document.getElementById('freteResultPill');
-          resultPill.style.display = 'flex';
-          document.getElementById('freteDistText').innerText = `Distância: ${calculatedDistanceKm} km`;
-          document.getElementById('freteValText').innerText = `Frete: R$ ${shippingCost.toFixed(2)}`;
-
-          document.getElementById('sumFrete').innerText = `R$ ${shippingCost.toFixed(2)}`;
-          document.getElementById('sumFrete').style.color = "var(--secondary)";
-          recalculateCart();
-        } catch (err) {
-          alert("Aviso no cálculo de frete: " + err.message + "\nConsiderando estimativa padrão para Luziânia.");
-          shippingCost = 20.00;
-          calculatedDistanceKm = 6.5;
-          document.getElementById('sumFrete').innerText = `R$ 20,00`;
-          recalculateCart();
-        } finally {
-          btn.disabled = false;
-          btn.innerText = "Calcular";
-        }
       }
 
       function selectPayment(method) {
@@ -1198,12 +1118,13 @@
         const name = document.getElementById('custName').value.trim() || 'Cliente Lana Supply Pro';
         const phone = document.getElementById('custPhone').value.trim();
 
-        if (deliveryType === 'express' && shippingCost === 0) {
-          alert("Por favor, clique em 'Calcular' para verificar o valor do frete antes de finalizar.");
+        const address = deliveryType === 'express' ? document.getElementById('inputAddress').value.trim() : 'Retirada no Studio Lana Wolf (Parque 9, Luziânia)';
+
+        if (deliveryType === 'express' && !address) {
+          alert("Por favor, informe seu endereço completo de entrega para o envio.");
+          document.getElementById('inputAddress').focus();
           return;
         }
-
-        const address = deliveryType === 'express' ? document.getElementById('inputAddress').value.trim() : 'Retirada no Studio Lana Wolf (Parque 9, Luziânia)';
 
         let subtotal = 0;
         const itemsList = itemIds.map(id => {
@@ -1233,8 +1154,8 @@
               cliente_whatsapp: phone,
               tipo_entrega: deliveryType,
               endereco: address,
-              distancia_km: calculatedDistanceKm,
-              frete: shippingCost,
+              distancia_km: 0,
+              frete: 0,
               subtotal: subtotal,
               total: totalFinal,
               forma_pagamento: paymentMethod,
@@ -1260,9 +1181,9 @@
         if (deliveryType === 'retirada') {
           msg += `📍 *Entrega:* Retirada no Studio Lana Wolf (Sem Frete)\n`;
         } else {
-          msg += `🛵 *Entrega:* Envio Express (${calculatedDistanceKm} km)\n`;
+          msg += `🛵 *Entrega:* Envio Express (Uber Flash / Motoboy)\n`;
           msg += `🏠 *Endereço:* ${address}\n`;
-          msg += `🚚 *Valor Frete:* R$ ${shippingCost.toFixed(2)}\n`;
+          msg += `🚚 *Frete:* Valor do Uber + Taxa de R$ 2,00 (acertado no envio)\n`;
         }
 
         if (paymentMethod === 'pix') {
