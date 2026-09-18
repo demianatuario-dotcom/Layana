@@ -316,29 +316,116 @@
       }
       .auth-modal {
         background: white;
-        padding: 35px 30px;
+        padding: 30px 25px;
         border-radius: 20px;
-        max-width: 380px;
+        max-width: 420px;
         width: 90%;
         text-align: center;
         box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+        position: relative;
+        box-sizing: border-box;
       }
-      .auth-modal h3 {
-        font-family: 'Playfair Display', serif;
-        margin: 0 0 10px 0;
-        font-size: 1.5rem;
-      }
-      .auth-modal input {
-        width: 100%;
-        padding: 14px;
+      .auth-modal-close {
+        position: absolute;
+        top: 15px;
+        right: 18px;
+        background: none;
+        border: none;
         font-size: 1.2rem;
-        letter-spacing: 4px;
-        text-align: center;
-        border: 1.5px solid #ccc;
+        color: #999;
+        cursor: pointer;
+        transition: color 0.2s;
+      }
+      .auth-modal-close:hover {
+        color: #333;
+      }
+      .auth-tabs {
+        display: flex;
+        border-bottom: 2px solid #f0e6e4;
+        margin-bottom: 20px;
+        gap: 10px;
+      }
+      .auth-tab-btn {
+        flex: 1;
+        background: none;
+        border: none;
+        padding: 10px 6px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: #888;
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        margin-bottom: -2px;
+        transition: all 0.3s;
+        font-family: inherit;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+      }
+      .auth-tab-btn.active {
+        color: var(--primary);
+        border-bottom-color: var(--primary);
+      }
+      .pin-input-group {
+        position: relative;
+        margin: 12px 0;
+        text-align: left;
+      }
+      .pin-input-group label {
+        display: block;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #666;
+        margin-bottom: 4px;
+      }
+      .pin-input-group input {
+        width: 100%;
+        padding: 12px 42px 12px 14px;
+        font-size: 1.1rem;
+        letter-spacing: 3px;
+        border: 1.5px solid #ddd;
         border-radius: 10px;
-        margin: 15px 0 20px;
         outline: none;
         box-sizing: border-box;
+        transition: border-color 0.2s;
+        font-family: inherit;
+      }
+      .pin-input-group input:focus {
+        border-color: var(--primary);
+      }
+      .pin-toggle-btn {
+        position: absolute;
+        right: 12px;
+        top: 32px;
+        background: none;
+        border: none;
+        color: #999;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+      .pin-toggle-btn:hover {
+        color: var(--primary);
+      }
+      .auth-alert {
+        display: none;
+        padding: 10px 14px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        margin-bottom: 15px;
+        text-align: left;
+      }
+      .auth-alert.error {
+        display: block;
+        background: #fde8e8;
+        color: #c81e1e;
+        border: 1px solid #f8b4b4;
+      }
+      .auth-alert.success {
+        display: block;
+        background: #def7ec;
+        color: #03543f;
+        border: 1px solid #84e1bc;
       }
       @media (max-width: 768px) {
         .stock-table th:nth-child(3), .stock-table td:nth-child(3) {
@@ -468,13 +555,85 @@
     <!-- PIN Modal -->
     <div class="modal-overlay" id="pinModal">
       <div class="auth-modal">
-        <i class="fa-solid fa-shield-halved" style="font-size:2.5rem; color:var(--primary); margin-bottom:12px;"></i>
-        <h3>Autenticação Master</h3>
-        <p style="font-size:0.9rem; color:#777; margin:0;">Digite o PIN de segurança para liberar alterações de estoque.</p>
-        <input type="password" id="inputMasterPin" placeholder="••••" maxlength="15" autofocus />
-        <button class="btn-save-stock" style="width:100%; justify-content:center; padding:12px; font-size:1rem;" onclick="submitPin()">
-          Confirmar Acesso
+        <button class="auth-modal-close" onclick="closeAuthModal()" title="Fechar">
+          <i class="fa-solid fa-xmark"></i>
         </button>
+
+        <div class="auth-tabs">
+          <button id="tabBtnLogin" class="auth-tab-btn active" onclick="switchAuthTab('login')">
+            <i class="fa-solid fa-key"></i> Autenticar
+          </button>
+          <button id="tabBtnChange" class="auth-tab-btn" onclick="switchAuthTab('change')">
+            <i class="fa-solid fa-lock"></i> Alterar Senha
+          </button>
+        </div>
+
+        <div id="authAlert" class="auth-alert"></div>
+
+        <!-- View 1: Autenticação -->
+        <div id="viewAuthLogin">
+          <i class="fa-solid fa-shield-halved" style="font-size:2.4rem; color:var(--primary); margin-bottom:10px;"></i>
+          <h3>Autenticação Master</h3>
+          <p id="authLoginSubtitle" style="font-size:0.9rem; color:#777; margin:0 0 15px 0;">Digite o PIN de segurança para liberar alterações de estoque.</p>
+          
+          <div class="pin-input-group">
+            <label for="inputMasterPin">Senha PIN Master</label>
+            <input type="password" id="inputMasterPin" placeholder="••••" maxlength="20" autofocus />
+            <button type="button" class="pin-toggle-btn" onclick="togglePinVisibility('inputMasterPin', this)">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+
+          <button id="btnSubmitLogin" class="btn-save-stock" style="width:100%; justify-content:center; padding:12px; font-size:1rem; margin-top:10px;" onclick="submitPin()">
+            Confirmar Acesso
+          </button>
+          <div style="margin-top:14px;">
+            <a href="javascript:void(0)" onclick="switchAuthTab('change')" style="color:var(--primary); font-size:0.85rem; text-decoration:none; font-weight:500;">
+              Deseja alterar a senha Master? Clique aqui
+            </a>
+          </div>
+        </div>
+
+        <!-- View 2: Alterar Senha Master -->
+        <div id="viewAuthChange" style="display:none;">
+          <i class="fa-solid fa-user-shield" style="font-size:2.4rem; color:var(--secondary); margin-bottom:10px;"></i>
+          <h3>Alterar PIN Master</h3>
+          <p style="font-size:0.88rem; color:#777; margin:0 0 15px 0;">A alteração só é permitida mediante confirmação da senha atual.</p>
+
+          <div class="pin-input-group">
+            <label for="inputCurrentPin">PIN Atual (Obrigatório)</label>
+            <input type="password" id="inputCurrentPin" placeholder="••••" maxlength="20" />
+            <button type="button" class="pin-toggle-btn" onclick="togglePinVisibility('inputCurrentPin', this)">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+
+          <div class="pin-input-group">
+            <label for="inputNewPin">Novo PIN (Mínimo 4 dígitos)</label>
+            <input type="password" id="inputNewPin" placeholder="••••" maxlength="20" />
+            <button type="button" class="pin-toggle-btn" onclick="togglePinVisibility('inputNewPin', this)">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+
+          <div class="pin-input-group">
+            <label for="inputConfirmNewPin">Confirmar Novo PIN</label>
+            <input type="password" id="inputConfirmNewPin" placeholder="••••" maxlength="20" />
+            <button type="button" class="pin-toggle-btn" onclick="togglePinVisibility('inputConfirmNewPin', this)">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+
+          <button id="btnSubmitChange" class="btn-save-stock" style="width:100%; justify-content:center; padding:12px; font-size:1rem; margin-top:10px;" onclick="submitChangePin()">
+            Salvar Nova Senha
+          </button>
+          <div style="margin-top:14px;">
+            <a href="javascript:void(0)" onclick="switchAuthTab('login')" style="color:var(--primary); font-size:0.85rem; text-decoration:none; font-weight:500;">
+              ← Voltar para Autenticação
+            </a>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -482,7 +641,7 @@
       let products = [];
       let currentFilter = 'todos';
       let currentQuery = '';
-      let masterPin = sessionStorage.getItem('lana_admin_pin') || 'LanaPro2026';
+      let masterPin = sessionStorage.getItem('lana_admin_pin') || '';
 
       function showToast(msg) {
         const toast = document.getElementById('adminToast');
@@ -491,20 +650,180 @@
         setTimeout(() => toast.classList.remove('show'), 3500);
       }
 
-      function openAuthModal() {
+      function updatePinUiState(isAuthenticated) {
+        const btn = document.getElementById('btnPinAuth');
+        if (!btn) return;
+        if (isAuthenticated) {
+          btn.innerHTML = '<i class="fa-solid fa-lock-open" style="color:#27ae60;"></i> PIN Master <span style="font-size:0.75rem; background:#27ae60; color:#fff; padding:2px 7px; border-radius:10px; margin-left:4px;">Ativo</span>';
+          btn.style.borderColor = 'rgba(39, 174, 96, 0.4)';
+        } else {
+          btn.innerHTML = '<i class="fa-solid fa-lock"></i> PIN Master';
+          btn.style.borderColor = '';
+        }
+      }
+
+      function showAlert(msg, isError = true) {
+        const el = document.getElementById('authAlert');
+        el.innerText = msg;
+        el.className = `auth-alert ${isError ? 'error' : 'success'}`;
+        el.style.display = 'block';
+      }
+
+      function clearAlert() {
+        const el = document.getElementById('authAlert');
+        el.style.display = 'none';
+        el.innerText = '';
+      }
+
+      function switchAuthTab(tab) {
+        clearAlert();
+        if (tab === 'login') {
+          document.getElementById('tabBtnLogin').classList.add('active');
+          document.getElementById('tabBtnChange').classList.remove('active');
+          document.getElementById('viewAuthLogin').style.display = 'block';
+          document.getElementById('viewAuthChange').style.display = 'none';
+          document.getElementById('inputMasterPin').focus();
+        } else {
+          document.getElementById('tabBtnChange').classList.add('active');
+          document.getElementById('tabBtnLogin').classList.remove('active');
+          document.getElementById('viewAuthChange').style.display = 'block';
+          document.getElementById('viewAuthLogin').style.display = 'none';
+          if (masterPin) {
+            document.getElementById('inputCurrentPin').value = masterPin;
+            document.getElementById('inputNewPin').focus();
+          } else {
+            document.getElementById('inputCurrentPin').focus();
+          }
+        }
+      }
+
+      function togglePinVisibility(inputId, btn) {
+        const input = document.getElementById(inputId);
+        if (!input) return;
+        const isPassword = input.type === 'password';
+        input.type = isPassword ? 'text' : 'password';
+        btn.innerHTML = isPassword ? '<i class="fa-regular fa-eye-slash"></i>' : '<i class="fa-regular fa-eye"></i>';
+      }
+
+      function openAuthModal(customSubtitle) {
+        clearAlert();
+        if (customSubtitle) {
+          document.getElementById('authLoginSubtitle').innerText = customSubtitle;
+        } else {
+          document.getElementById('authLoginSubtitle').innerText = 'Digite o PIN de segurança para liberar alterações de estoque.';
+        }
         document.getElementById('pinModal').classList.add('active');
+        switchAuthTab('login');
         document.getElementById('inputMasterPin').value = '';
         document.getElementById('inputMasterPin').focus();
       }
 
-      function submitPin() {
+      function closeAuthModal() {
+        document.getElementById('pinModal').classList.remove('active');
+        clearAlert();
+      }
+
+      async function submitPin() {
         const val = document.getElementById('inputMasterPin').value.trim();
-        if (val) {
+        if (!val) {
+          showAlert('Por favor, informe a senha PIN Master.');
+          return;
+        }
+
+        const btn = document.getElementById('btnSubmitLogin');
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Verificando...';
+
+        try {
+          const res = await fetch('/api/admin/verify-pin', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ pin: val })
+          });
+          const data = await res.json();
+          if (!res.ok) {
+            showAlert(data.error || 'PIN incorreto. Acesso negado.');
+            return;
+          }
+
           masterPin = val;
           sessionStorage.setItem('lana_admin_pin', val);
-          document.getElementById('pinModal').classList.remove('active');
-          showToast("PIN Master definido com sucesso!");
+          updatePinUiState(true);
+          closeAuthModal();
+          showToast("Autenticado com sucesso! Alterações liberadas.");
+        } catch (err) {
+          showAlert('Erro ao verificar PIN: ' + err.message);
+        } finally {
+          btn.disabled = false;
+          btn.innerHTML = 'Confirmar Acesso';
         }
+      }
+
+      async function submitChangePin() {
+        const currentPin = document.getElementById('inputCurrentPin').value.trim();
+        const newPin = document.getElementById('inputNewPin').value.trim();
+        const confirmNewPin = document.getElementById('inputConfirmNewPin').value.trim();
+
+        if (!currentPin) {
+          showAlert('Informe a senha PIN Master atual.');
+          return;
+        }
+        if (!newPin || newPin.length < 4) {
+          showAlert('A nova senha deve possuir no mínimo 4 dígitos.');
+          return;
+        }
+        if (newPin !== confirmNewPin) {
+          showAlert('A confirmação da nova senha não confere.');
+          return;
+        }
+
+        const btn = document.getElementById('btnSubmitChange');
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Atualizando...';
+
+        try {
+          const res = await fetch('/api/admin/change-pin', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ currentPin, newPin })
+          });
+          const data = await res.json();
+          if (!res.ok) {
+            showAlert(data.error || 'Não foi possível alterar a senha.');
+            return;
+          }
+
+          masterPin = newPin;
+          sessionStorage.setItem('lana_admin_pin', newPin);
+          updatePinUiState(true);
+          showAlert('Senha Master alterada com sucesso!', false);
+          setTimeout(() => {
+            closeAuthModal();
+            showToast("Nova senha Master gravada com sucesso!");
+          }, 1200);
+        } catch (err) {
+          showAlert('Erro ao alterar PIN: ' + err.message);
+        } finally {
+          btn.disabled = false;
+          btn.innerHTML = 'Salvar Nova Senha';
+        }
+      }
+
+      // Validação silenciosa da sessão salva
+      if (masterPin) {
+        fetch('/api/admin/verify-pin', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ pin: masterPin })
+        }).then(res => {
+          if (res.ok) {
+            updatePinUiState(true);
+          } else {
+            sessionStorage.removeItem('lana_admin_pin');
+            masterPin = '';
+            updatePinUiState(false);
+          }
+        }).catch(() => {});
       }
 
       async function fetchProducts() {
@@ -614,6 +933,11 @@
       }
 
       async function saveStock(id) {
+        if (!masterPin) {
+          openAuthModal("Informe o PIN Master (3008) para liberar a alteração de estoque.");
+          return;
+        }
+
         const input = document.getElementById(`input-stock-${id}`);
         if (!input) return;
         const newStock = parseInt(input.value, 10);
@@ -632,7 +956,10 @@
           const data = await res.json();
           if (!res.ok) {
             if (res.status === 401) {
-              openAuthModal();
+              sessionStorage.removeItem('lana_admin_pin');
+              masterPin = '';
+              updatePinUiState(false);
+              openAuthModal(data.error || "Sessão expirada ou PIN incorreto. Digite a senha Master.");
               return;
             }
             throw new Error(data.error || "Erro ao salvar");
@@ -668,6 +995,24 @@
 
       document.getElementById('inputMasterPin').addEventListener('keypress', (e) => {
         if (e.key === 'Enter') submitPin();
+      });
+
+      ['inputCurrentPin', 'inputNewPin', 'inputConfirmNewPin'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') submitChangePin();
+          });
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          const modal = document.getElementById('pinModal');
+          if (modal && modal.classList.contains('active')) {
+            closeAuthModal();
+          }
+        }
       });
 
       // Carregar produtos ao iniciar

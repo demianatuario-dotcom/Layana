@@ -79,8 +79,14 @@ async function initDB() {
                 status VARCHAR(50) DEFAULT 'pendente',
                 criado_em TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
             );
+
+            CREATE TABLE IF NOT EXISTS admin_config (
+                chave VARCHAR(100) PRIMARY KEY,
+                valor TEXT NOT NULL,
+                atualizado_em TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+            );
         `);
-        console.log("Tabelas 'comentarios', 'produtos_pro' e 'pedidos_pro' verificadas/criadas com sucesso no PostgreSQL.");
+        console.log("Tabelas 'comentarios', 'produtos_pro', 'pedidos_pro' e 'admin_config' verificadas/criadas com sucesso no PostgreSQL.");
 
         // Carga inicial dos 13 produtos se a tabela estiver vazia
         const countRes = await pool.query('SELECT COUNT(*) FROM produtos_pro');
@@ -790,16 +796,205 @@ app.get('/api/produtos', async (req, res) => {
     }
 });
 
-// PATCH /api/produtos/:id/estoque - Atualiza a quantidade em estoque de um produto
+// ==========================================
+// SEGURANÇA & CONTROLE DE ACESSO: PIN MASTER
+// ==========================================
+const PIN_KEY = 'admin_pin_hash';
+const DEFAULT_PIN = process.env.ADMIN_PIN || '3008';
+
+function hashPin(pin, salt = null) {
+    if (!salt) {
+        salt = crypto.randomBytes(16).toString('hex');
+    }
+    const hash = crypto.pbkdf2Sync(String(pin), salt, 10000, 64, 'sha512').toString('hex');
+    return `${salt}:${hash}`;
+}
+
+let cachedPinData = null;
+
+async function getAdminPinData() {
+    if (cachedPinData) return cachedPinData;
+    try {
+        const res = await pool.query('SELECT valor FROM admin_config WHERE chave = $1', [PIN_KEY]);
+        if (res.rows.length > 0) {
+            cachedPinData = res.rows[0].valor;
+            return cachedPinData;
+        }
+        // Inicializar com PIN padrão (3008)
+        const initialHash = hashPin(DEFAULT_PIN);
+        await pool.query(
+            `INSERT INTO admin_config (chave, valor)
+             VALUES ($1, $2)
+             ON CONFLICT (chave) DO NOTHING`,
+            [PIN_KEY, initialHash]
+        );
+        cachedPinData = initialHash;
+        return cachedPinData;
+    } catch (err) {
+        console.error("Aviso: Falha ao consultar admin_config no PostgreSQL, usando fallback em memória:", err.message);
+        if (!cachedPinData) {
+            cachedPinData = hashPin(DEFAULT_PIN);
+        }
+        return cachedPinData;
+    }
+}
+
+async function verifyPin(inputPin) {
+    if (!inputPin) return false;
+    const stored = await getAdminPinData();
+    if (!stored || !stored.includes(':')) {
+        return String(inputPin) === String(DEFAULT_PIN);
+    }
+    const [salt, originalHash] = stored.split(':');
+    const inputHash = crypto.pbkdf2Sync(String(inputPin), salt, 10000, 64, 'sha512').toString('hex');
+    try {
+        return crypto.timingSafeEqual(Buffer.from(inputHash, 'hex'), Buffer.from(originalHash, 'hex'));
+    } catch (e) {
+        return false;
+    }
+}
+
+async function updateAdminPin(newPin) {
+    const newHash = hashPin(newPin);
+    await pool.query(
+        `INSERT INTO admin_config (chave, valor, atualizado_em)
+         VALUES ($1, $2, CURRENT_TIMESTAMP)
+         ON CONFLICT (chave) DO UPDATE SET valor = EXCLUDED.valor, atualizado_em = CURRENT_TIMESTAMP`,
+        [PIN_KEY, newHash]
+    );
+    cachedPinData = newHash;
+    return true;
+}
+
+// Anti Brute-Force Rate Limiter em memória para proteção do PIN
+const pinRateLimitMap = new Map();
+
+function getClientIp(req) {
+    return (req.headers['x-forwarded-for']?.split(',')[0].trim()) || req.ip || req.socket?.remoteAddress || 'unknown';
+}
+
+function checkPinRateLimit(ip) {
+    const record = pinRateLimitMap.get(ip);
+    if (!record) return { allowed: true };
+    const now = Date.now();
+    if (record.lockedUntil && record.lockedUntil > now) {
+        const remainingSec = Math.ceil((record.lockedUntil - now) / 1000);
+        return { allowed: false, remainingSec };
+    }
+    if (record.lockedUntil && record.lockedUntil <= now) {
+        pinRateLimitMap.delete(ip);
+        return { allowed: true };
+    }
+    return { allowed: true };
+}
+
+function recordPinAttempt(ip, success) {
+    const now = Date.now();
+    let record = pinRateLimitMap.get(ip) || { attempts: 0, lockedUntil: null };
+    if (success) {
+        pinRateLimitMap.delete(ip);
+        return;
+    }
+    record.attempts += 1;
+    if (record.attempts >= 5) {
+        record.lockedUntil = now + (3 * 60 * 1000); // 3 minutos de lockout
+    }
+    pinRateLimitMap.set(ip, record);
+}
+
+// POST /api/admin/verify-pin - Autenticação da senha Master
+app.post('/api/admin/verify-pin', async (req, res) => {
+    try {
+        const clientIp = getClientIp(req);
+        const rateCheck = checkPinRateLimit(clientIp);
+        if (!rateCheck.allowed) {
+            return res.status(429).json({
+                error: `Muitas tentativas incorretas. Acesso bloqueado por mais ${rateCheck.remainingSec} segundos.`
+            });
+        }
+
+        const { pin } = req.body;
+        if (!pin) {
+            return res.status(400).json({ error: 'PIN não fornecido.' });
+        }
+
+        const isValid = await verifyPin(pin);
+        if (!isValid) {
+            recordPinAttempt(clientIp, false);
+            return res.status(401).json({ error: 'PIN Master incorreto.' });
+        }
+
+        recordPinAttempt(clientIp, true);
+        res.json({ success: true, message: 'Autenticação Master concedida com sucesso.' });
+    } catch (err) {
+        console.error('Erro em verify-pin:', err);
+        res.status(500).json({ error: 'Erro interno ao validar PIN.' });
+    }
+});
+
+// POST /api/admin/change-pin - Permite alteração apenas se o usuário digitar a senha atual corretamente
+app.post('/api/admin/change-pin', async (req, res) => {
+    try {
+        const clientIp = getClientIp(req);
+        const rateCheck = checkPinRateLimit(clientIp);
+        if (!rateCheck.allowed) {
+            return res.status(429).json({
+                error: `Muitas tentativas incorretas. Acesso bloqueado por mais ${rateCheck.remainingSec} segundos.`
+            });
+        }
+
+        const { currentPin, newPin } = req.body;
+        if (!currentPin || !newPin) {
+            return res.status(400).json({ error: 'Informe a senha atual e a nova senha.' });
+        }
+
+        // Validação obrigatória da senha atual
+        const isCurrentValid = await verifyPin(currentPin);
+        if (!isCurrentValid) {
+            recordPinAttempt(clientIp, false);
+            return res.status(401).json({ error: 'PIN atual incorreto. A alteração de senha só é autorizada com a senha correta.' });
+        }
+
+        // Validação do novo PIN
+        const cleanNewPin = String(newPin).trim();
+        if (cleanNewPin.length < 4 || cleanNewPin.length > 20) {
+            return res.status(400).json({ error: 'A nova senha deve possuir entre 4 e 20 caracteres.' });
+        }
+
+        await updateAdminPin(cleanNewPin);
+        recordPinAttempt(clientIp, true);
+        res.json({ success: true, message: 'Senha PIN Master atualizada com sucesso!' });
+    } catch (err) {
+        console.error('Erro em change-pin:', err);
+        res.status(500).json({ error: 'Erro interno ao alterar a senha Master.' });
+    }
+});
+
+// PATCH /api/produtos/:id/estoque - Atualiza o estoque (exige obrigatoriamente PIN correto)
 app.patch('/api/produtos/:id/estoque', async (req, res) => {
     try {
+        const clientIp = getClientIp(req);
+        const rateCheck = checkPinRateLimit(clientIp);
+        if (!rateCheck.allowed) {
+            return res.status(429).json({
+                error: `Muitas tentativas incorretas de PIN. Bloqueado por mais ${rateCheck.remainingSec} segundos.`
+            });
+        }
+
         const { id } = req.params;
         const { estoque, pin } = req.body;
 
-        const ADMIN_PIN = process.env.ADMIN_PIN || 'LanaPro2026';
-        if (pin && pin !== ADMIN_PIN) {
+        if (!pin) {
+            return res.status(401).json({ error: 'PIN de segurança obrigatório para alterar estoque.' });
+        }
+
+        const isAuthorized = await verifyPin(pin);
+        if (!isAuthorized) {
+            recordPinAttempt(clientIp, false);
             return res.status(401).json({ error: 'PIN de segurança incorreto.' });
         }
+
+        recordPinAttempt(clientIp, true);
 
         const parsedEstoque = parseInt(estoque, 10);
         if (isNaN(parsedEstoque) || parsedEstoque < 0) {
