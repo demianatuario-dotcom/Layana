@@ -16,11 +16,11 @@
     <!-- SEO Meta Tags -->
     <meta
       name="description"
-      content="Curso presencial de Extensão de Cílios Fio a Fio Clássico e Biossegurança em Luziânia. Mentoria prática individualizada com Layana Wolf, kit profissional incluso e certificado."
+      content="Curso presencial e individual de Extensão de Cílios Fio a Fio Clássico e Biossegurança em Luziânia por R$ 890,00. Mentoria prática individualizada com Layana Wolf, kit profissional de bancada e certificado."
     />
     <meta name="keywords" content="Curso de extensão de cílios Luziânia, Curso fio a fio clássico Luziânia, Lash designer iniciante Luziânia, Mentoria Layana Wolf, Formação cílios Lana Wolf Art" />
     <meta property="og:title" content="Cursos & Formação Profissional | Studio Lana Wolf" />
-    <meta property="og:description" content="Domine a técnica de Extensão de Cílios Fio a Fio Clássico com biossegurança rigorosa, mentoria prática e kit aluna incluso no Studio Lana Wolf." />
+    <meta property="og:description" content="Domine a técnica de Extensão de Cílios Fio a Fio Clássico por R$ 890,00 (curso individual e exclusivo) com mentoria prática no Studio Lana Wolf." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://lanawolfart.cloud/cursos" />
     <meta name="theme-color" content="#c98276" />
@@ -127,12 +127,138 @@
       .curso-card {
         padding: 40px 36px;
       }
+      /* Pricing styling */
+      .curso-pricing-box {
+        background: linear-gradient(135deg, #fdf8f7 0%, #ffffff 100%);
+        border: 2px solid rgba(201, 130, 118, 0.35);
+        border-radius: 16px;
+        padding: 22px 24px;
+        margin: 25px 0 20px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(201, 130, 118, 0.08);
+      }
+      .pricing-badge {
+        display: inline-block;
+        background: var(--bg-nude);
+        color: var(--primary-dark);
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        padding: 5px 14px;
+        border-radius: 20px;
+        margin-bottom: 8px;
+      }
+      .pricing-main {
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        gap: 10px;
+        margin: 8px 0;
+      }
+      .pricing-label {
+        font-size: 1.05rem;
+        color: var(--text-light);
+        font-weight: 500;
+      }
+      .pricing-value {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.4rem;
+        font-weight: 700;
+        color: var(--secondary);
+      }
+      .pricing-value small {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--primary);
+      }
+      .pricing-sub {
+        font-size: 0.9rem;
+        color: var(--text-light);
+        margin-top: 6px;
+        line-height: 1.5;
+      }
+      .pricing-sub strong {
+        color: var(--secondary);
+        font-weight: 600;
+      }
+
+      /* Kit items priced breakdown */
+      .kit-items-priced {
+        list-style: none;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin: 20px 0;
+        padding: 0;
+      }
+      .kit-items-priced li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(255, 255, 255, 0.85);
+        border: 1px solid rgba(201, 130, 118, 0.25);
+        border-radius: 12px;
+        padding: 10px 14px;
+        font-size: 0.88rem;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+      .kit-items-priced li:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(201, 130, 118, 0.15);
+      }
+      .kit-items-priced .item-name {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--text-main);
+        font-weight: 500;
+      }
+      .kit-items-priced .item-name i {
+        color: #2e7d32;
+        font-size: 0.85rem;
+      }
+      .kit-items-priced .item-price {
+        font-weight: 700;
+        color: var(--primary-dark);
+        white-space: nowrap;
+        font-size: 0.92rem;
+      }
+      .kit-total-card {
+        background: #ffffff;
+        border: 2px dashed rgba(201, 130, 118, 0.5);
+        border-radius: 14px;
+        padding: 18px 22px;
+        margin-bottom: 24px;
+      }
+      .kit-total-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.15rem;
+        font-family: 'Playfair Display', serif;
+        color: var(--secondary);
+      }
+      .kit-total-row strong {
+        font-size: 1.6rem;
+        color: #2e7d32;
+      }
+      .kit-total-note {
+        font-size: 0.84rem;
+        color: var(--text-light);
+        margin-top: 8px;
+        line-height: 1.5;
+      }
+
       @media (max-width: 900px) {
         .kit-aluna-highlight {
           grid-template-columns: 1fr;
           padding: 30px 20px;
         }
         .kit-items-list {
+          grid-template-columns: 1fr;
+        }
+        .kit-items-priced {
           grid-template-columns: 1fr;
         }
       }
@@ -200,14 +326,14 @@
 
     <!-- Page Hero Banner -->
     <section class="page-hero">
-      <div class="page-badge"><i class="fa-solid fa-graduation-cap"></i> Formação Presencial em Luziânia</div>
+      <div class="page-badge"><i class="fa-solid fa-graduation-cap"></i> Formação Presencial em Luziânia • Vaga Individual</div>
       <h1 class="page-title">Torne-se uma Lash Designer com <span>Segurança e Precisão</span></h1>
       <p class="page-desc">
-        Aprenda do zero absoluto a técnica de Fio a Fio Clássico com foco rigoroso em isolamento, química do cianoacrilato e saúde ocular. Mentoria prática individualizada com Layana Wolf.
+        Aprenda do zero absoluto a técnica de Fio a Fio Clássico com foco rigoroso em isolamento, química do cianoacrilato e saúde ocular. Mentoria prática individualizada e exclusiva com Layana Wolf por <strong>R$ 890,00</strong>.
       </p>
       <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
         <a href="#cursos-grade" class="btn-primary">Conhecer a Formação ↓</a>
-        <a href="https://wa.me/556195981186?text=Ol%C3%A1%20Layana!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20o%20Curso%20de%20Extens%C3%A3o%20de%20C%C3%ADlios%20Fio%20a%20Fio." target="_blank" class="btn-secondary">
+        <a href="https://wa.me/556195981186?text=Ol%C3%A1%20Layana!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20o%20Curso%20de%20Extens%C3%A3o%20de%20C%C3%ADlios%20(R$%20890,00)." target="_blank" class="btn-secondary">
           <i class="fa-brands fa-whatsapp"></i> Falar com a Mentora
         </a>
       </div>
@@ -223,8 +349,8 @@
         </div>
         <div class="pilar-card">
           <div class="pilar-icon"><i class="fa-solid fa-gift"></i></div>
-          <h4>Kit Completo Incluso</h4>
-          <p>Receba materiais profissionais selecionados da Lana Supply Pro para já começar a atender e lucrar imediatamente.</p>
+          <h4>Kit da Aluna Completo</h4>
+          <p>Lista transparente de materiais de bancada da Lana Supply Pro por apenas R$ 225,33 para treinar e já começar a atender.</p>
         </div>
         <div class="pilar-card">
           <div class="pilar-icon"><i class="fa-solid fa-certificate"></i></div>
@@ -255,12 +381,25 @@
             <li><i class="fa-solid fa-check"></i> Prática intensiva supervisionada em modelo real</li>
             <li><i class="fa-solid fa-check"></i> O Triângulo de Ouro do Isolamento e direcionamento a 90°</li>
             <li><i class="fa-solid fa-check"></i> Controle de umidade e parâmetros químicos do cianoacrilato</li>
-            <li><i class="fa-solid fa-check"></i> Kit Aluna Completo incluso com pinças e adesivo profissional</li>
+            <li><i class="fa-solid fa-check"></i> Kit Aluna Completo direcionado de bancada (pago à parte por R$ 225,33)</li>
             <li><i class="fa-solid fa-check"></i> Apostila ilustrada com diagramas didáticos e fichas de treino</li>
             <li><i class="fa-solid fa-check"></i> Certificado de Formação Profissional Lana Wolf Art</li>
             <li><i class="fa-solid fa-check"></i> Suporte direto com Layana Wolf via WhatsApp pós-curso</li>
           </ul>
-          <a href="https://wa.me/556195981186?text=Ol%C3%A1%20Layana!%20Quero%20garantir%20minha%20vaga%20na%20Forma%C3%A7%C3%A3o%20em%20Extens%C3%A3o%20de%20C%C3%ADlios%20Fio%20a%20Fio." target="_blank" class="btn-curso">
+
+          <!-- Box de Preço & Condições -->
+          <div class="curso-pricing-box">
+            <span class="pricing-badge"><i class="fa-solid fa-user-check"></i> Mentoria Individual e Exclusiva</span>
+            <div class="pricing-main">
+              <span class="pricing-label">Preço do Curso:</span>
+              <span class="pricing-value"><small>R$</small> 890,00</span>
+            </div>
+            <div class="pricing-sub">
+              <i class="fa-solid fa-boxes-stacked"></i> Material (Kit da Aluna pago à parte): <strong>R$ 225,33</strong>
+            </div>
+          </div>
+
+          <a href="https://wa.me/556195981186?text=Ol%C3%A1%20Layana!%20Quero%20garantir%20minha%20vaga%20na%20Forma%C3%A7%C3%A3o%20em%20Extens%C3%A3o%20de%20C%C3%ADlios%20(R$%20890,00)." target="_blank" class="btn-curso">
             <i class="fa-brands fa-whatsapp"></i> Consultar Próxima Turma & Vagas
           </a>
         </div>
@@ -268,22 +407,37 @@
 
       <!-- Kit Aluna Highlight -->
       <div class="kit-aluna-highlight">
-        <img src="/assets/kit_aluna_lash.jpg" alt="Kit Aluna Incluso nos Cursos" class="kit-aluna-img" loading="lazy" />
+        <img src="/assets/kit_aluna_lash.jpg" alt="Kit da Aluna - Lana Wolf Art" class="kit-aluna-img" loading="lazy" />
         <div class="kit-aluna-content">
-          <span class="curso-tag" style="background:#2e7d32; color:white;"><i class="fa-solid fa-box-open"></i> 100% Incluso</span>
-          <h3>Você Já Sai com Seu Kit Profissional Pronto para Atender</h3>
+          <span class="curso-tag" style="background:var(--primary); color:white;"><i class="fa-solid fa-box-open"></i> Material Pago à Parte • Kit da Aluna</span>
+          <h3>Materiais Oficiais de Bancada para Treino e Primeiros Atendimentos</h3>
           <p>
-            Nada de terminar o curso e não saber o que comprar! Você recebe em mãos um kit profissional montado pela <strong>Lana Supply Pro</strong> com os exatos produtos que Layana usa no estúdio.
+            Total transparência: você adquire o seu kit profissional completo com os produtos exatos que a Layana utiliza em estúdio, fornecidos pela <strong>Lana Supply Pro</strong> a valor direto de bancada:
           </p>
-          <ul class="kit-items-list">
-            <li><i class="fa-solid fa-circle-check"></i> Adesivo profissional Booble de alta retenção</li>
-            <li><i class="fa-solid fa-circle-check"></i> Caixa de Fios Clássicos Mix (Curvaturas C/D - 0.15mm)</li>
-            <li><i class="fa-solid fa-circle-check"></i> Pinça reta de isolamento cirúrgico de alta precisão</li>
-            <li><i class="fa-solid fa-circle-check"></i> Pinça curva clássica para acoplagem</li>
-            <li><i class="fa-solid fa-circle-check"></i> Shampoo neutro higienizador, foamer e escovinhas</li>
-            <li><i class="fa-solid fa-circle-check"></i> Protetores em gel (eyepads) hipoalergênicos e fitas de isolamento</li>
+          <ul class="kit-items-priced">
+            <li><span class="item-name"><i class="fa-solid fa-circle-check"></i> Cola Free</span> <span class="item-price">R$ 55,90</span></li>
+            <li><span class="item-name"><i class="fa-solid fa-circle-check"></i> Removedor</span> <span class="item-price">R$ 34,90</span></li>
+            <li><span class="item-name"><i class="fa-solid fa-circle-check"></i> Placa de cílios</span> <span class="item-price">R$ 13,00</span></li>
+            <li><span class="item-name"><i class="fa-solid fa-circle-check"></i> Cílios Y (Volume Brasileiro)</span> <span class="item-price">R$ 15,00</span></li>
+            <li><span class="item-name"><i class="fa-solid fa-circle-check"></i> Fita micropore/transpore</span> <span class="item-price">R$ 3,24</span></li>
+            <li><span class="item-name"><i class="fa-solid fa-circle-check"></i> Escovinhas descartáveis</span> <span class="item-price">R$ 3,00</span></li>
+            <li><span class="item-name"><i class="fa-solid fa-circle-check"></i> Batoques</span> <span class="item-price">R$ 16,39</span></li>
+            <li><span class="item-name"><i class="fa-solid fa-circle-check"></i> Pinça curva</span> <span class="item-price">R$ 31,90</span></li>
+            <li><span class="item-name"><i class="fa-solid fa-circle-check"></i> Pinça reta</span> <span class="item-price">R$ 32,00</span></li>
+            <li><span class="item-name"><i class="fa-solid fa-circle-check"></i> Certificado (impressão premium/pasta)</span> <span class="item-price">R$ 20,00</span></li>
           </ul>
-          <a href="https://wa.me/556195981186?text=Ol%C3%A1%20Layana!%20Quero%20garantir%20minha%20vaga%20na%20Forma%C3%A7%C3%A3o%20em%20Extens%C3%A3o%20de%20C%C3%ADlios%20Fio%20a%20Fio." target="_blank" class="btn-primary">
+
+          <div class="kit-total-card">
+            <div class="kit-total-row">
+              <span>Total por Aluna (Material):</span>
+              <strong>R$ 225,33</strong>
+            </div>
+            <p class="kit-total-note">
+              Formação Individual (<strong>R$ 890,00</strong>) + Kit da Aluna (<strong>R$ 225,33</strong>) = Investimento total de <strong>R$ 1.115,33</strong>
+            </p>
+          </div>
+
+          <a href="https://wa.me/556195981186?text=Ol%C3%A1%20Layana!%20Quero%20garantir%20minha%20vaga%20na%20Forma%C3%A7%C3%A3o%20em%20Extens%C3%A3o%20de%20C%C3%ADlios%20(R$%20890,00)%20com%20o%20Kit%20da%20Aluna%20(R$%20225,33)." target="_blank" class="btn-primary">
             <i class="fa-brands fa-whatsapp"></i> Garantir Minha Vaga com Kit
           </a>
         </div>
