@@ -874,28 +874,44 @@
 
     <!-- Catalog Section -->
     <section id="catalogo" class="loja-pro-section" style="padding-top: 20px;">
+      <!-- Official Catalog Showcase Banner -->
+      <div style="background: linear-gradient(135deg, rgba(197, 160, 89, 0.12), rgba(36, 23, 21, 0.05)); border: 1px solid rgba(197, 160, 89, 0.35); border-radius: 16px; padding: 18px 24px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <div style="width: 48px; height: 48px; border-radius: 12px; background: var(--accent-gold); color: #241715; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; box-shadow: 0 4px 12px rgba(197, 160, 89, 0.3);">
+            <i class="fa-solid fa-book-open"></i>
+          </div>
+          <div>
+            <h4 style="font-family: var(--font-heading); font-size: 1.15rem; color: var(--secondary); margin-bottom: 2px;">Catálogo Oficial Lash Designers 2026</h4>
+            <p style="font-size: 0.88rem; color: #666; margin: 0;">14 insumos profissionais selecionados para alta retenção, ergonomia na maca e biossegurança.</p>
+          </div>
+        </div>
+        <a href="https://wa.me/556195981186?text=Ol%C3%A1%20Layana!%20Gostaria%20de%20receber%20o%20Cat%C3%A1logo%20Oficial%20Lash%20Designers%20em%20PDF." target="_blank" class="btn-primary" style="padding: 10px 18px; font-size: 0.88rem; text-decoration: none; border-radius: 8px;">
+          <i class="fa-brands fa-whatsapp" style="margin-right: 6px;"></i> Pedir Catálogo em PDF
+        </a>
+      </div>
+
       <!-- Controls: Search & Category Filters -->
       <div class="loja-controls">
         <div class="pro-search-box">
-          <input type="text" id="proSearchInput" placeholder="Buscar insumo (ex: Rubi, Y, Nagaraku, RBKollors, Kits)..." />
+          <input type="text" id="proSearchInput" placeholder="Buscar insumo (ex: Decemars, Fadvan, Nagaraku, Free Beautify, Exovan)..." />
           <i class="fa-solid fa-magnifying-glass"></i>
         </div>
 
         <div class="pro-filter-tabs" id="proFilterTabs">
           <button class="pro-tab-btn active" data-category="todos">
-            <i class="fa-solid fa-border-all"></i> Todos os Insumos <span class="tab-count" id="countTodos">13</span>
+            <i class="fa-solid fa-border-all"></i> Todos os Insumos <span class="tab-count" id="countTodos">14</span>
           </button>
           <button class="pro-tab-btn" data-category="cilios">
-            <i class="fa-solid fa-eye"></i> Extensão de Cílios <span class="tab-count" id="countCilios">6</span>
+            <i class="fa-solid fa-eye"></i> Cílios & Extensões <span class="tab-count" id="countCilios">5</span>
           </button>
-          <button class="pro-tab-btn" data-category="micro">
-            <i class="fa-solid fa-feather-pointed"></i> Micropigmentação <span class="tab-count" id="countMicro">3</span>
+          <button class="pro-tab-btn" data-category="solucoes">
+            <i class="fa-solid fa-droplet"></i> Soluções & Adesivos <span class="tab-count" id="countSolucoes">3</span>
           </button>
-          <button class="pro-tab-btn" data-category="descartaveis">
-            <i class="fa-solid fa-shield-virus"></i> Descartáveis & Biossegurança <span class="tab-count" id="countDescartaveis">2</span>
+          <button class="pro-tab-btn" data-category="acessorios">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Ferramentas & Acessórios <span class="tab-count" id="countAcessorios">4</span>
           </button>
-          <button class="pro-tab-btn" data-category="kits">
-            <i class="fa-solid fa-gift"></i> Kits para Alunas <span class="tab-count" id="countKits">2</span>
+          <button class="pro-tab-btn" data-category="design">
+            <i class="fa-solid fa-feather-pointed"></i> Design & Sobrancelhas <span class="tab-count" id="countDesign">2</span>
           </button>
         </div>
       </div>
@@ -1256,11 +1272,11 @@
       }
 
       function updateCategoryCounts() {
-        document.getElementById('countTodos').innerText = catalogProducts.length;
-        document.getElementById('countCilios').innerText = catalogProducts.filter(p => p.categoria_filtro === 'cilios').length;
-        document.getElementById('countMicro').innerText = catalogProducts.filter(p => p.categoria_filtro === 'micro').length;
-        document.getElementById('countDescartaveis').innerText = catalogProducts.filter(p => p.categoria_filtro === 'descartaveis').length;
-        document.getElementById('countKits').innerText = catalogProducts.filter(p => p.categoria_filtro === 'kits').length;
+        if (document.getElementById('countTodos')) document.getElementById('countTodos').innerText = catalogProducts.length;
+        if (document.getElementById('countCilios')) document.getElementById('countCilios').innerText = catalogProducts.filter(p => p.categoria_filtro === 'cilios').length;
+        if (document.getElementById('countSolucoes')) document.getElementById('countSolucoes').innerText = catalogProducts.filter(p => p.categoria_filtro === 'solucoes').length;
+        if (document.getElementById('countAcessorios')) document.getElementById('countAcessorios').innerText = catalogProducts.filter(p => p.categoria_filtro === 'acessorios').length;
+        if (document.getElementById('countDesign')) document.getElementById('countDesign').innerText = catalogProducts.filter(p => p.categoria_filtro === 'design').length;
       }
 
       function changeCardQty(productId, delta) {

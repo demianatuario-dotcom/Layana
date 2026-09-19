@@ -88,150 +88,163 @@ async function initDB() {
         `);
         console.log("Tabelas 'comentarios', 'produtos_pro', 'pedidos_pro' e 'admin_config' verificadas/criadas com sucesso no PostgreSQL.");
 
-        // Carga inicial dos 13 produtos se a tabela estiver vazia
-        const countRes = await pool.query('SELECT COUNT(*) FROM produtos_pro');
-        if (parseInt(countRes.rows[0].count, 10) === 0) {
-            console.log("Populando tabela 'produtos_pro' com os insumos da Lana Supply Pro...");
-            const defaultProducts = [
-                {
-                    tipo: 'Extensão de Cílios • Booble',
-                    nome: 'Adesivo Booble Rubi 3ml',
-                    descricao: 'Secagem ultra-rápida (0.5s a 1s). Retenção campeã de até 7 a 8 semanas. Baixa emissão de odor e adaptabilidade ideal para o clima de Goiás.',
-                    preco: 95.00,
-                    estoque: 20,
-                    categoria_filtro: 'cilios',
-                    imagem_url: '/assets/booble_rubi.jpg',
-                    badge: 'Pronta Entrega Luziânia'
-                },
-                {
-                    tipo: 'Extensão de Cílios • Booble',
-                    nome: 'Adesivo Booble Black 3ml',
-                    descricao: 'Secagem flexível (1s a 2s). Acabamento preto acetinado profundo com película flexível que acompanha o movimento do fio natural.',
-                    preco: 89.00,
-                    estoque: 15,
-                    categoria_filtro: 'cilios',
-                    imagem_url: '/assets/booble_rubi.jpg',
-                    badge: 'Aprovado por Layana Wolf'
-                },
-                {
-                    tipo: 'Fios para Cílios • Nagaraku',
-                    nome: 'Fios Nagaraku Y Mix (8 a 15mm)',
-                    descricao: 'Os queridinhos do Volume Brasileiro. Fios macios, pretos matte e bifurcados com acoplagem magnética sem peso sobre o fio natural.',
-                    preco: 38.00,
-                    estoque: 30,
-                    categoria_filtro: 'cilios',
-                    imagem_url: '/assets/nagaraku_y_lashes.jpg',
-                    badge: 'Mais Vendido'
-                },
-                {
-                    tipo: 'Fios para Cílios • Booble',
-                    nome: 'Fios Booble Velvet Volume Russo',
-                    descricao: 'Fios ultrafinos (espessura 0.05 / 0.07) com textura aveludada. Fáceis de abrir fans no chicote sem desmanchar a raiz.',
-                    preco: 42.00,
-                    estoque: 25,
-                    categoria_filtro: 'cilios',
-                    imagem_url: '/assets/nagaraku_y_lashes.jpg',
-                    badge: 'Pronta Entrega Luziânia'
-                },
-                {
-                    tipo: 'Preparação • Booble',
-                    nome: 'Primer Higienizador Booble 15ml',
-                    descricao: 'Remove qualquer vestígio de oleosidade e equilibra o pH dos fios naturais antes da acoplagem. Aumenta a durabilidade da retenção em até 40%.',
-                    preco: 45.00,
-                    estoque: 18,
-                    categoria_filtro: 'cilios',
-                    imagem_url: '/assets/booble_rubi.jpg',
-                    badge: 'Essencial de Bancada'
-                },
-                {
-                    tipo: 'Remoção Segura • Booble',
-                    nome: 'Removedor em Gel Booble 15g',
-                    descricao: 'Fórmula em gel com aroma suave que não escorre para os olhos. Dissolve a cola com rapidez sem desconforto ou quebra dos fios naturais.',
-                    preco: 48.00,
-                    estoque: 16,
-                    categoria_filtro: 'cilios',
-                    imagem_url: '/assets/booble_rubi.jpg',
-                    badge: 'Pronta Entrega'
-                },
-                {
-                    tipo: 'Micropigmentação • RBKollors',
-                    nome: 'Pigmento RBKollors Red Rose 15ml',
-                    descricao: 'Linha Lips Smart Pigment. Alta carga pigmentária, cor translúcida e vibrante que entrega efeito lábios de seda e cicatrização fiel sem manchas.',
-                    preco: 165.00,
-                    estoque: 12,
-                    categoria_filtro: 'micro',
-                    imagem_url: '/assets/rbkollors_lips.jpg',
-                    badge: 'Aprovado por Layana Wolf'
-                },
-                {
-                    tipo: 'Micropigmentação • RBKollors',
-                    nome: 'Pigmento RBKollors Jambo 15ml',
-                    descricao: 'Castanho escuro aquecido indispensável para fototipos brasileiros. Fórmula biocompatível inteligente que impede o acinzentamento ao cicatrizar.',
-                    preco: 165.00,
-                    estoque: 14,
-                    categoria_filtro: 'micro',
-                    imagem_url: '/assets/rbkollors_lips.jpg',
-                    badge: 'Pronta Entrega Luziânia'
-                },
-                {
-                    tipo: 'Micropigmentação • Diamond',
-                    nome: 'Pigmento Diamond Sobrancelhas 10ml',
-                    descricao: 'Linha especial de acabamento nobre para técnicas Shadow e Microblading. Degradês perfeitos com penetração homogênea e excelente retenção na derme.',
-                    preco: 145.00,
-                    estoque: 10,
-                    categoria_filtro: 'micro',
-                    imagem_url: '/assets/diamond_pigment.jpg',
-                    badge: 'Exclusividade Pro'
-                },
-                {
-                    tipo: 'Biossegurança & Descartáveis',
-                    nome: 'Microbrush Rosa - Tubo c/ 100 un',
-                    descricao: 'Ponta de microfibra que não solta fiapos nem retém produto em excesso. Essencial para higienização, primer, removedor e alinhamento de cílios.',
-                    preco: 22.00,
-                    estoque: 40,
-                    categoria_filtro: 'descartaveis',
-                    imagem_url: '/assets/disposables.jpg',
-                    badge: 'Pronta Entrega'
-                },
-                {
-                    tipo: 'Biossegurança & Mimos',
-                    nome: 'Escovinhas c/ Glitter Rosa (50 un)',
-                    descricao: 'Cerdas macias que alinham as extensões sem repuxar. Cabo com glitter rosa de alto apelo visual para uso em bancada e presente para suas clientes.',
-                    preco: 25.00,
-                    estoque: 50,
-                    categoria_filtro: 'descartaveis',
-                    imagem_url: '/assets/disposables.jpg',
-                    badge: 'Pronta Entrega'
-                },
-                {
-                    tipo: 'Kits de Formação • Alunas',
-                    nome: 'Kit Aluna Lash Designer Completo',
-                    descricao: 'Adesivo Booble Rubi 3ml + 2 Caixas Nagaraku Y/Mix + Pinça Reta Dourada + Pinça Curva + Primer + Removedor + 50 Escovinhas + 100 Microbrush + Fita Micropore.',
-                    preco: 289.00,
-                    estoque: 8,
-                    categoria_filtro: 'kits',
-                    imagem_url: '/assets/kit_aluna_lash.jpg',
-                    badge: 'Kit Completo Aluna'
-                },
-                {
-                    tipo: 'Kits de Formação • Alunas',
-                    nome: 'Kit Aluna Micropigmentação Pro',
-                    descricao: '2 Pigmentos RBKollors (Lips Red Rose + Sobrancelhas Jambo) + 1 Pele Sintética 3D para treino + 20 Anéis de Batoque + Lápis Dermatográfico + Paquímetro de precisão.',
-                    preco: 389.00,
-                    estoque: 6,
-                    categoria_filtro: 'kits',
-                    imagem_url: '/assets/kit_aluna_lash.jpg',
-                    badge: 'Aprovado por Layana'
-                }
-            ];
+        // Carga e sincronização do Catálogo Oficial Lana Supply Pro (14 produtos)
+        const catalogoOficial = [
+            {
+                tipo: 'Cílios e Extensões • Decemars',
+                nome: 'Cílios Decemars YY U D (7mm a 13mm)',
+                descricao: 'Fios tecnológicos em formato YY de alta maciez - Curvatura D - Leveza incomparável, efeito volumoso e retenção duradoura para o dia a dia.',
+                preco: 32.00,
+                estoque: 25,
+                categoria_filtro: 'cilios',
+                imagem_url: '/assets/pro/cilios_decemars_yy.jpg',
+                badge: 'Volume Brasileiro'
+            },
+            {
+                tipo: 'Cílios e Extensões • Fadvan',
+                nome: 'Cílios Fadvan YV Vol. Brasileiro D Preto (8-14mm)',
+                descricao: 'Fios Precisão - Curvatura D (8-14mm) - Alta retenção, facilidade de acoplagem e acabamento marcante para o clássico Volume Brasileiro.',
+                preco: 25.00,
+                estoque: 30,
+                categoria_filtro: 'cilios',
+                imagem_url: '/assets/pro/cilios_fadvan_yv.jpg',
+                badge: 'Mais Vendido'
+            },
+            {
+                tipo: 'Cílios e Extensões • Decemars',
+                nome: 'Cílios Decemars 4D W D (7mm a 13mm)',
+                descricao: 'Fios tecnológicos 4D em W com acabamento acetinado - Curvatura D - Proporciona volume expressivo, preenchimento uniforme e rápida aplicação.',
+                preco: 38.00,
+                estoque: 20,
+                categoria_filtro: 'cilios',
+                imagem_url: '/assets/pro/cilios_decemars_4d_w.jpg',
+                badge: 'Volume Expressivo'
+            },
+            {
+                tipo: 'Cílios e Extensões • Nagaraku',
+                nome: 'Pinça Profissional Nagaraku N-04 Dourada',
+                descricao: 'Aço cirúrgico de alta precisão com acabamento dourado luxo - ponta fina e fechamento 100% calibrado, perfeita para isolamento e acoplagem.',
+                preco: 59.90,
+                estoque: 15,
+                categoria_filtro: 'cilios',
+                imagem_url: '/assets/pro/pinca_nagaraku_n04.jpg',
+                badge: 'Aço Cirúrgico Luxo'
+            },
+            {
+                tipo: 'Cílios e Extensões • Nagaraku',
+                nome: 'Pinça Profissional Nagaraku N-02 Dourada',
+                descricao: 'Ergonomia avançada e fechamento suave em aço dourado - Ideal para montagem de fans, manuseio de fios tecnológicos e alta produtividade.',
+                preco: 59.90,
+                estoque: 15,
+                categoria_filtro: 'cilios',
+                imagem_url: '/assets/pro/pinca_nagaraku_n02.jpg',
+                badge: 'Alta Precisão'
+            },
+            {
+                tipo: 'Ferramentas de Precisão & Acessórios',
+                nome: 'Fita Micropore Rosa 3cm (Unidade avulsa)',
+                descricao: 'Adesão suave e respirável em tom rosé - Excelente fixação de pálpebras e isolamento de fios inferiores sem agredir a pele sensível da cliente.',
+                preco: 8.00,
+                estoque: 40,
+                categoria_filtro: 'acessorios',
+                imagem_url: '/assets/pro/fita_micropore_rosa.jpg',
+                badge: 'Pronta Entrega'
+            },
+            {
+                tipo: 'Ferramentas de Precisão & Acessórios',
+                nome: 'Escovinha Descartável Dourada (Unidade avulsa)',
+                descricao: 'Cerdas macias com cabo glitter dourado premium - Essencial para pentear e alinhar extensões no atendimento ou entregar como mimo pós-procedimento.',
+                preco: 0.50,
+                estoque: 150,
+                categoria_filtro: 'acessorios',
+                imagem_url: '/assets/pro/escovinha_descartavel_dourada.jpg',
+                badge: 'Mimo para Cliente'
+            },
+            {
+                tipo: 'Ferramentas de Precisão & Acessórios',
+                nome: 'Placa de Mão para Cílios com Alça Removível',
+                descricao: 'Acrílico ergonômico com marcação consciente (fita a fita) e alça elástica ajustável - Otimiza a velocidade e a ergonomia de trabalho na maca.',
+                preco: 16.00,
+                estoque: 20,
+                categoria_filtro: 'acessorios',
+                imagem_url: '/assets/pro/placa_mao_cilios.jpg',
+                badge: 'Ergonomia na Maca'
+            },
+            {
+                tipo: 'Soluções e Removedores • Beautify',
+                nome: 'Cola Adesivo Free Beautify Pro',
+                descricao: 'Fórmula hipoalergênica de secagem rápida (0,5s a 1s) - Baixíssimo odor e sem ardor - Acompanha Magic Pack hermético protetor de umidade.',
+                preco: 65.00,
+                estoque: 18,
+                categoria_filtro: 'solucoes',
+                imagem_url: '/assets/pro/cola_adesivo_free_beautify.jpg',
+                badge: 'Hipoalergênica Magic Pack'
+            },
+            {
+                tipo: 'Soluções e Removedores • Excellent',
+                nome: 'Removedor em Creme Cola Cílios 5g Excellent',
+                descricao: 'Consistência cremosa e suave que não escorre nos olhos - Ação rápida em minutos para remoção segura, confortável e sem danos aos fios naturais.',
+                preco: 45.00,
+                estoque: 15,
+                categoria_filtro: 'solucoes',
+                imagem_url: '/assets/pro/removedor_creme_excellent.jpg',
+                badge: 'Não Escorre nos Olhos'
+            },
+            {
+                tipo: 'Essenciais de Design • Soluções',
+                nome: 'Adesivo de Cílios Exovan 7 Seg',
+                descricao: 'Secagem ultrarrápida de 1 segundo - Alta retenção (até 7 semanas) com baixa dispersão de vapores - Ideal para lash designers com ritmo ágil.',
+                preco: 49.90,
+                estoque: 16,
+                categoria_filtro: 'solucoes',
+                imagem_url: '/assets/pro/adesivo_exovan_7seg.jpg',
+                badge: 'Retenção até 7 Semanas'
+            },
+            {
+                tipo: 'Essenciais de Design & Acabamento',
+                nome: 'Tesourinha de Sobrancelha Prata (Unidade avulsa)',
+                descricao: 'Formato anatômico com lâminas retas e afiadas - Ergonômica para corte preciso e acabamento impecável no design de sobrancelhas.',
+                preco: 15.00,
+                estoque: 25,
+                categoria_filtro: 'design',
+                imagem_url: '/assets/pro/tesourinha_sobrancelha.jpg',
+                badge: 'Corte de Precisão'
+            },
+            {
+                tipo: 'Essenciais de Design & Acabamento',
+                nome: 'Pinça de Sobrancelha Chanfrada (Unidade avulsa)',
+                descricao: 'Ponta chanfrada anatômica com fechamento rente - Remove pelos curtos e médios pela raiz com máxima precisão e sem agredir a pele.',
+                preco: 7.00,
+                estoque: 35,
+                categoria_filtro: 'design',
+                imagem_url: '/assets/pro/pinca_sobrancelha_chanfrada.jpg',
+                badge: 'Fechamento Rente'
+            },
+            {
+                tipo: 'Essenciais de Design & Pequenos Toques',
+                nome: 'Flor de Anel para Cola (Unidade avulsa)',
+                descricao: 'Design inteligente com ranhuras em formato de pétalas - Economiza adesivo, previne desperdício e mantém a gota fresca durante o atendimento.',
+                preco: 0.50,
+                estoque: 100,
+                categoria_filtro: 'acessorios',
+                imagem_url: '/assets/pro/flor_anel_cola.jpg',
+                badge: 'Zero Desperdício'
+            }
+        ];
 
-            for (const p of defaultProducts) {
+        // Sincronização automática do Catálogo Oficial Lana Supply Pro
+        const checkDecemars = await pool.query("SELECT COUNT(*) FROM produtos_pro WHERE nome LIKE '%Decemars%'");
+        if (parseInt(checkDecemars.rows[0].count, 10) === 0) {
+            console.log("Populando/Atualizando produtos_pro com o Catálogo Oficial Lana Supply Pro (14 produtos)...");
+            await pool.query("DELETE FROM produtos_pro");
+            await pool.query("ALTER SEQUENCE IF EXISTS produtos_pro_id_seq RESTART WITH 1");
+            for (const p of catalogoOficial) {
                 await pool.query(`
-                    INSERT INTO produtos_pro (tipo, nome, descricao, preco, estoque, categoria_filtro, imagem_url, badge)
-                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+                    INSERT INTO produtos_pro (tipo, nome, descricao, preco, estoque, categoria_filtro, imagem_url, badge, ativo)
+                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, TRUE)
                 `, [p.tipo, p.nome, p.descricao, p.preco, p.estoque, p.categoria_filtro, p.imagem_url, p.badge]);
             }
-            console.log("13 produtos iniciais inseridos com sucesso na tabela produtos_pro.");
+            console.log("14 produtos oficiais inseridos com sucesso na tabela produtos_pro.");
         }
     } catch (err) {
         console.error("Erro ao inicializar o banco de dados (produtos_pro/pedidos_pro):", err.message);
