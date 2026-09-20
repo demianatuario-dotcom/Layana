@@ -95,7 +95,7 @@ async function initDB() {
                 nome: 'Cílios Decemars YY U D (7mm a 13mm)',
                 descricao: 'Fios tecnológicos em formato YY de alta maciez - Curvatura D - Leveza incomparável, efeito volumoso e retenção duradoura para o dia a dia.',
                 preco: 32.00,
-                estoque: 25,
+                estoque: 2, // Pedido: 2 caixas (7mm, D)
                 categoria_filtro: 'cilios',
                 imagem_url: '/assets/pro/cilios_decemars_yy.jpg',
                 badge: 'Volume Brasileiro'
@@ -105,7 +105,7 @@ async function initDB() {
                 nome: 'Cílios Fadvan YV Vol. Brasileiro D Preto (8-14mm)',
                 descricao: 'Fios Precisão - Curvatura D (8-14mm) - Alta retenção, facilidade de acoplagem e acabamento marcante para o clássico Volume Brasileiro.',
                 preco: 25.00,
-                estoque: 30,
+                estoque: 1, // Pedido: 1 caixa (D, 8-14mm)
                 categoria_filtro: 'cilios',
                 imagem_url: '/assets/pro/cilios_fadvan_yv.jpg',
                 badge: 'Mais Vendido'
@@ -115,7 +115,7 @@ async function initDB() {
                 nome: 'Cílios Decemars 4D W D (7mm a 13mm)',
                 descricao: 'Fios tecnológicos 4D em W com acabamento acetinado - Curvatura D - Proporciona volume expressivo, preenchimento uniforme e rápida aplicação.',
                 preco: 38.00,
-                estoque: 20,
+                estoque: 15, // Pedido: 3x 13mm + 3x 12mm + 3x 11mm + 3x 8mm + 3x 7mm = 15 caixas
                 categoria_filtro: 'cilios',
                 imagem_url: '/assets/pro/cilios_decemars_4d_w.jpg',
                 badge: 'Volume Expressivo'
@@ -125,7 +125,7 @@ async function initDB() {
                 nome: 'Pinça Profissional Nagaraku N-04 Dourada',
                 descricao: 'Aço cirúrgico de alta precisão com acabamento dourado luxo - ponta fina e fechamento 100% calibrado, perfeita para isolamento e acoplagem.',
                 preco: 59.90,
-                estoque: 15,
+                estoque: 4, // Pedido: 4 unidades
                 categoria_filtro: 'cilios',
                 imagem_url: '/assets/pro/pinca_nagaraku_n04.jpg',
                 badge: 'Aço Cirúrgico Luxo'
@@ -135,7 +135,7 @@ async function initDB() {
                 nome: 'Pinça Profissional Nagaraku N-02 Dourada',
                 descricao: 'Ergonomia avançada e fechamento suave em aço dourado - Ideal para montagem de fans, manuseio de fios tecnológicos e alta produtividade.',
                 preco: 59.90,
-                estoque: 15,
+                estoque: 0, // Não consta nas imagens de compras
                 categoria_filtro: 'cilios',
                 imagem_url: '/assets/pro/pinca_nagaraku_n02.jpg',
                 badge: 'Alta Precisão'
@@ -145,7 +145,7 @@ async function initDB() {
                 nome: 'Fita Micropore Rosa 3cm (Unidade avulsa)',
                 descricao: 'Adesão suave e respirável em tom rosé - Excelente fixação de pálpebras e isolamento de fios inferiores sem agredir a pele sensível da cliente.',
                 preco: 8.00,
-                estoque: 40,
+                estoque: 72, // Pedido: 6 pacotes com 12 fitas = 72 fitas avulsas
                 categoria_filtro: 'acessorios',
                 imagem_url: '/assets/pro/fita_micropore_rosa.jpg',
                 badge: 'Pronta Entrega'
@@ -155,7 +155,7 @@ async function initDB() {
                 nome: 'Escovinha Descartável Dourada (Unidade avulsa)',
                 descricao: 'Cerdas macias com cabo glitter dourado premium - Essencial para pentear e alinhar extensões no atendimento ou entregar como mimo pós-procedimento.',
                 preco: 0.50,
-                estoque: 150,
+                estoque: 3600, // Pedido: 6 lotes de 12 pacotes de 50 un = 3.600 escovinhas avulsas
                 categoria_filtro: 'acessorios',
                 imagem_url: '/assets/pro/escovinha_descartavel_dourada.jpg',
                 badge: 'Mimo para Cliente'
@@ -165,7 +165,7 @@ async function initDB() {
                 nome: 'Placa de Mão para Cílios com Alça Removível',
                 descricao: 'Acrílico ergonômico com marcação consciente (fita a fita) e alça elástica ajustável - Otimiza a velocidade e a ergonomia de trabalho na maca.',
                 preco: 16.00,
-                estoque: 20,
+                estoque: 0, // Não consta nas imagens de compras
                 categoria_filtro: 'acessorios',
                 imagem_url: '/assets/pro/placa_mao_cilios.jpg',
                 badge: 'Ergonomia na Maca'
@@ -175,7 +175,7 @@ async function initDB() {
                 nome: 'Cola Adesivo Free Beautify Pro',
                 descricao: 'Fórmula hipoalergênica de secagem rápida (0,5s a 1s) - Baixíssimo odor e sem ardor - Acompanha Magic Pack hermético protetor de umidade.',
                 preco: 65.00,
-                estoque: 18,
+                estoque: 0, // Não consta nas imagens de compras
                 categoria_filtro: 'solucoes',
                 imagem_url: '/assets/pro/cola_adesivo_free_beautify.jpg',
                 badge: 'Hipoalergênica Magic Pack'
@@ -185,17 +185,17 @@ async function initDB() {
                 nome: 'Removedor em Creme Cola Cílios 5g Excellent',
                 descricao: 'Consistência cremosa e suave que não escorre nos olhos - Ação rápida em minutos para remoção segura, confortável e sem danos aos fios naturais.',
                 preco: 45.00,
-                estoque: 15,
+                estoque: 0, // Não consta nas imagens de compras
                 categoria_filtro: 'solucoes',
                 imagem_url: '/assets/pro/removedor_creme_excellent.jpg',
                 badge: 'Não Escorre nos Olhos'
             },
             {
                 tipo: 'Essenciais de Design • Soluções',
-                nome: 'Adesivo de Cílios Exovan 7 Seg',
+                nome: 'Adesivo de Cílios Fadvan 1 Seg (Exovan)',
                 descricao: 'Secagem ultrarrápida de 1 segundo - Alta retenção (até 7 semanas) com baixa dispersão de vapores - Ideal para lash designers com ritmo ágil.',
                 preco: 49.90,
-                estoque: 16,
+                estoque: 5, // Pedido: 5 unidades
                 categoria_filtro: 'solucoes',
                 imagem_url: '/assets/pro/adesivo_exovan_7seg.jpg',
                 badge: 'Retenção até 7 Semanas'
@@ -205,7 +205,7 @@ async function initDB() {
                 nome: 'Tesourinha de Sobrancelha Prata (Unidade avulsa)',
                 descricao: 'Formato anatômico com lâminas retas e afiadas - Ergonômica para corte preciso e acabamento impecável no design de sobrancelhas.',
                 preco: 15.00,
-                estoque: 25,
+                estoque: 15, // Pedido: 3 pacotes com 5 unidades = 15 unidades avulsas
                 categoria_filtro: 'design',
                 imagem_url: '/assets/pro/tesourinha_sobrancelha.jpg',
                 badge: 'Corte de Precisão'
@@ -215,7 +215,7 @@ async function initDB() {
                 nome: 'Pinça de Sobrancelha Chanfrada (Unidade avulsa)',
                 descricao: 'Ponta chanfrada anatômica com fechamento rente - Remove pelos curtos e médios pela raiz com máxima precisão e sem agredir a pele.',
                 preco: 7.00,
-                estoque: 35,
+                estoque: 50, // Pedido: 5 pacotes + 5 pacotes = 10 pacotes com 5 unidades = 50 unidades avulsas
                 categoria_filtro: 'design',
                 imagem_url: '/assets/pro/pinca_sobrancelha_chanfrada.jpg',
                 badge: 'Fechamento Rente'
@@ -225,27 +225,30 @@ async function initDB() {
                 nome: 'Flor de Anel para Cola (Unidade avulsa)',
                 descricao: 'Design inteligente com ranhuras em formato de pétalas - Economiza adesivo, previne desperdício e mantém a gota fresca durante o atendimento.',
                 preco: 0.50,
-                estoque: 100,
+                estoque: 1500, // Pedido: 1 lote de 1.200 un (12 pct x 100) + 3 pct de 100 un = 1.500 unidades avulsas
                 categoria_filtro: 'acessorios',
                 imagem_url: '/assets/pro/flor_anel_cola.jpg',
                 badge: 'Zero Desperdício'
             }
         ];
 
-        // Sincronização automática do Catálogo Oficial Lana Supply Pro
-        const checkDecemars = await pool.query("SELECT COUNT(*) FROM produtos_pro WHERE nome LIKE '%Decemars%'");
-        if (parseInt(checkDecemars.rows[0].count, 10) === 0) {
-            console.log("Populando/Atualizando produtos_pro com o Catálogo Oficial Lana Supply Pro (14 produtos)...");
-            await pool.query("DELETE FROM produtos_pro");
-            await pool.query("ALTER SEQUENCE IF EXISTS produtos_pro_id_seq RESTART WITH 1");
-            for (const p of catalogoOficial) {
+        // Sincronização automática do Catálogo Oficial Lana Supply Pro e Atualização de Estoque
+        console.log("Sincronizando produtos e estoques oficiais Lana Supply Pro...");
+        for (const p of catalogoOficial) {
+            const updateRes = await pool.query(`
+                UPDATE produtos_pro
+                SET estoque = $1, preco = $2, tipo = $3, nome = $4, descricao = $5, categoria_filtro = $6, badge = $7, atualizado_em = CURRENT_TIMESTAMP
+                WHERE imagem_url = $8
+            `, [p.estoque, p.preco, p.tipo, p.nome, p.descricao, p.categoria_filtro, p.badge, p.imagem_url]);
+
+            if (updateRes.rowCount === 0) {
                 await pool.query(`
                     INSERT INTO produtos_pro (tipo, nome, descricao, preco, estoque, categoria_filtro, imagem_url, badge, ativo)
                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, TRUE)
                 `, [p.tipo, p.nome, p.descricao, p.preco, p.estoque, p.categoria_filtro, p.imagem_url, p.badge]);
             }
-            console.log("14 produtos oficiais inseridos com sucesso na tabela produtos_pro.");
         }
+        console.log("14 produtos oficiais e estoques sincronizados com sucesso no PostgreSQL.");
     } catch (err) {
         console.error("Erro ao inicializar o banco de dados (produtos_pro/pedidos_pro):", err.message);
     }
