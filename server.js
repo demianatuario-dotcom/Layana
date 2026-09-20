@@ -272,7 +272,19 @@ app.use(cors({
 app.use(express.json({ limit: '10mb' }));
 app.use('/api/', apiLimiter);
 
-// Serve arquivos estáticos (index.html, imagens, etc) da pasta atual
+// Remover cabeçalho Alt-Svc que pode causar net::ERR_QUIC_PROTOCOL_ERROR em proxies HTTP/3
+app.use((req, res, next) => {
+    res.removeHeader('Alt-Svc');
+    next();
+});
+
+// Servir arquivos estáticos de assets com cache de 7 dias
+app.use('/assets', express.static(path.join(__dirname, 'assets'), {
+    maxAge: '7d',
+    etag: true
+}));
+
+// Serve arquivos estáticos (index.html, imagens, etc) da pasta raiz
 app.use(express.static(path.join(__dirname)));
 
 // Servir arquivos estáticos das subpastas dedicadas

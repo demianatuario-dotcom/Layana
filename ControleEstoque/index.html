@@ -898,7 +898,7 @@
             <tr data-id="${p.id}">
               <td>
                 <div class="prod-cell">
-                  <img src="${p.imagem_url || '/assets/booble_rubi.jpg'}" alt="${p.nome}" class="prod-thumb" />
+                  <img src="${p.imagem_url || '/assets/booble_rubi.jpg'}" alt="${p.nome}" class="prod-thumb" loading="lazy" onerror="if(!this.dataset.retried){ this.dataset.retried='1'; this.src=this.src.split('?')[0] + '?r=' + Date.now(); }" />
                   <div>
                     <h4 class="prod-title">${p.nome}</h4>
                     <span class="prod-cat">${p.tipo}</span>
