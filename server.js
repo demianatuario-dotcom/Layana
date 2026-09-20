@@ -152,10 +152,10 @@ async function initDB() {
             },
             {
                 tipo: 'Ferramentas de Precisão & Acessórios',
-                nome: 'Escovinha Descartável Dourada (Unidade avulsa)',
-                descricao: 'Cerdas macias com cabo glitter dourado premium - Essencial para pentear e alinhar extensões no atendimento ou entregar como mimo pós-procedimento.',
-                preco: 0.50,
-                estoque: 3600, // Pedido: 6 lotes de 12 pacotes de 50 un = 3.600 escovinhas avulsas
+                nome: 'Escovinha Descartável Dourada (Pacote com 12 un)',
+                descricao: 'Cerdas macias com cabo glitter dourado premium (Pacote com 12 unidades) - Essencial para pentear e alinhar extensões no atendimento ou entregar como mimo pós-procedimento.',
+                preco: 6.00,
+                estoque: 300, // 3.600 escovinhas avulsas = 300 pacotes de 12 un
                 categoria_filtro: 'acessorios',
                 imagem_url: '/assets/pro/escovinha_descartavel_dourada.jpg',
                 badge: 'Mimo para Cliente'

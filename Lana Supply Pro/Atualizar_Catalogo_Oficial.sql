@@ -17,8 +17,8 @@
 --    - Não consta nas imagens -> ESTOQUE = 0 (Esgotado)
 -- 6. Fita Micropore Rosa 3cm (Unidade avulsa):
 --    - Pedido: 6 pacotes com 12 fitas = 72 unidades avulsas -> ESTOQUE = 72
--- 7. Escovinha Descartável Dourada (Unidade avulsa):
---    - Pedido: 6 lotes com 12 pacotes de 50 un (600 un/lote) = 3.600 unidades avulsas -> ESTOQUE = 3600
+-- 7. Escovinha Descartável Dourada (Pacote com 12 un):
+--    - Pedido: 6 lotes com 12 pacotes de 50 un = 3.600 unidades avulsas (300 pacotes de 12 un) -> ESTOQUE = 300 pacotes
 -- 8. Placa de Mão para Cílios com Alça Removível:
 --    - Não consta nas imagens -> ESTOQUE = 0 (Esgotado)
 -- 9. Cola Adesivo Free Beautify Pro:
@@ -60,7 +60,7 @@ UPDATE produtos_pro SET estoque = 15, atualizado_em = CURRENT_TIMESTAMP WHERE im
 UPDATE produtos_pro SET estoque = 4, atualizado_em = CURRENT_TIMESTAMP WHERE imagem_url = '/assets/pro/pinca_nagaraku_n04.jpg';
 UPDATE produtos_pro SET estoque = 0, atualizado_em = CURRENT_TIMESTAMP WHERE imagem_url = '/assets/pro/pinca_nagaraku_n02.jpg';
 UPDATE produtos_pro SET estoque = 72, atualizado_em = CURRENT_TIMESTAMP WHERE imagem_url = '/assets/pro/fita_micropore_rosa.jpg';
-UPDATE produtos_pro SET estoque = 3600, atualizado_em = CURRENT_TIMESTAMP WHERE imagem_url = '/assets/pro/escovinha_descartavel_dourada.jpg';
+UPDATE produtos_pro SET nome = 'Escovinha Descartável Dourada (Pacote com 12 un)', preco = 6.00, estoque = 300, atualizado_em = CURRENT_TIMESTAMP WHERE imagem_url = '/assets/pro/escovinha_descartavel_dourada.jpg';
 UPDATE produtos_pro SET estoque = 0, atualizado_em = CURRENT_TIMESTAMP WHERE imagem_url = '/assets/pro/placa_mao_cilios.jpg';
 UPDATE produtos_pro SET estoque = 0, atualizado_em = CURRENT_TIMESTAMP WHERE imagem_url = '/assets/pro/cola_adesivo_free_beautify.jpg';
 UPDATE produtos_pro SET estoque = 0, atualizado_em = CURRENT_TIMESTAMP WHERE imagem_url = '/assets/pro/removedor_creme_excellent.jpg';
