@@ -262,6 +262,21 @@
         border-color: var(--primary);
         outline: none;
       }
+      .stock-save-status {
+        width: 24px;
+        height: 24px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+        transition: opacity 0.25s ease, transform 0.25s ease;
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      .stock-save-status.active {
+        opacity: 1;
+        transform: scale(1);
+      }
       .btn-save-stock {
         background: var(--primary);
         color: white;
@@ -714,8 +729,11 @@
         }
         document.getElementById('pinModal').classList.add('active');
         switchAuthTab('login');
-        document.getElementById('inputMasterPin').value = '';
-        document.getElementById('inputMasterPin').focus();
+        const pinInput = document.getElementById('inputMasterPin');
+        if (pinInput) {
+          pinInput.value = '';
+          setTimeout(() => pinInput.focus(), 150);
+        }
       }
 
       function closeAuthModal() {
@@ -809,7 +827,7 @@
         }
       }
 
-      // Validação silenciosa da sessão salva
+      // Validação da sessão salva e solicitação do PIN Master imediatamente ao acessar a página
       if (masterPin) {
         fetch('/api/admin/verify-pin', {
           method: 'POST',
@@ -822,8 +840,16 @@
             sessionStorage.removeItem('lana_admin_pin');
             masterPin = '';
             updatePinUiState(false);
+            openAuthModal("Sessão expirada. Informe o PIN Master (3008).");
           }
-        }).catch(() => {});
+        }).catch(() => {
+          openAuthModal("Informe o PIN Master (3008) para gerenciar o estoque.");
+        });
+      } else {
+        // Solicitar imediatamente assim que realizado o acesso ao site
+        setTimeout(() => {
+          openAuthModal("Informe o PIN Master (3008) para liberar o gerenciamento de estoque.");
+        }, 200);
       }
 
       async function fetchProducts() {
@@ -859,6 +885,23 @@
         document.getElementById('tabCountTodos').innerText = totalItems;
       }
 
+      function getStatusBadgeHtml(estoque) {
+        if (estoque === 0) {
+          return `<span class="badge-status badge-out-stock"><i class="fa-solid fa-circle-xmark"></i> Esgotado (0)</span>`;
+        } else if (estoque <= 5) {
+          return `<span class="badge-status badge-low-stock"><i class="fa-solid fa-triangle-exclamation"></i> Baixo (${estoque} un)</span>`;
+        } else {
+          return `<span class="badge-status badge-in-stock"><i class="fa-solid fa-circle-check"></i> Normal (${estoque} un)</span>`;
+        }
+      }
+
+      function updateRowBadge(id, estoque) {
+        const cell = document.getElementById(`status-cell-${id}`);
+        if (cell) {
+          cell.innerHTML = getStatusBadgeHtml(estoque);
+        }
+      }
+
       function renderTable() {
         const tbody = document.getElementById('stockTableBody');
         const q = currentQuery.toLowerCase();
@@ -883,15 +926,7 @@
         }
 
         tbody.innerHTML = filtered.map(p => {
-          let statusBadge = '';
-          if (p.estoque === 0) {
-            statusBadge = `<span class="badge-status badge-out-stock"><i class="fa-solid fa-circle-xmark"></i> Esgotado (0)</span>`;
-          } else if (p.estoque <= 5) {
-            statusBadge = `<span class="badge-status badge-low-stock"><i class="fa-solid fa-triangle-exclamation"></i> Baixo (${p.estoque} un)</span>`;
-          } else {
-            statusBadge = `<span class="badge-status badge-in-stock"><i class="fa-solid fa-circle-check"></i> Normal (${p.estoque} un)</span>`;
-          }
-
+          const statusBadge = getStatusBadgeHtml(p.estoque);
           const precoFmt = parseFloat(p.preco).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
           return `
@@ -908,15 +943,13 @@
               <td>
                 <strong style="color:var(--secondary); font-size:0.95rem;">${precoFmt}</strong>
               </td>
-              <td>${statusBadge}</td>
+              <td id="status-cell-${p.id}">${statusBadge}</td>
               <td>
                 <div class="stock-control-wrap">
-                  <button class="stock-btn" onclick="stepStock(${p.id}, -1)">-</button>
-                  <input type="number" id="input-stock-${p.id}" class="stock-input" value="${p.estoque}" min="0" />
-                  <button class="stock-btn" onclick="stepStock(${p.id}, 1)">+</button>
-                  <button class="btn-save-stock" onclick="saveStock(${p.id})">
-                    <i class="fa-solid fa-check"></i> Salvar
-                  </button>
+                  <button class="stock-btn" onclick="stepStock(${p.id}, -1)" title="Diminuir quantidade">-</button>
+                  <input type="number" id="input-stock-${p.id}" class="stock-input" value="${p.estoque}" min="0" oninput="onStockInput(${p.id})" onchange="onStockBlurOrChange(${p.id})" onkeydown="if(event.key==='Enter') this.blur();" />
+                  <button class="stock-btn" onclick="stepStock(${p.id}, 1)" title="Aumentar quantidade">+</button>
+                  <span id="save-status-${p.id}" class="stock-save-status" title="Status de gravação"></span>
                 </div>
               </td>
             </tr>
@@ -924,15 +957,66 @@
         }).join('');
       }
 
+      const stockDebounceTimers = {};
+
       function stepStock(id, step) {
+        if (!masterPin) {
+          openAuthModal("Informe o PIN Master (3008) para liberar a alteração de estoque.");
+          return;
+        }
         const input = document.getElementById(`input-stock-${id}`);
         if (!input) return;
         let val = parseInt(input.value, 10) || 0;
         val = Math.max(0, val + step);
         input.value = val;
+
+        if (stockDebounceTimers[id]) {
+          clearTimeout(stockDebounceTimers[id]);
+          delete stockDebounceTimers[id];
+        }
+        saveStock(id, val);
       }
 
-      async function saveStock(id) {
+      function onStockInput(id) {
+        if (!masterPin) {
+          openAuthModal("Informe o PIN Master (3008) para liberar a alteração de estoque.");
+          return;
+        }
+        const input = document.getElementById(`input-stock-${id}`);
+        if (!input) return;
+        const val = parseInt(input.value, 10);
+        if (isNaN(val) || val < 0) return;
+
+        if (stockDebounceTimers[id]) {
+          clearTimeout(stockDebounceTimers[id]);
+        }
+        stockDebounceTimers[id] = setTimeout(() => {
+          delete stockDebounceTimers[id];
+          saveStock(id, val);
+        }, 500);
+      }
+
+      function onStockBlurOrChange(id) {
+        if (!masterPin) {
+          openAuthModal("Informe o PIN Master (3008) para liberar a alteração de estoque.");
+          return;
+        }
+        const input = document.getElementById(`input-stock-${id}`);
+        if (!input) return;
+        let val = parseInt(input.value, 10);
+        if (isNaN(val) || val < 0) {
+          const prod = products.find(p => p.id === id);
+          input.value = prod ? prod.estoque : 0;
+          return;
+        }
+        if (stockDebounceTimers[id]) {
+          clearTimeout(stockDebounceTimers[id]);
+          delete stockDebounceTimers[id];
+          saveStock(id, val);
+        }
+      }
+
+      async function saveStock(id, forcedStock) {
         if (!masterPin) {
           openAuthModal("Informe o PIN Master (3008) para liberar a alteração de estoque.");
           return;
@@ -940,10 +1024,21 @@
 
         const input = document.getElementById(`input-stock-${id}`);
         if (!input) return;
-        const newStock = parseInt(input.value, 10);
+        const newStock = (typeof forcedStock !== 'undefined') ? forcedStock : parseInt(input.value, 10);
         if (isNaN(newStock) || newStock < 0) {
-          alert("Por favor, informe um valor de estoque válido (zero ou positivo).");
           return;
+        }
+
+        const prod = products.find(p => p.id === id);
+        // Evita chamadas repetidas caso o valor gravado seja o mesmo
+        if (prod && prod.estoque === newStock) {
+          return;
+        }
+
+        const statusEl = document.getElementById(`save-status-${id}`);
+        if (statusEl) {
+          statusEl.className = 'stock-save-status active';
+          statusEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin" style="color:var(--primary);"></i>';
         }
 
         try {
@@ -959,22 +1054,44 @@
               sessionStorage.removeItem('lana_admin_pin');
               masterPin = '';
               updatePinUiState(false);
+              if (statusEl) {
+                statusEl.className = 'stock-save-status active';
+                statusEl.innerHTML = '<i class="fa-solid fa-lock" style="color:var(--danger-color);"></i>';
+              }
               openAuthModal(data.error || "Sessão expirada ou PIN incorreto. Digite a senha Master.");
               return;
             }
             throw new Error(data.error || "Erro ao salvar");
           }
 
-          // Atualizar o item local
-          const prod = products.find(p => p.id === id);
+          // Atualizar o item local e UI instantaneamente sem perder foco do input
           if (prod) {
             prod.estoque = newStock;
           }
           renderStats();
-          renderTable();
-          showToast(`Estoque de "${data.produto.nome}" atualizado para ${newStock} un!`);
+          updateRowBadge(id, newStock);
+
+          if (statusEl) {
+            statusEl.className = 'stock-save-status active';
+            statusEl.innerHTML = '<i class="fa-solid fa-circle-check" style="color:var(--success-color);"></i>';
+            setTimeout(() => {
+              if (statusEl.innerHTML.includes('circle-check')) {
+                statusEl.className = 'stock-save-status';
+                statusEl.innerHTML = '';
+              }
+            }, 2000);
+          }
+          showToast(`Estoque de "${data.produto?.nome || (prod && prod.nome)}" salvo: ${newStock} un!`);
         } catch (err) {
-          alert("Erro ao atualizar estoque: " + err.message);
+          console.error("Erro ao atualizar estoque:", err);
+          if (statusEl) {
+            statusEl.className = 'stock-save-status active';
+            statusEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation" style="color:var(--danger-color);"></i>';
+          }
+          showToast("Erro ao salvar: " + err.message);
+          if (prod) {
+            input.value = prod.estoque;
+          }
         }
       }
 
