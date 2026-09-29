@@ -1136,7 +1136,7 @@
           </form>
           <div class="ai-modal-subactions">
             <span>Respostas instantâneas pelo Gemini com base técnica.</span>
-            <a id="aiWaLink" href="https://wa.me/556196405270" target="_blank" class="ai-modal-wa-link">
+            <a id="aiWaLink" href="https://wa.me/556196406270" target="_blank" class="ai-modal-wa-link">
               <i class="fa-brands fa-whatsapp"></i> Falar com Layana
             </a>
           </div>
@@ -1145,7 +1145,7 @@
     </div>
 
     <!-- Floating WhatsApp Direct Contact -->
-    <a href="https://wa.me/556196405270" target="_blank" class="whatsapp-float" aria-label="Falar no WhatsApp">
+    <a href="https://wa.me/556196406270" target="_blank" class="whatsapp-float" aria-label="Falar no WhatsApp">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path d="M12.031 21.722l-3.146.85 1.13-3.082a9.71 9.71 0 01-1.396-4.99c0-5.362 4.364-9.725 9.728-9.725 5.362 0 9.725 4.363 9.725 9.725 0 5.363-4.363 9.725-9.725 9.725a9.71 9.71 0 01-5.016-1.38zM18.15 15.69c-.282-.142-1.673-.826-1.932-.92-.258-.094-.447-.142-.636.142-.188.283-.728.92-.893 1.11-.164.188-.33.212-.612.07a7.925 7.925 0 01-2.327-1.436 8.766 8.766 0 01-1.616-2.007c-.164-.283-.017-.436.124-.577.127-.127.283-.33.424-.495.141-.165.188-.283.283-.472.094-.188.047-.354-.024-.495-.07-.142-.636-1.533-.872-2.1-.228-.543-.46-.47-.636-.478-.164-.008-.353-.008-.542-.008a1.037 1.037 0 00-.754.354c-.26.283-.99.967-.99 2.358s1.014 2.735 1.155 2.924c.141.188 1.993 3.042 4.827 4.267.674.292 1.2.466 1.61.597.676.216 1.293.185 1.78.112.545-.082 1.673-.683 1.909-1.344.236-.66.236-1.226.165-1.344-.07-.118-.26-.188-.543-.33z"/>
       </svg>
@@ -1183,7 +1183,7 @@
               <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #888;">
                 <i class="fa-solid fa-circle-exclamation" style="font-size: 2rem; color: #e74c3c; margin-bottom: 12px; display: block;"></i>
                 Não foi possível carregar o catálogo no momento.<br>
-                <a href="https://wa.me/556196405270" target="_blank" style="color: var(--primary); font-weight: 600; text-decoration: underline; margin-top: 8px; display: inline-block;">Consulte nossos produtos diretamente no WhatsApp</a>.
+                <a href="https://wa.me/556196406270" target="_blank" style="color: var(--primary); font-weight: 600; text-decoration: underline; margin-top: 8px; display: inline-block;">Consulte nossos produtos diretamente no WhatsApp</a>.
               </div>
             `;
           }
@@ -1573,7 +1573,7 @@
           console.warn("Aviso ao registrar pedido no banco:", e);
         }
 
-        // Montar mensagem para o WhatsApp oficial da Lana Supply Pro (556196405270)
+        // Montar mensagem para o WhatsApp oficial da Lana Supply Pro (556196406270)
         let msg = `🛍️ *NOVO PEDIDO - LANA SUPPLY PRO*\n\n`;
         msg += `👤 *Cliente:* ${name}\n`;
         if (phone) msg += `📱 *WhatsApp:* ${phone}\n\n`;
@@ -1595,7 +1595,7 @@
         if (paymentMethod === 'pix') {
           msg += `\n🏷️ *Pagamento:* PIX com 5% de Desconto à Vista\n`;
           msg += `💵 *TOTAL A PAGAR:* R$ ${totalFinal.toFixed(2)} (Economia de R$ ${(totalBruto * 0.05).toFixed(2)})\n`;
-          msg += `🔑 *Chave Pix:* (61) 9640-5270\n`;
+          msg += `🔑 *Chave Pix:* (61) 9640-6270\n`;
         } else {
           msg += `\n💳 *Pagamento:* Cartão de Crédito Parcelado em ${selectedInstallment}x de R$ ${(totalFinal / selectedInstallment).toFixed(2)}\n`;
           msg += `💵 *TOTAL A PAGAR:* R$ ${totalFinal.toFixed(2)}\n`;
@@ -1605,7 +1605,7 @@
         msg += `\n_Pedido gerado automaticamente pelo portal lanawolfart.cloud/pro_`;
 
         // Abrir WhatsApp com mensagem
-        const whatsappUrl = `https://wa.me/556196405270?text=${encodeURIComponent(msg)}`;
+        const whatsappUrl = `https://wa.me/556196406270?text=${encodeURIComponent(msg)}`;
         window.open(whatsappUrl, '_blank');
 
         // Limpar carrinho após confirmação
@@ -1666,7 +1666,7 @@
         const waLink = document.getElementById('aiWaLink');
         if (waLink) {
           const waMsg = encodeURIComponent(`Olá Layana! Tenho uma dúvida sobre o produto "${prod.nome}" da Lana Supply Pro.`);
-          waLink.href = `https://wa.me/556196405270?text=${waMsg}`;
+          waLink.href = `https://wa.me/556196406270?text=${waMsg}`;
         }
 
         // Limpar mensagens e renderizar mensagem inicial
