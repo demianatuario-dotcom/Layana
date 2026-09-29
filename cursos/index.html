@@ -11,94 +11,273 @@
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cursos & Formação Profissional | Studio Lana Wolf - Luziânia</title>
+    <title>Cursos & Formação Profissional em Estética | Studio Lana Wolf Art - Luziânia</title>
 
     <!-- SEO Meta Tags -->
     <meta
       name="description"
-      content="Curso presencial e individual de Extensão de Cílios Fio a Fio Clássico e Biossegurança em Luziânia por R$ 890,00. Mentoria prática individualizada com Layana Wolf, kit profissional de bancada e certificado."
+      content="Cursos profissionais de Extensão de Cílios, Design de Sobrancelhas com Visagismo e Micropigmentação Labial em Luziânia. Mentoria prática com Layana Barbosa, kits oficiais e certificação."
     />
-    <meta name="keywords" content="Curso de extensão de cílios Luziânia, Curso fio a fio clássico Luziânia, Lash designer iniciante Luziânia, Mentoria Layana Wolf, Formação cílios Lana Wolf Art" />
-    <meta property="og:title" content="Cursos & Formação Profissional | Studio Lana Wolf" />
-    <meta property="og:description" content="Domine a técnica de Extensão de Cílios Fio a Fio Clássico por R$ 890,00 (curso individual e exclusivo) com mentoria prática no Studio Lana Wolf." />
+    <meta
+      name="keywords"
+      content="Curso micropigmentação labial Luziânia, Curso design de sobrancelhas Luziânia, Curso extensão de cílios Luziânia, Mentoria Layana Barbosa, Lana Wolf Art Cursos"
+    />
+    <meta property="og:title" content="Cursos & Formação Profissional em Estética | Studio Lana Wolf Art - Luziânia" />
+    <meta
+      property="og:description"
+      content="Cursos profissionais de Extensão de Cílios, Design de Sobrancelhas com Visagismo e Micropigmentação Labial em Luziânia. Mentoria prática com Layana Barbosa, kits oficiais e certificação."
+    />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://lanawolfart.cloud/cursos" />
     <meta name="theme-color" content="#c98276" />
 
     <!-- Google Fonts & Font Awesome -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="/assets/css/style.css" />
 
     <style>
-      .kit-aluna-highlight {
-        background: linear-gradient(135deg, #FDF4F3 0%, #FFFFFF 100%);
-        border: 2px solid rgba(201, 130, 118, 0.35);
+      /* Cursos Grid Luxury Overrides */
+      .cursos-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        gap: 30px;
+        max-width: 1240px;
+        margin: 0 auto 50px;
+      }
+
+      @media (min-width: 1100px) {
+        .cursos-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .curso-card {
+        background: #ffffff;
         border-radius: 24px;
-        padding: 45px 35px;
-        max-width: 1200px;
-        margin: 60px auto;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 40px;
-        align-items: center;
-        box-shadow: var(--shadow-soft);
+        border: 1px solid rgba(201, 130, 118, 0.28);
+        padding: 0;
+        box-shadow: 0 10px 35px rgba(59, 45, 42, 0.06);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+        position: relative;
       }
-      .kit-aluna-img {
+
+      .curso-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 18px 50px rgba(201, 130, 118, 0.22);
+      }
+
+      .curso-card-media {
+        position: relative;
         width: 100%;
-        max-height: 400px;
+        height: 220px;
+        overflow: hidden;
+        background: #241715;
+      }
+
+      .curso-card-media img {
+        width: 100%;
+        height: 100%;
         object-fit: cover;
-        border-radius: 18px;
-        border: 1px solid rgba(201, 130, 118, 0.2);
+        transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
       }
-      .kit-aluna-content h3 {
+
+      .curso-card:hover .curso-card-media img {
+        transform: scale(1.08);
+      }
+
+      .curso-card-media::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(36, 23, 21, 0.1) 0%, rgba(36, 23, 21, 0.6) 100%);
+        pointer-events: none;
+      }
+
+      .curso-card-tag-badge {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        background: rgba(36, 23, 21, 0.82);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        color: var(--accent-gold-light);
+        border: 1px solid rgba(247, 208, 112, 0.35);
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.6px;
+        padding: 6px 14px;
+        border-radius: 20px;
+        z-index: 2;
+        text-transform: uppercase;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .curso-card-body {
+        padding: 30px 28px 32px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+      }
+
+      .curso-card-body h3 {
         font-family: 'Playfair Display', serif;
-        font-size: 2.2rem;
+        font-size: 1.55rem;
         color: var(--secondary);
-        margin-bottom: 15px;
+        margin-bottom: 14px;
+        line-height: 1.25;
       }
-      .kit-aluna-content p {
-        font-size: 1.05rem;
+
+      .curso-card-body p.curso-desc {
+        font-size: 0.92rem;
         color: var(--text-light);
-        line-height: 1.7;
-        margin-bottom: 20px;
+        line-height: 1.65;
+        margin-bottom: 22px;
       }
-      .kit-items-list {
+
+      .curso-benefits {
         list-style: none;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-        margin-bottom: 25px;
+        padding: 0;
+        margin: 0 0 25px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        flex-grow: 1;
       }
-      .kit-items-list li {
-        font-size: 0.9rem;
+
+      .curso-benefits li {
+        font-size: 0.88rem;
         color: var(--text-main);
         display: flex;
-        align-items: center;
-        gap: 8px;
+        align-items: flex-start;
+        gap: 10px;
+        line-height: 1.45;
       }
-      .kit-items-list li i {
+
+      .curso-benefits li i {
         color: #2e7d32;
-        font-size: 0.85rem;
+        font-size: 0.92rem;
+        margin-top: 3px;
+        flex-shrink: 0;
       }
+
+      /* Pricing Box Luxury Styling */
+      .curso-pricing-box {
+        background: linear-gradient(135deg, #fdf8f7 0%, #ffffff 100%);
+        border: 1.5px solid rgba(201, 130, 118, 0.35);
+        border-radius: 18px;
+        padding: 20px 20px;
+        margin: 20px 0 20px;
+        text-align: center;
+        box-shadow: 0 4px 18px rgba(201, 130, 118, 0.08);
+      }
+
+      .pricing-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--bg-nude);
+        color: var(--primary-dark);
+        font-size: 0.78rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.7px;
+        padding: 5px 14px;
+        border-radius: 20px;
+        margin-bottom: 10px;
+        border: 1px solid rgba(201, 130, 118, 0.2);
+      }
+
+      .pricing-main {
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        gap: 8px;
+        margin: 6px 0;
+      }
+
+      .pricing-value {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.3rem;
+        font-weight: 700;
+        color: var(--secondary);
+      }
+
+      .pricing-value small {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--primary);
+      }
+
+      .pricing-parcelas {
+        font-size: 0.92rem;
+        color: var(--text-light);
+        font-weight: 500;
+        margin-bottom: 8px;
+      }
+
+      .pricing-sub {
+        font-size: 0.85rem;
+        color: var(--text-light);
+        margin-top: 6px;
+        line-height: 1.45;
+        border-top: 1px dashed rgba(201, 130, 118, 0.25);
+        padding-top: 8px;
+      }
+
+      .pricing-sub strong {
+        color: var(--secondary);
+        font-weight: 600;
+      }
+
+      .pricing-sub-highlight {
+        font-size: 0.82rem;
+        color: var(--primary-dark);
+        margin-top: 4px;
+        font-weight: 600;
+      }
+
+      /* Pilares Grid */
       .pilares-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 25px;
-        max-width: 1200px;
+        gap: 24px;
+        max-width: 1240px;
         margin: 40px auto 70px;
       }
+
       .pilar-card {
         background: white;
         border-radius: 18px;
-        padding: 30px 24px;
-        border: 1px solid rgba(201, 130, 118, 0.2);
-        box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        padding: 32px 24px;
+        border: 1px solid rgba(201, 130, 118, 0.22);
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
         text-align: center;
+        transition: transform 0.3s ease;
       }
+
+      .pilar-card:hover {
+        transform: translateY(-4px);
+      }
+
       .pilar-card .pilar-icon {
-        width: 60px;
-        height: 60px;
+        width: 62px;
+        height: 62px;
         border-radius: 50%;
         background: var(--bg-nude);
         color: var(--primary);
@@ -107,83 +286,70 @@
         justify-content: center;
         font-size: 1.6rem;
         margin: 0 auto 18px;
+        border: 1px solid rgba(201, 130, 118, 0.2);
       }
+
       .pilar-card h4 {
         font-family: 'Playfair Display', serif;
-        font-size: 1.3rem;
+        font-size: 1.25rem;
         color: var(--secondary);
         margin-bottom: 10px;
       }
+
       .pilar-card p {
         font-size: 0.9rem;
         color: var(--text-light);
-        line-height: 1.5;
-      }
-      .cursos-grid {
-        grid-template-columns: 1fr;
-        max-width: 780px;
-        margin: 0 auto 40px;
-      }
-      .curso-card {
-        padding: 40px 36px;
-      }
-      /* Pricing styling */
-      .curso-pricing-box {
-        background: linear-gradient(135deg, #fdf8f7 0%, #ffffff 100%);
-        border: 2px solid rgba(201, 130, 118, 0.35);
-        border-radius: 16px;
-        padding: 22px 24px;
-        margin: 25px 0 20px;
-        text-align: center;
-        box-shadow: 0 4px 15px rgba(201, 130, 118, 0.08);
-      }
-      .pricing-badge {
-        display: inline-block;
-        background: var(--bg-nude);
-        color: var(--primary-dark);
-        font-size: 0.8rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.8px;
-        padding: 5px 14px;
-        border-radius: 20px;
-        margin-bottom: 8px;
-      }
-      .pricing-main {
-        display: flex;
-        align-items: baseline;
-        justify-content: center;
-        gap: 10px;
-        margin: 8px 0;
-      }
-      .pricing-label {
-        font-size: 1.05rem;
-        color: var(--text-light);
-        font-weight: 500;
-      }
-      .pricing-value {
-        font-family: 'Playfair Display', serif;
-        font-size: 2.4rem;
-        font-weight: 700;
-        color: var(--secondary);
-      }
-      .pricing-value small {
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: var(--primary);
-      }
-      .pricing-sub {
-        font-size: 0.9rem;
-        color: var(--text-light);
-        margin-top: 6px;
-        line-height: 1.5;
-      }
-      .pricing-sub strong {
-        color: var(--secondary);
-        font-weight: 600;
+        line-height: 1.55;
       }
 
-      /* Kit items priced breakdown */
+      /* Kit Aluna Highlight Section */
+      .kit-aluna-highlight {
+        background: linear-gradient(135deg, #fdf4f3 0%, #ffffff 100%);
+        border: 2px solid rgba(201, 130, 118, 0.35);
+        border-radius: 26px;
+        padding: 50px 40px;
+        max-width: 1240px;
+        margin: 60px auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 45px;
+        align-items: center;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .kit-aluna-img {
+        width: 100%;
+        max-height: 420px;
+        object-fit: cover;
+        border-radius: 20px;
+        border: 1px solid rgba(201, 130, 118, 0.25);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+      }
+
+      .kit-aluna-content h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.1rem;
+        color: var(--secondary);
+        margin: 12px 0 16px;
+        line-height: 1.25;
+      }
+
+      .kit-notice-box {
+        background: rgba(255, 255, 255, 0.9);
+        border-left: 4px solid var(--accent-gold);
+        border-radius: 8px;
+        padding: 14px 16px;
+        margin-bottom: 20px;
+        font-size: 0.88rem;
+        color: var(--text-main);
+        line-height: 1.55;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+      }
+
+      .kit-notice-box strong {
+        color: var(--secondary);
+      }
+
       .kit-items-priced {
         list-style: none;
         display: grid;
@@ -192,21 +358,24 @@
         margin: 20px 0;
         padding: 0;
       }
+
       .kit-items-priced li {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        background: rgba(255, 255, 255, 0.85);
-        border: 1px solid rgba(201, 130, 118, 0.25);
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(201, 130, 118, 0.22);
         border-radius: 12px;
         padding: 10px 14px;
         font-size: 0.88rem;
         transition: transform 0.2s, box-shadow 0.2s;
       }
+
       .kit-items-priced li:hover {
         transform: translateY(-2px);
-        box-shadow: 0 4px 10px rgba(201, 130, 118, 0.15);
+        box-shadow: 0 4px 12px rgba(201, 130, 118, 0.15);
       }
+
       .kit-items-priced .item-name {
         display: flex;
         align-items: center;
@@ -214,23 +383,27 @@
         color: var(--text-main);
         font-weight: 500;
       }
+
       .kit-items-priced .item-name i {
         color: #2e7d32;
         font-size: 0.85rem;
       }
+
       .kit-items-priced .item-price {
         font-weight: 700;
         color: var(--primary-dark);
         white-space: nowrap;
-        font-size: 0.92rem;
+        font-size: 0.9rem;
       }
+
       .kit-total-card {
         background: #ffffff;
         border: 2px dashed rgba(201, 130, 118, 0.5);
-        border-radius: 14px;
+        border-radius: 16px;
         padding: 18px 22px;
         margin-bottom: 24px;
       }
+
       .kit-total-row {
         display: flex;
         justify-content: space-between;
@@ -239,10 +412,12 @@
         font-family: 'Playfair Display', serif;
         color: var(--secondary);
       }
+
       .kit-total-row strong {
         font-size: 1.6rem;
         color: #2e7d32;
       }
+
       .kit-total-note {
         font-size: 0.84rem;
         color: var(--text-light);
@@ -253,26 +428,32 @@
       @media (max-width: 900px) {
         .kit-aluna-highlight {
           grid-template-columns: 1fr;
-          padding: 30px 20px;
+          padding: 32px 20px;
+          gap: 30px;
         }
-        .kit-items-list {
-          grid-template-columns: 1fr;
-        }
+
         .kit-items-priced {
           grid-template-columns: 1fr;
         }
+
+        .curso-card-body {
+          padding: 24px 20px 28px;
+        }
       }
+
       .footer-dev-credit {
         margin-top: 8px;
         font-size: 0.78rem;
         color: #8a807e;
       }
+
       .footer-dev-credit a {
         color: var(--accent-gold-light);
         text-decoration: none;
         font-weight: 500;
         transition: color 0.2s;
       }
+
       .footer-dev-credit a:hover {
         color: #f7d070;
       }
@@ -301,7 +482,12 @@
         <a href="/pro" class="btn-nav-pro">
           <i class="fa-solid fa-boxes-stacked" style="color:var(--accent-gold);"></i> Loja Pro
         </a>
-        <a href="https://wa.me/556196406270?text=Ol%C3%A1%20Layana!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20as%20pr%C3%B3ximas%20turmas%20dos%20Cursos." target="_blank" class="btn-nav-agendar">
+        <a
+          href="https://wa.me/556196406270?text=Ol%C3%A1%20Layana!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20as%20pr%C3%B3ximas%20turmas%20dos%20Cursos."
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-nav-agendar"
+        >
           <i class="fa-brands fa-whatsapp"></i> Inscrições Abertas
         </a>
         <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menu">
@@ -318,7 +504,13 @@
       <a href="/pro"><i class="fa-solid fa-bag-shopping" style="color:var(--accent-gold); margin-right:8px;"></i> Lana Supply Pro (Insumos B2B)</a>
       <a href="#contato"><i class="fa-solid fa-location-dot" style="color:var(--primary); margin-right:8px;"></i> Localização no Parque 9</a>
       <div class="mobile-drawer-actions">
-        <a href="https://wa.me/556196406270?text=Ol%C3%A1%20Layana!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20as%20pr%C3%B3ximas%20turmas%20dos%20Cursos." target="_blank" class="btn-nav-agendar" style="justify-content: center;">
+        <a
+          href="https://wa.me/556196406270?text=Ol%C3%A1%20Layana!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20as%20pr%C3%B3ximas%20turmas%20dos%20Cursos."
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-nav-agendar"
+          style="justify-content: center;"
+        >
           <i class="fa-brands fa-whatsapp"></i> Consultar Vagas no WhatsApp
         </a>
       </div>
@@ -326,94 +518,222 @@
 
     <!-- Page Hero Banner -->
     <section class="page-hero">
-      <div class="page-badge"><i class="fa-solid fa-graduation-cap"></i> Formação Presencial em Luziânia • Vaga Individual</div>
-      <h1 class="page-title">Torne-se uma Lash Designer com <span>Segurança e Precisão</span></h1>
+      <div class="page-badge">
+        <i class="fa-solid fa-gem"></i> Academia de Alta Formação em Luziânia • Turmas VIP & Mentorias Individuais
+      </div>
+      <h1 class="page-title">Domine a Arte do Olhar e dos Lábios com <span>Autoridade e Precisão</span></h1>
       <p class="page-desc">
-        Aprenda do zero absoluto a técnica de Fio a Fio Clássico com foco rigoroso em isolamento, química do cianoacrilato e saúde ocular. Mentoria prática individualizada e exclusiva com Layana Wolf por <strong>R$ 890,00</strong>.
+        Formações presenciais completas com a fundadora Layana Barbosa. Metodologia internacional, biossegurança rigorosa, prática intensiva em modelos reais e suporte pós-curso contínuo.
       </p>
       <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
-        <a href="#cursos-grade" class="btn-primary">Conhecer a Formação ↓</a>
-        <a href="https://wa.me/556196406270?text=Ol%C3%A1%20Layana!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20o%20Curso%20de%20Extens%C3%A3o%20de%20C%C3%ADlios%20(R$%20890,00)." target="_blank" class="btn-secondary">
-          <i class="fa-brands fa-whatsapp"></i> Falar com a Mentora
+        <a href="#cursos-grade" class="btn-primary">Explorar Grade de Cursos ↓</a>
+        <a
+          href="https://wa.me/556196406270?text=Ol%C3%A1%20Layana!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20as%20pr%C3%B3ximas%20turmas%20dos%20Cursos."
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-secondary"
+        >
+          <i class="fa-brands fa-whatsapp"></i> Falar com a Mentora no WhatsApp
         </a>
       </div>
     </section>
 
-    <!-- Pilares da Formação -->
+    <!-- Pilares da Formação Lana Wolf Art -->
     <section style="width: 100%; padding: 0 5%;">
       <div class="pilares-grid">
         <div class="pilar-card">
           <div class="pilar-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
-          <h4>Prática em Modelos Vivas</h4>
-          <p>Você não fica apenas na teoria ou bonecas. Aplique todo o protocolo em clientes reais com supervisão direta.</p>
+          <h4>Prática em Modelos Reais</h4>
+          <p>Treinamento clínico imersivo com supervisão individualizada passo a passo para você conquistar segurança absoluta desde o primeiro atendimento.</p>
         </div>
         <div class="pilar-card">
-          <div class="pilar-icon"><i class="fa-solid fa-gift"></i></div>
-          <h4>Kit da Aluna Completo</h4>
-          <p>Lista transparente de materiais de bancada da Lana Supply Pro por apenas R$ 286,37 para treinar e já começar a atender.</p>
+          <div class="pilar-icon"><i class="fa-solid fa-shield-virus"></i></div>
+          <h4>Biossegurança & Parâmetros ANVISA</h4>
+          <p>Rigor cirúrgico de bancada estéril, controle de climatologia, tricologia, histologia e química para atuar com respaldo e saúde integral.</p>
         </div>
         <div class="pilar-card">
           <div class="pilar-icon"><i class="fa-solid fa-certificate"></i></div>
-          <h4>Certificado Reconhecido</h4>
-          <p>Comprovação profissional com selo Lana Wolf Art para valorizar o seu espaço e inspirar total confiança.</p>
+          <h4>Certificação Oficial de Prestígio</h4>
+          <p>Comprovação profissional com selo Lana Wolf Art • Academia & Formação Profissional para elevar o valor percebido da sua assinatura de beleza.</p>
         </div>
         <div class="pilar-card">
           <div class="pilar-icon"><i class="fa-solid fa-comments"></i></div>
-          <h4>Suporte Vitalício</h4>
-          <p>Tire dúvidas diretamente com a Lana pelo WhatsApp mesmo após a conclusão das aulas práticas.</p>
+          <h4>Mentoria & Suporte Contínuo</h4>
+          <p>Acompanhamento direto pós-curso com Layana Barbosa via WhatsApp para tirar dúvidas, avaliar casos clínicos e acelerar seu faturamento.</p>
         </div>
       </div>
     </section>
 
-    <!-- Grade de Cursos -->
+    <!-- Grade de Cursos: Tríade de Formações Oficiais -->
     <section id="cursos-grade" class="cursos-section" style="padding-top: 20px;">
-      <h2 class="section-title">Formação Profissional em Destaque</h2>
+      <h2 class="section-title">Tríade de Formações Profissionais</h2>
 
       <div class="cursos-grid">
-        <!-- Formação em Destaque: Lash Designer -->
+        <!-- CARD 1: Design de Sobrancelhas, Visagismo Facial & Epilação Egípcia -->
         <div class="curso-card">
-          <span class="curso-tag"><i class="fa-solid fa-award"></i> Formação Exclusiva & Presencial</span>
-          <h3>Formação em Extensão de Cílios (Fio a Fio Clássico & Biossegurança)</h3>
-          <p>
-            Desenvolvido especialmente para quem está começando do zero. Domine o isolamento milimétrico, a regra de ouro do distanciamento palpebral (0,5mm a 1,0mm), a química do adesivo e a biossegurança ocular para fidelizar clientes desde o primeiro atendimento.
-          </p>
-          <ul class="curso-benefits">
-            <li><i class="fa-solid fa-check"></i> Prática intensiva supervisionada em modelo real</li>
-            <li><i class="fa-solid fa-check"></i> O Triângulo de Ouro do Isolamento e direcionamento a 90°</li>
-            <li><i class="fa-solid fa-check"></i> Controle de umidade e parâmetros químicos do cianoacrilato</li>
-            <li><i class="fa-solid fa-check"></i> Kit Aluna Completo direcionado de bancada (pago à parte por R$ 286,37)</li>
-            <li><i class="fa-solid fa-check"></i> Apostila ilustrada com diagramas didáticos e fichas de treino</li>
-            <li><i class="fa-solid fa-check"></i> Certificado de Formação Profissional Lana Wolf Art</li>
-            <li><i class="fa-solid fa-check"></i> Suporte direto com Layana Wolf via WhatsApp pós-curso</li>
-          </ul>
-
-          <!-- Box de Preço & Condições -->
-          <div class="curso-pricing-box">
-            <span class="pricing-badge"><i class="fa-solid fa-user-check"></i> Mentoria Individual e Exclusiva</span>
-            <div class="pricing-main">
-              <span class="pricing-label">Preço do Curso:</span>
-              <span class="pricing-value"><small>R$</small> 890,00</span>
-            </div>
-            <div class="pricing-sub">
-              <i class="fa-solid fa-boxes-stacked"></i> Material (Kit da Aluna pago à parte): <strong>R$ 286,37</strong>
-            </div>
+          <div class="curso-card-media">
+            <span class="curso-card-tag-badge">
+              <i class="fa-solid fa-gem"></i> Imersão de 3 Dias (15 Horas)
+            </span>
+            <img src="/assets/eyebrow_design.png" alt="Curso Design de Sobrancelhas & Visagismo Facial - Lana Wolf Art" loading="lazy" />
           </div>
 
-          <a href="https://wa.me/556196406270?text=Ol%C3%A1%20Layana!%20Quero%20garantir%20minha%20vaga%20na%20Forma%C3%A7%C3%A3o%20em%20Extens%C3%A3o%20de%20C%C3%ADlios%20(R$%20890,00)." target="_blank" class="btn-curso">
-            <i class="fa-brands fa-whatsapp"></i> Consultar Próxima Turma & Vagas
-          </a>
+          <div class="curso-card-body">
+            <h3>Design de Sobrancelhas & Visagismo Facial</h3>
+            <p class="curso-desc">
+              Rompa com moldes prontos. Aprenda o visagismo adaptado à anatomia óssea e muscular, simetria com paquímetro digital, epilação na linha orgânica e a química da colorimetria com Henna Ombré e Tintura RefectoCil.
+            </p>
+
+            <ul class="curso-benefits">
+              <li><i class="fa-solid fa-circle-check"></i> Mapeamento geométrico tridimensional (PI, PA, PF) e facecharts</li>
+              <li><i class="fa-solid fa-circle-check"></i> Domínio cirúrgico de paquímetro, linha egípcia e lâmina</li>
+              <li><i class="fa-solid fa-circle-check"></i> Colorimetria facial: fundos de clareamento e subtons de pele</li>
+              <li><i class="fa-solid fa-circle-check"></i> Treino em pele artificial e atendimento individual em modelo viva</li>
+              <li><i class="fa-solid fa-circle-check"></i> Materiais de bancada disponibilizados para aulas e Apostila Ilustrada inclusa</li>
+              <li><i class="fa-solid fa-circle-check"></i> Certificado Oficial Lana Wolf Art e suporte contínuo via WhatsApp</li>
+            </ul>
+
+            <!-- Box de Preço & Condições -->
+            <div class="curso-pricing-box">
+              <span class="pricing-badge"><i class="fa-solid fa-users"></i> Turma VIP Reduzida (2 a 4 alunas)</span>
+              <div class="pricing-main">
+                <span class="pricing-value"><small>R$</small> 1.490,00</span>
+              </div>
+              <div class="pricing-parcelas">ou 10x de R$ 168,00 no cartão</div>
+              <div class="pricing-sub">
+                Mentoria Individual 1:1 disponível por <strong>R$ 2.200,00</strong>
+              </div>
+              <div class="pricing-sub-highlight">
+                <i class="fa-solid fa-circle-info"></i> Insumos de bancada fornecidos durante o treinamento prático
+              </div>
+            </div>
+
+            <a
+              href="https://wa.me/556196406270?text=Ol%C3%A1%20Layana!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20e%20vagas%20para%20o%20Curso%20de%20Design%20de%20Sobrancelhas%20e%20Visagismo%20(R$%201.490,00)."
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-curso"
+            >
+              <i class="fa-brands fa-whatsapp"></i> Consultar Turmas & Vagas
+            </a>
+          </div>
+        </div>
+
+        <!-- CARD 2: Formação em Extensão de Cílios (Fio a Fio Clássico & Biossegurança) -->
+        <div class="curso-card">
+          <div class="curso-card-media">
+            <span class="curso-card-tag-badge">
+              <i class="fa-solid fa-award"></i> Imersão Intensiva de 1 Dia (9 Horas)
+            </span>
+            <img src="/assets/eyelash_extension.png" alt="Formação em Extensão de Cílios Fio a Fio Clássico - Lana Wolf Art" loading="lazy" />
+          </div>
+
+          <div class="curso-card-body">
+            <h3>Extensão de Cílios: Fio a Fio Clássico & Biossegurança</h3>
+            <p class="curso-desc">
+              Formação completa para quem busca segurança máxima. Domine o isolamento absoluto (1:1), o Triângulo de Ouro do Isolamento, distanciamento palpebral (0,5mm), controle de climatologia da cabine e acoplagem sem stickies.
+            </p>
+
+            <ul class="curso-benefits">
+              <li><i class="fa-solid fa-circle-check"></i> Tricologia ciliar, fases de crescimento e mapeamentos visagistas</li>
+              <li><i class="fa-solid fa-circle-check"></i> Química do cianoacrilato, controle de umidade e prevenção de ardência</li>
+              <li><i class="fa-solid fa-circle-check"></i> Calibragem neuromotora em esponja facial e manequim</li>
+              <li><i class="fa-solid fa-circle-check"></i> Atendimento clínico completo de modelo viva sob tutoria individual</li>
+              <li><i class="fa-solid fa-circle-check"></i> Checklist cirúrgico de bancada estéril (normas ANVISA)</li>
+              <li><i class="fa-solid fa-circle-check"></i> Certificado Oficial Lana Wolf Art e suporte vitalício</li>
+            </ul>
+
+            <!-- Box de Preço & Condições -->
+            <div class="curso-pricing-box">
+              <span class="pricing-badge"><i class="fa-solid fa-user-check"></i> Mentoria Individual e Exclusiva</span>
+              <div class="pricing-main">
+                <span class="pricing-value"><small>R$</small> 890,00</span>
+              </div>
+              <div class="pricing-parcelas">Investimento do Curso</div>
+              <div class="pricing-sub">
+                Material de bancada (Kit da Aluna Lana Supply Pro): <strong>R$ 286,37</strong>
+              </div>
+              <div class="pricing-sub-highlight">
+                <i class="fa-solid fa-calculator"></i> Investimento Total (Curso + Kit Completo): <strong>R$ 1.176,37</strong>
+              </div>
+            </div>
+
+            <a
+              href="https://wa.me/556196406270?text=Ol%C3%A1%20Layana!%20Quero%20garantir%20minha%20vaga%20na%20Forma%C3%A7%C3%A3o%20em%20Extens%C3%A3o%20de%20C%C3%ADlios%20(R$%20890,00)."
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-curso"
+            >
+              <i class="fa-brands fa-whatsapp"></i> Garantir Vaga na Formação
+            </a>
+          </div>
+        </div>
+
+        <!-- CARD 3: Especialização Avançada em Micropigmentação Labial -->
+        <div class="curso-card">
+          <div class="curso-card-media">
+            <span class="curso-card-tag-badge">
+              <i class="fa-solid fa-crown"></i> Especialização Master de 5 Dias (25 Horas)
+            </span>
+            <img src="/assets/lip_micro.png" alt="Especialização Avançada em Micropigmentação Labial - Lana Wolf Art" loading="lazy" />
+          </div>
+
+          <div class="curso-card-body">
+            <h3>Micropigmentação Labial: Aquarelle, Gloss & Neutralização</h3>
+            <p class="curso-desc">
+              Formação de elite em estética regenerativa e translucidez labial. Domine a saturação pixelada a 0.3mm (derme papilar), física do dermógrafo, neutralização de lábios escuros com pigmentos quentes e protocolo profilático anti-herpes.
+            </p>
+
+            <ul class="curso-benefits">
+              <li><i class="fa-solid fa-circle-check"></i> Histologia da mucosa labial e prevenção do Efeito Tyndall (arroxeado)</li>
+              <li><i class="fa-solid fa-circle-check"></i> Biomecânica do pêndulo oscilatório a 90° e cartuchos 1R / 3RL</li>
+              <li><i class="fa-solid fa-circle-check"></i> Colorimetria e neutralização de lábios manchados/melanodérmicos</li>
+              <li><i class="fa-solid fa-circle-check"></i> Demonstração prática ao vivo executada por Layana Barbosa</li>
+              <li><i class="fa-solid fa-circle-check"></i> 2 Atendimentos Clínicos Reais em modelos vivas (Aquarela e Neutralização)</li>
+              <li><i class="fa-solid fa-circle-check"></i> Equipamentos e dermógrafo de precisão disponibilizados no estúdio</li>
+            </ul>
+
+            <!-- Box de Preço & Condições -->
+            <div class="curso-pricing-box">
+              <span class="pricing-badge"><i class="fa-solid fa-users"></i> Formação Master VIP (2 a 4 alunas)</span>
+              <div class="pricing-main">
+                <span class="pricing-value"><small>R$</small> 3.890,00</span>
+              </div>
+              <div class="pricing-parcelas">ou 10x de R$ 438,00 no cartão</div>
+              <div class="pricing-sub">
+                Mentoria Individual VIP 1:1 disponível por <strong>R$ 5.500,00</strong>
+              </div>
+              <div class="pricing-sub-highlight">
+                <i class="fa-solid fa-circle-info"></i> Dermógrafo e insumos esterilizados fornecidos para as práticas
+              </div>
+            </div>
+
+            <a
+              href="https://wa.me/556196406270?text=Ol%C3%A1%20Layana!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20a%20Especializa%C3%A7%C3%A3o%20em%20Micropigmenta%C3%A7%C3%A3o%20Labial%20(R$%203.890,00)."
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-curso"
+            >
+              <i class="fa-brands fa-whatsapp"></i> Consultar Vagas Master
+            </a>
+          </div>
         </div>
       </div>
 
       <!-- Kit Aluna Highlight -->
       <div class="kit-aluna-highlight">
-        <img src="/assets/kit_aluna_lash.jpg" alt="Kit da Aluna - Lana Wolf Art" class="kit-aluna-img" loading="lazy" />
+        <img src="/assets/kit_aluna_lash.jpg" alt="Kit Profissional de Bancada - Lana Wolf Art" class="kit-aluna-img" loading="lazy" />
         <div class="kit-aluna-content">
-          <span class="curso-tag" style="background:var(--primary); color:white;"><i class="fa-solid fa-box-open"></i> Material Pago à Parte • Kit da Aluna</span>
-          <h3>Materiais Oficiais de Bancada para Treino e Primeiros Atendimentos</h3>
-          <p>
-            Total transparência: você adquire o seu kit profissional completo com os produtos exatos que a Layana utiliza em estúdio, fornecidos pela <strong>Lana Supply Pro</strong> com 10% de desconto de aluna sobre o valor de venda:
-          </p>
+          <span class="curso-tag" style="background:var(--primary); color:white;">
+            <i class="fa-solid fa-box-open"></i> Transparência de Custos • Kit Profissional Lana Supply Pro
+          </span>
+          <h3>Materiais Oficiais de Bancada & Transparência para Alunas</h3>
+
+          <div class="kit-notice-box">
+            <i class="fa-solid fa-circle-exclamation" style="color:var(--accent-gold); margin-right:6px;"></i>
+            <strong>Atenção sobre Insumos & Equipamentos:</strong> As inscrições das formações de <strong>Design de Sobrancelhas</strong> e <strong>Micropigmentação Labial</strong> contam com todos os materiais de bancada, dermógrafo e insumos disponibilizados para uso em cabine durante as aulas presenciais (os kits físicos para levar não estão inclusos na inscrição). A relação discriminada a seguir refere-se especificamente ao <strong>Kit da Aluna para Extensão de Cílios</strong>, adquirido com 10% de desconto institucional via <strong>Lana Supply Pro</strong>:
+          </div>
+
           <ul class="kit-items-priced">
             <li><span class="item-name"><i class="fa-solid fa-circle-check"></i> Cola Free</span> <span class="item-price">R$ 58,50</span></li>
             <li><span class="item-name"><i class="fa-solid fa-circle-check"></i> Removedor</span> <span class="item-price">R$ 40,50</span></li>
@@ -429,16 +749,21 @@
 
           <div class="kit-total-card">
             <div class="kit-total-row">
-              <span>Total por Aluna (Material):</span>
+              <span>Total por Aluna (Material de Bancada Cílios):</span>
               <strong>R$ 286,37</strong>
             </div>
             <p class="kit-total-note">
-              Formação Individual (<strong>R$ 890,00</strong>) + Kit da Aluna (<strong>R$ 286,37</strong>) = Investimento total de <strong>R$ 1.176,37</strong>
+              Formação Individual em Cílios (<strong>R$ 890,00</strong>) + Kit da Aluna (<strong>R$ 286,37</strong>) = Investimento total de <strong>R$ 1.176,37</strong>
             </p>
           </div>
 
-          <a href="https://wa.me/556196406270?text=Ol%C3%A1%20Layana!%20Quero%20garantir%20minha%20vaga%20na%20Forma%C3%A7%C3%A3o%20em%20Extens%C3%A3o%20de%20C%C3%ADlios%20(R$%20890,00)%20com%20o%20Kit%20da%20Aluna%20(R$%20286,37)." target="_blank" class="btn-primary">
-            <i class="fa-brands fa-whatsapp"></i> Garantir Minha Vaga com Kit
+          <a
+            href="https://wa.me/556196406270?text=Ol%C3%A1%20Layana!%20Quero%20garantir%20minha%20vaga%20na%20Forma%C3%A7%C3%A3o%20em%20Extens%C3%A3o%20de%20C%C3%ADlios%20(R$%20890,00)%20com%20o%20Kit%20da%20Aluna%20(R$%20286,37)."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-primary"
+          >
+            <i class="fa-brands fa-whatsapp"></i> Garantir Minha Vaga com Kit no WhatsApp
           </a>
         </div>
       </div>
@@ -458,7 +783,13 @@
               <p>Rua 23, quadra 61, lote 3<br />Parque 9, Luziânia - GO<br />CEP: 72.853-061</p>
             </div>
             <div class="footer-map-container">
-              <iframe src="https://maps.google.com/maps?q=-16.156250,-47.946417&t=&z=18&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              <iframe
+                src="https://maps.google.com/maps?q=-16.156250,-47.946417&t=&z=18&ie=UTF8&iwloc=&output=embed"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Mapa de localização Lana Wolf Art"
+              ></iframe>
             </div>
           </div>
         </div>
@@ -476,14 +807,22 @@
     </footer>
 
     <!-- Floating WhatsApp -->
-    <a href="https://wa.me/556196406270" target="_blank" class="whatsapp-float" aria-label="Falar no WhatsApp">
+    <a
+      href="https://wa.me/556196406270"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="whatsapp-float"
+      aria-label="Falar no WhatsApp"
+    >
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12.031 21.722l-3.146.85 1.13-3.082a9.71 9.71 0 01-1.396-4.99c0-5.362 4.364-9.725 9.728-9.725 5.362 0 9.725 4.363 9.725 9.725 0 5.363-4.363 9.725-9.725 9.725a9.71 9.71 0 01-5.016-1.38zM18.15 15.69c-.282-.142-1.673-.826-1.932-.92-.258-.094-.447-.142-.636.142-.188.283-.728.92-.893 1.11-.164.188-.33.212-.612.07a7.925 7.925 0 01-2.327-1.436 8.766 8.766 0 01-1.616-2.007c-.164-.283-.017-.436.124-.577.127-.127.283-.33.424-.495.141-.165.188-.283.283-.472.094-.188.047-.354-.024-.495-.07-.142-.636-1.533-.872-2.1-.228-.543-.46-.47-.636-.478-.164-.008-.353-.008-.542-.008a1.037 1.037 0 00-.754.354c-.26.283-.99.967-.99 2.358s1.014 2.735 1.155 2.924c.141.188 1.993 3.042 4.827 4.267.674.292 1.2.466 1.61.597.676.216 1.293.185 1.78.112.545-.082 1.673-.683 1.909-1.344.236-.66.236-1.226.165-1.344-.07-.118-.26-.188-.543-.33z"/>
+        <path
+          d="M12.031 21.722l-3.146.85 1.13-3.082a9.71 9.71 0 01-1.396-4.99c0-5.362 4.364-9.725 9.728-9.725 5.362 0 9.725 4.363 9.725 9.725 0 5.363-4.363 9.725-9.725 9.725a9.71 9.71 0 01-5.016-1.38zM18.15 15.69c-.282-.142-1.673-.826-1.932-.92-.258-.094-.447-.142-.636.142-.188.283-.728.92-.893 1.11-.164.188-.33.212-.612.07a7.925 7.925 0 01-2.327-1.436 8.766 8.766 0 01-1.616-2.007c-.164-.283-.017-.436.124-.577.127-.127.283-.33.424-.495.141-.165.188-.283.283-.472.094-.188.047-.354-.024-.495-.07-.142-.636-1.533-.872-2.1-.228-.543-.46-.47-.636-.478-.164-.008-.353-.008-.542-.008a1.037 1.037 0 00-.754.354c-.26.283-.99.967-.99 2.358s1.014 2.735 1.155 2.924c.141.188 1.993 3.042 4.827 4.267.674.292 1.2.466 1.61.597.676.216 1.293.185 1.78.112.545-.082 1.673-.683 1.909-1.344.236-.66.236-1.226.165-1.344-.07-.118-.26-.188-.543-.33z"
+        />
       </svg>
     </a>
 
     <script>
-      // Mobile Drawer
+      // Mobile Drawer Toggle
       const mobileMenuBtn = document.getElementById('mobileMenuBtn');
       const mobileDrawer = document.getElementById('mobileDrawer');
       if (mobileMenuBtn && mobileDrawer) {
