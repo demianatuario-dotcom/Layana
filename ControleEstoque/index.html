@@ -1841,17 +1841,25 @@
         aiChatFeed.scrollTop = aiChatFeed.scrollHeight;
       }
 
+      let lastSentPhoto = null;
+      let lastSentMsg = '';
+
       // 4. Envio de Comando para a IA
-      async function sendAiStockCommand() {
-        const msg = aiTextInput.value.trim();
-        const photo = currentAttachedBase64;
+      async function sendAiStockCommand(retryMsg = null, retryPhoto = null) {
+        const msg = retryMsg !== null ? retryMsg : aiTextInput.value.trim();
+        const photo = retryPhoto !== null ? retryPhoto : currentAttachedBase64;
 
         if (!msg && !photo) return;
 
-        aiTextInput.value = '';
-        currentAttachedBase64 = null;
-        aiFileInput.value = '';
-        aiImagePreviewBar.style.display = 'none';
+        lastSentMsg = msg;
+        lastSentPhoto = photo;
+
+        if (retryMsg === null) {
+          aiTextInput.value = '';
+          currentAttachedBase64 = null;
+          aiFileInput.value = '';
+          aiImagePreviewBar.style.display = 'none';
+        }
 
         appendAiMessage('user', msg || '📷 [Foto enviada para análise]', photo);
 
@@ -1885,7 +1893,11 @@
           if (loadingEl) loadingEl.remove();
 
           if (!res.ok) {
-            appendAiMessage('bot', `⚠️ **Aviso:** ${data.error || 'Não foi possível processar o comando.'}`);
+            let userErrMsg = data.error || 'Não foi possível processar o comando.';
+            if (userErrMsg.includes('JSON')) {
+              userErrMsg = 'A IA encontrou uma oscilação na formatação da contagem. Clique abaixo para tentar novamente.';
+            }
+            appendAiMessage('bot', `⚠️ **Aviso:** ${userErrMsg}`, null, ['Tentar novamente']);
             return;
           }
 
@@ -1904,13 +1916,31 @@
           console.error('Erro na requisição da IA:', err);
           const loadingEl = document.getElementById('aiLoadingBubble');
           if (loadingEl) loadingEl.remove();
-          appendAiMessage('bot', '❌ Erro de conexão com o servidor. Verifique se o backend está online.');
+          appendAiMessage('bot', '❌ Erro de conexão com o servidor. Clique para tentar novamente.', null, ['Tentar novamente']);
         } finally {
           btnAiSend.disabled = false;
         }
       }
 
-      btnAiSend.addEventListener('click', sendAiStockCommand);
+      // Adicionar tratamento para o botão 'Tentar novamente' nos quick options
+      const originalAppendAiMessage = appendAiMessage;
+      appendAiMessage = function(role, text, imageBase64, quickOptions) {
+        if (Array.isArray(quickOptions) && quickOptions.includes('Tentar novamente')) {
+          // Garante que o clique reenvie o último comando com a foto
+          setTimeout(() => {
+            document.querySelectorAll('.ai-quick-btn').forEach(b => {
+              if (b.textContent.includes('Tentar novamente')) {
+                b.onclick = () => {
+                  sendAiStockCommand(lastSentMsg, lastSentPhoto);
+                };
+              }
+            });
+          }, 50);
+        }
+        originalAppendAiMessage(role, text, imageBase64, quickOptions);
+      };
+
+      btnAiSend.addEventListener('click', () => sendAiStockCommand());
       aiTextInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') sendAiStockCommand();
       });

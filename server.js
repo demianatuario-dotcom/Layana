@@ -1277,6 +1277,53 @@ Diretrizes de atendimento:
     }
 });
 
+function parseOrRepairJson(rawText) {
+    if (!rawText || typeof rawText !== 'string') {
+        throw new Error('Resposta vazia da IA.');
+    }
+
+    let text = rawText.trim();
+    text = text.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '').trim();
+
+    // 1. Tentar parse padrão
+    try {
+        return JSON.parse(text);
+    } catch (err1) {
+        console.warn('JSON.parse direto falhou, tentando reparo:', err1.message);
+    }
+
+    // 2. Tentar reparar quebras de linha cruas em strings
+    try {
+        const sanitized = text.replace(/[\r\n]+/g, ' ');
+        return JSON.parse(sanitized);
+    } catch (e) {}
+
+    // 3. Tentar recuperar até o último objeto válido do array se foi cortado
+    try {
+        const firstBrace = text.indexOf('{');
+        if (firstBrace !== -1) {
+            let slice = text.substring(firstBrace);
+
+            if (slice.includes('"alteracoes_propostas"')) {
+                const lastObjEnd = slice.lastIndexOf('}');
+                if (lastObjEnd !== -1) {
+                    slice = slice.substring(0, lastObjEnd + 1) + ']}';
+                    return JSON.parse(slice);
+                }
+            }
+
+            const quotes = slice.match(/"/g) || [];
+            if (quotes.length % 2 !== 0) slice += '"';
+            if (!slice.endsWith('}')) slice += '}';
+            return JSON.parse(slice);
+        }
+    } catch (err3) {
+        console.error('Falha em reparos estruturais de JSON:', err3.message);
+    }
+
+    throw new Error('A IA gerou uma resposta incompleta ou malformatada. Por favor, tente enviar novamente.');
+}
+
 // POST /api/admin/ia-gestao-estoque - Assistente de gestão de estoque com IA (Texto, Voz e Foto)
 app.post('/api/admin/ia-gestao-estoque', async (req, res) => {
     try {
@@ -1331,7 +1378,7 @@ DIRETRIZES DE DIÁLOGO E ESCLARECIMENTO (MUITO IMPORTANTE):
      "alteracoes_propostas": []
 
 2. SE O COMANDO FOR CLARO E COMPLETO:
-   - Se o usuário disse claramente o que deseja (ex: "tirar 3 escovinhas", "chegaram 4 toucas", "acrescentar as 10 máscaras da foto ao estoque", "definir o estoque das toucas para 10"):
+   - Se o usuário disse claramente o que deseja (ex: "tirar 3 escovinhas", "chegaram 4 toucas", "acrescentar as 10 máscaras da foto ao estoque", "definir o estoque das toucas para 10" ou "definir contagem exata da foto"):
      Calcule as operações:
      * Operação "SOMAR": estoque_resultante = estoque_atual + quantidade
      * Operação "SUBTRAIR": estoque_resultante = Math.max(0, estoque_atual - quantidade)
@@ -1339,8 +1386,12 @@ DIRETRIZES DE DIÁLOGO E ESCLARECIMENTO (MUITO IMPORTANTE):
      Configure:
      "precisa_esclarecer": false,
      "tipo_resposta": "PROPOSTA_ALTERACAO",
-     "mensagem_resposta": Resumo explicativo cordial e profissional com formatação markdown e emojis.
+     "mensagem_resposta": Resumo explicativo cordial e objetivo formatado com tópicos curtos e emojis.
      "alteracoes_propostas": Lista completa dos produtos alterados com produto_id, operacao, quantidade, estoque_atual e estoque_resultante.
+
+DIRETRIZES DE CONCISÃO E FORMATAÇÃO (CRÍTICO):
+1. Mantenha os campos "mensagem_resposta" e "justificativa" sempre concisos e diretos (máximo 1 frase por produto).
+2. Não inclua quebras de linha reais ou caracteres de controle não escapados nos valores de strings JSON.
 
 FORMATO OBRIGATÓRIO DE RETORNO (JSON ESTRITO):
 Retorne SEMPRE e EXCLUSIVAMENTE um objeto JSON válido no formato:
@@ -1411,8 +1462,8 @@ Retorne SEMPRE e EXCLUSIVAMENTE um objeto JSON válido no formato:
                 systemInstruction: { parts: [{ text: systemInstruction }] },
                 contents,
                 generationConfig: {
-                    temperature: 0.2,
-                    maxOutputTokens: 2000,
+                    temperature: 0.15,
+                    maxOutputTokens: 8192,
                     responseMimeType: 'application/json'
                 }
             })
@@ -1430,11 +1481,11 @@ Retorne SEMPRE e EXCLUSIVAMENTE um objeto JSON válido no formato:
             return res.status(500).json({ error: 'A IA não retornou resposta estruturada válida.' });
         }
 
-        const parsedResult = JSON.parse(jsonText);
+        const parsedResult = parseOrRepairJson(jsonText);
         res.json(parsedResult);
     } catch (error) {
         console.error("Erro interno ao processar comando de estoque por IA:", error);
-        res.status(500).json({ error: 'Erro interno ao processar comando com IA: ' + error.message });
+        res.status(500).json({ error: 'Erro ao processar comando com IA: ' + error.message });
     }
 });
 
