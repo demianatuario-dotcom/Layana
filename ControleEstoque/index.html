@@ -442,10 +442,453 @@
         color: #03543f;
         border: 1px solid #84e1bc;
       }
-      @media (max-width: 768px) {
-        .stock-table th:nth-child(3), .stock-table td:nth-child(3) {
-          display: none;
-        }
+      /* =================================================== */
+      /* ASSISTENTE INTELIGENTE DE ESTOQUE (IA, VOZ E FOTO) */
+      /* =================================================== */
+      .ai-stock-assistant-box {
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 26px 28px;
+        box-shadow: 0 10px 30px rgba(43, 35, 33, 0.08);
+        border: 1.5px solid rgba(201, 130, 118, 0.35);
+        margin-bottom: 30px;
+        position: relative;
+        overflow: hidden;
+      }
+      .ai-stock-assistant-box::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #c5a059 0%, #c98276 50%, #27ae60 100%);
+      }
+      .ai-assistant-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-bottom: 18px;
+      }
+      .ai-header-left {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .ai-badge-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, #2b2321 0%, #443432 100%);
+        color: #c5a059;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        box-shadow: 0 4px 12px rgba(43, 35, 33, 0.15);
+      }
+      .ai-header-left h3 {
+        margin: 0 0 4px 0;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.35rem;
+        color: var(--secondary);
+      }
+      .ai-header-left p {
+        margin: 0;
+        font-size: 0.88rem;
+        color: var(--text-light);
+      }
+      .ai-model-tag {
+        background: #fdf5f3;
+        color: var(--primary-dark);
+        border: 1px solid rgba(201, 130, 118, 0.4);
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .ai-chat-feed {
+        max-height: 320px;
+        overflow-y: auto;
+        padding: 16px;
+        background: #faf7f6;
+        border-radius: 14px;
+        border: 1px solid rgba(201, 130, 118, 0.2);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 15px;
+        scroll-behavior: smooth;
+      }
+      .ai-msg {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        max-width: 90%;
+      }
+      .ai-msg-bot {
+        align-self: flex-start;
+      }
+      .ai-msg-user {
+        align-self: flex-end;
+        flex-direction: row-reverse;
+      }
+      .ai-avatar {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.85rem;
+        flex-shrink: 0;
+      }
+      .ai-msg-bot .ai-avatar {
+        background: #2b2321;
+        color: #c5a059;
+      }
+      .ai-msg-user .ai-avatar {
+        background: var(--primary);
+        color: #fff;
+      }
+      .ai-bubble {
+        padding: 12px 16px;
+        border-radius: 16px;
+        font-size: 0.92rem;
+        line-height: 1.5;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+      }
+      .ai-msg-bot .ai-bubble {
+        background: #ffffff;
+        color: #2b2321;
+        border: 1px solid rgba(201, 130, 118, 0.25);
+        border-top-left-radius: 4px;
+      }
+      .ai-msg-user .ai-bubble {
+        background: var(--primary);
+        color: #ffffff;
+        border-top-right-radius: 4px;
+      }
+      .ai-bubble-attachment {
+        margin-top: 8px;
+        border-radius: 10px;
+        overflow: hidden;
+        max-width: 200px;
+        border: 1px solid rgba(255,255,255,0.4);
+      }
+      .ai-bubble-attachment img {
+        width: 100%;
+        display: block;
+        max-height: 140px;
+        object-fit: cover;
+      }
+      .ai-quick-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 10px;
+      }
+      .ai-quick-btn {
+        background: #ffffff;
+        border: 1.5px solid var(--primary);
+        color: var(--primary-dark);
+        border-radius: 20px;
+        padding: 6px 14px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .ai-quick-btn:hover {
+        background: var(--primary);
+        color: #fff;
+        transform: translateY(-1px);
+      }
+      .ai-image-preview-bar {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: #fdf8f6;
+        border: 1px dashed var(--primary);
+        border-radius: 12px;
+        padding: 8px 14px;
+        margin-bottom: 12px;
+      }
+      .preview-thumb-wrap {
+        position: relative;
+        width: 50px;
+        height: 50px;
+        border-radius: 8px;
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+      .preview-thumb-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .btn-remove-preview {
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        background: rgba(0,0,0,0.7);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        font-size: 0.65rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .preview-info {
+        flex: 1;
+        font-size: 0.85rem;
+        display: flex;
+        flex-direction: column;
+      }
+      .preview-info span {
+        font-weight: 600;
+        color: var(--secondary);
+      }
+      .preview-info small {
+        color: var(--text-light);
+      }
+      .ai-input-bar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: #ffffff;
+        border: 1.5px solid rgba(201, 130, 118, 0.4);
+        border-radius: 35px;
+        padding: 6px 10px;
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+      .ai-input-bar:focus-within {
+        border-color: var(--primary);
+        box-shadow: 0 4px 15px rgba(201, 130, 118, 0.2);
+      }
+      .ai-tool-btn {
+        background: #f5eeeb;
+        border: none;
+        color: var(--secondary);
+        border-radius: 20px;
+        padding: 8px 14px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.2s;
+      }
+      .ai-tool-btn:hover {
+        background: #eeddd6;
+        color: var(--primary-dark);
+      }
+      .ai-tool-btn.recording {
+        background: #e74c3c !important;
+        color: #ffffff !important;
+        animation: pulseMic 1.2s infinite;
+      }
+      @keyframes pulseMic {
+        0% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7); }
+        70% { box-shadow: 0 0 0 10px rgba(231, 76, 60, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+      }
+      .ai-text-input-wrap {
+        flex: 1;
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+      #aiTextInput {
+        width: 100%;
+        border: none;
+        outline: none;
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.95rem;
+        color: var(--secondary);
+        background: transparent;
+        padding: 8px 10px;
+      }
+      .voice-recording-indicator {
+        position: absolute;
+        left: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #e74c3c;
+        background: #ffffff;
+        padding: 4px 8px;
+        pointer-events: none;
+      }
+      .recording-dot {
+        width: 8px;
+        height: 8px;
+        background: #e74c3c;
+        border-radius: 50%;
+        animation: blinkDot 0.8s infinite alternate;
+      }
+      @keyframes blinkDot {
+        from { opacity: 0.2; }
+        to { opacity: 1; }
+      }
+      .ai-send-btn {
+        background: linear-gradient(135deg, #2b2321 0%, #443432 100%);
+        color: #ffffff;
+        border: none;
+        border-radius: 25px;
+        padding: 10px 18px;
+        font-size: 0.88rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.2s;
+        flex-shrink: 0;
+      }
+      .ai-send-btn:hover:not(:disabled) {
+        transform: translateY(-1px);
+        background: #c5a059;
+        color: #241715;
+      }
+      .ai-send-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+      /* Proposal Card */
+      .ai-proposal-card {
+        margin-top: 20px;
+        background: #ffffff;
+        border: 2px solid #27ae60;
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 0 6px 20px rgba(39, 174, 96, 0.12);
+        animation: fadeInProposal 0.3s ease;
+      }
+      @keyframes fadeInProposal {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .proposal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 14px;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .proposal-header h4 {
+        margin: 0;
+        font-size: 1.1rem;
+        color: #27ae60;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .proposal-badge {
+        background: rgba(39, 174, 96, 0.12);
+        color: #27ae60;
+        font-weight: 700;
+        font-size: 0.78rem;
+        padding: 4px 10px;
+        border-radius: 12px;
+      }
+      .proposal-table-wrap {
+        overflow-x: auto;
+      }
+      .proposal-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+      }
+      .proposal-table th {
+        background: #f7faf8;
+        padding: 10px 12px;
+        text-align: left;
+        color: var(--secondary);
+        font-weight: 600;
+        border-bottom: 1.5px solid rgba(39, 174, 96, 0.2);
+      }
+      .proposal-table td {
+        padding: 12px;
+        border-bottom: 1px solid #f0f0f0;
+      }
+      .op-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 4px 8px;
+        border-radius: 10px;
+        text-transform: uppercase;
+      }
+      .op-somar { background: rgba(39, 174, 96, 0.15); color: #27ae60; }
+      .op-subtrair { background: rgba(231, 76, 60, 0.15); color: #e74c3c; }
+      .op-definir { background: rgba(197, 160, 89, 0.2); color: #9c7a2b; }
+      .stock-num-before {
+        color: #888;
+        font-weight: 600;
+      }
+      .stock-num-after {
+        font-weight: 700;
+        font-size: 1.05rem;
+        color: #27ae60;
+      }
+      .proposal-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-top: 15px;
+        flex-wrap: wrap;
+      }
+      .btn-cancel-proposal {
+        background: #f0f0f0;
+        color: #555;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 20px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .btn-cancel-proposal:hover {
+        background: #e0e0e0;
+      }
+      .btn-apply-proposal {
+        background: #27ae60;
+        color: #ffffff;
+        border: none;
+        padding: 10px 22px;
+        border-radius: 20px;
+        font-weight: 700;
+        font-size: 0.92rem;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.2s;
+        box-shadow: 0 4px 12px rgba(39, 174, 96, 0.25);
+      }
+      .btn-apply-proposal:hover {
+        background: #219653;
+        transform: translateY(-1px);
       }
     </style>
   </head>
@@ -519,6 +962,103 @@
           <div>
             <div class="stat-val" id="statOutStock">0</div>
             <div class="stat-lbl">Esgotados (0 un)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Assistente Inteligente de Estoque por IA (Voz, Foto e Texto) -->
+      <div class="ai-stock-assistant-box" id="assistente-ia">
+        <div class="ai-assistant-header">
+          <div class="ai-header-left">
+            <div class="ai-badge-icon">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+            </div>
+            <div>
+              <h3>Assistente Inteligente de Estoque (IA • Voz • Foto)</h3>
+              <p>Fale no microfone, digite alterações (ex: <em>"tirar 3 escovinhas"</em>, <em>"chegaram 4 toucas"</em>) ou anexe fotos da bancada para contagem.</p>
+            </div>
+          </div>
+          <div class="ai-header-right">
+            <span class="ai-model-tag"><i class="fa-solid fa-bolt"></i> Gemini 2.5 Multimodal</span>
+          </div>
+        </div>
+
+        <!-- Chat / Feed de Diálogo e Esclarecimentos -->
+        <div class="ai-chat-feed" id="aiChatFeed">
+          <div class="ai-msg ai-msg-bot">
+            <div class="ai-avatar"><i class="fa-solid fa-robot"></i></div>
+            <div class="ai-bubble">
+              Olá! Sou sua assistente de estoque. Você pode falar no microfone, digitar alterações (ex: <em>"tirar 3 escovinhas", "chegaram 10 máscaras"</em>) ou anexar fotos da bancada. Se a informação estiver incompleta ou faltar foto/comando, eu te perguntarei antes de alterar!
+            </div>
+          </div>
+        </div>
+
+        <!-- Preview da Imagem Anexada -->
+        <div class="ai-image-preview-bar" id="aiImagePreviewBar" style="display: none;">
+          <div class="preview-thumb-wrap">
+            <img id="aiImagePreviewThumb" src="" alt="Foto para contagem" />
+            <button type="button" class="btn-remove-preview" id="btnRemovePreview" title="Remover foto">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+          <div class="preview-info">
+            <span id="aiImagePreviewName">foto_recebimento.jpg</span>
+            <small>Foto selecionada para análise visual com IA</small>
+          </div>
+        </div>
+
+        <!-- Barra de Entrada Multimodal (Texto, Microfone e Upload de Foto) -->
+        <div class="ai-input-bar">
+          <input type="file" id="aiFileInput" accept="image/*" capture="environment" style="display: none;" />
+
+          <button type="button" class="ai-tool-btn" id="btnAiUploadPhoto" title="Tirar foto ou anexar imagem da bancada">
+            <i class="fa-solid fa-camera"></i>
+            <span class="btn-tool-label">Foto</span>
+          </button>
+
+          <button type="button" class="ai-tool-btn" id="btnAiVoiceInput" title="Gravar voz (falar comando)">
+            <i class="fa-solid fa-microphone"></i>
+            <span class="btn-tool-label" id="voiceBtnLabel">Voz</span>
+          </button>
+
+          <div class="ai-text-input-wrap">
+            <input type="text" id="aiTextInput" placeholder="Digite ou fale o que alterar (ex: 'tirar 3 escovinhas', 'chegaram 4 toucas')..." autocomplete="off" />
+            <span class="voice-recording-indicator" id="voiceRecordingIndicator" style="display: none;">
+              <span class="recording-dot"></span> Ouvindo... Fale agora
+            </span>
+          </div>
+
+          <button type="button" class="ai-send-btn" id="btnAiSend">
+            <i class="fa-solid fa-paper-plane"></i>
+            <span>Enviar</span>
+          </button>
+        </div>
+
+        <!-- Card de Proposta de Alterações (Gerado pela IA para confirmação) -->
+        <div class="ai-proposal-card" id="aiProposalCard" style="display: none;">
+          <div class="proposal-header">
+            <h4><i class="fa-solid fa-clipboard-check"></i> Proposta de Atualização de Estoque</h4>
+            <span class="proposal-badge">Revisão do Operador</span>
+          </div>
+          <div class="proposal-table-wrap">
+            <table class="proposal-table">
+              <thead>
+                <tr>
+                  <th>Produto</th>
+                  <th>Operação</th>
+                  <th>Estoque Atual</th>
+                  <th>Alteração</th>
+                  <th>Novo Estoque</th>
+                </tr>
+              </thead>
+              <tbody id="aiProposalTableBody"></tbody>
+            </table>
+          </div>
+          <div class="proposal-actions">
+            <button type="button" class="btn-cancel-proposal" id="btnCancelProposal">Cancelar</button>
+            <button type="button" class="btn-apply-proposal" id="btnApplyProposal">
+              <i class="fa-solid fa-circle-check"></i> Confirmar e Salvar no Banco
+            </button>
           </div>
         </div>
       </div>
@@ -1130,6 +1670,340 @@
           if (modal && modal.classList.contains('active')) {
             closeAuthModal();
           }
+        }
+      });
+
+      // ============================================================
+      // ASSISTENTE DE ESTOQUE INTELIGENTE (IA, VOZ E FOTO)
+      // ============================================================
+      let aiStockHistory = [];
+      let currentAttachedBase64 = null;
+      let isRecordingVoice = false;
+      let activeProposal = null;
+
+      const aiChatFeed = document.getElementById('aiChatFeed');
+      const aiTextInput = document.getElementById('aiTextInput');
+      const btnAiSend = document.getElementById('btnAiSend');
+      const btnAiVoiceInput = document.getElementById('btnAiVoiceInput');
+      const voiceBtnLabel = document.getElementById('voiceBtnLabel');
+      const voiceRecordingIndicator = document.getElementById('voiceRecordingIndicator');
+      const btnAiUploadPhoto = document.getElementById('btnAiUploadPhoto');
+      const aiFileInput = document.getElementById('aiFileInput');
+      const aiImagePreviewBar = document.getElementById('aiImagePreviewBar');
+      const aiImagePreviewThumb = document.getElementById('aiImagePreviewThumb');
+      const aiImagePreviewName = document.getElementById('aiImagePreviewName');
+      const btnRemovePreview = document.getElementById('btnRemovePreview');
+      const aiProposalCard = document.getElementById('aiProposalCard');
+      const aiProposalTableBody = document.getElementById('aiProposalTableBody');
+      const btnCancelProposal = document.getElementById('btnCancelProposal');
+      const btnApplyProposal = document.getElementById('btnApplyProposal');
+
+      // 1. Web Speech API (Microfone / Voz para Texto)
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      let recognition = null;
+
+      if (SpeechRecognition) {
+        recognition = new SpeechRecognition();
+        recognition.lang = 'pt-BR';
+        recognition.continuous = false;
+        recognition.interimResults = true;
+
+        recognition.onstart = () => {
+          isRecordingVoice = true;
+          btnAiVoiceInput.classList.add('recording');
+          voiceBtnLabel.innerText = 'Parar';
+          voiceRecordingIndicator.style.display = 'flex';
+          aiTextInput.placeholder = 'Ouvindo... Pode falar agora!';
+        };
+
+        recognition.onresult = (e) => {
+          let transcript = '';
+          for (let i = e.resultIndex; i < e.results.length; ++i) {
+            transcript += e.results[i][0].transcript;
+          }
+          aiTextInput.value = transcript;
+        };
+
+        recognition.onerror = (e) => {
+          console.warn('SpeechRecognition erro:', e.error);
+          stopVoiceRecording();
+          if (e.error === 'not-allowed') {
+            alert('Acesso ao microfone foi negado pelo navegador. Por favor, permita o microfone nas configurações da página.');
+          }
+        };
+
+        recognition.onend = () => {
+          stopVoiceRecording();
+        };
+      } else {
+        btnAiVoiceInput.title = 'Reconhecimento de voz não suportado neste navegador.';
+        btnAiVoiceInput.style.opacity = '0.5';
+      }
+
+      function toggleVoiceRecording() {
+        if (!recognition) {
+          alert('Seu navegador não suporta a Web Speech API nativa. Recomendamos Google Chrome, Edge ou Safari para comandos de voz.');
+          return;
+        }
+        if (isRecordingVoice) {
+          recognition.stop();
+          stopVoiceRecording();
+        } else {
+          try {
+            recognition.start();
+          } catch (err) {
+            console.error('Erro ao iniciar gravação de voz:', err);
+          }
+        }
+      }
+
+      function stopVoiceRecording() {
+        isRecordingVoice = false;
+        btnAiVoiceInput.classList.remove('recording');
+        voiceBtnLabel.innerText = 'Voz';
+        voiceRecordingIndicator.style.display = 'none';
+        aiTextInput.placeholder = "Digite ou fale o que alterar (ex: 'tirar 3 escovinhas', 'chegaram 4 toucas')...";
+      }
+
+      btnAiVoiceInput.addEventListener('click', toggleVoiceRecording);
+
+      // 2. Upload de Foto / Câmera da Bancada
+      btnAiUploadPhoto.addEventListener('click', () => {
+        aiFileInput.click();
+      });
+
+      aiFileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+          currentAttachedBase64 = evt.target.result;
+          aiImagePreviewThumb.src = currentAttachedBase64;
+          aiImagePreviewName.innerText = file.name;
+          aiImagePreviewBar.style.display = 'flex';
+        };
+        reader.readAsDataURL(file);
+      });
+
+      btnRemovePreview.addEventListener('click', () => {
+        currentAttachedBase64 = null;
+        aiFileInput.value = '';
+        aiImagePreviewBar.style.display = 'none';
+      });
+
+      // 3. Renderização do Chat Feed
+      function appendAiMessage(role, text, imageBase64 = null, quickOptions = null) {
+        const row = document.createElement('div');
+        row.className = `ai-msg ${role === 'user' ? 'ai-msg-user' : 'ai-msg-bot'}`;
+
+        const avatar = document.createElement('div');
+        avatar.className = 'ai-avatar';
+        avatar.innerHTML = role === 'user' ? '<i class="fa-solid fa-user"></i>' : '<i class="fa-solid fa-robot"></i>';
+
+        const bubble = document.createElement('div');
+        bubble.className = 'ai-bubble';
+
+        let formatted = String(text || '')
+          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+          .replace(/\*(.*?)\*/g, '<em>$1</em>')
+          .replace(/\n/g, '<br>');
+
+        bubble.innerHTML = formatted;
+
+        if (imageBase64) {
+          const imgWrap = document.createElement('div');
+          imgWrap.className = 'ai-bubble-attachment';
+          imgWrap.innerHTML = `<img src="${imageBase64}" alt="Foto enviada" />`;
+          bubble.appendChild(imgWrap);
+        }
+
+        if (Array.isArray(quickOptions) && quickOptions.length > 0) {
+          const optsDiv = document.createElement('div');
+          optsDiv.className = 'ai-quick-options';
+          quickOptions.forEach(optText => {
+            const optBtn = document.createElement('button');
+            optBtn.type = 'button';
+            optBtn.className = 'ai-quick-btn';
+            optBtn.innerHTML = `<i class="fa-solid fa-reply"></i> ${optText}`;
+            optBtn.onclick = () => {
+              aiTextInput.value = optText;
+              sendAiStockCommand();
+            };
+            optsDiv.appendChild(optBtn);
+          });
+          bubble.appendChild(optsDiv);
+        }
+
+        row.appendChild(avatar);
+        row.appendChild(bubble);
+        aiChatFeed.appendChild(row);
+        aiChatFeed.scrollTop = aiChatFeed.scrollHeight;
+      }
+
+      // 4. Envio de Comando para a IA
+      async function sendAiStockCommand() {
+        const msg = aiTextInput.value.trim();
+        const photo = currentAttachedBase64;
+
+        if (!msg && !photo) return;
+
+        aiTextInput.value = '';
+        currentAttachedBase64 = null;
+        aiFileInput.value = '';
+        aiImagePreviewBar.style.display = 'none';
+
+        appendAiMessage('user', msg || '📷 [Foto enviada para análise]', photo);
+
+        const loadingRow = document.createElement('div');
+        loadingRow.className = 'ai-msg ai-msg-bot';
+        loadingRow.id = 'aiLoadingBubble';
+        loadingRow.innerHTML = `
+          <div class="ai-avatar"><i class="fa-solid fa-robot"></i></div>
+          <div class="ai-bubble" style="color:#777;">
+            <i class="fa-solid fa-spinner fa-spin"></i> Analisando insumos e calculando estoque...
+          </div>
+        `;
+        aiChatFeed.appendChild(loadingRow);
+        aiChatFeed.scrollTop = aiChatFeed.scrollHeight;
+
+        btnAiSend.disabled = true;
+
+        try {
+          const res = await fetch('/api/admin/ia-gestao-estoque', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              mensagem: msg,
+              imagem_base64: photo,
+              historico: aiStockHistory
+            })
+          });
+
+          const data = await res.json();
+          const loadingEl = document.getElementById('aiLoadingBubble');
+          if (loadingEl) loadingEl.remove();
+
+          if (!res.ok) {
+            appendAiMessage('bot', `⚠️ **Aviso:** ${data.error || 'Não foi possível processar o comando.'}`);
+            return;
+          }
+
+          if (msg) aiStockHistory.push({ role: 'user', text: msg });
+          if (data.mensagem_resposta) aiStockHistory.push({ role: 'model', text: data.mensagem_resposta });
+
+          appendAiMessage('bot', data.mensagem_resposta, null, data.opcoes_rapidas);
+
+          if (data.tipo_resposta === 'PROPOSTA_ALTERACAO' && Array.isArray(data.alteracoes_propostas) && data.alteracoes_propostas.length > 0) {
+            renderProposalCard(data.alteracoes_propostas);
+          } else {
+            aiProposalCard.style.display = 'none';
+          }
+
+        } catch (err) {
+          console.error('Erro na requisição da IA:', err);
+          const loadingEl = document.getElementById('aiLoadingBubble');
+          if (loadingEl) loadingEl.remove();
+          appendAiMessage('bot', '❌ Erro de conexão com o servidor. Verifique se o backend está online.');
+        } finally {
+          btnAiSend.disabled = false;
+        }
+      }
+
+      btnAiSend.addEventListener('click', sendAiStockCommand);
+      aiTextInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendAiStockCommand();
+      });
+
+      // 5. Renderizar Card de Proposta
+      function renderProposalCard(alteracoes) {
+        activeProposal = alteracoes;
+        aiProposalTableBody.innerHTML = alteracoes.map(item => {
+          let badgeClass = 'op-somar';
+          let opSymbol = '+';
+          if (item.operacao === 'SUBTRAIR') { badgeClass = 'op-subtrair'; opSymbol = '-'; }
+          if (item.operacao === 'DEFINIR') { badgeClass = 'op-definir'; opSymbol = '='; }
+
+          return `
+            <tr>
+              <td>
+                <strong>${item.nome}</strong>
+                ${item.justificativa ? `<br><small style="color:#777;">${item.justificativa}</small>` : ''}
+              </td>
+              <td>
+                <span class="op-badge ${badgeClass}">${opSymbol} ${item.operacao} (${item.quantidade})</span>
+              </td>
+              <td>
+                <span class="stock-num-before">${item.estoque_atual} un</span>
+              </td>
+              <td style="font-weight:600; color:var(--secondary);">
+                ${item.operacao === 'SUBTRAIR' ? `-${item.quantidade}` : item.operacao === 'SOMAR' ? `+${item.quantidade}` : `=${item.quantidade}`}
+              </td>
+              <td>
+                <span class="stock-num-after">${item.estoque_resultante} un</span>
+              </td>
+            </tr>
+          `;
+        }).join('');
+
+        aiProposalCard.style.display = 'block';
+        aiProposalCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+
+      btnCancelProposal.addEventListener('click', () => {
+        activeProposal = null;
+        aiProposalCard.style.display = 'none';
+        appendAiMessage('bot', 'Ação cancelada pelo operador. O estoque não foi modificado.');
+      });
+
+      // 6. Aplicar Proposta com PIN Master
+      btnApplyProposal.addEventListener('click', async () => {
+        if (!activeProposal || activeProposal.length === 0) return;
+
+        if (!masterPin) {
+          openAuthModal('Informe o PIN Master (3008) para autorizar a aplicação das alterações de estoque propostas pela IA.');
+          return;
+        }
+
+        btnApplyProposal.disabled = true;
+        btnApplyProposal.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Gravando...';
+
+        try {
+          const res = await fetch('/api/admin/aplicar-alteracoes-estoque', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              pin: masterPin,
+              alteracoes: activeProposal
+            })
+          });
+
+          const data = await res.json();
+          if (!res.ok) {
+            if (res.status === 401) {
+              masterPin = null;
+              openAuthModal('PIN Master incorreto ou expirado. Digite novamente.');
+            } else {
+              alert(data.error || 'Erro ao aplicar alterações.');
+            }
+            return;
+          }
+
+          showToast(`✅ ${data.total_atualizados} produto(s) atualizados com sucesso no PostgreSQL!`);
+          appendAiMessage('bot', `🎉 **Pronto!** ${data.total_atualizados} produto(s) foram atualizados no banco de dados e o catálogo oficial já reflete os novos estoques.`);
+
+          activeProposal = null;
+          aiProposalCard.style.display = 'none';
+
+          // Recarregar tabela e estatísticas da página
+          await fetchProducts();
+
+        } catch (err) {
+          console.error('Erro ao aplicar alterações de estoque:', err);
+          alert('Erro de conexão ao salvar alterações no banco.');
+        } finally {
+          btnApplyProposal.disabled = false;
+          btnApplyProposal.innerHTML = '<i class="fa-solid fa-circle-check"></i> Confirmar e Salvar no Banco';
         }
       });
 

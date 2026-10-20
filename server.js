@@ -1277,6 +1277,223 @@ Diretrizes de atendimento:
     }
 });
 
+// POST /api/admin/ia-gestao-estoque - Assistente de gestão de estoque com IA (Texto, Voz e Foto)
+app.post('/api/admin/ia-gestao-estoque', async (req, res) => {
+    try {
+        const { mensagem, imagem_base64, historico } = req.body;
+
+        if (!mensagem && !imagem_base64) {
+            return res.status(400).json({ error: 'Nenhuma mensagem ou imagem foi enviada.' });
+        }
+
+        // Buscar catálogo de produtos atualizado do PostgreSQL
+        const prodRes = await pool.query(`
+            SELECT id, tipo, nome, descricao, preco, estoque, categoria_filtro
+            FROM produtos_pro
+            WHERE ativo = true
+            ORDER BY id ASC
+        `);
+        const catalogo = prodRes.rows;
+
+        const catalogoFormatado = catalogo.map(p => 
+            `- [ID ${p.id}] "${p.nome}" | Tipo: "${p.tipo}" | Categoria: "${p.categoria_filtro}" | Estoque Atual: ${p.estoque} un | Preço: R$ ${parseFloat(p.preco).toFixed(2)}`
+        ).join('\n');
+
+        const systemInstruction = `Você é o Assistente Inteligente de Controle e Gestão de Estoque da distribuidora "Lana Supply Pro" (Studio Layana Wolf).
+Sua missão é ajudar o operador/administrador a gerenciar e atualizar o estoque com máxima precisão através de comandos de texto, áudio transcrito por voz ou fotos da bancada de recebimento.
+
+CATÁLOGO OFICIAL COM ESTOQUE ATUAL NO BANCO DE DADOS:
+${catalogoFormatado}
+
+REGRAS DE IDENTIFICAÇÃO E CONTAGEM DE EMBALAGENS:
+1. "Cílios Decemars YY", "Cílios Fadvan YV", "Cílios Decemars 4D W": contados por caixas individuais (1 caixa = 1 un no estoque).
+2. "Fita Micropore Rosa 3cm": se a foto mostrar fardos/pacotes lacrados com rolos empilhados, cada fardo contém 12 fitas (ex: 6 fardos = 72 fitas avulsas). Se forem fitas avulsas, conte individualmente.
+3. "Escovinha Descartável Dourada": no catálogo o produto é vendido em "Pacote com 12 un" (R$ 6,00). Logo, cada pacote de 12 un corresponde a 1 unidade cadastrada no sistema. Se o usuário falar em unidades avulsas (ex: 12 avulsas), converta para 1 pacote.
+4. "Máscara Descartável Tripla Branca Talge": cada caixa contém 50 unidades, e o estoque é controlado em caixas (ex: 10 caixas = estoque 10).
+5. "Luva de Nitrilo Rosa sem Pó Medix": cada caixa contém 100 unidades (50 pares), controlada em caixas (ex: 4 caixas = estoque 4).
+6. "Touca Descartável Sanfonada Branca Descarpack": cada pacote contém 100 unidades, controlado em pacotes (ex: 4 pacotes = estoque 4).
+7. "Pinça Nagaraku N-04" e "Pinça Nagaraku N-02": contadas individualmente.
+8. "Pinça de Sobrancelha Chanfrada": contada individualmente ou em réguas de 5 un.
+9. "Tesourinha de Sobrancelha Prata": contada individualmente.
+10. "Cola Adesivo Free Beautify", "Removedor em Creme Excellent", "Adesivo Fadvan Exovan": frascos individuais.
+11. "Flor de Anel para Cola": unidades avulsas (ou pacotes de 100 un).
+
+DIRETRIZES DE DIÁLOGO E ESCLARECIMENTO (MUITO IMPORTANTE):
+1. SE A INFORMAÇÃO ESTIVER INCOMPLETA OU AMBÍGUA (VOCÊ DEVE PERGUNTAR):
+   - SE O USUÁRIO ENVIOU UMA FOTO MAS NÃO ESPECIFICOU A AÇÃO (ex: só enviou a foto ou disse apenas "olha a foto", "veja a bancada"):
+     Identifique detalhadamente todos os produtos e quantidades contadas na foto.
+     OBRIGATORIAMENTE PERGUNTE ao usuário se ele deseja SOMAR essa quantidade ao estoque existente (como recebimento de novo pedido) OU se deseja DEFINIR o estoque exatamente com essas quantidades (balanço/contagem física).
+   - SE O USUÁRIO DEU UM COMANDO VAGO (ex: "tirar 3 cílios", "chegaram 5 pinças", "acrescentar 2", "dar baixa em 4"):
+     Como há mais de um modelo de cílios ou pinças no catálogo, PERGUNTE educadamente qual modelo específico ele se refere, listando as opções correspondentes.
+   - Quando fizer uma pergunta para esclarecer, configure:
+     "precisa_esclarecer": true,
+     "tipo_resposta": "PERGUNTA_ESCLARECIMENTO",
+     "alteracoes_propostas": []
+
+2. SE O COMANDO FOR CLARO E COMPLETO:
+   - Se o usuário disse claramente o que deseja (ex: "tirar 3 escovinhas", "chegaram 4 toucas", "acrescentar as 10 máscaras da foto ao estoque", "definir o estoque das toucas para 10"):
+     Calcule as operações:
+     * Operação "SOMAR": estoque_resultante = estoque_atual + quantidade
+     * Operação "SUBTRAIR": estoque_resultante = Math.max(0, estoque_atual - quantidade)
+     * Operação "DEFINIR": estoque_resultante = quantidade
+     Configure:
+     "precisa_esclarecer": false,
+     "tipo_resposta": "PROPOSTA_ALTERACAO",
+     "mensagem_resposta": Resumo explicativo cordial e profissional com formatação markdown e emojis.
+     "alteracoes_propostas": Lista completa dos produtos alterados com produto_id, operacao, quantidade, estoque_atual e estoque_resultante.
+
+FORMATO OBRIGATÓRIO DE RETORNO (JSON ESTRITO):
+Retorne SEMPRE e EXCLUSIVAMENTE um objeto JSON válido no formato:
+{
+  "tipo_resposta": "PERGUNTA_ESCLARECIMENTO" ou "PROPOSTA_ALTERACAO",
+  "precisa_esclarecer": true ou false,
+  "mensagem_resposta": "Texto amigável formatado em markdown com emojis para exibição na tela",
+  "resumo_foto": "Descrição breve do que foi identificado na foto (se houver foto)",
+  "opcoes_rapidas": ["Somar ao estoque atual", "Definir como contagem exata"],
+  "alteracoes_propostas": [
+    {
+      "produto_id": 1,
+      "nome": "Nome do Produto",
+      "operacao": "SOMAR" ou "SUBTRAIR" ou "DEFINIR",
+      "quantidade": 3,
+      "estoque_atual": 10,
+      "estoque_resultante": 13,
+      "justificativa": "Entrada de 3 caixas identificada"
+    }
+  ]
+}`;
+
+        // Preparar partes da mensagem do usuário (texto + imagem)
+        const userParts = [];
+        if (mensagem && typeof mensagem === 'string' && mensagem.trim()) {
+            userParts.push({ text: mensagem.trim() });
+        } else if (imagem_base64) {
+            userParts.push({ text: "Analise esta foto de insumos na bancada e me diga o que identificou." });
+        }
+
+        if (imagem_base64 && typeof imagem_base64 === 'string') {
+            const match = imagem_base64.match(/^data:([^;]+);base64,(.+)$/);
+            if (match) {
+                userParts.push({
+                    inlineData: {
+                        mimeType: match[1],
+                        data: match[2]
+                    }
+                });
+            } else if (imagem_base64.length > 100) {
+                userParts.push({
+                    inlineData: {
+                        mimeType: 'image/jpeg',
+                        data: imagem_base64
+                    }
+                });
+            }
+        }
+
+        let contents = [];
+        if (Array.isArray(historico) && historico.length > 0) {
+            contents = historico
+                .filter(h => h && h.text)
+                .map(h => ({
+                    role: h.role === 'model' ? 'model' : 'user',
+                    parts: [{ text: String(h.text) }]
+                }));
+        }
+        contents.push({
+            role: 'user',
+            parts: userParts
+        });
+
+        const response = await fetch(GEMINI_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                systemInstruction: { parts: [{ text: systemInstruction }] },
+                contents,
+                generationConfig: {
+                    temperature: 0.2,
+                    maxOutputTokens: 2000,
+                    responseMimeType: 'application/json'
+                }
+            })
+        });
+
+        if (!response.ok) {
+            const errText = await response.text();
+            console.error("Erro Gemini na rota de gestão de estoque:", response.status, errText);
+            return res.status(response.status).json({ error: 'Erro ao consultar IA de estoque', details: errText });
+        }
+
+        const data = await response.json();
+        const jsonText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (!jsonText) {
+            return res.status(500).json({ error: 'A IA não retornou resposta estruturada válida.' });
+        }
+
+        const parsedResult = JSON.parse(jsonText);
+        res.json(parsedResult);
+    } catch (error) {
+        console.error("Erro interno ao processar comando de estoque por IA:", error);
+        res.status(500).json({ error: 'Erro interno ao processar comando com IA: ' + error.message });
+    }
+});
+
+// POST /api/admin/aplicar-alteracoes-estoque - Aplica lote de alterações aprovadas com PIN Master
+app.post('/api/admin/aplicar-alteracoes-estoque', async (req, res) => {
+    try {
+        const clientIp = getClientIp(req);
+        const rateCheck = checkPinRateLimit(clientIp);
+        if (!rateCheck.allowed) {
+            return res.status(429).json({
+                error: `Muitas tentativas incorretas de PIN. Bloqueado por mais ${rateCheck.remainingSec} segundos.`
+            });
+        }
+
+        const { pin, alteracoes } = req.body;
+        if (!pin) {
+            return res.status(401).json({ error: 'PIN de segurança obrigatório para aplicar alterações.' });
+        }
+
+        const isAuthorized = await verifyPin(pin);
+        if (!isAuthorized) {
+            recordPinAttempt(clientIp, false);
+            return res.status(401).json({ error: 'PIN Master incorreto.' });
+        }
+        recordPinAttempt(clientIp, true);
+
+        if (!Array.isArray(alteracoes) || alteracoes.length === 0) {
+            return res.status(400).json({ error: 'Nenhuma alteração de estoque foi fornecida.' });
+        }
+
+        const atualizados = [];
+        for (const item of alteracoes) {
+            const prodId = parseInt(item.produto_id, 10);
+            const novoEstoque = parseInt(item.estoque_resultante, 10);
+            if (!isNaN(prodId) && !isNaN(novoEstoque) && novoEstoque >= 0) {
+                const upd = await pool.query(
+                    `UPDATE produtos_pro
+                     SET estoque = $1, atualizado_em = CURRENT_TIMESTAMP
+                     WHERE id = $2
+                     RETURNING id, tipo, nome, estoque, atualizado_em`,
+                    [novoEstoque, prodId]
+                );
+                if (upd.rows.length > 0) {
+                    atualizados.push(upd.rows[0]);
+                }
+            }
+        }
+
+        res.json({
+            success: true,
+            total_atualizados: atualizados.length,
+            produtos: atualizados
+        });
+    } catch (error) {
+        console.error("Erro ao aplicar alterações de estoque:", error);
+        res.status(500).json({ error: 'Erro interno ao aplicar alterações no banco de dados.' });
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`Servidor backend rodando na porta ${PORT}`);
     console.log(`Você agora pode acessar a página abrindo o index.html no navegador.`);
