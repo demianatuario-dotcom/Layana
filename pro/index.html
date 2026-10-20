@@ -919,6 +919,9 @@
           <button class="pro-tab-btn" data-category="acessorios">
             <i class="fa-solid fa-wand-magic-sparkles"></i> Ferramentas & Acessórios <span class="tab-count" id="countAcessorios">4</span>
           </button>
+          <button class="pro-tab-btn" data-category="descartaveis">
+            <i class="fa-solid fa-shield-virus"></i> Descartáveis & Biossegurança <span class="tab-count" id="countDescartaveis">3</span>
+          </button>
           <button class="pro-tab-btn" data-category="design">
             <i class="fa-solid fa-feather-pointed"></i> Design & Sobrancelhas <span class="tab-count" id="countDesign">2</span>
           </button>
@@ -1338,6 +1341,7 @@
         if (document.getElementById('countCilios')) document.getElementById('countCilios').innerText = catalogProducts.filter(p => p.categoria_filtro === 'cilios').length;
         if (document.getElementById('countSolucoes')) document.getElementById('countSolucoes').innerText = catalogProducts.filter(p => p.categoria_filtro === 'solucoes').length;
         if (document.getElementById('countAcessorios')) document.getElementById('countAcessorios').innerText = catalogProducts.filter(p => p.categoria_filtro === 'acessorios').length;
+        if (document.getElementById('countDescartaveis')) document.getElementById('countDescartaveis').innerText = catalogProducts.filter(p => p.categoria_filtro === 'descartaveis').length;
         if (document.getElementById('countDesign')) document.getElementById('countDesign').innerText = catalogProducts.filter(p => p.categoria_filtro === 'design').length;
       }
 
